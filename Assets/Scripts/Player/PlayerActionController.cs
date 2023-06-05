@@ -1,14 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerActionController : MonoBehaviour
 {
-    public Hero hero;
-    Animator animator;
+    PlayerDataModel playerDataModel;
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        playerDataModel = GetComponent<PlayerDataModel>();
+    }
+
+    void OnAction1(InputValue inputValue)
+    {
+        if(playerDataModel.hero.Action1(inputValue.isPressed, playerDataModel.attackCoolTime))
+        {
+
+        }
+    }
+
+    void OnAction2(InputValue inputValue)
+    {
+        if (playerDataModel.hero.Action2(inputValue.isPressed, playerDataModel.attackCoolTime))
+        {
+
+        }
+    }
+
+    void OnAction3(InputValue inputValue)
+    {
+        if (playerDataModel.hero.Action3(inputValue.isPressed, playerDataModel.attackCoolTime))
+        {
+
+        }
+    }
+
+    void OnAction4(InputValue inputValue)
+    {
+        if (playerDataModel.hero.Action4(inputValue.isPressed, playerDataModel.attackCoolTime))
+        {
+
+        }
     }
 }

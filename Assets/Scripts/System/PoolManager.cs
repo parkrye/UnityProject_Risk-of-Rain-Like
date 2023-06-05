@@ -15,6 +15,15 @@ public class PoolManager : MonoBehaviour
         poolRoot = new GameObject("PoolRoot").transform;
     }
 
+    /// <summary>
+    /// 풀 오브젝트를 가져오는 함수
+    /// </summary>
+    /// <typeparam name="T">게임 오브젝트인지, 컴포넌트인지</typeparam>
+    /// <param name="original">대상 오브젝트</param>
+    /// <param name="position">오브젝트의 위치</param>
+    /// <param name="rotation">오브젝트의 방향</param>
+    /// <param name="parent">오브젝트의 부모(인스펙터 내 위치)</param>
+    /// <returns>가져오기 성공 여부</returns>
     public T Get<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : Object
     {
         if (original is GameObject)
@@ -66,6 +75,12 @@ public class PoolManager : MonoBehaviour
         return Get<T>(original, Vector3.zero, Quaternion.identity, null);
     }
 
+    /// <summary>
+    /// 오브젝트를 반환하는 함수
+    /// </summary>
+    /// <typeparam name="T">게임 오브젝트인지, 컴포넌트인지</typeparam>
+    /// <param name="instance">대상 오브젝트</param>
+    /// <returns>반환 성공 여부</returns>
     public bool Release<T>(T instance) where T : Object
     {
         if (instance is GameObject)

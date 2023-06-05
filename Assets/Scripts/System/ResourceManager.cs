@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 풀을 이용한 인스턴스 생성 및 삭제
+/// </summary>
 public class ResourceManager : MonoBehaviour
 {
     Dictionary<string, Object> resources = new Dictionary<string, Object>();
@@ -67,7 +70,7 @@ public class ResourceManager : MonoBehaviour
         if (GameManager.Pool.IsContain(go))
             GameManager.Pool.Release(go);
         else
-            GameObject.Destroy(go);
+            Destroy(go);
     }
 
     public void Destroy(GameObject go, float delay)
@@ -75,7 +78,7 @@ public class ResourceManager : MonoBehaviour
         if (GameManager.Pool.IsContain(go))
             StartCoroutine(DelayReleaseRoutine(go, delay));
         else
-            GameObject.Destroy(go, delay);
+            Destroy(go, delay);
     }
 
     IEnumerator DelayReleaseRoutine(GameObject go, float delay)
@@ -86,6 +89,6 @@ public class ResourceManager : MonoBehaviour
 
     public void Destroy(Component component, float delay = 0f)
     {
-        Component.Destroy(component, delay);
+        Destroy(component, delay);
     }
 }

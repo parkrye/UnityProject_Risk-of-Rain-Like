@@ -45,6 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f47cad967a780749b14d2bb7ec6185a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolTimes:
+  - 0
+  - 0
+  - 0
+  - 0
+  coolChecks: 00000000
 --- !u!1001 &3087650586855941134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,7 +187,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: b04406949810a0a46b21e74416b63350, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 833e0d6869f4a8a44b79fef3888df493, type: 2}
+      objectReference: {fileID: 9100000, guid: d2f7c2320d01ad340b2247e5db4dbfe1, type: 2}
     - target: {fileID: -4216859302048453862, guid: b04406949810a0a46b21e74416b63350, type: 3}
       propertyPath: m_RootOrder
       value: 0
