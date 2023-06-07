@@ -17,9 +17,9 @@ public class PlayerDataModel : MonoBehaviour
             hero.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody>();
 
-        DontDestroyOnLoad(gameObject);
-
         SelectHero(heroNum);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>
@@ -35,7 +35,8 @@ public class PlayerDataModel : MonoBehaviour
                 hero.gameObject.SetActive(false);
             heroList[num].gameObject.SetActive(true);
             hero = heroList[num];
-            animator = hero.Animator;
+            animator = hero.animator;
+            hero.playerDataModel = this;
             animator.SetInteger("Hero", num);
             return true;
         }
@@ -51,7 +52,7 @@ public class PlayerDataModel : MonoBehaviour
     }
 
     public float hitPoint;
-    public float moveSpeed, jumpPower;
+    public float moveSpeed, highSpeed, jumpPower;
     public float attackCoolTime, skillCoolTime;
     public int jumpLimit, jumpCount;
     public bool isJump, attackCooldown;

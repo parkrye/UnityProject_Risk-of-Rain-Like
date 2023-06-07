@@ -5,10 +5,10 @@ public abstract class Hero : MonoBehaviour
 {
     public float[] coolTimes = new float[4];
     public bool[] coolChecks = new bool[4];
-    Animator animator;
-    public Animator Animator { get { return animator; } }
+    public PlayerDataModel playerDataModel;
+    public Animator animator;
 
-    void Awake()
+    protected virtual void Awake()
     {
         for(int i = 0; i < coolChecks.Length; i++)
             coolChecks[i] = true;
