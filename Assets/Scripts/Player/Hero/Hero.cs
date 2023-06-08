@@ -3,15 +3,12 @@ using UnityEngine;
 
 public abstract class Hero : MonoBehaviour
 {
-    public float[] coolTimes = new float[4];
-    public bool[] coolChecks = new bool[4];
     public PlayerDataModel playerDataModel;
     public Animator animator;
+    public float[] coolTimes = new float[4];
 
-    protected virtual void Awake()
+    protected virtual void Awake() 
     {
-        for(int i = 0; i < coolChecks.Length; i++)
-            coolChecks[i] = true;
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -28,6 +25,6 @@ public abstract class Hero : MonoBehaviour
     protected IEnumerator CoolTime(int actionNum, float coolTime)
     {
         yield return new WaitForSeconds(coolTimes[actionNum] * coolTime);
-        coolChecks[actionNum] = true;
+        playerDataModel.coolChecks[actionNum] = true;
     }
 }

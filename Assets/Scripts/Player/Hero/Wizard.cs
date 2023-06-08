@@ -3,10 +3,10 @@ public class Wizard : Hero
     override protected void Awake()
     {
         base.Awake();
-        coolTimes[0] = 1f;
-        coolTimes[1] = 1f;
-        coolTimes[2] = 4f;
-        coolTimes[3] = 20f;
+        coolTimes[0] = 2f;
+        coolTimes[1] = 2f;
+        coolTimes[2] = 8f;
+        coolTimes[3] = 40f;
     }
 
     public override bool Jump(bool isPressed)
@@ -15,8 +15,8 @@ public class Wizard : Hero
         {
             playerDataModel.jumpCount++;
             playerDataModel.isJump = true;
-            playerDataModel.animator.SetTrigger("JumpH");
-            playerDataModel.animator.SetTrigger("JumpL");
+            animator.SetTrigger("JumpH");
+            animator.SetTrigger("JumpL");
         }
 
         return isPressed;
@@ -24,11 +24,11 @@ public class Wizard : Hero
 
     public override bool Action1(bool isPressed, float coolTime)
     {
-        if (coolChecks[0] && isPressed)
+        if (playerDataModel.coolChecks[0] && isPressed)
         {
             animator.SetTrigger("Action1");
 
-            coolChecks[0] = false;
+            playerDataModel.coolChecks[0] = false;
             StartCoroutine(CoolTime(0, coolTime));
             return true;
         }
@@ -37,11 +37,11 @@ public class Wizard : Hero
 
     public override bool Action2(bool isPressed, float coolTime)
     {
-        if (coolChecks[1] && isPressed)
+        if (playerDataModel.coolChecks[1] && isPressed)
         {
             animator.SetTrigger("Action2");
 
-            coolChecks[1] = false;
+            playerDataModel.coolChecks[1] = false;
             StartCoroutine(CoolTime(1, coolTime));
             return true;
         }
@@ -50,11 +50,11 @@ public class Wizard : Hero
 
     public override bool Action3(bool isPressed, float coolTime)
     {
-        if (coolChecks[2] && isPressed)
+        if (playerDataModel.coolChecks[2] && isPressed)
         {
             animator.SetTrigger("Action3");
 
-            coolChecks[2] = false;
+            playerDataModel.coolChecks[2] = false;
             StartCoroutine(CoolTime(2, coolTime));
             return true;
         }
@@ -63,11 +63,11 @@ public class Wizard : Hero
 
     public override bool Action4(bool isPressed, float coolTime)
     {
-        if (coolChecks[3] && isPressed)
+        if (playerDataModel.coolChecks[3] && isPressed)
         {
             animator.SetTrigger("Action4");
 
-            coolChecks[3] = false;
+            playerDataModel.coolChecks[3] = false;
             StartCoroutine(CoolTime(3, coolTime));
             return true;
         }

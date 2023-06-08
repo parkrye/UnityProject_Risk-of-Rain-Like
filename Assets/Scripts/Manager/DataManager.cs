@@ -1,16 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public float hitPoint, exp;
-    public int level;
+    public float time;
+    public int difficulty;
 
-    private void Awake()
+    public EnemyDataContainer Enemy { get; private set; }
+    public GameObject Player { get; set; }
+
+    void Awake()
     {
-        hitPoint = 100f;
-        level = 1;
-        exp = 0f;
+        time = 1f;
+        difficulty = 1;
+
+        Enemy = gameObject.AddComponent<EnemyDataContainer>();
     }
 }

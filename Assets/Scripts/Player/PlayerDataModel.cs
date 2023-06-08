@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class PlayerDataModel : MonoBehaviour
 {
@@ -43,7 +44,9 @@ public class PlayerDataModel : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public float hitPoint;
+    public float hitPoint, exp;
+    public int level;
+
     public float moveSpeed, highSpeed, jumpPower;
     public float attackCoolTime, skillCoolTime;
     public int jumpLimit, jumpCount;
@@ -52,6 +55,8 @@ public class PlayerDataModel : MonoBehaviour
     public Vector3 moveDir, prevDir;
     public Dictionary<Vector3, bool> climable;
     public float climbCheckLowHeight, climbCheckHighHeight, climbCheckLength;
+
+    public bool[] coolChecks = new bool[4];
 
     void Initailze()
     {
@@ -63,8 +68,18 @@ public class PlayerDataModel : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         climable = new Dictionary<Vector3, bool>();
 
+        coolChecks = new bool[4];
+        for (int i = 0; i < coolChecks.Length; i++)
+            coolChecks[i] = true;
+
+        hitPoint = 100f;
+        level = 1;
+        exp = 0f;
+
         SelectHero(heroNum);
 
         DontDestroyOnLoad(gameObject);
+
+        GameManager.Data.Player = gameObject;
     }
 }
