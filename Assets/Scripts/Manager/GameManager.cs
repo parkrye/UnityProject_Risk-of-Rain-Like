@@ -3,12 +3,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     static GameManager instance;
+
     static PoolManager poolManager;
     static ResourceManager resourceManager;
+    static DataManager dataManager;
+    static UIManager uiManager;
 
     public static GameManager Instance { get { return instance; } }
     public static PoolManager Pool { get { return poolManager; } }
     public static ResourceManager Resource { get { return resourceManager; } }
+    public static DataManager Data { get { return dataManager; } }
+    public static UIManager UI {  get { return uiManager; } }
 
     void Awake()
     {
@@ -40,5 +45,15 @@ public class GameManager : MonoBehaviour
         resourceObj.name = "ResourceManager";
         resourceObj.transform.parent = transform;
         resourceManager = resourceObj.AddComponent<ResourceManager>();
+
+        GameObject dataObj = new GameObject();
+        dataObj.name = "DataManager";
+        dataObj.transform.parent = transform;
+        dataManager = dataObj.AddComponent<DataManager>();
+
+        GameObject uiObj = new GameObject();
+        uiObj.name = "UIManager";
+        uiObj.transform.parent = transform;
+        uiManager = uiObj.AddComponent<UIManager>();
     }
 }
