@@ -6,15 +6,9 @@ public class PlayerMovementController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
 
-    [SerializeField] Vector3 moveDir, prevDir;
-    Dictionary<Vector3, bool> climable;
-
-    [SerializeField] float low, high, lowLength, highLength;
-
     void Awake()
     {
         playerDataModel = GetComponent<PlayerDataModel>();
-        climable = new Dictionary<Vector3, bool>();
     }
 
     void Update()
@@ -39,24 +33,23 @@ public class PlayerMovementController : MonoBehaviour
 
     void CheckClimable()
     {
-        if (moveDir == Vector3.zero)
+        if (playerDataModel.moveDir == Vector3.zero)
             return;
 
-        if(!climable.ContainsKey(moveDir))
-            climable.Add(moveDir, false);
+        if(!playerDataModel.climable.ContainsKey(playerDataModel.moveDir))
+            playerDataModel.climable.Add(playerDataModel.moveDir, false);
 
-        // 옆, 뒤로 오르기 추가
-        Debug.DrawRay(transform.position + transform.up * low, transform.forward * lowLength, Color.red, 2f);
-        Debug.DrawRay(transform.position + transform.up * high, transform.forward * highLength, Color.red, 2f);
-        if (Physics.Raycast(transform.position + transform.up * low, transform.forward * lowLength, LayerMask.GetMask("Ground")))
+        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
+        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
+        if (Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x) * playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
         {
-            if (!Physics.Raycast(transform.position + transform.up * high, transform.forward, highLength, LayerMask.GetMask("Ground")))
+            if (!Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x), playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
             {
-                climable[moveDir] = true;
+                playerDataModel.climable[playerDataModel.moveDir] = true;
                 return;
             }
         }
-        climable[moveDir] = false;
+        playerDataModel.climable[playerDataModel.moveDir] = false;
     }
 
     void FixedUpdate()
@@ -68,7 +61,7 @@ public class PlayerMovementController : MonoBehaviour
     void Move()
     {
         float animatorSpeed = playerDataModel.animator.GetFloat("Move");
-        if (moveDir == Vector3.zero)
+        if (playerDataModel.moveDir == Vector3.zero)
         {
             playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, 0f);
 
@@ -83,9 +76,9 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
-            if((prevDir.x < 0f && moveDir.x > 0f) || (prevDir.x > 0f && moveDir.x < 0f))
+            if((playerDataModel.prevDir.x < 0f && playerDataModel.moveDir.x > 0f) || (playerDataModel.prevDir.x > 0f && playerDataModel.moveDir.x < 0f))
                 playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, playerDataModel.rb.velocity.z);
-            if ((prevDir.z < 0f && moveDir.z > 0f) || (prevDir.z > 0f && moveDir.z < 0f))
+            if ((playerDataModel.prevDir.z < 0f && playerDataModel.moveDir.z > 0f) || (playerDataModel.prevDir.z > 0f && playerDataModel.moveDir.z < 0f))
                 playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, 0f);
 
             if (animatorSpeed < 1f)
@@ -99,16 +92,16 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         if (playerDataModel.animator.GetBool("IsGround"))
-            playerDataModel.rb.AddForce(((transform.forward * moveDir.z) + (transform.right * moveDir.x)) * playerDataModel.moveSpeed, ForceMode.Force);
+            playerDataModel.rb.AddForce(((transform.forward * playerDataModel.moveDir.z) + (transform.right * playerDataModel.moveDir.x)) * playerDataModel.moveSpeed, ForceMode.Force);
         else
-            playerDataModel.rb.AddForce(((transform.forward * moveDir.z) + (transform.right * moveDir.x)) * playerDataModel.moveSpeed * 0.5f, ForceMode.Force);
+            playerDataModel.rb.AddForce(((transform.forward * playerDataModel.moveDir.z) + (transform.right * playerDataModel.moveDir.x)) * playerDataModel.moveSpeed * 0.5f, ForceMode.Force);
 
         if (playerDataModel.rb.velocity.x > playerDataModel.highSpeed)
             playerDataModel.rb.velocity = new Vector3(playerDataModel.highSpeed, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, playerDataModel.rb.velocity.z);
         if (playerDataModel.rb.velocity.z > playerDataModel.highSpeed)
             playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, playerDataModel.highSpeed);
 
-        if (climable.ContainsKey(moveDir) && climable[moveDir])
+        if (playerDataModel.climable.ContainsKey(playerDataModel.moveDir) && playerDataModel.climable[playerDataModel.moveDir])
         {
             playerDataModel.rb.AddForce(transform.up * playerDataModel.moveSpeed * 0.4f, ForceMode.Force);
         }
@@ -125,9 +118,9 @@ public class PlayerMovementController : MonoBehaviour
 
     void OnMove(InputValue inputValue)
     {
-        prevDir = moveDir;
+        playerDataModel.prevDir = playerDataModel.moveDir;
         Vector2 tmp = inputValue.Get<Vector2>();
-        moveDir = new Vector3(tmp.x, 0f, tmp.y);
+        playerDataModel.moveDir = new Vector3(tmp.x, 0f, tmp.y);
     }
 
     void OnJump(InputValue inputValue)

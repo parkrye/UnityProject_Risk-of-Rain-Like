@@ -1,4 +1,3 @@
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,20 +5,24 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] Vector2 pointerPos;
     [SerializeField] Transform lookFromPoint;
-    [SerializeField] float turnSpeed, lookSpeed;
+    [SerializeField] float turnSpeed, lookX, turnSensivity;
+
+    void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     void Update()
     {
-        if(pointerPos.x != 0)
+        if(Mathf.Abs(pointerPos.x) > turnSensivity)
         {
-            transform.Rotate(Vector3.up * Mathf.Clamp(pointerPos.x, -1f, 1f) * turnSpeed);
+            transform.localEulerAngles += new Vector3(0f, Mathf.Clamp(pointerPos.x, -1f, 1f) * turnSpeed * Time.deltaTime, 0f);
         }
-        
-        if(pointerPos.y != 0)
-        {
-            lookFromPoint.Rotate(-Vector3.right * Mathf.Clamp(pointerPos.y, -1f, 1f) * lookSpeed);
 
-            // 회전 각도 제한
+        if (Mathf.Abs(pointerPos.y) > turnSensivity)
+        {
+            lookX -= Mathf.Clamp(pointerPos.y, -1f, 1f) * turnSpeed * Time.deltaTime;
+            lookFromPoint.localEulerAngles = new Vector3(Mathf.Clamp(lookX, -60f, 60f), 0f, 0f);
         }
     }
 

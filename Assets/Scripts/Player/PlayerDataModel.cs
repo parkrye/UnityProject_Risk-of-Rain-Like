@@ -11,15 +11,7 @@ public class PlayerDataModel : MonoBehaviour
 
     void Awake()
     {
-        heroList = new List<Hero>();
-        heroList.AddRange(GetComponentsInChildren<Hero>());
-        foreach(var hero in heroList)
-            hero.gameObject.SetActive(false);
-        rb = GetComponent<Rigidbody>();
-
-        SelectHero(heroNum);
-
-        DontDestroyOnLoad(gameObject);
+        Initailze();
     }
 
     /// <summary>
@@ -56,4 +48,23 @@ public class PlayerDataModel : MonoBehaviour
     public float attackCoolTime, skillCoolTime;
     public int jumpLimit, jumpCount;
     public bool isJump, attackCooldown;
+
+    public Vector3 moveDir, prevDir;
+    public Dictionary<Vector3, bool> climable;
+    public float climbCheckLowHeight, climbCheckHighHeight, climbCheckLength;
+
+    void Initailze()
+    {
+        heroList = new List<Hero>();
+        heroList.AddRange(GetComponentsInChildren<Hero>());
+        foreach (var hero in heroList)
+            hero.gameObject.SetActive(false);
+
+        rb = GetComponent<Rigidbody>();
+        climable = new Dictionary<Vector3, bool>();
+
+        SelectHero(heroNum);
+
+        DontDestroyOnLoad(gameObject);
+    }
 }
