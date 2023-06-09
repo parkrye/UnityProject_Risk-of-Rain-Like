@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
         popUpStack = new Stack<PopUpUI>();
     }
 
+    // 이하 PopUpUI
     public T ShowPopupUI<T>(T popup) where T : PopUpUI
     {
         if (popUpStack.Count > 0)
@@ -65,6 +66,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // 이하 InGameUI
     public T ShowInGameUI<T>(T inGameUI) where T : InGameUI
     {
         T ui = GameManager.Pool.GetUI(inGameUI);

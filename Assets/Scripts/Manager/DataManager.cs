@@ -7,7 +7,7 @@ public class DataManager : MonoBehaviour
     public int difficulty;
 
     public EnemyDataContainer Enemy { get; private set; }
-    public GameObject Player { get; set; }
+    public PlayerDataModel Player { get; set; }
 
     void Awake()
     {

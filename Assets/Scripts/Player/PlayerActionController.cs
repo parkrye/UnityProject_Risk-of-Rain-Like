@@ -12,7 +12,7 @@ public class PlayerActionController : MonoBehaviour
 
     void OnAction1(InputValue inputValue)
     {
-        if(playerDataModel.hero.Action1(inputValue.isPressed, playerDataModel.attackCoolTime))
+        if(playerDataModel.hero.Action1(inputValue.isPressed))
         {
 
         }
@@ -20,7 +20,7 @@ public class PlayerActionController : MonoBehaviour
 
     void OnAction2(InputValue inputValue)
     {
-        if (playerDataModel.hero.Action2(inputValue.isPressed, playerDataModel.skillCoolTime))
+        if (playerDataModel.hero.Action2(inputValue.isPressed))
         {
 
         }
@@ -28,7 +28,7 @@ public class PlayerActionController : MonoBehaviour
 
     void OnAction3(InputValue inputValue)
     {
-        if (playerDataModel.hero.Action3(inputValue.isPressed, playerDataModel.skillCoolTime))
+        if (playerDataModel.hero.Action3(inputValue.isPressed))
         {
 
         }
@@ -36,7 +36,7 @@ public class PlayerActionController : MonoBehaviour
 
     void OnAction4(InputValue inputValue)
     {
-        if (playerDataModel.hero.Action4(inputValue.isPressed, playerDataModel.skillCoolTime))
+        if (playerDataModel.hero.Action4(inputValue.isPressed))
         {
 
         }

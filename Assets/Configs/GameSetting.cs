@@ -12,11 +12,8 @@ public class GameSetting : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            GameObject gameManager = new()
-            {
-                name = "GameManager"
-            };
-
+            GameObject gameManager = new();
+            gameManager.name = "GameManager";
             gameManager.AddComponent<GameManager>();
         }
     }

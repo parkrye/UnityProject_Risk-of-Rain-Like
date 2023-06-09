@@ -1,24 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDataContainer : MonoBehaviour
 {
-    Dictionary<string, EnemyDataBase> dictionary;
+    Dictionary<string, EnemyData> dictionary;
 
     void Awake()
     {
-        dictionary = new Dictionary<string, EnemyDataBase>();
+        dictionary = new Dictionary<string, EnemyData>();
+        dictionary.Add("Bat", GameManager.Resource.Load<EnemyData>("Enemy/Bat"));
     }
 
-    public EnemyDataBase GetData(string name)
+    public EnemyData GetData(string name)
     {
         if(dictionary.ContainsKey(name))
             return dictionary[name];
         return null;
     }
 
-    public void AddData(string name, EnemyDataBase data)
+    public void AddData(string name, EnemyData data)
     {
         dictionary.Add(name, data);
     }

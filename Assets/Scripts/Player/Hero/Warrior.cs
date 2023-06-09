@@ -3,10 +3,7 @@ public class Warrior : Hero
     override protected void Awake()
     {
         base.Awake();
-        coolTimes[0] = 0.5f;
-        coolTimes[1] = 0.5f;
-        coolTimes[2] = 2f;
-        coolTimes[3] = 10f;
+
     }
 
     public override bool Jump(bool isPressed)
@@ -22,53 +19,41 @@ public class Warrior : Hero
         return isPressed;
     }
 
-    public override bool Action1(bool isPressed, float coolTime)
+    public override bool Action1(bool isPressed)
     {
-        if (playerDataModel.coolChecks[0] && isPressed)
+        if (skills[0].Active(isPressed))
         {
-            animator.SetTrigger("Action1");
-
-            playerDataModel.coolChecks[0] = false;
-            StartCoroutine(CoolTime(0, coolTime));
+            StartCoroutine(skills[0].CoolTime(GameManager.Data.Player.coolTime));
             return true;
         }
         return false;
     }
 
-    public override bool Action2(bool isPressed, float coolTime)
+    public override bool Action2(bool isPressed)
     {
-        if (playerDataModel.coolChecks[1] && isPressed)
+        if (skills[1].Active(isPressed))
         {
-            animator.SetTrigger("Action2");
-
-            playerDataModel.coolChecks[1] = false;
-            StartCoroutine(CoolTime(1, coolTime));
+            StartCoroutine(skills[1].CoolTime(GameManager.Data.Player.coolTime));
             return true;
         }
         return false;
     }
 
-    public override bool Action3(bool isPressed, float coolTime)
+    public override bool Action3(bool isPressed)
     {
-        if (playerDataModel.coolChecks[2] && isPressed)
+        if (skills[2].Active(isPressed))
         {
-            animator.SetTrigger("Action3");
-
-            playerDataModel.coolChecks[2] = false;
-            StartCoroutine(CoolTime(2, coolTime));
+            StartCoroutine(skills[2].CoolTime(GameManager.Data.Player.coolTime));
             return true;
         }
         return false;
     }
 
-    public override bool Action4(bool isPressed, float coolTime)
+    public override bool Action4(bool isPressed)
     {
-        if (playerDataModel.coolChecks[3] && isPressed)
+        if (skills[3].Active(isPressed))
         {
-            animator.SetTrigger("Action4");
-
-            playerDataModel.coolChecks[3] = false;
-            StartCoroutine(CoolTime(3, coolTime));
+            StartCoroutine(skills[3].CoolTime(GameManager.Data.Player.coolTime));
             return true;
         }
         return false;

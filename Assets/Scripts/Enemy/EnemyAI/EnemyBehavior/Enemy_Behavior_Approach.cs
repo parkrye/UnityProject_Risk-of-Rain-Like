@@ -29,7 +29,7 @@ public class Enemy_Behavior_Approach : BT_Action
 
     void OnChase()
     {
-        GameObject player = GameManager.Data.Player;
+        GameObject player = GameManager.Data.Player.gameObject;
         if (player)
         {
             Vector3 vDir = player.transform.position - enemy.transform.position;
@@ -38,7 +38,7 @@ public class Enemy_Behavior_Approach : BT_Action
             enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, Quaternion.LookRotation(vDir), Time.deltaTime * 4.0f);
 
             //¿Ãµø
-            enemy.transform.Translate(Vector3.forward * enemy.GetComponentInChildren<EnemyBase>().data.Speed * Time.deltaTime);
+            enemy.transform.Translate(Vector3.forward * enemy.GetComponentInChildren<EnemyData>().Speed * Time.deltaTime);
         }
     }
 }

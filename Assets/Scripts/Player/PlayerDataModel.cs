@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
+using UnityEngine.Events;
 
 public class PlayerDataModel : MonoBehaviour
 {
@@ -44,11 +44,10 @@ public class PlayerDataModel : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public float hitPoint, exp;
+    public float maxHP, nowHP, exp;
     public int level;
 
-    public float moveSpeed, highSpeed, jumpPower;
-    public float attackCoolTime, skillCoolTime;
+    public float moveSpeed, highSpeed, jumpPower, coolTime;
     public int jumpLimit, jumpCount;
     public bool isJump, attackCooldown;
 
@@ -72,7 +71,7 @@ public class PlayerDataModel : MonoBehaviour
         for (int i = 0; i < coolChecks.Length; i++)
             coolChecks[i] = true;
 
-        hitPoint = 100f;
+        maxHP = 100f;
         level = 1;
         exp = 0f;
 
@@ -80,6 +79,59 @@ public class PlayerDataModel : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        GameManager.Data.Player = gameObject;
+        GameManager.Data.Player = this;
+    }
+
+    public UnityEvent LevelEvent, HPEvent, EXPEvent;
+
+    public void AddEventListener(UnityEvent target, UnityAction action)
+    {
+        target.AddListener(action);
+    }
+
+    void LevelUP()
+    {
+        exp -= level * 100;
+        level++;
+        LevelEvent?.Invoke();
+    }
+
+    public void ModifyHP(float _modifier)
+    {
+        if(_modifier < 0f)
+        {
+            nowHP += _modifier;
+            if(nowHP <= 0f)
+            {
+                nowHP = 0f;
+            }
+            HPEvent?.Invoke();
+        }
+        else
+        {
+            nowHP += _modifier;
+            if(nowHP > maxHP)
+            {
+                HPEvent?.Invoke();
+            }
+        }
+    }
+
+    public void ModifyEXP(float _modifier)
+    {
+        if (_modifier < 0f)
+        {
+            exp += _modifier;
+            if (exp < 0f)
+                exp = 0f;
+        }
+        else
+        {
+            exp += _modifier;
+            while(exp >= level * 100f)
+            {
+                LevelUP();
+            }
+        }
     }
 }

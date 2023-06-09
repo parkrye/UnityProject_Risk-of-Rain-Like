@@ -1,11 +1,10 @@
-using System.Collections;
 using UnityEngine;
 
 public abstract class Hero : MonoBehaviour
 {
     public PlayerDataModel playerDataModel;
     public Animator animator;
-    public float[] coolTimes = new float[4];
+    public Skill[] skills = new Skill[4];
 
     protected virtual void Awake() 
     {
@@ -14,17 +13,12 @@ public abstract class Hero : MonoBehaviour
 
     public abstract bool Jump(bool isPressed);
 
-    public abstract bool Action1(bool isPressed, float coolTime);
+    public abstract bool Action1(bool isPressed);
 
-    public abstract bool Action2(bool isPressed, float coolTime);
+    public abstract bool Action2(bool isPressed);
 
-    public abstract bool Action3(bool isPressed, float coolTime);
+    public abstract bool Action3(bool isPressed);
 
-    public abstract bool Action4(bool isPressed, float coolTime);
+    public abstract bool Action4(bool isPressed);
 
-    protected IEnumerator CoolTime(int actionNum, float coolTime)
-    {
-        yield return new WaitForSeconds(coolTimes[actionNum] * coolTime);
-        playerDataModel.coolChecks[actionNum] = true;
-    }
 }

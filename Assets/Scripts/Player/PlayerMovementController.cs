@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
+    [SerializeField] Transform cameraTransform;
 
     void Awake()
     {
@@ -55,12 +56,14 @@ public class PlayerMovementController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        Rotate();
         Jump();
     }
 
     void Move()
     {
         float animatorSpeed = playerDataModel.animator.GetFloat("Move");
+
         if (playerDataModel.moveDir == Vector3.zero)
         {
             playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, 0f);
@@ -76,8 +79,6 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
-            if((playerDataModel.prevDir.x < 0f && playerDataModel.moveDir.x > 0f) || (playerDataModel.prevDir.x > 0f && playerDataModel.moveDir.x < 0f))
-                playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, playerDataModel.rb.velocity.z);
             if ((playerDataModel.prevDir.z < 0f && playerDataModel.moveDir.z > 0f) || (playerDataModel.prevDir.z > 0f && playerDataModel.moveDir.z < 0f))
                 playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, 0f);
 
@@ -105,6 +106,14 @@ public class PlayerMovementController : MonoBehaviour
         {
             playerDataModel.rb.AddForce(transform.up * playerDataModel.moveSpeed * 0.4f, ForceMode.Force);
         }
+    }
+
+    void Rotate()
+    {
+        // °³¼±
+        Vector3 dir = transform.position + cameraTransform.transform.forward * playerDataModel.moveDir.z + cameraTransform.transform.right * playerDataModel.moveDir.x;
+        dir.y = transform.position.y;
+        transform.LookAt(dir);
     }
 
     void Jump()
