@@ -51,9 +51,9 @@ public class PlayerDataModel : MonoBehaviour
     public int jumpLimit, jumpCount;
     public bool isJump, attackCooldown;
 
-    public Vector3 moveDir, prevDir;
-    public Dictionary<Vector3, bool> climable;
     public float climbCheckLowHeight, climbCheckHighHeight, climbCheckLength;
+
+    public float turnSpeed, turnSensivity;
 
     public bool[] coolChecks = new bool[4];
 
@@ -65,7 +65,6 @@ public class PlayerDataModel : MonoBehaviour
             hero.gameObject.SetActive(false);
 
         rb = GetComponent<Rigidbody>();
-        climable = new Dictionary<Vector3, bool>();
 
         coolChecks = new bool[4];
         for (int i = 0; i < coolChecks.Length; i++)

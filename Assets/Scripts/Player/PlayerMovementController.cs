@@ -5,11 +5,15 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
-    [SerializeField] Transform cameraTransform;
+
+    [SerializeField] Vector3 moveDir;
+    [SerializeField] Dictionary<Vector3, bool> climable;
+    [SerializeField] float animatorChangeSpeed;
 
     void Awake()
     {
         playerDataModel = GetComponent<PlayerDataModel>();
+        climable = new Dictionary<Vector3, bool>();
     }
 
     void Update()
@@ -34,102 +38,136 @@ public class PlayerMovementController : MonoBehaviour
 
     void CheckClimable()
     {
-        if (playerDataModel.moveDir == Vector3.zero)
+        if (moveDir == Vector3.zero)
             return;
 
-        if(!playerDataModel.climable.ContainsKey(playerDataModel.moveDir))
-            playerDataModel.climable.Add(playerDataModel.moveDir, false);
+        if(!climable.ContainsKey(moveDir))
+            climable.Add(moveDir, false);
 
-        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
-        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
-        if (Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x) * playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
+        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * moveDir.z + transform.right * moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
+        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * moveDir.z + transform.right * moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
+        if (Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * moveDir.z + transform.right * moveDir.x) * playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
         {
-            if (!Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * playerDataModel.moveDir.z + transform.right * playerDataModel.moveDir.x), playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
+            if (!Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * moveDir.z + transform.right * moveDir.x), playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
             {
-                playerDataModel.climable[playerDataModel.moveDir] = true;
+                climable[moveDir] = true;
                 return;
             }
         }
-        playerDataModel.climable[playerDataModel.moveDir] = false;
+        climable[moveDir] = false;
     }
 
     void FixedUpdate()
     {
         Move();
-        Rotate();
         Jump();
     }
 
     void Move()
     {
-        float animatorSpeed = playerDataModel.animator.GetFloat("Move");
+        float animatorFoward = playerDataModel.animator.GetFloat("Foward");
+        float animatorSide = playerDataModel.animator.GetFloat("Side");
 
-        if (playerDataModel.moveDir == Vector3.zero)
+        // 이동
+        playerDataModel.rb.velocity = (transform.right * moveDir.x + transform.forward * moveDir.z) * playerDataModel.moveSpeed + transform.up * (playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime);
+        
+        // 등반
+        if (climable.ContainsKey(moveDir) && climable[moveDir])
         {
-            playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, 0f);
+            playerDataModel.rb.AddForce(transform.up * playerDataModel.moveSpeed * Time.deltaTime, ForceMode.Force);
+        }
 
-            if (animatorSpeed > 0f)
+        // 애니메이션
+        if (moveDir.z > 0f)
+        {
+            if (animatorFoward < 1f)
             {
-                playerDataModel.animator.SetFloat("Move", animatorSpeed - playerDataModel.moveSpeed * Time.deltaTime);
+                playerDataModel.animator.SetFloat("Foward", animatorFoward + animatorChangeSpeed);
             }
-            else if (animatorSpeed < 0f)
+            else
             {
-                playerDataModel.animator.SetFloat("Move", 0f);
+                playerDataModel.animator.SetFloat("Foward", 1f);
+            }
+        }
+        else if (moveDir.z < 0f)
+        {
+            if (animatorFoward > -1f)
+            {
+                playerDataModel.animator.SetFloat("Foward", animatorFoward - animatorChangeSpeed);
+            }
+            else
+            {
+                playerDataModel.animator.SetFloat("Foward", -1f);
             }
         }
         else
         {
-            if ((playerDataModel.prevDir.z < 0f && playerDataModel.moveDir.z > 0f) || (playerDataModel.prevDir.z > 0f && playerDataModel.moveDir.z < 0f))
-                playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, 0f);
-
-            if (animatorSpeed < 1f)
+            if (animatorFoward >= 0.1f)
             {
-                playerDataModel.animator.SetFloat("Move", animatorSpeed + playerDataModel.moveSpeed * Time.deltaTime);
+                playerDataModel.animator.SetFloat("Foward", animatorFoward - animatorChangeSpeed);
             }
-            else if (animatorSpeed > 1f)
+            else if (animatorFoward <= -0.1f)
             {
-                playerDataModel.animator.SetFloat("Move", 1f);
+                playerDataModel.animator.SetFloat("Foward", animatorFoward + animatorChangeSpeed);
+            }
+            else
+            {
+                playerDataModel.animator.SetFloat("Foward", 0f);
             }
         }
 
-        if (playerDataModel.animator.GetBool("IsGround"))
-            playerDataModel.rb.AddForce(((transform.forward * playerDataModel.moveDir.z) + (transform.right * playerDataModel.moveDir.x)) * playerDataModel.moveSpeed, ForceMode.Force);
-        else
-            playerDataModel.rb.AddForce(((transform.forward * playerDataModel.moveDir.z) + (transform.right * playerDataModel.moveDir.x)) * playerDataModel.moveSpeed * 0.5f, ForceMode.Force);
-
-        if (playerDataModel.rb.velocity.x > playerDataModel.highSpeed)
-            playerDataModel.rb.velocity = new Vector3(playerDataModel.highSpeed, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, playerDataModel.rb.velocity.z);
-        if (playerDataModel.rb.velocity.z > playerDataModel.highSpeed)
-            playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime, playerDataModel.highSpeed);
-
-        if (playerDataModel.climable.ContainsKey(playerDataModel.moveDir) && playerDataModel.climable[playerDataModel.moveDir])
+        if (moveDir.x > 0f)
         {
-            playerDataModel.rb.AddForce(transform.up * playerDataModel.moveSpeed * 0.4f, ForceMode.Force);
+            if (animatorSide < 1f)
+            {
+                playerDataModel.animator.SetFloat("Side", animatorSide + animatorChangeSpeed);
+            }
+            else
+            {
+                playerDataModel.animator.SetFloat("Side", 1f);
+            }
         }
-    }
-
-    void Rotate()
-    {
-        // 개선
-        Vector3 dir = transform.position + cameraTransform.transform.forward * playerDataModel.moveDir.z + cameraTransform.transform.right * playerDataModel.moveDir.x;
-        dir.y = transform.position.y;
-        transform.LookAt(dir);
+        else if (moveDir.x < 0f)
+        {
+            if (animatorSide > -1f)
+            {
+                playerDataModel.animator.SetFloat("Side", animatorSide - animatorChangeSpeed);
+            }
+            else
+            {
+                playerDataModel.animator.SetFloat("Side", -1f);
+            }
+        }
+        else
+        {
+            if (animatorSide >= 0.1f)
+            {
+                playerDataModel.animator.SetFloat("Side", animatorSide - animatorChangeSpeed);
+            }
+            else if (animatorSide <= -0.1f)
+            {
+                playerDataModel.animator.SetFloat("Side", animatorSide + animatorChangeSpeed);
+            }
+            else
+            {
+                playerDataModel.animator.SetFloat("Side", 0f);
+            }
+        }
     }
 
     void Jump()
     {
         if (playerDataModel.isJump)
         {
-            playerDataModel.rb.AddForce(transform.up * playerDataModel.jumpPower, ForceMode.Impulse);
+            playerDataModel.rb.velocity += transform.up * playerDataModel.jumpPower;
             playerDataModel.isJump = false;
         }
     }
 
     void OnMove(InputValue inputValue)
     {
-        playerDataModel.prevDir = playerDataModel.moveDir;
         Vector2 tmp = inputValue.Get<Vector2>();
-        playerDataModel.moveDir = new Vector3(tmp.x, 0f, tmp.y);
+        moveDir = new Vector3(tmp.x, 0f, tmp.y);
     }
 
     void OnJump(InputValue inputValue)
