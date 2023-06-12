@@ -7,7 +7,7 @@ public class Wizard_Action1A : Skill
     {
         if (coolCheck && isPressed)
         {
-            GameManager.Data.Player.animator.SetTrigger("Action1");
+            hero.playerDataModel.animator.SetTrigger("Action1");
 
             coolCheck = false;
 

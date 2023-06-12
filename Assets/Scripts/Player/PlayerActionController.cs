@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerActionController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
-
+    public Transform AttackTransform;
     void Awake()
     {
         playerDataModel = GetComponent<PlayerDataModel>();

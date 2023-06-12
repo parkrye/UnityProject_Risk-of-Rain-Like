@@ -1,19 +1,29 @@
+using UnityEngine;
+
 public class Warrior : Hero
 {
     override protected void Awake()
     {
         base.Awake();
-
+        SettingSkill(0, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action1A"));
+        SettingSkill(1, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action2A"));
+        SettingSkill(2, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action3A"));
+        SettingSkill(3, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action4A"));
     }
 
     public override bool Jump(bool isPressed)
     {
+        if (nowCharge)
+            nowCharge = false;
+
         if (isPressed)
         {
-            playerDataModel.jumpCount++;
-            playerDataModel.isJump = true;
-            animator.SetTrigger("JumpH");
-            animator.SetTrigger("JumpL");
+            if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
+            {
+                playerDataModel.isJump = true;
+                playerDataModel.jumpCount++;
+                StartCoroutine(JumpCharger());
+            }
         }
 
         return isPressed;
@@ -57,5 +67,13 @@ public class Warrior : Hero
             return true;
         }
         return false;
+    }
+
+    protected override void ChargeJump()
+    {
+        playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.jumpPower * 1f * jumpCharge * 0.01f, playerDataModel.rb.velocity.z);
+        animator.SetTrigger("JumpH");
+        animator.SetTrigger("JumpL");
+        playerDataModel.isJump = false;
     }
 }

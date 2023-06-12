@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7bf5e13c536d074298ca19de0d7214a, type: 3}
   m_Name: Wizard_Action3A
   m_EditorClassIdentifier: 
+  hero: {fileID: 0}
   SkillName: 333
   SkillDesc: 333
   SkillIcon: {fileID: 0}
   coolTime: 1
   coolCheck: 1
+  teleportDistance: 10

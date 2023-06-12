@@ -7,8 +7,8 @@ public class Warrior_Action2A : Skill
     {
         if (coolCheck && isPressed)
         {
-            GameManager.Data.Player.animator.SetTrigger("Action2");
-            GameManager.Data.Player.animator.SetBool("Guard", true);
+            hero.playerDataModel.animator.SetTrigger("Action2");
+            hero.playerDataModel.animator.SetBool("Guard", true);
 
             coolCheck = false;
 
@@ -16,7 +16,7 @@ public class Warrior_Action2A : Skill
         }
         else
         {
-            GameManager.Data.Player.animator.SetBool("Guard", false);
+            hero.playerDataModel.animator.SetBool("Guard", false);
         }
         return false;
     }

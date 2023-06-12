@@ -7,8 +7,8 @@ public class Wizard_Action2A : Skill
     {
         if (coolCheck && isPressed)
         {
-            GameManager.Data.Player.animator.SetTrigger("Action2");
-            GameManager.Data.Player.animator.SetBool("Casting", true);
+            hero.playerDataModel.animator.SetTrigger("Action2");
+            hero.playerDataModel.animator.SetBool("Casting", true);
 
             coolCheck = false;
 
@@ -16,7 +16,7 @@ public class Wizard_Action2A : Skill
         }
         else
         {
-            GameManager.Data.Player.animator.SetBool("Casting", false);
+            hero.playerDataModel.animator.SetBool("Casting", false);
         }
         return false;
     }

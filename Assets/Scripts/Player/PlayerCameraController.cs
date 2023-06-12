@@ -8,7 +8,7 @@ public class PlayerCameraController : MonoBehaviour
 
     [SerializeField] Vector2 pointerPos;
     [SerializeField] float lookX;
-    [SerializeField] Transform lookAtTransform;
+    public Transform lookAtTransform;
 
     void Awake()
     {
@@ -18,9 +18,9 @@ public class PlayerCameraController : MonoBehaviour
 
     void Update()
     {
-        if(Mathf.Abs(pointerPos.x) > playerDataModel.turnSensivity * 2)
+        if(Mathf.Abs(pointerPos.x) > playerDataModel.turnSensivity * 2f)
         {
-            transform.localEulerAngles += new Vector3(0f, Mathf.Clamp(pointerPos.x, -1f, 1f) * playerDataModel.turnSpeed * Time.deltaTime, 0f);
+            transform.localEulerAngles += new Vector3(0f, Mathf.Clamp(pointerPos.x, -1f, 1f) * playerDataModel.turnSpeed * 0.5f * Time.deltaTime, 0f);
         }
 
         if (Mathf.Abs(pointerPos.y) > playerDataModel.turnSensivity)

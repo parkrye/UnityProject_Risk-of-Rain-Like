@@ -8,6 +8,9 @@ public class PlayerDataModel : MonoBehaviour
     List<Hero> heroList;
     public Animator animator;
     public Rigidbody rb;
+    public PlayerActionController playerAction;
+    public PlayerMovementController playerMovement;
+    public PlayerCameraController playerCamera;
     [SerializeField][Range(0, 2)] int heroNum;
 
     void Awake()
@@ -15,41 +18,12 @@ public class PlayerDataModel : MonoBehaviour
         Initailze();
     }
 
-    /// <summary>
-    /// 캐릭터 선택
-    /// </summary>
-    /// <param name="num"></param>
-    /// <returns>선택 성공 여부</returns>
-    public bool SelectHero(int num)
-    {
-        if(num >= 0 && num < heroList.Count)
-        {
-            foreach (var hero in heroList)
-                hero.gameObject.SetActive(false);
-            heroList[num].gameObject.SetActive(true);
-            hero = heroList[num];
-            animator = hero.animator;
-            hero.playerDataModel = this;
-            animator.SetInteger("Hero", num);
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// 캐릭터 파괴
-    /// </summary>
-    public void DestroyCharacter()
-    {
-        Destroy(gameObject);
-    }
-
     public float maxHP, nowHP, exp;
     public int level;
 
-    public float moveSpeed, highSpeed, jumpPower, coolTime;
+    public float moveSpeed, highSpeed, jumpPower, coolTime, climbPower;
     public int jumpLimit, jumpCount;
-    public bool isJump, attackCooldown;
+    public bool isJump, attackCooldown, controlleable;
 
     public float climbCheckLowHeight, climbCheckHighHeight, climbCheckLength;
 
@@ -65,6 +39,9 @@ public class PlayerDataModel : MonoBehaviour
             hero.gameObject.SetActive(false);
 
         rb = GetComponent<Rigidbody>();
+        playerAction = GetComponent<PlayerActionController>();
+        playerMovement = GetComponent<PlayerMovementController>();
+        playerCamera = GetComponent<PlayerCameraController>();
 
         coolChecks = new bool[4];
         for (int i = 0; i < coolChecks.Length; i++)
@@ -73,12 +50,43 @@ public class PlayerDataModel : MonoBehaviour
         maxHP = 100f;
         level = 1;
         exp = 0f;
+        controlleable = true;
 
         SelectHero(heroNum);
 
         DontDestroyOnLoad(gameObject);
 
         GameManager.Data.Player = this;
+    }
+
+    /// <summary>
+    /// 캐릭터 선택
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns>선택 성공 여부</returns>
+    public bool SelectHero(int num)
+    {
+        if (num >= 0 && num < heroList.Count)
+        {
+            foreach (var hero in heroList)
+                hero.gameObject.SetActive(false);
+            heroList[num].gameObject.SetActive(true);
+            hero = heroList[num];
+            animator = hero.animator;
+            hero.playerDataModel = this;
+            animator.SetInteger("Hero", num);
+            playerAction.AttackTransform = hero.attackTransform;
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 캐릭터 파괴
+    /// </summary>
+    public void DestroyCharacter()
+    {
+        Destroy(gameObject);
     }
 
     public UnityEvent LevelEvent, HPEvent, EXPEvent;

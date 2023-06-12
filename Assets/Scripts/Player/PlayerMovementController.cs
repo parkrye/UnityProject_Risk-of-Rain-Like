@@ -6,7 +6,8 @@ public class PlayerMovementController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
 
-    [SerializeField] Vector3 moveDir;
+    public Vector3 moveDir { get; private set; }
+    Vector3 prevDir;
     [SerializeField] Dictionary<Vector3, bool> climable;
     [SerializeField] float animatorChangeSpeed;
 
@@ -20,6 +21,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         CheckGround();
         CheckClimable();
+        SetDirection();
     }
 
     void CheckGround()
@@ -28,6 +30,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position + transform.up * 0.1f, -transform.up, 0.2f, LayerMask.GetMask("Ground")))
             {
+                playerDataModel.hero.Jump(false);
                 playerDataModel.jumpCount = 0;
                 playerDataModel.animator.SetBool("IsGround", true);
                 return;
@@ -57,10 +60,17 @@ public class PlayerMovementController : MonoBehaviour
         climable[moveDir] = false;
     }
 
+    void SetDirection()
+    {
+        prevDir = moveDir;
+    }
+
     void FixedUpdate()
     {
-        Move();
-        Jump();
+        if (playerDataModel.controlleable)
+        {
+            Move();
+        }
     }
 
     void Move()
@@ -68,100 +78,42 @@ public class PlayerMovementController : MonoBehaviour
         float animatorFoward = playerDataModel.animator.GetFloat("Foward");
         float animatorSide = playerDataModel.animator.GetFloat("Side");
 
+        // 제동
+        if(moveDir == Vector3.zero)
+        {
+            playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y, 0f);
+        }
+        else
+        {
+            if((prevDir.x < 0f && moveDir.x >= 0f) || (prevDir.x > 0f && moveDir.x <= 0f))
+            {
+                playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y, playerDataModel.rb.velocity.z);
+            }
+            if((prevDir.z < 0f && moveDir.z >= 0f) || (prevDir.z > 0f && moveDir.z <= 0f))
+            {
+                playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y, 0f);
+            }
+        }
+        if (playerDataModel.rb.velocity.x > playerDataModel.highSpeed)
+            playerDataModel.rb.velocity = new Vector3(playerDataModel.highSpeed, playerDataModel.rb.velocity.y, playerDataModel.rb.velocity.z);
+        if (playerDataModel.rb.velocity.z > playerDataModel.highSpeed)
+            playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y, playerDataModel.highSpeed);
+
         // 이동
-        playerDataModel.rb.velocity = (transform.right * moveDir.x + transform.forward * moveDir.z) * playerDataModel.moveSpeed + transform.up * (playerDataModel.rb.velocity.y + Physics.gravity.y * Time.deltaTime);
-        
+        if (playerDataModel.animator.GetBool("IsGround"))
+            playerDataModel.rb.AddForce(((transform.right * moveDir.x) + (transform.forward * moveDir.z)) * playerDataModel.moveSpeed, ForceMode.Force);
+        else
+            playerDataModel.rb.AddForce(((transform.right * moveDir.x) + (transform.forward * moveDir.z)) * Mathf.Sqrt(playerDataModel.moveSpeed), ForceMode.Force);
+
         // 등반
         if (climable.ContainsKey(moveDir) && climable[moveDir])
         {
-            playerDataModel.rb.AddForce(transform.up * playerDataModel.moveSpeed * Time.deltaTime, ForceMode.Force);
+            playerDataModel.rb.AddForce(transform.up * playerDataModel.climbPower, ForceMode.Force);
         }
 
         // 애니메이션
-        if (moveDir.z > 0f)
-        {
-            if (animatorFoward < 1f)
-            {
-                playerDataModel.animator.SetFloat("Foward", animatorFoward + animatorChangeSpeed);
-            }
-            else
-            {
-                playerDataModel.animator.SetFloat("Foward", 1f);
-            }
-        }
-        else if (moveDir.z < 0f)
-        {
-            if (animatorFoward > -1f)
-            {
-                playerDataModel.animator.SetFloat("Foward", animatorFoward - animatorChangeSpeed);
-            }
-            else
-            {
-                playerDataModel.animator.SetFloat("Foward", -1f);
-            }
-        }
-        else
-        {
-            if (animatorFoward >= 0.1f)
-            {
-                playerDataModel.animator.SetFloat("Foward", animatorFoward - animatorChangeSpeed);
-            }
-            else if (animatorFoward <= -0.1f)
-            {
-                playerDataModel.animator.SetFloat("Foward", animatorFoward + animatorChangeSpeed);
-            }
-            else
-            {
-                playerDataModel.animator.SetFloat("Foward", 0f);
-            }
-        }
-
-        if (moveDir.x > 0f)
-        {
-            if (animatorSide < 1f)
-            {
-                playerDataModel.animator.SetFloat("Side", animatorSide + animatorChangeSpeed);
-            }
-            else
-            {
-                playerDataModel.animator.SetFloat("Side", 1f);
-            }
-        }
-        else if (moveDir.x < 0f)
-        {
-            if (animatorSide > -1f)
-            {
-                playerDataModel.animator.SetFloat("Side", animatorSide - animatorChangeSpeed);
-            }
-            else
-            {
-                playerDataModel.animator.SetFloat("Side", -1f);
-            }
-        }
-        else
-        {
-            if (animatorSide >= 0.1f)
-            {
-                playerDataModel.animator.SetFloat("Side", animatorSide - animatorChangeSpeed);
-            }
-            else if (animatorSide <= -0.1f)
-            {
-                playerDataModel.animator.SetFloat("Side", animatorSide + animatorChangeSpeed);
-            }
-            else
-            {
-                playerDataModel.animator.SetFloat("Side", 0f);
-            }
-        }
-    }
-
-    void Jump()
-    {
-        if (playerDataModel.isJump)
-        {
-            playerDataModel.rb.velocity += transform.up * playerDataModel.jumpPower;
-            playerDataModel.isJump = false;
-        }
+        playerDataModel.animator.SetFloat("Foward", Mathf.Lerp(animatorFoward, moveDir.z, 0.1f));
+        playerDataModel.animator.SetFloat("Side", Mathf.Lerp(animatorSide, moveDir.x, 0.1f));
     }
 
     void OnMove(InputValue inputValue)
@@ -172,9 +124,6 @@ public class PlayerMovementController : MonoBehaviour
 
     void OnJump(InputValue inputValue)
     {
-        if(playerDataModel.jumpCount < playerDataModel.jumpLimit)
-        {
-            playerDataModel.hero.Jump(inputValue.isPressed);
-        }
+        playerDataModel.hero.Jump(inputValue.isPressed);
     }
 }

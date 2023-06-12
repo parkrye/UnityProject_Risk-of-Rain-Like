@@ -7,7 +7,7 @@ public class Archer_Action2A : Skill
     {
         if (coolCheck && isPressed)
         {
-            GameManager.Data.Player.animator.SetTrigger("Action2");
+            hero.playerDataModel.animator.SetTrigger("Action2");
 
             coolCheck = false;
 

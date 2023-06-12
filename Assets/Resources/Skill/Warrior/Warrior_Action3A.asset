@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55667c482aac3974e9fdd7918f3ad8be, type: 3}
   m_Name: Warrior_Action3A
   m_EditorClassIdentifier: 
+  hero: {fileID: 0}
   SkillName: 33
   SkillDesc: 33
   SkillIcon: {fileID: 0}
   coolTime: 1
   coolCheck: 1
+  dashPower: 5

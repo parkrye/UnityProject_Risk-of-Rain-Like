@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "Skill", menuName = "Data/Skill")]
 public abstract class Skill : ScriptableObject
 {
+    public Hero hero;
     public string SkillName;
     public string SkillDesc;
     public Sprite SkillIcon;

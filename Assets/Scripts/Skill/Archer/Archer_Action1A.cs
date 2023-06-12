@@ -7,7 +7,12 @@ public class Archer_Action1A : Skill
     {
         if (coolCheck && isPressed)
         {
-            GameManager.Data.Player.animator.SetTrigger("Action1");
+            hero.playerDataModel.animator.SetTrigger("Action1");
+
+            GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Throwing"), true);
+            arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
+            arrow.transform.LookAt(hero.playerDataModel.playerCamera.lookAtTransform.position);
+            arrow.GetComponent<Arrow>().Shot();
 
             coolCheck = false;
 
@@ -16,3 +21,4 @@ public class Archer_Action1A : Skill
         return false;
     }
 }
+

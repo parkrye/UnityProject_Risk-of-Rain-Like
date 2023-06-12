@@ -7,7 +7,7 @@ public class Warrior_Action4A : Skill
     {
         if (coolCheck && isPressed)
         {
-            GameManager.Data.Player.animator.SetTrigger("Action4");
+            hero.playerDataModel.animator.SetTrigger("Action4");
 
             coolCheck = false;
 
