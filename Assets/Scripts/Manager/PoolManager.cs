@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -79,7 +80,14 @@ public class PoolManager : MonoBehaviour
             if (!poolDic.ContainsKey(key))
                 return false;
 
-            poolDic[key].Release(go);
+            try
+            {
+                poolDic[key].Release(go);
+            }
+            catch
+            {
+                return false;
+            }
             return true;
         }
         else if (instance is Component)
@@ -90,7 +98,15 @@ public class PoolManager : MonoBehaviour
             if (!poolDic.ContainsKey(key))
                 return false;
 
-            poolDic[key].Release(component.gameObject);
+            try
+            {
+                poolDic[key].Release(component.gameObject);
+            }
+            catch
+            {
+                return false;
+            }
+
             return true;
         }
         else

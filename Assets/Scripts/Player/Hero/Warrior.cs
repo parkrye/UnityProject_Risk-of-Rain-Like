@@ -20,7 +20,6 @@ public class Warrior : Hero
         {
             if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
             {
-                playerDataModel.isJump = true;
                 playerDataModel.jumpCount++;
                 StartCoroutine(JumpCharger());
             }
@@ -74,6 +73,5 @@ public class Warrior : Hero
         playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.jumpPower * 1f * jumpCharge * 0.01f, playerDataModel.rb.velocity.z);
         animator.SetTrigger("JumpH");
         animator.SetTrigger("JumpL");
-        playerDataModel.isJump = false;
     }
 }

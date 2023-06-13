@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Wizard : Hero
@@ -27,7 +26,6 @@ public class Wizard : Hero
         {
             if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
             {
-                playerDataModel.isJump = true;
                 playerDataModel.jumpCount++;
                 floating = true;
                 playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.jumpPower * 0.5f, playerDataModel.rb.velocity.z);
@@ -87,7 +85,6 @@ public class Wizard : Hero
         yield return new WaitForSeconds(0.5f);
         playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, 0f, playerDataModel.rb.velocity.z);
         playerDataModel.rb.useGravity = false;
-        playerDataModel.isJump = false;
         while (floating)
         {
             yield return new WaitForFixedUpdate();

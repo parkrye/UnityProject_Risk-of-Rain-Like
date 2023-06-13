@@ -1,27 +1,50 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] float speed;
+    TrailRenderer trail;
 
-    public void Shot()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        trail = GetComponent<TrailRenderer>();
+    }
 
+    void OnEnable()
+    {
+        trail.Clear();
+    }
+
+    public void Shot(float speed, float damage, float delay)
+    {
+        StartCoroutine(ReadyToShot(speed, damage, delay));
+    }
+
+    public void Shot(float speed, float damage = 1f)
+    {
+        Shot(speed, damage, 0f);
+    }
+
+    IEnumerator ReadyToShot(float speed, float damage, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        trail.enabled = true;
         rb.AddForce(transform.forward * speed, ForceMode.Impulse);
+        GameManager.Resource.Destroy(gameObject, 5f);
+    }
+
+    void OnDisable()
+    {
+        trail.enabled = false;
+        rb.velocity = Vector3.zero;
     }
 
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            GameManager.Pool.Release(gameObject);
-        }
-        else if (collision.gameObject.layer == 1 << LayerMask.GetMask("Ground"))
+        if (other.tag == "Enemy")
         {
             GameManager.Pool.Release(gameObject);
         }

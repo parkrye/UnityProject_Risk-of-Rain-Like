@@ -1352,7 +1352,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  attackTransform: {fileID: 0}
+  attackTransform: {fileID: 1655839557735060474}
   jumpCharge: 0
 --- !u!1 &1236346923177175752
 GameObject:
@@ -5326,14 +5326,14 @@ MonoBehaviour:
   playerAction: {fileID: 0}
   playerMovement: {fileID: 0}
   playerCamera: {fileID: 0}
-  heroNum: 2
+  heroNum: 0
   maxHP: 0
   nowHP: 0
   exp: 0
   level: 0
   moveSpeed: 10
   highSpeed: 5
-  jumpPower: 10
+  jumpPower: 5
   coolTime: 1
   climbPower: 5
   jumpLimit: 1
@@ -10652,7 +10652,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9221011082053742855}
-  m_LocalRotation: {x: 0.11852725, y: 0.5842061, z: -0.80036944, w: -0.06374376}
+  m_LocalRotation: {x: 0.118527226, y: 0.5842061, z: -0.80036944, w: -0.06374373}
   m_LocalPosition: {x: 1.3473301, y: 4.6161757, z: -4.858266}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

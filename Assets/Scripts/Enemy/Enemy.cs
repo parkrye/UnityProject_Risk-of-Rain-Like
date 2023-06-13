@@ -1,22 +1,17 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
-    EnemyData enemyData;
-    Enemy_AI enemy_AI;
+    public EnemyData enemyData;
+    protected Enemy_AI enemy_AI;
 
-    void Awake()
+    protected virtual void OnEnable()
     {
-        enemyData = GetComponent<EnemyData>();
         enemy_AI = GetComponent<Enemy_AI>();
-    }
-
-    void OnEnable()
-    {
         enemy_AI.CreateBehaviorTreeAIState();
     }
 
-    void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, enemyData.Range);

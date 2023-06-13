@@ -23,7 +23,7 @@ public class PlayerDataModel : MonoBehaviour
 
     public float moveSpeed, highSpeed, jumpPower, coolTime, climbPower;
     public int jumpLimit, jumpCount;
-    public bool isJump, attackCooldown, controlleable;
+    public bool attackCooldown, controlleable;
 
     public float climbCheckLowHeight, climbCheckHighHeight, climbCheckLength;
 

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class BT_Condition : BT_Behavior
 {
     public BT_Condition()

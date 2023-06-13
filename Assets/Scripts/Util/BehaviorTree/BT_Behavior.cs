@@ -1,4 +1,6 @@
 // 행동 노드의 상태
+using UnityEngine;
+
 public enum NodeState
 {
     Invalid, // 기본 상태
@@ -24,6 +26,7 @@ public class BT_Behavior
     NodeType type;
     int index;
     BT_Behavior parent;
+    protected GameObject enemy, player;
 
     public BT_Behavior()
     {

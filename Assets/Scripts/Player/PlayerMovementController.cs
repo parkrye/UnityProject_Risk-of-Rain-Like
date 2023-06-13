@@ -26,7 +26,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void CheckGround()
     {
-        if (!playerDataModel.isJump)
+        if (playerDataModel.rb.velocity.y <= 0f)
         {
             if (Physics.Raycast(transform.position + transform.up * 0.1f, -transform.up, 0.2f, LayerMask.GetMask("Ground")))
             {
