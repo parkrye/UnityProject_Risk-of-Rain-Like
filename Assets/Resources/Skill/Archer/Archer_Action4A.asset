@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab9ead8479d64540aa2e4f15abff9ee, type: 3}
   m_Name: Archer_Action4A
   m_EditorClassIdentifier: 
+  hero: {fileID: 0}
   SkillName: 4
   SkillDesc: 4
   SkillIcon: {fileID: 21300000, guid: c8de558d1809a431b853143ea7327b0d, type: 3}
-  coolTime: 1
-  coolCheck: 1
+  coolTime: 20
+  modifier: 1
+  coolCheck: 0

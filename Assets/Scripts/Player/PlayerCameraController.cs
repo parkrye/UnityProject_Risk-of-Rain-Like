@@ -7,34 +7,37 @@ public class PlayerCameraController : MonoBehaviour
     PlayerDataModel playerDataModel;
 
     [SerializeField] Vector2 pointerPos;
-    [SerializeField] float lookX;
-    public Transform lookAtTransform;
+    [SerializeField] Vector3 cameraOffset, downViewOffset, upViewOffset;
+    [SerializeField] float xRotation;
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
+
+    public Transform lookFromTransform, lookAtTransform;
 
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerDataModel = GetComponent<PlayerDataModel>();
+        cameraOffset = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
+        downViewOffset = new Vector3 (0f, 10f, -5f);
+        upViewOffset = new Vector3 (0f, 0.5f, -0.5f);
     }
 
     void Update()
     {
-        if(Mathf.Abs(pointerPos.x) > playerDataModel.turnSensivity * 2f)
-        {
-            transform.localEulerAngles += new Vector3(0f, Mathf.Clamp(pointerPos.x, -1f, 1f) * playerDataModel.turnSpeed * 0.5f * Time.deltaTime, 0f);
-        }
+        transform.localEulerAngles += new Vector3(0f, pointerPos.x * playerDataModel.mouseSensivity * Time.deltaTime, 0f);
 
-        if (Mathf.Abs(pointerPos.y) > playerDataModel.turnSensivity)
+        xRotation -= pointerPos.y * Mathf.Sqrt(playerDataModel.mouseSensivity) * 10f * Time.deltaTime;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
+        lookFromTransform.localEulerAngles = new Vector3(xRotation, 0f, 0f);
+
+        if(xRotation < 0f)
         {
-            lookX = Mathf.Clamp(pointerPos.y, -1f, 1f) * Mathf.Sqrt(playerDataModel.turnSpeed) * Time.deltaTime;
-            lookAtTransform.Translate(new Vector3(0f, lookX, 0f), Space.Self);
-            if(lookAtTransform.localPosition.y > 3f)
-            {
-                lookAtTransform.localPosition = new Vector3(0f, 3f, 5f);
-            }
-            else if (lookAtTransform.localPosition.y < -3f)
-            {
-                lookAtTransform.localPosition = new Vector3(0f, -3f, 5f);
-            }
+            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, upViewOffset, -xRotation / 80f);
+        }
+        else
+        {
+            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, downViewOffset, xRotation / 80f);
         }
     }
 

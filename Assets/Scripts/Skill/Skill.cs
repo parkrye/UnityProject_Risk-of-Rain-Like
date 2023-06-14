@@ -10,7 +10,7 @@ public abstract class Skill : ScriptableObject
     public string SkillDesc;
     public Sprite SkillIcon;
 
-    public float coolTime;
+    public float coolTime, modifier;
     public bool coolCheck;
 
     void Awake()

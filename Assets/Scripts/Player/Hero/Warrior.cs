@@ -20,7 +20,6 @@ public class Warrior : Hero
         {
             if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
             {
-                playerDataModel.jumpCount++;
                 StartCoroutine(JumpCharger());
             }
         }
@@ -71,6 +70,7 @@ public class Warrior : Hero
     protected override void ChargeJump()
     {
         playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.jumpPower * 1f * jumpCharge * 0.01f, playerDataModel.rb.velocity.z);
+        playerDataModel.jumpCount++;
         animator.SetTrigger("JumpH");
         animator.SetTrigger("JumpL");
     }

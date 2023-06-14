@@ -1,23 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Behavior_TakeRoundabout : BT_Action
 {
-    Vector3 roundaboutDir;
+    Stack<Vector3> roundaboutDir;
 
     public Enemy_Behavior_TakeRoundabout(GameObject _enemy)
     {
         enemy = _enemy;
         player = GameManager.Data.Player.gameObject;
+        roundaboutDir = new Stack<Vector3>();
     }
 
+    /// <summary>
+    /// 초기화시 길찾기 루트 생성
+    /// </summary>
     public override void Initialize()
     {
-        roundaboutDir = PathFinder.PathFinding(enemy.transform, player.transform, enemy.GetComponent<Enemy>().enemyData.Range);
+        roundaboutDir = PathFinder.PathFindingForAerial(enemy.transform, player.transform, enemy.GetComponent<Enemy>().enemyData.Range);
     }
 
     public override void Terminate()
     {
-        roundaboutDir = Vector3.zero;
+        roundaboutDir.Clear();
     }
 
     public override NodeState Renew()
@@ -30,10 +35,9 @@ public class Enemy_Behavior_TakeRoundabout : BT_Action
     {
         if (player)
         {
-            enemy.transform.LookAt(enemy.transform.position + roundaboutDir);
-
-            enemy.GetComponent<Rigidbody>().velocity = (enemy.transform.forward * enemy.GetComponent<Enemy>().enemyData.Speed);
-            Debug.Log(enemy.GetComponent<Rigidbody>().velocity);
+            enemy.GetComponent<Rigidbody>().velocity = (roundaboutDir.Peek().normalized * enemy.GetComponent<Enemy>().enemyData.Speed);
+            if(Vector3.Distance(enemy.transform.position, roundaboutDir.Peek()) <= 0.5f)
+                roundaboutDir.Pop();
         }
     }
 }

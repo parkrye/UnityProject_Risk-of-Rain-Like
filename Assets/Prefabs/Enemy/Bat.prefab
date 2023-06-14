@@ -267,10 +267,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4158631881214898}
   - component: {fileID: 95937921189647870}
-  - component: {fileID: 5879479084890917288}
-  - component: {fileID: 4960309939422729130}
-  - component: {fileID: 4763618566055087027}
-  - component: {fileID: 4316615329354734332}
+  - component: {fileID: 3143585279466658270}
+  - component: {fileID: 9079446454867074511}
+  - component: {fileID: 7148940426093210682}
+  - component: {fileID: 5521633955531390089}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Enemy
@@ -316,7 +316,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5879479084890917288
+--- !u!114 &3143585279466658270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,7 +329,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
---- !u!114 &4960309939422729130
+  hp: 0
+--- !u!114 &9079446454867074511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e19790b4ae8b6489df8dea807a6dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &4763618566055087027
+--- !u!54 &7148940426093210682
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,7 +358,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &4316615329354734332
+--- !u!135 &5521633955531390089
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,7 +369,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1147369430959092
 GameObject:
@@ -1085,7 +1086,7 @@ GameObject:
   - component: {fileID: 4871487389712490}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

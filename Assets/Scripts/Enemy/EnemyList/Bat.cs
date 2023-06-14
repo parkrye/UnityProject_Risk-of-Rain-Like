@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bat : Enemy
 {
-    protected override void OnEnable()
+    protected override void Awake()
     {
-        base.OnEnable();
+        base.Awake();
         enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Bat");
     }
 }

@@ -7,16 +7,6 @@ public class BT_Action : BT_Behavior
         SetNodeType(NodeType.Action);
     }
 
-    public override void Initialize()
-    {
-
-    }
-
-    public override void Terminate()
-    {
-
-    }
-
     public override void Reset()
     {
         SetState(NodeState.Invalid);

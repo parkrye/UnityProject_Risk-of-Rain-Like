@@ -26,7 +26,6 @@ public class Wizard : Hero
         {
             if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
             {
-                playerDataModel.jumpCount++;
                 floating = true;
                 playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.jumpPower * 0.5f, playerDataModel.rb.velocity.z);
                 StartCoroutine(FloaterJump());
@@ -84,6 +83,7 @@ public class Wizard : Hero
     {
         yield return new WaitForSeconds(0.5f);
         playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, 0f, playerDataModel.rb.velocity.z);
+        playerDataModel.jumpCount++;
         playerDataModel.rb.useGravity = false;
         while (floating)
         {

@@ -14,8 +14,8 @@ public enum NodeState
 public enum NodeType
 {
     Root,       // 루트 노드
-    Fallback,   // 자식 노드를 순회. 하나라도 성공하면 즉시 성공 반환. 모두 실패하면 실패 반환
-    Sequence,   // 자식 노드를 순회. 하나라도 실패하면 즉시 실패 반환. 모두 성공하면 성공 반환
+    Fallback,   // 자식 노드를 순회. 하나라도 성공하면 즉시 성공 반환. 모두 실패하면 실패 반환. Or 조건
+    Sequence,   // 자식 노드를 순회. 하나라도 실패하면 즉시 실패 반환. 모두 성공하면 성공 반환. And 조건
     Condition,  // 조건이 참일 경우 자식 노드를 실행
     Action,     // 행동 노드
 }
@@ -33,24 +33,9 @@ public class BT_Behavior
         state = NodeState.Invalid;
     }
 
-    public bool IsTerminated()
-    {
-        return state == NodeState.Success | state == NodeState.Failure;
-    }
-
-    public bool IsRunning()
-    {
-        return state == NodeState.Running;
-    }
-
     public void SetParent(BT_Behavior node)
     {
         parent = node;
-    }
-
-    public BT_Behavior GetParent()
-    {
-        return parent;
     }
 
     public NodeState GetState()

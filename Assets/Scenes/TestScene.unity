@@ -448,8 +448,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971569119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.32, y: 7.7, z: -3.39}
-  m_LocalScale: {x: 5, y: 20, z: 20}
+  m_LocalPosition: {x: -7.32, y: 7.7, z: -0.7}
+  m_LocalScale: {x: 5, y: 20, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -561,12 +561,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2325192601614344886, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2597705
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325192601614344886, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.739013
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325192601614344886, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.8697093
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325192601614344886, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.06374373
+      value: -0.054226957
       objectReference: {fileID: 0}
     - target: {fileID: 2325192601614344886, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.118527226
+      value: 0.12317231
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325192601614344886, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6453283
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325192601614344886, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7519571
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414069403745658433, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: heroNum
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574023989982931356, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
       propertyPath: m_Name
@@ -616,13 +640,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7537184508920932075, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Bip001 Head'\n\tTransform 'Bip001 R UpperArm'\n\tTransform
+        'Bip001 L UpperArm'\n\tTransform 'Bip001 L Forearm'\n\tTransform 'Bip001
+        R Forearm'\n\tTransform 'Bip001 Neck'\n\tTransform 'Bip001 Head'\n\tTransform
+        'Bip001 R UpperArm'\n\tTransform 'Bip001 L UpperArm'\n\tTransform 'Bip001
+        L Forearm'\n\tand more ..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192795935887157362, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2597705
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192795935887157362, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.739013
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192795935887157362, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.8697093
+      objectReference: {fileID: 0}
     - target: {fileID: 8192795935887157362, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.06374373
+      value: -0.054226957
       objectReference: {fileID: 0}
     - target: {fileID: 8192795935887157362, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.118527226
+      value: 0.12317231
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192795935887157362, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6453283
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192795935887157362, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7519571
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e49d1eaa97d45904da75dcb521b9ae77, type: 3}

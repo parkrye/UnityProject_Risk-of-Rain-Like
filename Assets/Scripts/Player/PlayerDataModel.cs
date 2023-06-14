@@ -21,13 +21,13 @@ public class PlayerDataModel : MonoBehaviour
     public float maxHP, nowHP, exp;
     public int level;
 
-    public float moveSpeed, highSpeed, jumpPower, coolTime, climbPower;
+    public float moveSpeed, highSpeed, jumpPower, coolTime, climbPower, attackDamage;
     public int jumpLimit, jumpCount;
     public bool attackCooldown, controlleable;
 
     public float climbCheckLowHeight, climbCheckHighHeight, climbCheckLength;
 
-    public float turnSpeed, turnSensivity;
+    public float mouseSensivity;
 
     public bool[] coolChecks = new bool[4];
 
@@ -48,8 +48,21 @@ public class PlayerDataModel : MonoBehaviour
             coolChecks[i] = true;
 
         maxHP = 100f;
+        nowHP = maxHP;
         level = 1;
         exp = 0f;
+        moveSpeed = 10f;
+        highSpeed = 5f;
+        jumpPower = 5f;
+        coolTime = 1f;
+        climbPower = 5f;
+        attackDamage = 5f;
+        jumpLimit = 1;
+        climbCheckLowHeight = 0.1f;
+        climbCheckHighHeight = 0.5f;
+        climbCheckLength = 0.5f;
+        mouseSensivity = 10f;
+
         controlleable = true;
 
         SelectHero(heroNum);

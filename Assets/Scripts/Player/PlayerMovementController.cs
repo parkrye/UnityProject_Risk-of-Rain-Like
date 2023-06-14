@@ -67,10 +67,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (playerDataModel.controlleable)
-        {
-            Move();
-        }
+        Move();
     }
 
     void Move()
@@ -119,11 +116,14 @@ public class PlayerMovementController : MonoBehaviour
     void OnMove(InputValue inputValue)
     {
         Vector2 tmp = inputValue.Get<Vector2>();
-        moveDir = new Vector3(tmp.x, 0f, tmp.y);
+
+        if (playerDataModel.controlleable)
+            moveDir = new Vector3(tmp.x, 0f, tmp.y);
     }
 
     void OnJump(InputValue inputValue)
     {
-        playerDataModel.hero.Jump(inputValue.isPressed);
+        if (playerDataModel.controlleable)
+            playerDataModel.hero.Jump(inputValue.isPressed);
     }
 }
