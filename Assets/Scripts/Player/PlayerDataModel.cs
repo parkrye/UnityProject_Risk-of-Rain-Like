@@ -11,6 +11,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     public PlayerActionController playerAction;
     public PlayerMovementController playerMovement;
     public PlayerCameraController playerCamera;
+    public Inventory inventory;
     [SerializeField][Range(0, 2)] int heroNum;
 
     void Awake()
@@ -42,6 +43,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         playerAction = GetComponent<PlayerActionController>();
         playerMovement = GetComponent<PlayerMovementController>();
         playerCamera = GetComponent<PlayerCameraController>();
+        inventory = GetComponent<Inventory>();
 
         coolChecks = new bool[4];
         for (int i = 0; i < coolChecks.Length; i++)
