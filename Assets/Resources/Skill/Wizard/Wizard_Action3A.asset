@@ -15,7 +15,10 @@ MonoBehaviour:
   hero: {fileID: 0}
   SkillName: 333
   SkillDesc: 333
-  SkillIcon: {fileID: 0}
-  coolTime: 1
+  SkillIcon: {fileID: 21300000, guid: d6bf9fd619ff24ce58267141ada9bbaa, type: 3}
+  coolTime: 10
+  modifier: 0
   coolCheck: 1
   teleportDistance: 10
+  teleportCharge: 1.0099994
+  nowCharge: 0

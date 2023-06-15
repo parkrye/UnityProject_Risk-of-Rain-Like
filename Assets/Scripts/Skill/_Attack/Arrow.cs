@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    Rigidbody rb;
     TrailRenderer trail;
     float damage;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         trail = GetComponent<TrailRenderer>();
     }
 
@@ -34,14 +32,17 @@ public class Arrow : MonoBehaviour
         yield return new WaitForSeconds(delay);
         trail.Clear();
         trail.enabled = true;
-        rb.AddForce(transform.forward * speed, ForceMode.Impulse);
-        GameManager.Resource.Destroy(gameObject, 5f);
+        GameManager.Resource.Destroy(gameObject, 10f);
+        while (true)
+        {
+            transform.Translate((transform.forward * speed + Vector3.up * Physics.gravity.y) * Time.deltaTime, Space.World);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     void OnDisable()
     {
         trail.Clear();
-        rb.velocity = Vector3.zero;
     }
 
 

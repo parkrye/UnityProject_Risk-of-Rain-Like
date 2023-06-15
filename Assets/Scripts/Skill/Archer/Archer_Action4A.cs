@@ -1,20 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Æø¹ß È­»ì
+/// </summary>
 [CreateAssetMenu(fileName = "Archer_Action4A", menuName = "Data/Skill/Archer/Action4A")]
-public class Archer_Action4A : Skill
+public class Archer_Action4A : Skill, IEnumeratable
 {
+    public float skillTime;
+
     public override bool Active(bool isPressed)
     {
-        if (coolCheck && isPressed)
+        if (isPressed)
         {
-            hero.playerDataModel.controlleable = false;
             hero.playerDataModel.animator.SetTrigger("Action4");
 
             GameObject bombArrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/BombArrow"), true);
             bombArrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position + hero.playerDataModel.transform.up;
             bombArrow.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
-            bombArrow.GetComponent<BombArrow>().Shot(50, hero.playerDataModel.attackDamage * modifier, 0.5f);
+            bombArrow.GetComponent<BombArrow>().Shot(40, hero.playerDataModel.attackDamage * modifier, 0.5f);
 
             coolCheck = false;
 
@@ -23,8 +27,10 @@ public class Archer_Action4A : Skill
         return false;
     }
 
-    public void AnimationEnd()
+    public IEnumerator enumerator()
     {
+        hero.playerDataModel.controlleable = false;
+        yield return new WaitForSeconds(skillTime);
         hero.playerDataModel.controlleable = true;
     }
 }

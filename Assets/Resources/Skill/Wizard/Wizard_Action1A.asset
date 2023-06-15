@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3aae5b7927975c449ceaff1d0c72b6b, type: 3}
   m_Name: Wizard_Action1A
   m_EditorClassIdentifier: 
+  hero: {fileID: 0}
   SkillName: 111
   SkillDesc: 111
-  SkillIcon: {fileID: 0}
+  SkillIcon: {fileID: 21300000, guid: 6d97d3b88bacf4e8bb4116ea752e1f91, type: 3}
   coolTime: 1
+  modifier: 0.6
   coolCheck: 1

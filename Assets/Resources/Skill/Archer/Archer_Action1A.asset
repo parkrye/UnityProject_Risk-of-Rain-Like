@@ -16,6 +16,6 @@ MonoBehaviour:
   SkillName: 1
   SkillDesc: 1
   SkillIcon: {fileID: 21300000, guid: 4c2e103ee53f2497b8222fa8db303c8f, type: 3}
-  coolTime: 1
+  coolTime: 0.8
   modifier: 0.5
   coolCheck: 1

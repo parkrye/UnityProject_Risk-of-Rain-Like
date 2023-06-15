@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Ω∫≈« ¿Ãµø
+/// </summary>
 [CreateAssetMenu(fileName = "Archer_Action3A", menuName = "Data/Skill/Archer/Action3A")]
 public class Archer_Action3A : Skill
 {
@@ -7,7 +10,7 @@ public class Archer_Action3A : Skill
 
     public override bool Active(bool isPressed)
     {
-        if (coolCheck && isPressed)
+        if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger("Action3");
 

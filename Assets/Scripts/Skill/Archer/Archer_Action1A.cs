@@ -1,11 +1,14 @@
 using UnityEngine;
 
+/// <summary>
+/// 단발 사격
+/// </summary>
 [CreateAssetMenu(fileName = "Archer_Action1A", menuName = "Data/Skill/Archer/Action1A")]
 public class Archer_Action1A : Skill
 {
     public override bool Active(bool isPressed)
     {
-        if (coolCheck && isPressed)
+        if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger("Action1");
 

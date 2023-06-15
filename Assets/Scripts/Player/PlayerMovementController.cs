@@ -30,7 +30,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position + transform.up * 0.1f, -transform.up, 0.2f, LayerMask.GetMask("Ground")))
             {
-                playerDataModel.hero.Jump(false);
                 playerDataModel.jumpCount = 0;
                 playerDataModel.animator.SetBool("IsGround", true);
                 return;
@@ -119,11 +118,22 @@ public class PlayerMovementController : MonoBehaviour
 
         if (playerDataModel.controlleable)
             moveDir = new Vector3(tmp.x, 0f, tmp.y);
+        else
+            moveDir = Vector3.zero;
     }
 
     void OnJump(InputValue inputValue)
     {
         if (playerDataModel.controlleable)
-            playerDataModel.hero.Jump(inputValue.isPressed);
+        {
+            if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
+            {
+                playerDataModel.hero.Jump(inputValue.isPressed);
+            }
+            else
+            {
+                playerDataModel.hero.Jump(false);
+            }
+        }
     }
 }

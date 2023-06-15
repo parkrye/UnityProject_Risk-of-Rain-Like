@@ -1,34 +1,53 @@
+using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 전방으로 텔레포트
+/// </summary>
 [CreateAssetMenu(fileName = "Wizard_Action3A", menuName = "Data/Skill/Wizard/Action3A")]
-public class Wizard_Action3A : Skill
+public class Wizard_Action3A : Skill, IEnumeratable
 {
-    public float teleportDistance;
+    public float teleportDistance, teleportCharge;
+    public bool nowCharge;
 
     public override bool Active(bool isPressed)
     {
-        if (coolCheck && isPressed)
+        if (nowCharge)
+            nowCharge = false;
+
+        if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger("Action3");
-
-            Vector3 teleportVec = hero.playerDataModel.playerMovement.moveDir;
-            if(teleportVec.magnitude == 0f)
-                teleportVec.z = 1f;
-
-            RaycastHit hit;
-            if (Physics.Raycast(hero.playerDataModel.transform.position + hero.playerDataModel.transform.up, (hero.playerDataModel.transform.right * teleportVec.x + hero.playerDataModel.transform.forward * teleportVec.z), out hit, teleportDistance, LayerMask.GetMask("Ground")))
-            {
-                hero.playerDataModel.transform.position = hit.point;
-            }
-            else
-            {
-                hero.playerDataModel.transform.position += hero.playerDataModel.transform.right * teleportVec.x + hero.playerDataModel.transform.forward * teleportVec.z * teleportDistance;
-            }
-
-            coolCheck = false;
 
             return true;
         }
         return false;
+    }
+
+    public IEnumerator enumerator()
+    {
+        teleportCharge = 0f;
+        nowCharge = true;
+        while (teleportCharge < 1f && nowCharge)
+        {
+            yield return new WaitForSeconds(0.01f);
+            teleportCharge += 0.01f;
+        }
+        Teleport();
+    }
+
+    void Teleport()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(hero.playerDataModel.transform.position + hero.playerDataModel.transform.up, hero.playerDataModel.playerAction.lookFromTransform.forward.normalized, out hit, teleportDistance * teleportCharge, LayerMask.GetMask("Ground")))
+        {
+            hero.playerDataModel.transform.position = hit.point;
+        }
+        else
+        {
+            hero.playerDataModel.transform.position += hero.playerDataModel.playerAction.lookFromTransform.forward * teleportDistance * teleportCharge;
+        }
+        coolCheck = false;
+        hero.playerDataModel.animator.SetTrigger("Teleport");
     }
 }

@@ -30,13 +30,25 @@ public abstract class Hero : MonoBehaviour
 
     public abstract bool Jump(bool isPressed);
 
-    public abstract bool Action1(bool isPressed);
+    public bool Action(int num, bool isPressed)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if(i != num)
+            {
+                skills[i].Active(false);
+            }
+        }
 
-    public abstract bool Action2(bool isPressed);
-
-    public abstract bool Action3(bool isPressed);
-
-    public abstract bool Action4(bool isPressed);
+        if (skills[num].coolCheck && skills[num].Active(isPressed))
+        {
+            if (skills[num] is IEnumeratable)
+                StartCoroutine((skills[num] as IEnumeratable).enumerator());
+            StartCoroutine(skills[num].CoolTime(playerDataModel.coolTime));
+            return true;
+        }
+        return false;
+    }
 
     protected IEnumerator JumpCharger()
     {

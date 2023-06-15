@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02482a485e42d3d49a0effc1bbd15acb, type: 3}
   m_Name: Wizard_Action4A
   m_EditorClassIdentifier: 
+  hero: {fileID: 0}
   SkillName: 444
   SkillDesc: 444
-  SkillIcon: {fileID: 0}
+  SkillIcon: {fileID: 21300000, guid: 022f16cfd7d5647188b31ae1abc00634, type: 3}
   coolTime: 1
+  modifier: 0.03
   coolCheck: 1
+  skillRange: 20
+  skillTerm: 0.5

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6725245810059893115}
   - component: {fileID: 5992941445535592097}
   - component: {fileID: -4595373715100425126}
-  - component: {fileID: -8587964269779069378}
   - component: {fileID: 68791817301314279}
   m_Layer: 0
   m_Name: BombArrow
@@ -156,22 +155,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!54 &-8587964269779069378
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587455145953572390}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!135 &68791817301314279
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -183,7 +166,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3097339070394201027
 GameObject:

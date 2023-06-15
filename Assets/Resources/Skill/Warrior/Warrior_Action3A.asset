@@ -15,7 +15,7 @@ MonoBehaviour:
   hero: {fileID: 0}
   SkillName: 33
   SkillDesc: 33
-  SkillIcon: {fileID: 0}
+  SkillIcon: {fileID: 21300000, guid: 15795860a9d324250823686a664034a3, type: 3}
   coolTime: 1
+  modifier: 0
   coolCheck: 1
-  dashPower: 5

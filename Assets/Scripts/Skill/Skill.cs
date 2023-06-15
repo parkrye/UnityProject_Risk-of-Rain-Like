@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "Skill", menuName = "Data/Skill")]
 public abstract class Skill : ScriptableObject
 {
     public Hero hero;
@@ -13,7 +12,7 @@ public abstract class Skill : ScriptableObject
     public float coolTime, modifier;
     public bool coolCheck;
 
-    void Awake()
+    private void OnEnable()
     {
         coolCheck = true;
     }
@@ -22,6 +21,10 @@ public abstract class Skill : ScriptableObject
 
     public IEnumerator CoolTime(float modifier)
     {
+        while (coolCheck)
+        {
+            yield return null;
+        }
         yield return new WaitForSeconds(coolTime * modifier);
         coolCheck = true;
     }

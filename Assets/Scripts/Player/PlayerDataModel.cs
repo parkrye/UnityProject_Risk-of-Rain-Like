@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerDataModel : MonoBehaviour
+public class PlayerDataModel : MonoBehaviour, IHitable
 {
     public Hero hero;
     List<Hero> heroList;
@@ -21,7 +21,7 @@ public class PlayerDataModel : MonoBehaviour
     public float maxHP, nowHP, exp;
     public int level;
 
-    public float moveSpeed, highSpeed, jumpPower, coolTime, climbPower, attackDamage;
+    public float moveSpeed, highSpeed, jumpPower, coolTime, climbPower, attackDamage, armorPoint;
     public int jumpLimit, jumpCount;
     public bool attackCooldown, controlleable;
 
@@ -46,24 +46,6 @@ public class PlayerDataModel : MonoBehaviour
         coolChecks = new bool[4];
         for (int i = 0; i < coolChecks.Length; i++)
             coolChecks[i] = true;
-
-        maxHP = 100f;
-        nowHP = maxHP;
-        level = 1;
-        exp = 0f;
-        moveSpeed = 10f;
-        highSpeed = 5f;
-        jumpPower = 5f;
-        coolTime = 1f;
-        climbPower = 5f;
-        attackDamage = 5f;
-        jumpLimit = 1;
-        climbCheckLowHeight = 0.1f;
-        climbCheckHighHeight = 0.5f;
-        climbCheckLength = 0.5f;
-        mouseSensivity = 10f;
-
-        controlleable = true;
 
         SelectHero(heroNum);
 
@@ -124,6 +106,7 @@ public class PlayerDataModel : MonoBehaviour
             if(nowHP <= 0f)
             {
                 nowHP = 0f;
+                Die();
             }
             HPEvent?.Invoke();
         }
@@ -153,5 +136,15 @@ public class PlayerDataModel : MonoBehaviour
                 LevelUP();
             }
         }
+    }
+
+    public void Hit(float damage)
+    {
+        ModifyHP(-damage * armorPoint);
+    }
+
+    public void Die()
+    {
+        Debug.Log("you died");
     }
 }

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cb987261ccddc4d80c8a861602f80c, type: 3}
   m_Name: Warrior_Action4A
   m_EditorClassIdentifier: 
+  hero: {fileID: 0}
   SkillName: 44
   SkillDesc: 44
-  SkillIcon: {fileID: 0}
-  coolTime: 1
+  SkillIcon: {fileID: 21300000, guid: cf62c64581a1f48dcb9737334276c7b7, type: 3}
+  coolTime: 10
+  modifier: 1.2
   coolCheck: 1
+  dashPower: 10
+  skillRange: 5

@@ -20,9 +20,15 @@ public class Enemy_Behavior_Attack : BT_Action
         enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
+    public override void Terminate()
+    {
+        base.Terminate();
+        enemy.GetComponent<Enemy>().StopAttack();
+    }
+
     void OnAttack()
     {
-        Debug.Log("Attack");
+        enemy.GetComponent<Enemy>().StartAttack();
         enemy.transform.LookAt(player.transform.position);
     }
 }

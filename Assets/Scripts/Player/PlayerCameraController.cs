@@ -19,7 +19,7 @@ public class PlayerCameraController : MonoBehaviour
         playerDataModel = GetComponent<PlayerDataModel>();
         cameraOffset = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
         downViewOffset = new Vector3 (0f, 10f, -5f);
-        upViewOffset = new Vector3 (0f, 0.5f, -0.5f);
+        upViewOffset = new Vector3 (0f, 0f, -0.5f);
     }
 
     void Update()
