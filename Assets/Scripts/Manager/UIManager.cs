@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -70,7 +69,7 @@ public class UIManager : MonoBehaviour
     public T ShowInGameUI<T>(T inGameUI) where T : InGameUI
     {
         T ui = GameManager.Pool.GetUI(inGameUI);
-        ui.transform.SetParent(inGameUI.transform, false);
+        ui.transform.SetParent(ingameCanvas.transform, false);
 
         return ui;
     }
@@ -84,5 +83,25 @@ public class UIManager : MonoBehaviour
     public void CloseInGameUI(InGameUI inGameUI)
     {
         GameManager.Pool.Release(inGameUI);
+    }
+
+    // юлго SceneUI
+    public T ShowSceneUI<T>(T sceneUI) where T : SceneUI
+    {
+        T ui = GameManager.Pool.GetUI(sceneUI);
+        ui.transform.SetParent(sceneCanvas.transform, false);
+
+        return ui;
+    }
+
+    public T ShowSceneUI<T>(string path) where T : SceneUI
+    {
+        T ui = GameManager.Resource.Load<T>(path);
+        return ShowSceneUI(ui);
+    }
+
+    public void CloseSceneUI(SceneUI sceneUI)
+    {
+        GameManager.Pool.Release(sceneUI);
     }
 }

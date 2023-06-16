@@ -19,7 +19,7 @@ public class Wizard_Action4A : Skill
             {
                 GameObject tower = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Tower"), hit.point, Quaternion.identity, true);
                 tower.GetComponent<Tower>().SetTower(hero.playerDataModel.attackDamage * modifier, skillTerm, skillRange);
-                coolCheck = false;
+                CoolCheck = false;
             }
 
             return true;

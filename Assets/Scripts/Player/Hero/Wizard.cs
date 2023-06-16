@@ -25,7 +25,7 @@ public class Wizard : Hero
         if (isPressed)
         {
             floating = true;
-            playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.jumpPower * 1f, playerDataModel.rb.velocity.z);
+            playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.jumpPower * 1f;
             StartCoroutine(FloaterJump());
             animator.SetTrigger("JumpH");
             animator.SetTrigger("JumpL");
@@ -38,14 +38,14 @@ public class Wizard : Hero
 
     IEnumerator FloaterJump()
     {
-        yield return new WaitForSeconds(0.5f);
-        playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, 0f, playerDataModel.rb.velocity.z);
+        yield return new WaitForSeconds(0.2f);
         playerDataModel.jumpCount++;
+        playerDataModel.playerMovement.dirModifier.y = 0f;
         playerDataModel.rb.useGravity = false;
         while (floating)
         {
             yield return new WaitForFixedUpdate();
-            if (Mathf.Abs(playerDataModel.rb.velocity.y) > 0.1f)
+            if (Mathf.Abs(playerDataModel.rb.velocity.y) > 1f)
                 floating = false;
         }
         playerDataModel.rb.useGravity = true;

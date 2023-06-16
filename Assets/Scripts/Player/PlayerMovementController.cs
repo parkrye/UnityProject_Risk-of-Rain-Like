@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,29 +7,29 @@ public class PlayerMovementController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
 
-    public Vector3 moveDir { get; private set; }
-    Vector3 prevDir;
-    [SerializeField] Dictionary<Vector3, bool> climable;
-    [SerializeField] float animatorChangeSpeed;
+    public Vector3 moveDir, dirModifier;
+    [SerializeField] Vector3 curVelocity;
+    [SerializeField] float slopeDegree;
+    [SerializeField] bool isSlope;
+    RaycastHit slopeHit;
 
     void Awake()
     {
         playerDataModel = GetComponent<PlayerDataModel>();
-        climable = new Dictionary<Vector3, bool>();
     }
 
     void Update()
     {
         CheckGround();
-        CheckClimable();
-        SetDirection();
+        CheckSlope();
     }
 
     void CheckGround()
     {
         if (playerDataModel.rb.velocity.y <= 0f)
         {
-            if (Physics.Raycast(transform.position + transform.up * 0.1f, -transform.up, 0.2f, LayerMask.GetMask("Ground")))
+            Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+            if (Physics.Raycast(ray, 0.3f, LayerMask.GetMask("Ground")))
             {
                 playerDataModel.jumpCount = 0;
                 playerDataModel.animator.SetBool("IsGround", true);
@@ -38,30 +39,29 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    void CheckClimable()
+    /// <summary>
+    /// 바닥면의 법선 벡터를 이용하여 현재 서있는 바닥이 경사로인지 확인하는 메소드
+    /// </summary>
+    void CheckSlope()
     {
-        if (moveDir == Vector3.zero)
-            return;
-
-        if(!climable.ContainsKey(moveDir))
-            climable.Add(moveDir, false);
-
-        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * moveDir.z + transform.right * moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
-        Debug.DrawRay(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * moveDir.z + transform.right * moveDir.x) * playerDataModel.climbCheckLength, Color.red, 2f);
-        if (Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckLowHeight, (transform.forward * moveDir.z + transform.right * moveDir.x) * playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
+        Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+        if(Physics.Raycast(ray, out slopeHit, 0.2f, LayerMask.GetMask("Ground")))
         {
-            if (!Physics.Raycast(transform.position + transform.up * playerDataModel.climbCheckHighHeight, (transform.forward * moveDir.z + transform.right * moveDir.x), playerDataModel.climbCheckLength, LayerMask.GetMask("Ground")))
-            {
-                climable[moveDir] = true;
-                return;
-            }
+            var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            isSlope = angle != 0f && angle < slopeDegree;
+            return;
         }
-        climable[moveDir] = false;
+        isSlope = false;
     }
 
-    void SetDirection()
+    /// <summary>
+    /// 경사로의 지형 평면을 구하고 필요한 벡터 방향 정보를 반환하는 메소드
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <returns></returns>
+    Vector3 AdjustDirectionToSlope(Vector3 direction)
     {
-        prevDir = moveDir;
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
     void FixedUpdate()
@@ -74,39 +74,22 @@ public class PlayerMovementController : MonoBehaviour
         float animatorFoward = playerDataModel.animator.GetFloat("Foward");
         float animatorSide = playerDataModel.animator.GetFloat("Side");
 
-        // 제동
-        if(moveDir == Vector3.zero)
+        // 경사로
+        float gravity = Mathf.Abs(playerDataModel.rb.velocity.y) - Physics.gravity.y * Time.deltaTime;
+        if(playerDataModel.animator.GetBool("IsGround") && isSlope)
         {
-            playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y, 0f);
+            curVelocity = AdjustDirectionToSlope(moveDir);
+            gravity = 0f;
         }
         else
-        {
-            if((prevDir.x < 0f && moveDir.x >= 0f) || (prevDir.x > 0f && moveDir.x <= 0f))
-            {
-                playerDataModel.rb.velocity = new Vector3(0f, playerDataModel.rb.velocity.y, playerDataModel.rb.velocity.z);
-            }
-            if((prevDir.z < 0f && moveDir.z >= 0f) || (prevDir.z > 0f && moveDir.z <= 0f))
-            {
-                playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y, 0f);
-            }
-        }
-        if (playerDataModel.rb.velocity.x > playerDataModel.highSpeed)
-            playerDataModel.rb.velocity = new Vector3(playerDataModel.highSpeed, playerDataModel.rb.velocity.y, playerDataModel.rb.velocity.z);
-        if (playerDataModel.rb.velocity.z > playerDataModel.highSpeed)
-            playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.rb.velocity.y, playerDataModel.highSpeed);
+            curVelocity = moveDir;
+        if (!playerDataModel.rb.useGravity)
+            gravity = 0f;
+        curVelocity = transform.right * curVelocity.x + transform.forward * curVelocity.z;
 
-        // 이동
-        if (playerDataModel.animator.GetBool("IsGround"))
-            playerDataModel.rb.AddForce(((transform.right * moveDir.x) + (transform.forward * moveDir.z)) * playerDataModel.moveSpeed, ForceMode.Force);
-        else
-            playerDataModel.rb.AddForce(((transform.right * moveDir.x) + (transform.forward * moveDir.z)) * Mathf.Sqrt(playerDataModel.moveSpeed), ForceMode.Force);
-
-        // 등반
-        if (climable.ContainsKey(moveDir) && climable[moveDir])
-        {
-            playerDataModel.rb.AddForce(transform.up * playerDataModel.climbPower, ForceMode.Force);
-        }
-
+        playerDataModel.rb.velocity = new Vector3(curVelocity.x, 0f, curVelocity.z) * playerDataModel.moveSpeed + Vector3.down * gravity + dirModifier;
+        if (dirModifier != Vector3.zero)
+            dirModifier = Vector3.Lerp(dirModifier, Vector3.zero, 0.1f);
         // 애니메이션
         playerDataModel.animator.SetFloat("Foward", Mathf.Lerp(animatorFoward, moveDir.z, 0.1f));
         playerDataModel.animator.SetFloat("Side", Mathf.Lerp(animatorSide, moveDir.x, 0.1f));

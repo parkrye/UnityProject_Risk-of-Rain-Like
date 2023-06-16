@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1123161434240648, guid: e2ce315c37e32fd4b9d2fd8f2d56a7d0, type: 3}
   MaxHP: 10
-  Damage: 1
-  Range: 5
+  Damage: 5
+  Range: 10
   Speed: 2
-  exp: 1
+  exp: 10

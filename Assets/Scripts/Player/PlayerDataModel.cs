@@ -19,10 +19,70 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         Initailze();
     }
 
-    public float maxHP, nowHP, exp;
-    public int level;
 
-    public float moveSpeed, highSpeed, jumpPower, coolTime, climbPower, attackDamage, armorPoint;
+    [SerializeField] float maxHP, nowHP, exp;
+    [SerializeField] int level;
+    public float MAXHP
+    {
+        get { return maxHP; }
+        set
+        {
+            if (value < 0)
+                maxHP = 1f;
+            else
+                maxHP = value;
+            HPEvent?.Invoke();
+        }
+    }
+    public float NOWHP
+    {
+        get { return nowHP; }
+        set
+        {
+            if (value < 0f)
+            {
+                Die();
+                HPEvent?.Invoke();
+            }
+            else
+            {
+                if(value > MAXHP)
+                    nowHP = MAXHP;
+                else
+                    nowHP = value;
+                HPEvent?.Invoke();
+            }
+        }
+    }
+
+    public float EXP
+    {
+        get { return exp; }
+        set 
+        {
+            exp = value;
+            while (exp >= LEVEL * 100f)
+            {
+                exp -= LEVEL * 100f;
+                LEVEL++;
+            }
+            EXPEvent?.Invoke();
+        }
+    }
+
+    public int LEVEL
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+            maxHP *= 1.1f;
+            nowHP = MAXHP;
+            LevelEvent?.Invoke();
+        }
+    }
+
+    public float moveSpeed, jumpPower, coolTime, climbPower, attackDamage, armorPoint;
     public int jumpLimit, jumpCount;
     public bool attackCooldown, controlleable;
 
@@ -88,61 +148,9 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     public UnityEvent LevelEvent, HPEvent, EXPEvent;
 
-    public void AddEventListener(UnityEvent target, UnityAction action)
-    {
-        target.AddListener(action);
-    }
-
-    void LevelUP()
-    {
-        exp -= level * 100;
-        level++;
-        LevelEvent?.Invoke();
-    }
-
-    public void ModifyHP(float _modifier)
-    {
-        if(_modifier < 0f)
-        {
-            nowHP += _modifier;
-            if(nowHP <= 0f)
-            {
-                nowHP = 0f;
-                Die();
-            }
-            HPEvent?.Invoke();
-        }
-        else
-        {
-            nowHP += _modifier;
-            if(nowHP > maxHP)
-            {
-                HPEvent?.Invoke();
-            }
-        }
-    }
-
-    public void ModifyEXP(float _modifier)
-    {
-        if (_modifier < 0f)
-        {
-            exp += _modifier;
-            if (exp < 0f)
-                exp = 0f;
-        }
-        else
-        {
-            exp += _modifier;
-            while(exp >= level * 100f)
-            {
-                LevelUP();
-            }
-        }
-    }
-
     public void Hit(float damage)
     {
-        ModifyHP(-damage * armorPoint);
+        NOWHP -= damage * armorPoint;
     }
 
     public void Die()

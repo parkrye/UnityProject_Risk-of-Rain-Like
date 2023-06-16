@@ -28,7 +28,7 @@ public class Archer : Hero
 
     protected override void ChargeJump()
     {
-        playerDataModel.rb.velocity = new Vector3(playerDataModel.rb.velocity.x, playerDataModel.jumpPower * 1.5f * jumpCharge * 0.01f, playerDataModel.rb.velocity.z);
+        playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.jumpPower * 1.5f * jumpCharge * 0.01f;
         playerDataModel.jumpCount++;
         animator.SetTrigger("JumpH");
         animator.SetTrigger("JumpL");

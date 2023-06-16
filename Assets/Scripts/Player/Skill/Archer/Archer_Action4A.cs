@@ -20,7 +20,7 @@ public class Archer_Action4A : Skill, IEnumeratable
             bombArrow.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
             bombArrow.GetComponent<BombArrow>().Shot(40, hero.playerDataModel.attackDamage * modifier, 0.5f);
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }

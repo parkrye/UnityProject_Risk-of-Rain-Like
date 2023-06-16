@@ -9,6 +9,7 @@ public abstract class BaseUI : MonoBehaviour
     protected Dictionary<string, Button> buttons;
     protected Dictionary<string, TMP_Text> texts;
     protected Dictionary<string, Slider> sliders;
+    protected Dictionary<string, Image> images;
 
     protected virtual void Awake()
     {
@@ -21,6 +22,7 @@ public abstract class BaseUI : MonoBehaviour
         buttons = new Dictionary<string, Button>();
         texts = new Dictionary<string, TMP_Text>();
         sliders = new Dictionary<string, Slider>();
+        images = new Dictionary<string, Image>();
 
         RectTransform[] childrenRect = GetComponentsInChildren<RectTransform>();
         foreach (var child in childrenRect)
@@ -46,6 +48,12 @@ public abstract class BaseUI : MonoBehaviour
                 {
                     if(!sliders.ContainsKey(key))
                         sliders[key] = child.GetComponent<Slider>();
+                }
+
+                if (child.GetComponent<Image>())
+                {
+                    if (!images.ContainsKey(key))
+                        images[key] = child.GetComponent<Image>();
                 }
             }
         }

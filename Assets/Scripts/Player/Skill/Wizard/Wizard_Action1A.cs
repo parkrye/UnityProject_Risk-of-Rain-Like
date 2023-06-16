@@ -17,7 +17,7 @@ public class Wizard_Action1A : Skill
             energyBolt.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
             energyBolt.GetComponent<Bolt>().Shot(10, hero.playerDataModel.attackDamage * modifier);
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }

@@ -15,7 +15,7 @@ public class Warrior_Action4A : Skill, IEnumeratable
         {
             hero.playerDataModel.animator.SetTrigger("Action4");
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }
@@ -25,7 +25,7 @@ public class Warrior_Action4A : Skill, IEnumeratable
     public IEnumerator enumerator()
     {
         hero.playerDataModel.controlleable = false;
-        hero.playerDataModel.rb.AddForce((hero.playerDataModel.transform.forward + hero.playerDataModel.transform.up * 0.5f) * dashPower, ForceMode.Impulse);
+        hero.playerDataModel.playerMovement.dirModifier += (hero.playerDataModel.transform.forward + Vector3.up * 0.5f) * dashPower;
 
         yield return new WaitForSeconds(1f);
 

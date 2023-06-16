@@ -47,7 +47,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
         {
             hero.playerDataModel.transform.position += hero.playerDataModel.playerAction.lookFromTransform.forward * teleportDistance * teleportCharge;
         }
-        coolCheck = false;
+        CoolCheck = false;
         hero.playerDataModel.animator.SetTrigger("Teleport");
     }
 }

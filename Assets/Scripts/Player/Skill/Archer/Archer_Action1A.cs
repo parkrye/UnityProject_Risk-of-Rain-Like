@@ -17,7 +17,7 @@ public class Archer_Action1A : Skill
             arrow.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
             arrow.GetComponent<Arrow>().Shot(50, hero.playerDataModel.attackDamage * modifier);
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }

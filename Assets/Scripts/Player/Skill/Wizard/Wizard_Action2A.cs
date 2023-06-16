@@ -27,7 +27,7 @@ public class Wizard_Action2A : Skill
             if (hero.playerDataModel.animator.GetBool("Casting"))
             {
                 hero.playerDataModel.animator.SetBool("Casting", false);
-                coolCheck = false;
+                CoolCheck = false;
                 flame?.GetComponent<Flame>().StopFlame();
             }
             flame = null;

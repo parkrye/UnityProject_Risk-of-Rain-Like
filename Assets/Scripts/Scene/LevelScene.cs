@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class LevelScene : BaseScene
 {
+
     protected override IEnumerator LoadingRoutine()
     {
         yield return new WaitForEndOfFrame();
+
         progress = 1f;
     }
 }

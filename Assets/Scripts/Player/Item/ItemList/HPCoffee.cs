@@ -1,17 +1,21 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HPCoffee", menuName = "Data/Item/HPCoffee")]
-public class HPCoffee : ItemData
+public class HPCoffee : ItemBase
 {
+    void Awake()
+    {
+        itemData = GameManager.Resource.Load<ItemData>("Item/HPCoffee");
+    }
+
     public override void GetFirstEffect()
     {
-        GameManager.Data.Player.maxHP += 10f;
-        GameManager.Data.Player.nowHP += 10f;
+        GameManager.Data.Player.MAXHP += 10f;
+        GameManager.Data.Player.NOWHP += 10f;
     }
 
     public override void GetNextEffect()
     {
-        GameManager.Data.Player.maxHP += 10f;
-        GameManager.Data.Player.nowHP += 10f;
+        GameManager.Data.Player.MAXHP += 10f;
+        GameManager.Data.Player.NOWHP += 10f;
     }
 }

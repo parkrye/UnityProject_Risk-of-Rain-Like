@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Hero : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public abstract class Hero : MonoBehaviour
 
     [SerializeField] protected int jumpCharge;
     protected bool nowCharge;
+
+    public UnityEvent<bool[]> ActionEvent;
 
     protected virtual void Awake() 
     {
@@ -26,6 +29,12 @@ public abstract class Hero : MonoBehaviour
 
         skills[skillNum] = skill;
         skill.hero = this;
+        skill.CoolEvent.AddListener(CallCoolTime);
+    }
+
+    void CallCoolTime(bool cool)
+    {
+        ActionEvent?.Invoke(new bool[] { skills[0].CoolCheck, skills[1].CoolCheck, skills[2].CoolCheck, skills[3].CoolCheck });
     }
 
     public abstract bool Jump(bool isPressed);
@@ -40,7 +49,7 @@ public abstract class Hero : MonoBehaviour
             }
         }
 
-        if (skills[num].coolCheck && skills[num].Active(isPressed))
+        if (skills[num].CoolCheck && skills[num].Active(isPressed))
         {
             if (skills[num] is IEnumeratable)
                 StartCoroutine((skills[num] as IEnumeratable).enumerator());

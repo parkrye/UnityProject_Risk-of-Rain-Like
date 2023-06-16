@@ -16,7 +16,7 @@ public class Warrior_Action3A : Skill
             if (dashVec.magnitude == 0f)
                 dashVec.z = 1f;
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }

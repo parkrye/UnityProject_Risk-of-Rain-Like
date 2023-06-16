@@ -20,7 +20,7 @@ public class Archer_Action2A : Skill
                 arrow.GetComponent<Arrow>().Shot(30, hero.playerDataModel.attackDamage * modifier);
             }
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }

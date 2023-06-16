@@ -28,7 +28,7 @@ public class Archer_Action3A : Skill
                 hero.playerDataModel.transform.position += hero.playerDataModel.transform.right * stepVec.x + hero.playerDataModel.transform.forward * stepVec.z * stepDistance;
             }
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }

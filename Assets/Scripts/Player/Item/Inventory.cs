@@ -1,29 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
-    PlayerDataModel playerDataModel;
-
     Dictionary<ItemData, int> inventory;
+    public UnityEvent<ItemData, int> ItemEvent;
 
     void Awake()
     {
-        playerDataModel = GetComponent<PlayerDataModel>();
         inventory = new Dictionary<ItemData, int>();
     }
 
-    public void AddItem(ItemData item)
+    public void AddItem(ItemBase item)
     {
-        if (inventory.ContainsKey(item))
+        if (inventory.ContainsKey(item.itemData))
         {
-            inventory[item]++;
+            inventory[item.itemData]++;
             item.GetFirstEffect();
         }
         else
         {
-            inventory.Add(item, 1);
+            inventory.Add(item.itemData, 1);
             item.GetNextEffect();
         }
+        ItemEvent?.Invoke(item.itemData, inventory[item.itemData]);
     }
 }

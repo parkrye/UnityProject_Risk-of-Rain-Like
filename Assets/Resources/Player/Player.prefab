@@ -5328,16 +5328,15 @@ MonoBehaviour:
   playerMovement: {fileID: 719491648340369631}
   playerCamera: {fileID: 6949231124553317690}
   inventory: {fileID: 0}
-  heroNum: 2
+  heroNum: 0
   maxHP: 100
   nowHP: 100
   exp: 0
   level: 1
-  moveSpeed: 10
-  highSpeed: 5
-  jumpPower: 3
+  moveSpeed: 5
+  jumpPower: 10
   coolTime: 1
-  climbPower: 2
+  climbPower: 5
   attackDamage: 5
   armorPoint: 1
   jumpLimit: 1
@@ -5370,7 +5369,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c85a532a411da7429f90fec8a0d360a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorChangeSpeed: 0.1
+  moveDir: {x: 0, y: 0, z: 0}
+  dirModifier: {x: 0, y: 0, z: 0}
+  curVelocity: {x: 0, y: 0, z: 0}
+  slopeDegree: 120
+  isSlope: 0
 --- !u!114 &3988545672618533068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8489,7 +8492,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7106909747070590017}
-  m_LocalRotation: {x: 0.12317231, y: 0.6453283, z: -0.7519571, w: -0.054226957}
+  m_LocalRotation: {x: 0.12317229, y: 0.6453283, z: -0.7519571, w: -0.05422694}
   m_LocalPosition: {x: 1.2597705, y: 4.739013, z: -3.8697093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10676,7 +10679,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9221011082053742855}
-  m_LocalRotation: {x: 0.12317231, y: 0.6453283, z: -0.7519571, w: -0.054226957}
+  m_LocalRotation: {x: 0.12317229, y: 0.6453283, z: -0.7519571, w: -0.05422694}
   m_LocalPosition: {x: 1.2597705, y: 4.739013, z: -3.8697093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

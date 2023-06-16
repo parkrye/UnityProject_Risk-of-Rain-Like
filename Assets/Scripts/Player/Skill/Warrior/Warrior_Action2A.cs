@@ -17,7 +17,7 @@ public class Warrior_Action2A : Skill
             prevArmor = hero.playerDataModel.armorPoint;
             hero.playerDataModel.armorPoint *= 0.5f;
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }

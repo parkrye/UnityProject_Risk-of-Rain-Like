@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneInfoUI : BaseUI
+public class SceneInfoUI : SceneUI
 {
-    void Start()
+    public override void Initialize()
     {
         SettingDifficulty();
     }

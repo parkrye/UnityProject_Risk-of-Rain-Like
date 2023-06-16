@@ -5,7 +5,7 @@ public class FollowBolt : MonoBehaviour
 {
     TrailRenderer trail;
     float damage, range;
-    GameObject target;
+    [SerializeField] GameObject target;
     Collider coll;
 
     void Awake()
@@ -36,7 +36,7 @@ public class FollowBolt : MonoBehaviour
         GameManager.Resource.Destroy(gameObject, 5f);
         while (true)
         {
-            if (target == null)
+            if (target == null || target.activeInHierarchy || target.activeSelf)
             {
                 if (SetTarget())
                 {

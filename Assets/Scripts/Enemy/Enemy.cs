@@ -43,6 +43,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
 
     public void Die()
     {
+        GameManager.Data.Player.EXP += enemyData.exp / (GameManager.Data.difficulty);
         GameManager.Resource.Destroy(gameObject);
     }
 

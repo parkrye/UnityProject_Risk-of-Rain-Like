@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Skill : ScriptableObject
 {
@@ -10,22 +11,33 @@ public abstract class Skill : ScriptableObject
     public Sprite SkillIcon;
 
     public float coolTime, modifier;
-    public bool coolCheck;
+    bool coolCheck;
+    public bool CoolCheck
+    {
+        get { return coolCheck; }
+        set
+        {
+            coolCheck = value;
+            CoolEvent?.Invoke(CoolCheck);
+        }
+    }
+    public UnityEvent<bool> CoolEvent;
 
     private void OnEnable()
     {
-        coolCheck = true;
+        CoolCheck = true;
     }
 
     public abstract bool Active(bool isPressed);
 
     public IEnumerator CoolTime(float modifier)
     {
-        while (coolCheck)
+        while (CoolCheck)
         {
             yield return null;
         }
         yield return new WaitForSeconds(coolTime * modifier);
-        coolCheck = true;
+        CoolCheck = true;
     }
+
 }

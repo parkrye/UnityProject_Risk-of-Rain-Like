@@ -14,7 +14,7 @@ public class Warrior_Action1A : Skill, IEnumeratable
         {
             hero.playerDataModel.animator.SetTrigger("Action1");
 
-            coolCheck = false;
+            CoolCheck = false;
 
             return true;
         }
