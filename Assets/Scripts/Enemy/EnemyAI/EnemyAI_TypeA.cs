@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Approach ( => Take Roundaout ) => Attack
+/// Approach ( => Bypass ) => Attack
 /// </summary>
 public class EnemyAI_TypeA : Enemy_AI
 {
@@ -28,10 +28,10 @@ public class EnemyAI_TypeA : Enemy_AI
         Enemy_Condition_CheckWall enemy_Condition_CheckWall = new(gameObject);
         Sub2.AddChild(enemy_Condition_CheckWall);
 
-        Enemy_Behavior_TakeRoundabout enemy_Behavior_TakeRoundabout = new(gameObject);
+        Enemy_Behavior_Bypass enemy_Behavior_TakeRoundabout = new(gameObject);
         Sub2.AddChild(enemy_Behavior_TakeRoundabout);
 
-        Enemy_Behavior_GoStraight enemy_Behavior_Approach = new(gameObject);
+        Enemy_Behavior_Approach enemy_Behavior_Approach = new(gameObject);
         Sub1.AddChild(enemy_Behavior_Approach);
 
         Enemy_Behavior_Attack enemy_Behavior_attack = new(gameObject);

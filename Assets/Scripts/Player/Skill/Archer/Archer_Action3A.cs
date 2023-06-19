@@ -12,7 +12,7 @@ public class Archer_Action3A : Skill
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger("Action3");
+            hero.playerDataModel.animator.SetTrigger(actionKeys[2]);
 
             Vector3 stepVec = hero.playerDataModel.playerMovement.moveDir;
             if (stepVec.magnitude == 0f)

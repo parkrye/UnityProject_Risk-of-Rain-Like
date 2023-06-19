@@ -12,7 +12,7 @@ public class Warrior_Action2A : Skill
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger("Action2");
+            hero.playerDataModel.animator.SetTrigger(actionKeys[1]);
             hero.playerDataModel.animator.SetBool("Guard", true);
             prevArmor = hero.playerDataModel.armorPoint;
             hero.playerDataModel.armorPoint *= 0.5f;

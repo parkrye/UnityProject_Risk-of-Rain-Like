@@ -10,12 +10,12 @@ public class Wizard_Action1A : Skill
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger("Action1");
+            hero.playerDataModel.animator.SetTrigger(actionKeys[0]);
 
             GameObject energyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/EnergyBolt"), true);
             energyBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
             energyBolt.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
-            energyBolt.GetComponent<Bolt>().Shot(10, hero.playerDataModel.attackDamage * modifier);
+            energyBolt.GetComponent<Bolt>().Shot(hero.playerDataModel.attackDamage * modifier);
 
             CoolCheck = false;
 

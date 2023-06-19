@@ -12,7 +12,7 @@ public class Wizard_Action2A : Skill
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger("Action2");
+            hero.playerDataModel.animator.SetTrigger(actionKeys[1]);
             hero.playerDataModel.animator.SetBool("Casting", true);
 
             flame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Flame"), hero.playerDataModel.playerAction.lookFromTransform, true);

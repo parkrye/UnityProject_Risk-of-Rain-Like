@@ -6,6 +6,7 @@ public class Bolt : MonoBehaviour
     TrailRenderer trail;
     float damage;
     Collider coll;
+    [SerializeField] float speed;
 
     void Awake()
     {
@@ -19,18 +20,18 @@ public class Bolt : MonoBehaviour
         coll.enabled = false;
     }
 
-    public void Shot(float speed, float _damage, float delay)
+    public void Shot(float _damage, float delay)
     {
         damage = _damage;
-        StartCoroutine(ReadyToShot(speed, delay));
+        StartCoroutine(ReadyToShot(delay));
     }
 
-    public void Shot(float speed, float _damage = 1f)
+    public void Shot(float _damage = 1f)
     {
-        Shot(speed, _damage, 0f);
+        Shot(_damage, 0f);
     }
 
-    IEnumerator ReadyToShot(float speed, float delay)
+    IEnumerator ReadyToShot(float delay)
     {
         yield return new WaitForSeconds(delay);
         coll.enabled = true;

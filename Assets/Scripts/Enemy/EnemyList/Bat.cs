@@ -18,7 +18,7 @@ public class Bat : Enemy
                 GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), true);
                 enemyBolt.transform.position = transform.position;
                 enemyBolt.transform.LookAt(GameManager.Data.Player.transform.position);
-                enemyBolt.GetComponent<EnemyBolt>().Shot(10, enemyData.Damage * GameManager.Data.difficulty * 0.5f * GameManager.Data.Player.LEVEL * 0.1f);
+                enemyBolt.GetComponent<EnemyBolt>().Shot(enemyData.Damage * GameManager.Data.difficulty * 0.5f * GameManager.Data.Player.LEVEL * 0.1f);
                 yield return new WaitForSeconds(enemyData.Speed);
             }
             else

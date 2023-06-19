@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Enemy_Behavior_GoStraight : BT_Action
+public class Enemy_Behavior_Approach : BT_Action
 {
-    public Enemy_Behavior_GoStraight(GameObject _enemy)
+    public Enemy_Behavior_Approach(GameObject _enemy)
     {
         enemy = _enemy;
         player = GameManager.Data.Player.gameObject;

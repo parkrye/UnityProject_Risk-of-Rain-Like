@@ -10,12 +10,12 @@ public class Archer_Action1A : Skill
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger("Action1");
+            hero.playerDataModel.animator.SetTrigger(actionKeys[0]);
 
             GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
             arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
             arrow.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
-            arrow.GetComponent<Arrow>().Shot(50, hero.playerDataModel.attackDamage * modifier);
+            arrow.GetComponent<Arrow>().Shot(hero.playerDataModel.attackDamage * modifier);
 
             CoolCheck = false;
 

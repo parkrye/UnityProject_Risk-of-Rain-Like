@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ebb38b6c9f33f44aaa12e037f836e32, type: 3}
+  m_Name: Archer_Action1C
+  m_EditorClassIdentifier: 
+  hero: {fileID: 0}
+  SkillName: 1
+  SkillDesc: 1
+  SkillIcon: {fileID: 21300000, guid: 4c2e103ee53f2497b8222fa8db303c8f, type: 3}
+  coolTime: 0.8
+  modifier: 0.5
+  actionKey: 0
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  resourcePath: Attack/Arrow
+  throwingSpeed: 50

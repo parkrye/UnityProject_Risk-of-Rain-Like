@@ -13,7 +13,7 @@ public class Warrior_Action4A : Skill, IEnumeratable
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger("Action4");
+            hero.playerDataModel.animator.SetTrigger(actionKeys[3]);
 
             CoolCheck = false;
 

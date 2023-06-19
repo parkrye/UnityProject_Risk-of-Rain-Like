@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +11,9 @@ public abstract class Skill : ScriptableObject
 
     public float coolTime, modifier;
     bool coolCheck;
+
+    [SerializeField] protected string[] actionKeys = {"Action1", "Action2", "Action3", "Action4"};
+    
     public bool CoolCheck
     {
         get { return coolCheck; }

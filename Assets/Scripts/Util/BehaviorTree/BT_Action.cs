@@ -26,7 +26,7 @@ public class BT_Action : BT_Behavior
         // 실행하고 그 상태를 저장
         SetState(Renew());
 
-        // 현재 상태가 아직도 진행중이라면
+        // 현재 상태가 진행중이 아니라면
         if(GetState() != NodeState.Running) 
         { 
             // 종료

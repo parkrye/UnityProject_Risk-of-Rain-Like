@@ -4,7 +4,8 @@ using UnityEngine;
 public class FollowBolt : MonoBehaviour
 {
     TrailRenderer trail;
-    float damage, range;
+    float damage;
+    [SerializeField] float range, speed;
     [SerializeField] GameObject target;
     Collider coll;
 
@@ -20,14 +21,13 @@ public class FollowBolt : MonoBehaviour
         coll.enabled = false;
     }
 
-    public void Shot(float speed, float _damage, float delay, float _range)
+    public void Shot(float _damage, float delay)
     {
         damage = _damage;
-        range = _range;
-        StartCoroutine(ReadyToShot(speed, delay));
+        StartCoroutine(ReadyToShot(delay));
     }
 
-    IEnumerator ReadyToShot(float speed, float delay)
+    IEnumerator ReadyToShot(float delay)
     {
         yield return new WaitForSeconds(delay);
         coll.enabled = true;

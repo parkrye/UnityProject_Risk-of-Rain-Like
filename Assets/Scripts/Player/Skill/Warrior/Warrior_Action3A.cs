@@ -10,7 +10,7 @@ public class Warrior_Action3A : Skill
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger("Action3");
+            hero.playerDataModel.animator.SetTrigger(actionKeys[2]);
 
             Vector3 dashVec = hero.playerDataModel.playerMovement.moveDir;
             if (dashVec.magnitude == 0f)
