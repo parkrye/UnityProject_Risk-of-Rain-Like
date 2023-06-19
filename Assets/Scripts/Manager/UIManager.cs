@@ -12,18 +12,29 @@ public class UIManager : MonoBehaviour
     {
         eventSystem = GameManager.Resource.Instantiate<EventSystem>("UI/EventSystem");
         eventSystem.transform.parent = transform;
+    }
 
+    public void CreateInGameScene()
+    {
         ingameCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         ingameCanvas.gameObject.name = "InGameCanvas";
         ingameCanvas.sortingOrder = 0;
+    }
 
+    public void CreateSceneCanvas()
+    {
         sceneCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         sceneCanvas.gameObject.name = "SceneCanvas";
         sceneCanvas.sortingOrder = 1;
+    }
+
+    public void CreatePopupCanvas()
+    {
 
         popUpCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         popUpCanvas.gameObject.name = "PopupCanvas";
-        popUpCanvas.sortingOrder = 100;
+        popUpCanvas.transform.SetParent(transform, false);
+        popUpCanvas.sortingOrder = 5;
 
         popUpStack = new Stack<PopUpUI>();
     }

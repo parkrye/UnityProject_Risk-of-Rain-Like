@@ -10,6 +10,8 @@ public abstract class BaseUI : MonoBehaviour
     protected Dictionary<string, TMP_Text> texts;
     protected Dictionary<string, Slider> sliders;
     protected Dictionary<string, Image> images;
+    protected Dictionary<string, ToggleGroup> toggleGroups;
+    protected Dictionary<string, Toggle> toggles;
 
     protected virtual void Awake()
     {
@@ -23,6 +25,8 @@ public abstract class BaseUI : MonoBehaviour
         texts = new Dictionary<string, TMP_Text>();
         sliders = new Dictionary<string, Slider>();
         images = new Dictionary<string, Image>();
+        toggleGroups = new Dictionary<string, ToggleGroup>();
+        toggles = new Dictionary<string, Toggle>();
 
         RectTransform[] childrenRect = GetComponentsInChildren<RectTransform>();
         foreach (var child in childrenRect)
@@ -54,6 +58,18 @@ public abstract class BaseUI : MonoBehaviour
                 {
                     if (!images.ContainsKey(key))
                         images[key] = child.GetComponent<Image>();
+                }
+
+                if (child.GetComponent<ToggleGroup>())
+                {
+                    if (!toggleGroups.ContainsKey(key))
+                        toggleGroups[key] = child.GetComponent<ToggleGroup>();
+                }
+
+                if (child.GetComponent<Toggle>())
+                {
+                    if (!toggles.ContainsKey(key))
+                        toggles[key] = child.GetComponent<Toggle>();
                 }
             }
         }
