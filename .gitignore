@@ -71,3 +71,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /Assets/Imports
+/Assets/Animators/Player/WizardAnims
+/Assets/Animators/Player/WarriorAnims
+/Assets/Animators/Player/ArcherAnims
