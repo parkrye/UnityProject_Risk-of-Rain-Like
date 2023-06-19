@@ -1,26 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleScene : BaseScene
+public class TitleScene : MonoBehaviour
 {
-    public void OnStartButton()
+    void OnEnable()
     {
-        GameManager.Scene.LoadScene("SelectScene");
-    }
-
-    public void OnOptionButton()
-    {
-        GameManager.UI.ShowPopupUI<PopUpUI>("UI/OptionUI");
-    }
-
-    public void OnQuitButton()
-    {
-        Application.Quit();
-    }
-
-    protected override IEnumerator LoadingRoutine()
-    {
-        yield return new WaitForEndOfFrame();
-        progress = 1f;
+        GameManager.Scene.LoadScene("MainScene");
     }
 }
