@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LevelScene : BaseScene
 {
+    [SerializeField] Transform startPosition;
+
     protected override IEnumerator LoadingRoutine()
     {
         yield return new WaitForEndOfFrame();
@@ -10,12 +12,7 @@ public class LevelScene : BaseScene
         GameManager.UI.CreatePopupCanvas();
         GameManager.UI.CreateInGameScene();
         progress = 0.3f;
-        /*
-         * 
-        GameObject player = GameManager.Resource.Load<GameObject>("Player/Player");
-        player.GetComponent<PlayerDataModel>().SelectHero();
-         *
-         */
+        GameManager.Data.Player.transform.position = startPosition.position;
         progress = 0.6f;
         yield return new WaitForEndOfFrame();
         progress = 1f;

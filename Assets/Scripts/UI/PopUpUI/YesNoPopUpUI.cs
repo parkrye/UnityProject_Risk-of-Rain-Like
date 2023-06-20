@@ -16,6 +16,26 @@ public class YesNoPopUpUI : PopUpUI
     }
 
     /// <summary>
+    /// 텍스트 문구를 수정
+    /// </summary>
+    /// <param name="textNum">0: 설명, 1: yes버튼, 2: no버튼</param>
+    public void SetText(int textNum, string text)
+    {
+        switch(textNum)
+        {
+            case 0:
+                texts["DescText"].text = text;
+                break;
+            case 1:
+                texts["YesText"].text = text;
+                break;
+            case 2:
+                texts["NoText"].text = text;
+                break;
+        }
+    }
+
+    /// <summary>
     /// YesEvent를 발동시키고 삭제
     /// </summary>
     public void YesButton()

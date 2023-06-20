@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class UIManager : MonoBehaviour
 {
     EventSystem eventSystem;
-    Canvas sceneCanvas, ingameCanvas, popUpCanvas;
+    [SerializeField] Canvas sceneCanvas, ingameCanvas, popUpCanvas;
     Stack<PopUpUI> popUpStack;
 
     void Awake()
@@ -30,10 +30,8 @@ public class UIManager : MonoBehaviour
 
     public void CreatePopupCanvas()
     {
-
         popUpCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         popUpCanvas.gameObject.name = "PopupCanvas";
-        popUpCanvas.transform.SetParent(transform, false);
         popUpCanvas.sortingOrder = 5;
 
         popUpStack = new Stack<PopUpUI>();
@@ -52,8 +50,6 @@ public class UIManager : MonoBehaviour
 
         popUpStack.Push(ui);
 
-        Time.timeScale = 0f;
-
         return ui;
     }
 
@@ -65,10 +61,7 @@ public class UIManager : MonoBehaviour
 
     public void ClosePopupUI()
     {
-        GameManager.Pool.Release(popUpStack.Pop());
-
-        if (popUpStack.Count == 0)
-            Time.timeScale = 1f;
+        GameManager.Pool.ReleaseUI(popUpStack.Pop());
 
         if (popUpStack.Count > 0)
         {

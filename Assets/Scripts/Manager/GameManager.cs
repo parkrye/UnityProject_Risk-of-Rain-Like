@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     static DataManager dataManager;
     static UIManager uiManager;
     static SceneManager sceneManager;
+    static AudioManager audioManager;
+    static ScriptManager scriptManager;
 
     public static GameManager Instance { get { return instance; } }
     public static PoolManager Pool { get { return poolManager; } }
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
     public static DataManager Data { get { return dataManager; } }
     public static UIManager UI {  get { return uiManager; } }
     public static SceneManager Scene { get { return sceneManager; } }
+    public static AudioManager Audio { get { return audioManager; } }
+    public static ScriptManager Script { get { return scriptManager; } }
 
     void Awake()
     {
@@ -62,5 +66,15 @@ public class GameManager : MonoBehaviour
         sceneObj.name = "SceneManager";
         sceneObj.transform.parent = transform;
         sceneManager = sceneObj.AddComponent<SceneManager>();
+
+        GameObject audioObj = new GameObject();
+        audioObj.name = "AudioManager";
+        audioObj.transform.parent = transform;
+        audioManager = audioObj.AddComponent<AudioManager>();
+
+        GameObject scriptObj = new GameObject();
+        scriptObj.name = "ScriptManager";
+        scriptObj.transform.parent = transform;
+        scriptManager = sceneObj.AddComponent<ScriptManager>();
     }
 }

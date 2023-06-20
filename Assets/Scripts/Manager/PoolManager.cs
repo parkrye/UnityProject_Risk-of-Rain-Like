@@ -17,6 +17,7 @@ public class PoolManager : MonoBehaviour
         poolRoot = new GameObject("PoolRoot").transform;
         canvasRoot = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         canvasRoot.name = "CanvasRoot";
+        canvasRoot.transform.SetParent(transform, false);
     }
 
     public T Get<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : Object
