@@ -1,41 +1,23 @@
 using System.Collections;
 using UnityEngine;
 
-public class BombArrow : MonoBehaviour
+public class BombArrow : ArrowType
 {
-    TrailRenderer trail;
     ParticleSystem bombParticle;
 
-    float damage;
-    [SerializeField] float speed, range;
+    [SerializeField] float range;
 
-    void Awake()
+    protected override void Awake()
     {
-        trail = GetComponent<TrailRenderer>();
+        base.Awake();
         bombParticle = GameManager.Resource.Load<ParticleSystem>("Particle/Explosion");
     }
 
-    void OnEnable()
+    protected override IEnumerator ReadyToShot(float delay)
     {
-        trail.enabled = false;
-    }
-
-    public void Shot(float _damage, float delay)
-    {
-        damage = _damage;
-        StartCoroutine(ReadyToShot(delay));
-    }
-
-    public void Shot(float _damage = 1f)
-    {
-        Shot(_damage, 0f);
-    }
-
-    IEnumerator ReadyToShot(float delay)
-    {
-        yield return new WaitForSeconds(delay);
         trail.Clear();
         trail.enabled = true;
+        yield return new WaitForSeconds(delay);
         GameManager.Resource.Destroy(gameObject, 10f);
         while (true)
         {
@@ -44,12 +26,7 @@ public class BombArrow : MonoBehaviour
         }
     }
 
-    void OnDisable()
-    {
-        trail.Clear();
-    }
-
-    void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy" || (1 << other.gameObject.layer == LayerMask.GetMask("Ground")))
         {

@@ -7,10 +7,8 @@ public class Archer : Hero
     override protected void Awake()
     {
         base.Awake();
-        SettingSkill(0, GameManager.Resource.Load<Skill>("Skill/Archer/Archer_Action1A"));
-        SettingSkill(1, GameManager.Resource.Load<Skill>("Skill/Archer/Archer_Action2A"));
-        SettingSkill(2, GameManager.Resource.Load<Skill>("Skill/Archer/Archer_Action3A"));
-        SettingSkill(3, GameManager.Resource.Load<Skill>("Skill/Archer/Archer_Action4A"));
+
+        heroName = "Archer";
     }
 
     public override bool Jump(bool isPressed)

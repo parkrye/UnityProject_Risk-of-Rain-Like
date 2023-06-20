@@ -16,8 +16,7 @@ public class Archer_Action2A : Skill
             {
                 GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
                 arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-                arrow.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position + hero.playerDataModel.playerAction.lookAtTransform.right * i);
-                arrow.GetComponent<Arrow>().Shot(hero.playerDataModel.attackDamage * modifier);
+                arrow.GetComponent<Arrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position + hero.playerDataModel.playerAction.lookAtTransform.right * i, hero.playerDataModel.attackDamage * modifier);
             }
 
             CoolCheck = false;

@@ -5,10 +5,8 @@ public class Warrior : Hero
     override protected void Awake()
     {
         base.Awake();
-        SettingSkill(0, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action1A"));
-        SettingSkill(1, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action2A"));
-        SettingSkill(2, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action3A"));
-        SettingSkill(3, GameManager.Resource.Load<Skill>("Skill/Warrior/Warrior_Action4A"));
+
+        heroName = "Warrior";
     }
 
     public override bool Jump(bool isPressed)

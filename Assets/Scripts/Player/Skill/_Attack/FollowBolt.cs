@@ -1,33 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class FollowBolt : MonoBehaviour
+public class FollowBolt : BoltType
 {
-    TrailRenderer trail;
-    float damage;
-    [SerializeField] float range, speed;
+    [SerializeField] float range;
     [SerializeField] GameObject target;
-    Collider coll;
 
-    void Awake()
-    {
-        trail = GetComponent<TrailRenderer>();
-        coll = GetComponent<Collider>();
-    }
-
-    void OnEnable()
-    {
-        trail.enabled = false;
-        coll.enabled = false;
-    }
-
-    public void Shot(float _damage, float delay)
-    {
-        damage = _damage;
-        StartCoroutine(ReadyToShot(delay));
-    }
-
-    IEnumerator ReadyToShot(float delay)
+    protected override IEnumerator ReadyToShot(float delay)
     {
         yield return new WaitForSeconds(delay);
         coll.enabled = true;
@@ -73,19 +52,5 @@ public class FollowBolt : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    void OnDisable()
-    {
-        trail.Clear();
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            other.GetComponent<IHitable>()?.Hit(damage);
-            GameManager.Pool.Release(gameObject);
-        }
     }
 }

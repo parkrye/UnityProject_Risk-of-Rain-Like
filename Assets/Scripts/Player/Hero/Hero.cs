@@ -11,6 +11,7 @@ public abstract class Hero : MonoBehaviour
 
     [SerializeField] protected int jumpCharge;
     protected bool nowCharge;
+    protected string heroName;
 
     public UnityEvent<bool[]> ActionEvent;
 
@@ -20,18 +21,34 @@ public abstract class Hero : MonoBehaviour
         Skill[] skills = new Skill[4];
     }
 
-    public void SettingSkill(int skillNum, Skill skill)
+    public void SettingSkill(int slot, Skill skill)
     {
-        if (skillNum < 0 || skillNum >= skills.Length || skill == null)
+        if (slot < 0 || slot >= skills.Length || skill == null)
         {
             return;
         }
 
-        skills[skillNum] = skill;
+        skills[slot] = skill;
         skill.hero = this;
         skill.CoolEvent.AddListener(CallCoolTime);
     }
 
+    public void SettingSkill(int slot, int skillNum)
+    {
+        switch (skillNum)
+        {
+            case 1:
+                SettingSkill(slot - 1, GameManager.Resource.Load<Skill>($"Skill/{heroName}/{heroName}_Action{slot}A"));
+                break;
+            case 2:
+                SettingSkill(slot - 1, GameManager.Resource.Load<Skill>($"Skill/{heroName}/{heroName}_Action{slot}B"));
+                break;
+            case 3:
+                SettingSkill(slot - 1, GameManager.Resource.Load<Skill>($"Skill/{heroName}/{heroName}_Action{slot}C"));
+                break;
+        }
+    }
+    
     void CallCoolTime(bool cool)
     {
         ActionEvent?.Invoke(new bool[] { skills[0].CoolCheck, skills[1].CoolCheck, skills[2].CoolCheck, skills[3].CoolCheck });

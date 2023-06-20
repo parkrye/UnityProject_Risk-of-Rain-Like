@@ -9,10 +9,7 @@ public class Wizard : Hero
     {
         base.Awake();
 
-        SettingSkill(0, GameManager.Resource.Load<Skill>("Skill/Wizard/Wizard_Action1A"));
-        SettingSkill(1, GameManager.Resource.Load<Skill>("Skill/Wizard/Wizard_Action2A"));
-        SettingSkill(2, GameManager.Resource.Load<Skill>("Skill/Wizard/Wizard_Action3A"));
-        SettingSkill(3, GameManager.Resource.Load<Skill>("Skill/Wizard/Wizard_Action4A"));
+        heroName = "Wizard";
     }
 
     public override bool Jump(bool isPressed)

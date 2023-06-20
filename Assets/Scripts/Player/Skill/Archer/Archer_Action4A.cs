@@ -16,9 +16,8 @@ public class Archer_Action4A : Skill, IEnumeratable
             hero.playerDataModel.animator.SetTrigger(actionKeys[3]);
 
             GameObject bombArrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/BombArrow"), true);
-            bombArrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position + hero.playerDataModel.transform.up;
-            bombArrow.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
-            bombArrow.GetComponent<BombArrow>().Shot(hero.playerDataModel.attackDamage * modifier, 0.5f);
+            bombArrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
+            bombArrow.GetComponent<BombArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, hero.playerDataModel.attackDamage * modifier, 0.5f);
 
             CoolCheck = false;
 

@@ -14,8 +14,7 @@ public class Wizard_Action1A : Skill
 
             GameObject energyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/EnergyBolt"), true);
             energyBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            energyBolt.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
-            energyBolt.GetComponent<Bolt>().Shot(hero.playerDataModel.attackDamage * modifier);
+            energyBolt.GetComponent<Bolt>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, hero.playerDataModel.attackDamage * modifier);
 
             CoolCheck = false;
 

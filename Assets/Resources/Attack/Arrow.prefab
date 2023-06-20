@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
+  yModifier: 16
 --- !u!96 &-4595373715100425126
 TrailRenderer:
   serializedVersion: 2
