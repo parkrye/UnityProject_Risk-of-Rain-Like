@@ -21,7 +21,7 @@ public class PlayerCameraController : MonoBehaviour
         defaultCameraOffset = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
         cameraOffset = defaultCameraOffset;
         closeCameraOffset = cameraOffset / 10f;
-        downViewOffset = new Vector3(0f, 10f, -5f);
+        downViewOffset = new Vector3(0f, 5f, -2.5f);
         upViewOffset = new Vector3(0f, 0f, -0.5f);
     }
 
