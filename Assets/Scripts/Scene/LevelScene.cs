@@ -7,13 +7,18 @@ public class LevelScene : BaseScene
 
     protected override IEnumerator LoadingRoutine()
     {
-        yield return new WaitForEndOfFrame();
+        GameManager.Data.Player.transform.position = startPosition.position;
+        progress = 0.3f;
+
         GameManager.UI.CreateSceneCanvas();
         GameManager.UI.CreatePopupCanvas();
         GameManager.UI.CreateInGameScene();
-        progress = 0.3f;
-        GameManager.Data.Player.transform.position = startPosition.position;
+        GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneInfoUI").Initialize();
+        GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneItemUI").Initialize();
+        GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneKeyUI").Initialize();
+        GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneStatusUI").Initialize();
         progress = 0.6f;
+
         yield return new WaitForEndOfFrame();
         progress = 1f;
     }
