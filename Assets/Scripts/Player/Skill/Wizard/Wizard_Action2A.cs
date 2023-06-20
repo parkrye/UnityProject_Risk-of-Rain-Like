@@ -17,7 +17,7 @@ public class Wizard_Action2A : Skill
 
             flame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Flame"), hero.playerDataModel.playerAction.lookFromTransform, true);
             flame.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            flame.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position);
+            flame.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position + Vector3.up);
             flame.GetComponent<Flame>().StartFlame(hero.playerDataModel.attackDamage * modifier);
 
             return true;

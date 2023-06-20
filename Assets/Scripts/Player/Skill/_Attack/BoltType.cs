@@ -7,7 +7,7 @@ public class BoltType : MonoBehaviour
     protected TrailRenderer trail;
     protected float damage;
     protected Collider coll;
-    [SerializeField] protected float speed;
+    [SerializeField] protected float speed, yModifier;
 
     protected virtual void Awake()
     {
@@ -23,7 +23,7 @@ public class BoltType : MonoBehaviour
 
     public void Shot(Vector3 target, float _damage, float delay)
     {
-        transform.LookAt(target);
+        transform.LookAt(target + Vector3.up * yModifier);
         damage = _damage;
         StartCoroutine(ReadyToShot(delay));
     }
