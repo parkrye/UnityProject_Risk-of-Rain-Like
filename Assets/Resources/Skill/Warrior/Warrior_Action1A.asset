@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Warrior_Action1A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 11
-  SkillDesc: 11
-  SkillIcon: {fileID: 21300000, guid: c6c887cce7af543b0bf0b150917f449c, type: 3}
+  SkillName: Slash
+  SkillDesc: Slash Foward
+  SkillIcon: {fileID: 21300000, guid: 77fb1396afd204cba852e21347033826, type: 3}
   coolTime: 1
   modifier: 0.8
-  coolCheck: 1
+  actionKeys:
+  - Action1
+  - Action2
+  - Action3
+  - Action4
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []

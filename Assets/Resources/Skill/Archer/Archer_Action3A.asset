@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Archer_Action3A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 3
-  SkillDesc: 3
-  SkillIcon: {fileID: 21300000, guid: d9c542b9190b24dafb2737a0b0cf789e, type: 3}
+  SkillName: Quick Step
+  SkillDesc: Move Fast
+  SkillIcon: {fileID: 21300000, guid: 657e61396de954dd58c72903864114bf, type: 3}
   coolTime: 5
   modifier: 0
-  coolCheck: 1
+  actionKeys:
+  - Action1
+  - Action2
+  - Action3
+  - Action4
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
   stepDistance: 2

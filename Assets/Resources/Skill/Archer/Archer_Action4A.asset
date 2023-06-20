@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Archer_Action4A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 4
-  SkillDesc: 4
-  SkillIcon: {fileID: 21300000, guid: c8de558d1809a431b853143ea7327b0d, type: 3}
+  SkillName: Explosion Shot
+  SkillDesc: Shot a Bomb Arrow to Foward
+  SkillIcon: {fileID: 21300000, guid: 04781ddf1640d48e4b784ad7268ba9ad, type: 3}
   coolTime: 20
   modifier: 1
-  coolCheck: 1
+  actionKeys:
+  - Action1
+  - Action2
+  - Action3
+  - Action4
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
   skillTime: 1

@@ -1,8 +1,5 @@
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class SelectUI : SceneUI
 {
@@ -27,11 +24,11 @@ public class SelectUI : SceneUI
             toggles[actionB].group = toggleGroups[$"Action{slot}"];
             toggles[actionC].group = toggleGroups[$"Action{slot}"];
 
-            toggles[actionA].AddComponent<ToggleColorChanger>();
+            toggles[actionA].gameObject.AddComponent<ToggleColorChanger>();
             toggles[actionA].onValueChanged.AddListener(toggles[actionA].GetComponent<ToggleColorChanger>().ColorChange);
-            toggles[actionB].AddComponent<ToggleColorChanger>();
+            toggles[actionB].gameObject.AddComponent<ToggleColorChanger>();
             toggles[actionB].onValueChanged.AddListener(toggles[actionB].GetComponent<ToggleColorChanger>().ColorChange);
-            toggles[actionC].AddComponent<ToggleColorChanger>();
+            toggles[actionC].gameObject.AddComponent<ToggleColorChanger>();
             toggles[actionC].onValueChanged.AddListener(toggles[actionC].GetComponent<ToggleColorChanger>().ColorChange);
 
             toggles[actionC].isOn = true;
@@ -123,31 +120,40 @@ public class SelectUI : SceneUI
 
     void SettingSkills()
     {
-        for (int i = 1; i <= 4; i++)
+        for (int slot = 1; slot <= 4; slot++)
         {
-            var actionA = $"Action{i}A";
-            var actionB = $"Action{i}B";
-            var actionC = $"Action{i}C";
+            var actionA = $"Action{slot}A";
+            var actionB = $"Action{slot}B";
+            var actionC = $"Action{slot}C";
 
             switch (characterNum)
             {
                 // 궁수
                 case 0:
-                    images[actionA].sprite = GameManager.Resource.Load<Skill>($"Skill/Archer/Archer_Action{i}A").SkillIcon;
-                    images[actionB].sprite = GameManager.Resource.Load<Skill>($"Skill/Archer/Archer_Action{i}B").SkillIcon;
-                    images[actionC].sprite = GameManager.Resource.Load<Skill>($"Skill/Archer/Archer_Action{i}C").SkillIcon;
+                    toggles[actionA].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Archer/Archer_Action{slot}A"));
+                    toggles[actionB].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Archer/Archer_Action{slot}B"));
+                    toggles[actionC].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Archer/Archer_Action{slot}C"));
+                    images[actionA].sprite = toggles[actionA].GetComponent<SkillListUI>().skill.SkillIcon;
+                    images[actionB].sprite = toggles[actionB].GetComponent<SkillListUI>().skill.SkillIcon;
+                    images[actionC].sprite = toggles[actionC].GetComponent<SkillListUI>().skill.SkillIcon;
                     break;
                 // 전사
                 case 1:
-                    images[actionA].sprite = GameManager.Resource.Load<Skill>($"Skill/Warrior/Warrior_Action{i}A").SkillIcon;
-                    images[actionB].sprite = GameManager.Resource.Load<Skill>($"Skill/Warrior/Warrior_Action{i}B").SkillIcon;
-                    images[actionC].sprite = GameManager.Resource.Load<Skill>($"Skill/Warrior/Warrior_Action{i}C").SkillIcon;
+                    toggles[actionA].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Warrior/Warrior_Action{slot}A"));
+                    toggles[actionB].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Warrior/Warrior_Action{slot}B"));
+                    toggles[actionC].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Warrior/Warrior_Action{slot}C"));
+                    images[actionA].sprite = toggles[actionA].GetComponent<SkillListUI>().skill.SkillIcon;
+                    images[actionB].sprite = toggles[actionB].GetComponent<SkillListUI>().skill.SkillIcon;
+                    images[actionC].sprite = toggles[actionC].GetComponent<SkillListUI>().skill.SkillIcon;
                     break;
                 // 마법사
                 case 2:
-                    images[actionA].sprite = GameManager.Resource.Load<Skill>($"Skill/Wizard/Wizard_Action{i}A").SkillIcon;
-                    images[actionB].sprite = GameManager.Resource.Load<Skill>($"Skill/Wizard/Wizard_Action{i}B").SkillIcon;
-                    images[actionC].sprite = GameManager.Resource.Load<Skill>($"Skill/Wizard/Wizard_Action{i}C").SkillIcon;
+                    toggles[actionA].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Wizard/Wizard_Action{slot}A"));
+                    toggles[actionB].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Wizard/Wizard_Action{slot}B"));
+                    toggles[actionC].GetComponent<SkillListUI>().skill = (GameManager.Resource.Load<Skill>($"Skill/Wizard/Wizard_Action{slot}C"));
+                    images[actionA].sprite = toggles[actionA].GetComponent<SkillListUI>().skill.SkillIcon;
+                    images[actionB].sprite = toggles[actionB].GetComponent<SkillListUI>().skill.SkillIcon;
+                    images[actionC].sprite = toggles[actionC].GetComponent<SkillListUI>().skill.SkillIcon;
                     break;
             }
 

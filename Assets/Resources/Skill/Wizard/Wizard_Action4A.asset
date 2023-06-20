@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: Wizard_Action4A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 444
-  SkillDesc: 444
-  SkillIcon: {fileID: 21300000, guid: 022f16cfd7d5647188b31ae1abc00634, type: 3}
+  SkillName: Summon Tower
+  SkillDesc: It is from Defense Game
+  SkillIcon: {fileID: 21300000, guid: 310c9e07e0cf54ee99abf0200d2adbba, type: 3}
   coolTime: 20
   modifier: 0.03
-  coolCheck: 1
+  actionKeys:
+  - Action1
+  - Action2
+  - Action3
+  - Action4
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
   skillRange: 20
-  skillTerm: 0.5

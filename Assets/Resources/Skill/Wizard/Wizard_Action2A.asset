@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Wizard_Action2A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 222
-  SkillDesc: 222
-  SkillIcon: {fileID: 21300000, guid: d6bf9fd619ff24ce58267141ada9bbaa, type: 3}
+  SkillName: Fire Breath
+  SkillDesc: Maybe It's Breath
+  SkillIcon: {fileID: 21300000, guid: 4460493b17a0e4beaaeaa6ba43c37f4e, type: 3}
   coolTime: 5
   modifier: 0.002
-  coolCheck: 1
+  actionKeys:
+  - Action1
+  - Action2
+  - Action3
+  - Action4
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
