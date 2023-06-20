@@ -12,13 +12,12 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     public PlayerMovementController playerMovement;
     public PlayerCameraController playerCamera;
     public Inventory inventory;
-    [SerializeField][Range(0, 2)] int heroNum;
+    [SerializeField][Range(0, 2)] public int heroNum;
 
     void Awake()
     {
         Initailze();
     }
-
 
     [SerializeField] float maxHP, nowHP, exp;
     [SerializeField] int level;
@@ -34,6 +33,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
             HPEvent?.Invoke();
         }
     }
+
     public float NOWHP
     {
         get { return nowHP; }
@@ -94,6 +94,8 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     void Initailze()
     {
+        GameManager.Data.Player = this;
+
         heroList = new List<Hero>();
         heroList.AddRange(GetComponentsInChildren<Hero>());
         foreach (var hero in heroList)
@@ -109,11 +111,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         for (int i = 0; i < coolChecks.Length; i++)
             coolChecks[i] = true;
 
-        SelectHero(heroNum);
-
         DontDestroyOnLoad(gameObject);
-
-        GameManager.Data.Player = this;
     }
 
     /// <summary>

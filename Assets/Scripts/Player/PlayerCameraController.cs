@@ -1,4 +1,5 @@
 using Cinemachine;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ public class PlayerCameraController : MonoBehaviour
     PlayerDataModel playerDataModel;
 
     [SerializeField] Vector2 pointerPos;
-    [SerializeField] Vector3 cameraOffset, downViewOffset, upViewOffset;
+    [SerializeField] Vector3 cameraOffset, downViewOffset, upViewOffset, defaultCameraOffset, closeCameraOffset;
     [SerializeField] float xRotation;
     [SerializeField] CinemachineVirtualCamera virtualCamera;
 
@@ -17,12 +18,27 @@ public class PlayerCameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerDataModel = GetComponent<PlayerDataModel>();
-        cameraOffset = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
-        downViewOffset = new Vector3 (0f, 10f, -5f);
-        upViewOffset = new Vector3 (0f, 0f, -0.5f);
+        defaultCameraOffset = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
+        cameraOffset = defaultCameraOffset;
+        closeCameraOffset = cameraOffset / 10f;
+        downViewOffset = new Vector3(0f, 10f, -5f);
+        upViewOffset = new Vector3(0f, 0f, -0.5f);
     }
 
     void Update()
+    {
+        Ray ray = new Ray(lookFromTransform.position, (virtualCamera.transform.position - lookFromTransform.position));
+        if(Physics.Raycast(ray, Vector3.Distance(virtualCamera.transform.position, lookFromTransform.position), LayerMask.GetMask("Ground")))
+        {
+            cameraOffset = Vector3.Lerp(cameraOffset, closeCameraOffset, Time.deltaTime);
+        }
+        else
+        {
+            cameraOffset = Vector3.Lerp(cameraOffset, defaultCameraOffset, Time.deltaTime);
+        }
+    }
+
+    void LateUpdate()
     {
         transform.localEulerAngles += new Vector3(0f, pointerPos.x * playerDataModel.mouseSensivity * Time.deltaTime, 0f);
 
