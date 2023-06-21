@@ -16,7 +16,7 @@ MonoBehaviour:
   SkillName: Guard
   SkillDesc: Shield Up
   SkillIcon: {fileID: 21300000, guid: 577de0353c3f34e91b4bdeb038bcb2e9, type: 3}
-  coolTime: 1
+  coolTime: 0
   modifier: 0
   actionKeys:
   - Action1

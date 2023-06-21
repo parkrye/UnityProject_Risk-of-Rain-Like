@@ -28,11 +28,9 @@ public class Enemy_Condition_CheckBypassRoute : BT_Condition
     {
         if(bypassStack.Count > 0)
         {
-            Debug.Log("Find Bypass");
             enemy.GetComponent<Enemy_AI>().SetBypassRoute(bypassStack);
             return NodeState.Success;
         }
-        Debug.Log("not Find Bypass");
         return NodeState.Failure;
     }
 }

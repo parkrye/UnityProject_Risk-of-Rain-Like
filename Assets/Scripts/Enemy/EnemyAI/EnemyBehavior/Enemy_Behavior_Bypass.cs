@@ -27,7 +27,6 @@ public class Enemy_Behavior_Bypass : BT_Action
 
     public override NodeState Renew()
     {
-        Debug.Log("Bypass");
         OnBypass();
         return NodeState.Running;
     }

@@ -10,7 +10,6 @@ public class Enemy_Behavior_Attack : BT_Action
 
     public override NodeState Renew()
     {
-        Debug.Log("Attack");
         OnAttack();
         return NodeState.Running;
     }

@@ -17,11 +17,9 @@ public class Enemy_Condition_CheckWall : BT_Condition
         {
             if(Physics.Raycast(enemy.transform.position, (player.transform.position - enemy.transform.position).normalized, enemy.GetComponent<Enemy>().enemyData.Range, LayerMask.GetMask("Ground")))
             {
-                Debug.Log("Wall Beside");
                 return NodeState.Success;
             }
         }
-        Debug.Log("Not Wall");
         return NodeState.Failure;
     }
 }
