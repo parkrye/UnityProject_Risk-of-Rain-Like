@@ -6,6 +6,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
     public EnemyData enemyData;
     protected Enemy_AI enemy_AI;
     [SerializeField] ParticleSystem bleedParticle;
+    protected Animator animator;
 
     public float hp, damage;
     public bool bleed, attack;
@@ -14,6 +15,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
     {
         enemy_AI = GetComponent<Enemy_AI>();
         bleedParticle = GameManager.Resource.Load<ParticleSystem>("Particle/Bleed");
+        animator = gameObject.GetComponent<Animator>();
     }
 
     void OnEnable()
@@ -30,6 +32,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
 
     public void Hit(float damage)
     {
+        animator.SetTrigger("Hit");
         hp -= damage;
         if (bleed)
         {
@@ -45,10 +48,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
 
     public void Die()
     {
-        GameManager.Data.Player.EXP += enemyData.exp / (GameManager.Data.difficulty);
-        if(Random.Range(0, 10) == 0)
-            GameManager.Resource.Instantiate<ItemBox>("Item/ItemBox", transform.position, Quaternion.identity);
-        GameManager.Resource.Destroy(gameObject);
+        StartCoroutine(DieRoutine());
     }
 
     IEnumerator BleedingRoutine()
@@ -58,6 +58,16 @@ public abstract class Enemy : MonoBehaviour, IHitable
             bleed = true;
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    IEnumerator DieRoutine()
+    {
+        animator.SetTrigger("Die");
+        yield return new WaitForSeconds(1f);
+        GameManager.Data.Player.EXP += enemyData.exp / (GameManager.Data.difficulty);
+        if (Random.Range(0, 10) == 0)
+            GameManager.Resource.Instantiate<ItemBox>("Item/ItemBox", transform.position, Quaternion.identity);
+        GameManager.Resource.Destroy(gameObject);
     }
 
     public void StartAttack()

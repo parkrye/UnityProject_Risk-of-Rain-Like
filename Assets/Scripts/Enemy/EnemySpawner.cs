@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(spawnDelay);
-            EnemyData enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Bat");
+            EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
 
             Vector3 spawnPosition = Vector3.zero;
             float remainDistance = spawnDistance;
@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
 
             spawnPosition.z = remainDistance;
 
-            GameManager.Resource.Instantiate(enemyData.enemy, player.position + spawnPosition, Quaternion.identity, true);
+            GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, player.position + spawnPosition, Quaternion.identity, true);
         }
     }
 }

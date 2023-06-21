@@ -15,6 +15,7 @@ public class Bat : Enemy
         {
             if (attack)
             {
+                animator.SetTrigger("Attack");
                 GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), true);
                 enemyBolt.transform.position = transform.position;
                 enemyBolt.transform.LookAt(GameManager.Data.Player.transform.position);

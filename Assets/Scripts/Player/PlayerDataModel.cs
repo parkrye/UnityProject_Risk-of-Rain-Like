@@ -39,7 +39,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         get { return nowHP; }
         set
         {
-            if (value < 0f)
+            if (value <= 0f)
             {
                 Die();
                 HPEvent?.Invoke();
