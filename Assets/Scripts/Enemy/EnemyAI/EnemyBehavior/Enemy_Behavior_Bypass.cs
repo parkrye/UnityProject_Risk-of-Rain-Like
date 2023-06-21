@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class Enemy_Behavior_Bypass : BT_Action
     {
         enemy = _enemy;
         player = GameManager.Data.Player.gameObject;
-        bypassStack = new Stack<Vector3>();
     }
 
     /// <summary>
@@ -17,7 +17,11 @@ public class Enemy_Behavior_Bypass : BT_Action
     /// </summary>
     public override void Initialize()
     {
-        bypassStack = PathFinder.PathFindingForAerial(enemy.transform, player.transform, enemy.GetComponent<Enemy>().enemyData.Range);
+        if (GetParent() is not BT_Composite)
+            throw new Exception("Enemy_Behavior_Bypass는 BT_Composite의 자식으로만 존재할 수 있습니다");
+        if((GetParent() as BT_Composite).GetChild(GetIndex() - 1) is not Enemy_Condition_CheckBypassRoute)
+            throw new Exception("Enemy_Behavior_Bypass는 Enemy_Condition_CheckBypassRoute 다음에만 존재할 수 있습니다");
+        bypassStack = ((GetParent() as BT_Composite).GetChild(GetIndex() - 1) as Enemy_Condition_CheckBypassRoute).bypassStack;
     }
 
     public override void Terminate()
@@ -27,11 +31,11 @@ public class Enemy_Behavior_Bypass : BT_Action
 
     public override NodeState Renew()
     {
-        OnChase();
+        OnBypass();
         return NodeState.Running;
     }
 
-    void OnChase()
+    void OnBypass()
     {
         if (player)
         {

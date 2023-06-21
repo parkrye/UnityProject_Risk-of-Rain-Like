@@ -10,4 +10,5 @@ public class EnemyData : ScriptableObject
     public float Range;
     public float Speed;
     public float exp;
+    public float size;
 }

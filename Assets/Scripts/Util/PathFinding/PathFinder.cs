@@ -13,7 +13,6 @@ public class PathFinder : MonoBehaviour
     public static Stack<Vector3> PathFindingForAerial(Transform start, Transform end, float distance)
     {
         Stack<Vector3> answer = new Stack<Vector3>();   // 반환 스택
-        answer.Push(end.position);                      // 초기값 = 목표 좌표(플레이어 좌표)
 
         // 만약 플레이어와 에너미 사이에 벽이 있다면
         if (!CheckPassable(start.position, end.position, distance))
@@ -36,8 +35,11 @@ public class PathFinder : MonoBehaviour
             nodes.Add(startNode.position, startNode);
             pq.Enqueue(startNode, 0);
 
-            // 우선순위 큐에 노드가 있다면 계속 반복
-            while(pq.Count > 0)
+            // 검사 한계 카운터
+            int counter = 0;
+
+            // 우선순위 큐에 노드가 있다고, 검색이 100회 미만인 경우 반복
+            while(pq.Count > 0 && counter < 100)
             {
                 Node node = pq.Dequeue();               // 현재 노드
                 if(!visited.ContainsKey(node.position)) // 만약 방문하지 않은 노드라면 방문 노드에 추가
@@ -46,6 +48,7 @@ public class PathFinder : MonoBehaviour
                 // 종료 조건 1 : 목표 좌표와의 거리가 정지 거리 이하
                 if (Vector3.Distance(node.position, end.position) <= distance)
                 {
+                    answer.Push(end.position);     // 초기값 = 목표 좌표(플레이어 좌표)
                     // 노드의 부모가 없을 때까지 반복
                     while (node.parent != null)
                     {
@@ -61,6 +64,7 @@ public class PathFinder : MonoBehaviour
                 // 종료 조건 2 : 현재 좌표부터 목표 좌표 사이에 벽이 없다
                 if (CheckPassable(node.position, end.position, distance))
                 {
+                    answer.Push(end.position);     // 초기값 = 목표 좌표(플레이어 좌표)
                     // 노드의 부모가 없을 때까지 반복
                     while (node.parent != null)
                     {
@@ -106,17 +110,19 @@ public class PathFinder : MonoBehaviour
                         }
                     }
                 }
+
+                counter++;
             }
         }
         // 벽이 없었다면 그대로 반환
         else
         {
+            answer.Push(end.position);     // 초기값 = 목표 좌표(플레이어 좌표)
             return answer;
         }
 
-        // 탐지 결과 길을 찾지 못했다면 플레이어의 뒤로 이동시키고
-        TeleportToBackside(start, end, distance);
-        return answer;  // 그대로 반환
+        // 탐지 결과 길을 찾지 못했다면 그대로 반환
+        return answer;
     }
 
     /// <summary>
@@ -156,24 +162,5 @@ public class PathFinder : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    /// <summary>
-    /// 플레이어의 뒤로 에너미를 이동시킨다
-    /// </summary>
-    /// <param name="enemy">에너미 위치</param>
-    /// <param name="player">플레이어 위치</param>
-    /// <param name="distance">에너미 정지 거리</param>
-    static void TeleportToBackside(Transform enemy, Transform player, float distance)
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(player.position, -player.forward, out hit, distance, LayerMask.GetMask("Ground")))
-        {
-            enemy.position = hit.point;
-        }
-        else
-        {
-            enemy.position = player.position - player.forward * distance;
-        }
     }
 }

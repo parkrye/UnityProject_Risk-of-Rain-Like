@@ -1,4 +1,5 @@
 // 행동 노드의 상태
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum NodeState
@@ -36,6 +37,11 @@ public class BT_Behavior
     public void SetParent(BT_Behavior node)
     {
         parent = node;
+    }
+
+    public BT_Behavior GetParent()
+    {
+        return parent;
     }
 
     public NodeState GetState()

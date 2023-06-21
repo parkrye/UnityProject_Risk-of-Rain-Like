@@ -22,6 +22,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
         hp = enemyData.MaxHP;
         bleed = false;
         attack = false;
+        GetComponent<SphereCollider>().radius = enemyData.size;
         StartCoroutine(BleedingRoutine());
         StartCoroutine(AttackRoutine());
     }
@@ -65,5 +66,6 @@ public abstract class Enemy : MonoBehaviour, IHitable
     {
         attack = false;
     }
+
     protected abstract IEnumerator AttackRoutine();
 }
