@@ -18,16 +18,16 @@ public class PathFinder : MonoBehaviour
         if (!CheckPassable(start.position, end.position, distance))
         {
             // x, y, z 거리 차이. 최소 1
-            int xDiff = (int)Mathf.Abs(start.position.x - end.position.x);
-            if (xDiff == 0) xDiff = 1;
-            int yDiff = (int)Mathf.Abs(start.position.y - end.position.y);
-            if (yDiff == 0) yDiff = 1;
-            int zDiff = (int)Mathf.Abs(start.position.z - end.position.z);
-            if (zDiff == 0) zDiff = 1;
+            float xDiff = Mathf.Abs(start.position.x - end.position.x);
+            if (xDiff == 0f) xDiff = 1f;
+            float yDiff = Mathf.Abs(start.position.y - end.position.y);
+            if (yDiff == 0f) yDiff = 1f;
+            float zDiff = Mathf.Abs(start.position.z - end.position.z);
+            if (zDiff == 0f) zDiff = 1f;
 
             Dictionary<Vector3, bool> visited = new Dictionary<Vector3, bool>();    // 좌표, 노드 방문 여부 딕셔너리
             Dictionary<Vector3, Node> nodes = new Dictionary<Vector3, Node>();      // 좌표, 노드 딕셔너리
-            PriorityQueue<Node, int> pq = new PriorityQueue<Node, int>();           // 총 예상 거리로 노드를 정렬한 우선순위 큐
+            PriorityQueue<Node, float> pq = new PriorityQueue<Node, float>();           // 총 예상 거리로 노드를 정렬한 우선순위 큐
 
             // 초기 노드를 저장
             Node startNode = new Node();
@@ -35,11 +35,8 @@ public class PathFinder : MonoBehaviour
             nodes.Add(startNode.position, startNode);
             pq.Enqueue(startNode, 0);
 
-            // 검사 한계 카운터
-            int counter = 0;
-
-            // 우선순위 큐에 노드가 있다고, 검색이 100회 미만인 경우 반복
-            while(pq.Count > 0 && counter < 100)
+            // 우선순위 큐에 노드가 있다면 반복
+            while(pq.Count > 0)
             {
                 Node node = pq.Dequeue();               // 현재 노드
                 if(!visited.ContainsKey(node.position)) // 만약 방문하지 않은 노드라면 방문 노드에 추가
@@ -75,11 +72,11 @@ public class PathFinder : MonoBehaviour
                 }
 
                 // 각 x, y, z로부터 -1 ~ +1 떨어진 좌표를 탐색
-                for (int x = -1; x <= 1; x++)
+                for (float x = -1; x <= 1; x += 0.5f)
                 {
-                    for(int y = -1; y <= 1; y++)
+                    for(float y = -1; y <= 1; y += 0.5f)
                     {
-                        for(int  z = -1; z <= 1; z++)
+                        for(float z = -1; z <= 1; z += 0.5f)
                         {
                             // 0, 0, 0은 현재 좌표이므로 패스
                             if (x == y && y == z && z == 0)
@@ -92,8 +89,8 @@ public class PathFinder : MonoBehaviour
                             if (visited.ContainsKey(findPosition))
                                 continue;
 
-                            int g = node.g + Mathf.Abs(x) + Mathf.Abs(y) + Mathf.Abs(z);    // 이동 거리 + 이동한 x, y, z 거리
-                            int h = (int)Vector3.Distance(findPosition, end.position);      // 예상 거리 = 현재부터 목표꺼지 직선 거리
+                            float g = node.g + Mathf.Abs(x) + Mathf.Abs(y) + Mathf.Abs(z);    // 이동 거리 + 이동한 x, y, z 거리
+                            float h = Vector3.Distance(findPosition, end.position);      // 예상 거리 = 현재부터 목표꺼지 직선 거리
 
                             // 새 노드 생성
                             Node findNode = new Node(findPosition, node.position, g, h);
@@ -110,8 +107,6 @@ public class PathFinder : MonoBehaviour
                         }
                     }
                 }
-
-                counter++;
             }
         }
         // 벽이 없었다면 그대로 반환
@@ -134,11 +129,11 @@ public class PathFinder : MonoBehaviour
         public Vector3 position;
         public Vector3 parent;
 
-        public int g;
-        public int h;
-        public int f;
+        public float g;
+        public float h;
+        public float f;
 
-        public Node(Vector3 _position, Vector3 _parent, int _g, int _h)
+        public Node(Vector3 _position, Vector3 _parent, float _g, float _h)
         {
             position = _position;
             parent = _parent;

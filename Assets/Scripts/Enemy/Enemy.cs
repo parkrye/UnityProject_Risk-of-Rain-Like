@@ -7,7 +7,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
     protected Enemy_AI enemy_AI;
     [SerializeField] ParticleSystem bleedParticle;
 
-    public float hp;
+    public float hp, damage;
     public bool bleed, attack;
 
     protected virtual void Awake()
@@ -19,7 +19,8 @@ public abstract class Enemy : MonoBehaviour, IHitable
     void OnEnable()
     {
         enemy_AI.CreateBehaviorTreeAIState();
-        hp = enemyData.MaxHP;
+        hp = enemyData.MaxHP * (1 + (GameManager.Data.difficulty - 1) * 0.5f + GameManager.Data.time * 0.0016f);
+        damage = enemyData.Damage * (1 + (GameManager.Data.difficulty - 1) * 0.5f + GameManager.Data.time * 0.0016f);
         bleed = false;
         attack = false;
         GetComponent<SphereCollider>().radius = enemyData.size;

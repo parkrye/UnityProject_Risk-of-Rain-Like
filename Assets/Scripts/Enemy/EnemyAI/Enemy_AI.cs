@@ -11,5 +11,12 @@ public abstract class Enemy_AI : MonoBehaviour
         AI.Tick();
     }
 
+    public Stack<Vector3> bypassRoute { get; private set; }
+
+    public void SetBypassRoute(Stack<Vector3> route)
+    {
+        bypassRoute = route;
+    }
+
     public abstract void CreateBehaviorTreeAIState();
 }

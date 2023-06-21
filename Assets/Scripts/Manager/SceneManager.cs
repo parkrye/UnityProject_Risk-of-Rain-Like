@@ -42,7 +42,6 @@ public class SceneManager : MonoBehaviour
         loadingUI.SetProgress(0f);
         loadingUI.FadeIn();
         yield return new WaitForSeconds(1f);
-        Time.timeScale = 0f;
 
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
         while (!oper.isDone)
@@ -63,7 +62,6 @@ public class SceneManager : MonoBehaviour
 
         loadingUI.SetProgress(1f);
         loadingUI.FadeOut();
-        Time.timeScale = 1f;
         yield return new WaitForSeconds(1f);
     }
 }

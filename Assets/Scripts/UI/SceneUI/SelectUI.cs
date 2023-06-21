@@ -78,7 +78,7 @@ public class SelectUI : SceneUI
             player.GetComponent<PlayerDataModel>().hero.SettingSkill(slot, skillNum);
         }
 
-        GameManager.Scene.LoadScene("LevelScene_Dungeon");
+        GameManager.Scene.LoadScene("LevelScene");
     }
 
     void CancelSelect()

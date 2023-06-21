@@ -4,6 +4,7 @@ using UnityEngine;
 public class LevelScene : BaseScene
 {
     [SerializeField] Transform startPosition;
+    [SerializeField] float spawnDelay, spawnDistance;
 
     protected override IEnumerator LoadingRoutine()
     {
@@ -19,7 +20,11 @@ public class LevelScene : BaseScene
         GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneStatusUI").Initialize();
         progress = 0.5f;
 
-
+        if (spawnDelay == 0f)
+            spawnDelay = 5f;
+        if (spawnDistance == 0f)
+            spawnDistance = 10f;
+        gameObject.AddComponent<EnemySpawner>().Initialize(spawnDelay, spawnDistance);
         progress = 0.7f;
 
         yield return new WaitForEndOfFrame();

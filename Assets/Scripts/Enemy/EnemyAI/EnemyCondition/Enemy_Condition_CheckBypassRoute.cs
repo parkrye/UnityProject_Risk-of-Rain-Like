@@ -12,15 +12,27 @@ public class Enemy_Condition_CheckBypassRoute : BT_Condition
     {
         enemy = _enemy;
         player = GameManager.Data.Player.gameObject;
+        bypassStack = new Stack<Vector3>();
+    }
+    public override void Initialize()
+    {
         bypassStack = PathFinder.PathFindingForAerial(enemy.transform, player.transform, enemy.GetComponent<Enemy>().enemyData.Range);
+    }
+
+    public override void Terminate()
+    {
+        bypassStack.Clear();
     }
 
     public override NodeState Renew()
     {
         if(bypassStack.Count > 0)
         {
+            Debug.Log("Find Bypass");
+            enemy.GetComponent<Enemy_AI>().SetBypassRoute(bypassStack);
             return NodeState.Success;
         }
+        Debug.Log("not Find Bypass");
         return NodeState.Failure;
     }
 }

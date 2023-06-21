@@ -12,4 +12,9 @@ public class DataManager : MonoBehaviour
         time = 1f;
         difficulty = 1;
     }
+
+    void Update()
+    {
+        time += Time.deltaTime;
+    }
 }
