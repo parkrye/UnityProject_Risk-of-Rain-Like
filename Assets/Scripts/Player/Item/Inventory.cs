@@ -12,18 +12,18 @@ public class Inventory : MonoBehaviour
         inventory = new Dictionary<ItemData, int>();
     }
 
-    public void AddItem(ItemBase item)
+    public void AddItem(ItemData item)
     {
-        if (inventory.ContainsKey(item.itemData))
+        if (inventory.ContainsKey(item))
         {
-            inventory[item.itemData]++;
+            inventory[item]++;
             item.GetFirstEffect();
         }
         else
         {
-            inventory.Add(item.itemData, 1);
+            inventory.Add(item, 1);
             item.GetNextEffect();
         }
-        ItemEvent?.Invoke(item.itemData, inventory[item.itemData]);
+        ItemEvent?.Invoke(item, inventory[item]);
     }
 }

@@ -1,12 +1,8 @@
 using UnityEngine;
 
-public class HPCoffee : ItemBase
+[CreateAssetMenu(fileName = "HPPotion", menuName = "Data/Item/HPPotion")]
+public class HPPotion : ItemData
 {
-    void Awake()
-    {
-        itemData = GameManager.Resource.Load<ItemData>("Item/HPCoffee");
-    }
-
     public override void GetFirstEffect()
     {
         GameManager.Data.Player.MAXHP += 10f;

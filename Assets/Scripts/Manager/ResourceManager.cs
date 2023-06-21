@@ -8,6 +8,13 @@ using UnityEngine;
 public class ResourceManager : MonoBehaviour
 {
     Dictionary<string, Object> resources = new Dictionary<string, Object>();
+
+    public T[] LoadAll<T>(string path) where T : Object
+    {
+        T[] allResource = Resources.LoadAll<T>(path);
+        return allResource;
+    }
+
     public T Load<T>(string path) where T : Object
     {
         string key = $"{typeof(T)}.{path}";
