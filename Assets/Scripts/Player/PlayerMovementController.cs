@@ -74,7 +74,7 @@ public class PlayerMovementController : MonoBehaviour
         float animatorFoward = playerDataModel.animator.GetFloat("Foward");
         float animatorSide = playerDataModel.animator.GetFloat("Side");
 
-        // 경사로
+        // 경사로 보정
         float gravity = Mathf.Abs(playerDataModel.rb.velocity.y) - Physics.gravity.y * Time.deltaTime;
         if(playerDataModel.animator.GetBool("IsGround") && isSlope)
         {
@@ -87,9 +87,11 @@ public class PlayerMovementController : MonoBehaviour
             gravity = 0f;
         curVelocity = transform.right * curVelocity.x + transform.forward * curVelocity.z;
 
+        // 이동
         playerDataModel.rb.velocity = new Vector3(curVelocity.x, 0f, curVelocity.z) * playerDataModel.moveSpeed + Vector3.down * gravity + dirModifier;
         if (dirModifier != Vector3.zero)
             dirModifier = Vector3.Lerp(dirModifier, Vector3.zero, 0.1f);
+
         // 애니메이션
         playerDataModel.animator.SetFloat("Foward", Mathf.Lerp(animatorFoward, moveDir.z, 0.1f));
         playerDataModel.animator.SetFloat("Side", Mathf.Lerp(animatorSide, moveDir.x, 0.1f));

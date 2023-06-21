@@ -82,11 +82,9 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         }
     }
 
-    public float moveSpeed, jumpPower, coolTime, climbPower, attackDamage, armorPoint;
+    public float moveSpeed, jumpPower, coolTime, attackDamage, armorPoint;
     public int jumpLimit, jumpCount;
-    public bool attackCooldown, controlleable;
-
-    public float climbCheckLowHeight, climbCheckHighHeight, climbCheckLength;
+    public bool attackCooldown, controlleable, dodgeDamage;
 
     public float mouseSensivity;
 
@@ -148,7 +146,8 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     public void Hit(float damage)
     {
-        NOWHP -= damage * armorPoint;
+        if(!dodgeDamage)
+            NOWHP -= damage * armorPoint;
     }
 
     public void Die()

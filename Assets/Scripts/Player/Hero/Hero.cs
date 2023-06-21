@@ -58,14 +58,6 @@ public abstract class Hero : MonoBehaviour
 
     public bool Action(int num, bool isPressed)
     {
-        for(int i = 0; i < 4; i++)
-        {
-            if(i != num)
-            {
-                skills[i].Active(false);
-            }
-        }
-
         if (skills[num].CoolCheck && skills[num].Active(isPressed))
         {
             if (skills[num] is IEnumeratable)

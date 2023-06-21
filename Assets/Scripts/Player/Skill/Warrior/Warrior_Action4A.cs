@@ -39,7 +39,7 @@ public class Warrior_Action4A : Skill, IEnumeratable
             hittable?.Hit(hero.playerDataModel.attackDamage * modifier);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         hero.playerDataModel.controlleable = true;
     }
