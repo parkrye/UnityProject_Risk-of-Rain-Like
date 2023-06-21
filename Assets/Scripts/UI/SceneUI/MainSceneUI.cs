@@ -20,7 +20,7 @@ public class MainSceneUI : SceneUI
 
     IEnumerator StartButtonRoutine()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         GameManager.Scene.LoadScene("ReadyScene");
     }
 
@@ -36,7 +36,7 @@ public class MainSceneUI : SceneUI
 
     IEnumerator OptionButtonRoutine()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         GameManager.UI.ShowPopupUI<PopUpUI>("UI/OptionUI");
     }
 
@@ -48,7 +48,7 @@ public class MainSceneUI : SceneUI
 
     IEnumerator QuitButtonRoutine()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         Application.Quit();
     }
 

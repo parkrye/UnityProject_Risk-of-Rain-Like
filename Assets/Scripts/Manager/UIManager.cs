@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class UIManager : MonoBehaviour
 {
     EventSystem eventSystem;
-    [SerializeField] Canvas sceneCanvas, ingameCanvas, popUpCanvas;
+    public Canvas sceneCanvas, ingameCanvas, popUpCanvas;
     Stack<PopUpUI> popUpStack;
 
     void Awake()
