@@ -1,76 +1,105 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Approach ( => Bypass ) => Attack
+/// 공중 몬스터 AI
+/// 우회 접근  => 공격
 /// </summary>
-public class EnemyAI_TypeA : Enemy_AI
+public class EnemyAI_TypeA : EnemyAI
 {
-    protected override void Update()
+    enum AI_State { Bypass, Atttack }
+    [SerializeField] AI_State state;
+    Stack<Vector3> bypass;
+    bool needToBypass;
+    Vector3 prevPlayerPosition;
+
+    protected override void Awake()
     {
-        AI.Tick();
+        base.Awake();
+        state = AI_State.Bypass;
+        bypass = new Stack<Vector3>();
     }
 
-    public override void CreateBehaviorTreeAIState()
+    void Update()
     {
-        // 트리 구성
-        // AI - Main - ApproachInRange
-        //     (and) - BypassAndAttack
-        //           - Attack
+        state = StateCheck();
+        switch (state)
+        {
+            case AI_State.Bypass:
+                ByPass();
+                break;
+            case AI_State.Atttack:
+                Attack();
+                break;
+        }
+    }
 
-        //             ApproachInRange - CheckDist: 거리 측정
-        //             (or)            - Bypass: 우회
-        //                             - Approach: 접근
+    AI_State StateCheck()
+    {
+        /*
+        RaycastHit hit;
+        if(Physics.SphereCast(transform.position + Vector3.up, enemy.enemyData.Size, (player.position - transform.position).normalized, out hit, Vector3.Distance(player.position, transform.position) - 1f, LayerMask.GetMask("Ground")))
+         */
 
-        //                   Bypass - CheckWall: 벽 확인
-        //                  (and)   - CheckBypass: 우회 확인
-        //                          - Bypass: 우회
+        if (Vector3.Distance(player.position + Vector3.up, transform.position + Vector3.up) <= enemy.enemyData.Range)
+        {
+            needToBypass = false;
+            return AI_State.Atttack;
+        }
+        else
+        {
+            enemy.StopAttack();
+            return AI_State.Bypass;
+        }
+    }
 
-        //             BypassAndAttack  - Bypass
-        //             (or)             - Attack
+    void Attack()
+    {
+        transform.LookAt(player.position + Vector3.up);
+        enemy.StartAttack();
+    }
 
-        //             Attack: 공격
+    void ByPass()
+    {
+        if (!needToBypass)
+        {
+            needToBypass = true;
+            StartCoroutine(FindBypass());
+        }
 
-        AI = new();
+        if (needToBypass)
+        {
+            if(bypass.Count == 0)
+                bypass = PathFinder.PathFindingForAerial(transform.position + Vector3.up, player.position + Vector3.up);
+            transform.Translate((bypass.Peek() - (transform.position + Vector3.up)).normalized * enemy.enemyData.MoveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position + Vector3.up, bypass.Peek()) <= 0.5f)
+                bypass.Pop();
+        }
+    }
 
-        BT_Sequence Main = new();
+    IEnumerator FindBypass()
+    {
+        while (needToBypass)
+        {
+            if(Vector3.Distance(prevPlayerPosition, GameManager.Data.Player.transform.position) > 3f)
+            {
+                bypass = PathFinder.PathFindingForAerial(transform.position + Vector3.up, player.position + Vector3.up);
+                prevPlayerPosition = GameManager.Data.Player.transform.position;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 
-
-        BT_Fallback ApproachInRange = new();
-        Main.AddChild(ApproachInRange);
-
-
-        Enemy_Condition_CheckDistance enemy_CheckDistance = new(gameObject);
-        ApproachInRange.AddChild(enemy_CheckDistance);
-
-        BT_Sequence Bypass = new();
-        ApproachInRange.AddChild(Bypass);
-
-        Enemy_Behavior_Approach enemy_Behavior_Approach = new(gameObject);
-        ApproachInRange.AddChild(enemy_Behavior_Approach);
-
-
-        Enemy_Condition_CheckWall enemy_Condition_CheckWall = new(gameObject);
-        Bypass.AddChild(enemy_Condition_CheckWall);
-
-        Enemy_Condition_CheckBypassRoute enemy_Condition_CheckBypassRoute = new(gameObject);
-        Bypass.AddChild(enemy_Condition_CheckBypassRoute);
-
-        Enemy_Behavior_Bypass enemy_Behavior_Bypass = new(gameObject);
-        Bypass.AddChild(enemy_Behavior_Bypass);
-
-
-        BT_Fallback BypassAndAttack = new();
-        Main.AddChild(BypassAndAttack);
-
-        BypassAndAttack.AddChild(Bypass);
-
-        Enemy_Behavior_Attack enemy_Behavior_attack = new(gameObject);
-        BypassAndAttack.AddChild(enemy_Behavior_attack);
-
-
-        Main.AddChild(enemy_Behavior_attack);
-
-        AI.AddChild(Main);
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if(bypass.Count > 0)
+        {
+            foreach (var bypass in bypass)
+            {
+                Gizmos.DrawWireSphere(bypass, 0.5f);
+            }
+        }
     }
 }
