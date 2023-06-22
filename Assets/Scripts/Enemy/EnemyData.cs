@@ -8,7 +8,10 @@ public class EnemyData : ScriptableObject
     public float MaxHP;
     public float Damage;
     public float Range;
-    public float Speed;
-    public float exp;
-    public float size;
+    public float AttackSpeed;
+    public float MoveSpeed;
+    public float Exp;
+    public float Size;
+
+    public float[] floatdatas;
 }

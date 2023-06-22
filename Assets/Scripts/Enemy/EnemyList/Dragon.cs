@@ -1,14 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dragon : Enemy
 {
+    [SerializeField] Transform mouse;
+    GameObject enemyFlame;
     bool attacking;
 
     protected override void Awake()
     {
         base.Awake();
+        attacking = false;
         enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Dragon");
     }
 
@@ -21,18 +23,29 @@ public class Dragon : Enemy
                 if (!attacking)
                 {
                     animator.SetTrigger("Attack");
-                    GameObject enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), transform.position, Quaternion.identity, transform, true);
-                    enemyFlame.transform.LookAt(transform.forward);
-                    enemyFlame.GetComponent<EnemyFlame>().damage = damage;
-                    attacking = true;
+                    StartCoroutine(Breath());
                 }
-                yield return new WaitForSeconds(enemyData.Speed);
+                yield return null;
             }
             else
             {
-                attacking = false;
                 yield return null;
             }
         }
+    }
+
+    IEnumerator Breath()
+    {
+        Debug.Log($"{name} Start Breath!");
+        attacking = true;
+        enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), transform, true);
+        enemyFlame.GetComponent<EnemyFlame>().Shot(damage, mouse);
+        enemyFlame.transform.LookAt(mouse.position + transform.forward);
+        yield return new WaitForSeconds(enemyData.floatdatas[0]);
+        GameManager.Resource.Destroy(enemyFlame);
+        Debug.Log($"{name} End Breath!");
+        yield return new WaitForSeconds(enemyData.floatdatas[1]);
+        Debug.Log($"{name} Ready Breath!");
+        attacking = false;
     }
 }

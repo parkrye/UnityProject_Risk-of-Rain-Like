@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using UnityEngine;
 
@@ -16,11 +17,9 @@ public class Bat : Enemy
             if (attack)
             {
                 animator.SetTrigger("Attack");
-                GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), true);
-                enemyBolt.transform.position = transform.position;
-                enemyBolt.transform.LookAt(GameManager.Data.Player.transform.position);
-                enemyBolt.GetComponent<EnemyBolt>().Shot(gameObject.GetComponent<Enemy>().damage);
-                yield return new WaitForSeconds(enemyData.Speed);
+                GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), transform.position, Quaternion.identity, true);
+                enemyBolt.GetComponent<EnemyBolt>().Shot(GameManager.Data.Player.transform.position, damage);
+                yield return new WaitForSeconds(enemyData.AttackSpeed);
             }
             else
             {
