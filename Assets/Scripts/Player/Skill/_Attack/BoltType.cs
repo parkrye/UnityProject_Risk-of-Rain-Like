@@ -59,5 +59,9 @@ public class BoltType : MonoBehaviour
             other.GetComponent<IHitable>()?.Hit(damage);
             GameManager.Pool.Release(gameObject);
         }
+        else if ((1 << other.gameObject.layer) == LayerMask.GetMask("Ground"))
+        {
+            GameManager.Pool.Release(gameObject);
+        }
     }
 }

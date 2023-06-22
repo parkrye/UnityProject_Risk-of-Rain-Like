@@ -48,7 +48,6 @@ public class ArrowType : MonoBehaviour
         trail.Clear();
     }
 
-
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
