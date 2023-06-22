@@ -13,6 +13,7 @@ public class SelectUI : SceneUI
         buttons["Left"].onClick.AddListener(LeftButton);
         buttons["Right"].onClick.AddListener(RightButton);
         buttons["Select"].onClick.AddListener(SelectButton);
+        buttons["Main"].onClick.AddListener(MainButton);
 
         for(int slot = 1; slot <= 4; slot++)
         {
@@ -100,6 +101,11 @@ public class SelectUI : SceneUI
         if (characterNum > virtualCameras.Length)
             characterNum = 0;
         MoveCamera();
+    }
+
+    void MainButton()
+    {
+        GameManager.Scene.LoadScene("MainScene");
     }
 
     void MoveCamera()
