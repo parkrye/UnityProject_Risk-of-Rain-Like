@@ -153,5 +153,6 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     public void Die()
     {
         Debug.Log("you died");
+        GameManager.Data.RecordTime = false;
     }
 }
