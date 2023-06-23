@@ -5,9 +5,11 @@ public class LevelScene : BaseScene
 {
     [SerializeField] Transform startPosition;
     [SerializeField] float spawnDelay, spawnDistance;
+    [SerializeField] int enemyLimit;
 
     protected override IEnumerator LoadingRoutine()
     {
+        yield return new WaitForEndOfFrame();
         GameManager.Data.Player.transform.position = startPosition.position;
         progress = 0.25f;
 
@@ -24,10 +26,12 @@ public class LevelScene : BaseScene
             spawnDelay = 5f;
         if (spawnDistance == 0f)
             spawnDistance = 10f;
-        gameObject.AddComponent<EnemySpawner>().Initialize(spawnDelay, spawnDistance);
+        gameObject.AddComponent<EnemySpawner>().Initialize(spawnDelay, spawnDistance, enemyLimit);
         progress = 0.7f;
 
-        yield return new WaitForEndOfFrame();
+        GetComponent<YLimiter>().Initialize();
         progress = 1f;
+
+        GameManager.Data.RecordTime = true;
     }
 }
