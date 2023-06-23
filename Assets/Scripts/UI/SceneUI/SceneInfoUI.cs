@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SceneInfoUI : SceneUI
 {
+    public enum ObjectState { Search, Keep, ComeBack, Fight, Win }
+
     public override void Initialize()
     {
         SettingDifficulty();
@@ -43,8 +45,25 @@ public class SceneInfoUI : SceneUI
     /// <summary>
     /// 목표 관련 이벤트
     /// </summary>
-    public void UpdateObjective()
+    public void UpdateObjective(ObjectState objectState)
     {
-
+        switch (objectState)
+        {
+            case ObjectState.Search:
+                texts["ObjectiveText"].text = "Objective\nFind Zone";
+                break;
+            case ObjectState.Keep:
+                texts["ObjectiveText"].text = "Objective\nKeep Zone";
+                break;
+            case ObjectState.ComeBack:
+                texts["ObjectiveText"].text = "Objective\nBack to Zone";
+                break;
+            case ObjectState.Fight:
+                texts["ObjectiveText"].text = "Objective\nKill Boss";
+                break;
+            case ObjectState.Win:
+                texts["ObjectiveText"].text = "Objective\nComplete";
+                break;
+        }
     }
 }

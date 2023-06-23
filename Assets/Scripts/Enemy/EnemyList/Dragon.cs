@@ -8,9 +8,9 @@ public class Dragon : Enemy
 
     protected override void Awake()
     {
-        base.Awake();
         attacking = false;
         enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Dragon");
+        base.Awake();
     }
 
     protected override IEnumerator AttackRoutine()

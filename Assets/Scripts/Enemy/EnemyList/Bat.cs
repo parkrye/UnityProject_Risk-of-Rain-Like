@@ -6,8 +6,8 @@ public class Bat : Enemy
 {
     protected override void Awake()
     {
-        base.Awake();
         enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Bat");
+        base.Awake();
     }
 
     protected override IEnumerator AttackRoutine()

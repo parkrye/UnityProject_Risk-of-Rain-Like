@@ -6,7 +6,6 @@ public class TestScene : MonoBehaviour
 {
     void Awake()
     {
-        GameManager.UI.CreateInGameScene();
         GameManager.UI.CreatePopupCanvas();
         GameManager.UI.CreateSceneCanvas();
         GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneInfoUI").Initialize();

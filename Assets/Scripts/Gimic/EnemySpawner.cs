@@ -29,20 +29,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
             if(enemyCount < enemyLimit)
             {
-                EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
-
-                Vector3 spawnPosition = Vector3.zero;
-                float remainDistance = spawnDistance;
-
-                spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-                remainDistance -= spawnPosition.x;
-
-                spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-                remainDistance -= spawnPosition.y;
-
-                spawnPosition.z = remainDistance;
-
-                GameObject enemy = GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, player.position + spawnPosition, Quaternion.identity, true);
+                GameObject enemy = EnemySummon.RandomLocationSummon(player, spawnDistance);
                 enemy.GetComponent<Enemy>().EnemyDie.AddListener(EnemyDie);
 
                 enemyCount++;
