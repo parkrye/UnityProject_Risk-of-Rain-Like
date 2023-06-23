@@ -1,5 +1,3 @@
-using Cinemachine.Utility;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +10,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] float slopeDegree;
     [SerializeField] bool isSlope;
     RaycastHit slopeHit;
+    bool descending;
 
     void Awake()
     {
@@ -26,17 +25,24 @@ public class PlayerMovementController : MonoBehaviour
 
     void CheckGround()
     {
-        if (playerDataModel.rb.velocity.y <= 0f)
+        if (playerDataModel.rb.velocity.y > 0f)
         {
-            Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-            if (Physics.Raycast(ray, 0.3f, LayerMask.GetMask("Ground")))
+            descending = true;
+        }
+
+        Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
+        if (Physics.Raycast(ray, 0.2f, LayerMask.GetMask("Ground")))
+        {
+            if (descending && playerDataModel.rb.velocity.y < 0f)
             {
                 playerDataModel.jumpCount = 0;
-                playerDataModel.animator.SetBool("IsGround", true);
-                return;
+                descending = false;
             }
-            playerDataModel.animator.SetBool("IsGround", false);
+
+            playerDataModel.animator.SetBool("IsGround", true);
+            return;
         }
+        playerDataModel.animator.SetBool("IsGround", false);
     }
 
     /// <summary>

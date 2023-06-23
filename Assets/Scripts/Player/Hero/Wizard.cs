@@ -21,6 +21,7 @@ public class Wizard : Hero
 
         if (isPressed)
         {
+            playerDataModel.jumpCount++;
             floating = true;
             playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.jumpPower * 1f;
             StartCoroutine(FloaterJump());
@@ -36,7 +37,6 @@ public class Wizard : Hero
     IEnumerator FloaterJump()
     {
         yield return new WaitForSeconds(0.2f);
-        playerDataModel.jumpCount++;
         playerDataModel.playerMovement.dirModifier.y = 0f;
         playerDataModel.rb.useGravity = false;
         while (floating)

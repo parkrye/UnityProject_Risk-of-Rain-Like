@@ -18,6 +18,7 @@ public class Archer : Hero
 
         if (isPressed)
         {
+            playerDataModel.jumpCount++;
             StartCoroutine(JumpCharger());
         }
 
@@ -27,7 +28,6 @@ public class Archer : Hero
     protected override void ChargeJump()
     {
         playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.jumpPower * 1.5f * jumpCharge * 0.01f;
-        playerDataModel.jumpCount++;
         animator.SetTrigger("JumpH");
         animator.SetTrigger("JumpL");
     }
