@@ -9,6 +9,11 @@ public class Archer_Action4A : Skill, IEnumeratable
 {
     public float skillTime;
 
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Archer4A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)

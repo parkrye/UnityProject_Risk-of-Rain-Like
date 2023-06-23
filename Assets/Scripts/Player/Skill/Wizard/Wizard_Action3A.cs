@@ -10,6 +10,11 @@ public class Wizard_Action3A : Skill, IEnumeratable
     public float teleportDistance, teleportCharge;
     public bool nowCharge;
 
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Wizard3A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (nowCharge)

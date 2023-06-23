@@ -9,6 +9,11 @@ public class Warrior_Action4A : Skill, IEnumeratable
 {
     public float dashPower, skillRange;
 
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Warrior4A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)

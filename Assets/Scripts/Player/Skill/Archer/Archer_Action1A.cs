@@ -6,6 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Archer_Action1A", menuName = "Data/Skill/Archer/Action1A")]
 public class Archer_Action1A : Skill
 {
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Archer1A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)

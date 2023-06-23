@@ -8,6 +8,11 @@ public class Wizard_Action4A : Skill
 {
     [SerializeField] float skillRange;
 
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Wizard4A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)

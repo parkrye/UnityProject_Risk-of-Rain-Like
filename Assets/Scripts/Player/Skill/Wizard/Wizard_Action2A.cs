@@ -8,6 +8,11 @@ public class Wizard_Action2A : Skill
 {
     GameObject flame;
 
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Wizard2A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)

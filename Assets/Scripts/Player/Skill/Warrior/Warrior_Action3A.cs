@@ -7,6 +7,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Warrior_Action3A", menuName = "Data/Skill/Warrior/Action3A")]
 public class Warrior_Action3A : Skill, IEnumeratable
 {
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Warrior3A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)

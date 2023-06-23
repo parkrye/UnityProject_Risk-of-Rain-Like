@@ -8,6 +8,11 @@ public class Warrior_Action2A : Skill
 {
     float prevArmor;
 
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Warrior2A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)

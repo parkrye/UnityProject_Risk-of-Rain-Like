@@ -8,6 +8,11 @@ public class Archer_Action3A : Skill
 {
     public float stepDistance;
 
+    void Awake()
+    {
+        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Archer3A").sprite;
+    }
+
     public override bool Active(bool isPressed)
     {
         if (isPressed)
