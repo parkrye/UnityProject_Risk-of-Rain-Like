@@ -17,7 +17,7 @@ public class PathFinder : MonoBehaviour
         Dictionary<Vector3, bool> visited = new Dictionary<Vector3, bool>();    // 좌표, 노드 방문 여부 딕셔너리
         Dictionary<Vector3, Node> nodes = new Dictionary<Vector3, Node>();      // 좌표, 노드 딕셔너리
         PriorityQueue<Node, float> pq = new PriorityQueue<Node, float>();           // 총 예상 거리로 노드를 정렬한 우선순위 큐
-        float moveModifier = 2f;
+        float moveModifier = radius;
 
         // 초기 노드를 저장
         Node startNode = new Node();
@@ -127,7 +127,7 @@ public class PathFinder : MonoBehaviour
     static bool CheckPassable(Vector3 start, Vector3 end, float radius)
     {
         RaycastHit hit;
-        if (Physics.SphereCast(start, radius, (start - end).normalized, out hit, Vector3.Distance(start, end) - radius, LayerMask.GetMask("Ground")))
+        if (Physics.SphereCast(start, radius, (end - start).normalized, out hit, Vector3.Distance(start, end) - radius, LayerMask.GetMask("Ground")))
         {
             return false;
         }

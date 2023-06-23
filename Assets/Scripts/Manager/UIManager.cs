@@ -5,20 +5,13 @@ using UnityEngine.EventSystems;
 public class UIManager : MonoBehaviour
 {
     EventSystem eventSystem;
-    public Canvas sceneCanvas, ingameCanvas, popUpCanvas;
+    public Canvas sceneCanvas, popUpCanvas;
     Stack<PopUpUI> popUpStack;
 
     void Awake()
     {
         eventSystem = GameManager.Resource.Instantiate<EventSystem>("UI/EventSystem");
         eventSystem.transform.parent = transform;
-    }
-
-    public void CreateInGameScene()
-    {
-        ingameCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
-        ingameCanvas.gameObject.name = "InGameCanvas";
-        ingameCanvas.sortingOrder = 0;
     }
 
     public void CreateSceneCanvas()
@@ -73,7 +66,6 @@ public class UIManager : MonoBehaviour
     public T ShowInGameUI<T>(T inGameUI) where T : InGameUI
     {
         T ui = GameManager.Pool.GetUI(inGameUI);
-        ui.transform.SetParent(ingameCanvas.transform, false);
 
         return ui;
     }

@@ -24,7 +24,6 @@ public class InGameUI : BaseUI
 
     void Follow()
     {
-
         if (followTarget != null)
         {
             transform.position = Camera.main.WorldToScreenPoint(followTarget.position) + followOffset;

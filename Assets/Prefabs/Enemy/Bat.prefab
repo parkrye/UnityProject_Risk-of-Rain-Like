@@ -334,6 +334,9 @@ MonoBehaviour:
   bleed: 0
   attack: 0
   onGizmo: 1
+  EnemyDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &5521633955531390089
 SphereCollider:
   m_ObjectHideFlags: 0
