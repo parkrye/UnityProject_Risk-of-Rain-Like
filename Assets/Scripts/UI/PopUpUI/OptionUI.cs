@@ -8,8 +8,29 @@ public class OptionUI : PopUpUI
     {
         base.Awake();
 
+        sliders["VolumeSlider"].onValueChanged.AddListener(OnVolumeSlider);
+        sliders["BGMSlider"].onValueChanged.AddListener(OnBGMSlider);
+        sliders["SFXSlider"].onValueChanged.AddListener(OnSESlider);
+
         buttons["DoneButton"].onClick.AddListener(OnDoneButton);
         buttons["ResetButton"].onClick.AddListener(OnResetButton);
+
+        ResetOptions();
+    }
+
+    void OnVolumeSlider(float volume)
+    {
+        GameManager.Audio.MasterVolume = volume;
+    }
+
+    void OnBGMSlider(float volume)
+    {
+        GameManager.Audio.BGMVolume = volume;
+    }
+
+    void OnSESlider(float volume)
+    {
+        GameManager.Audio.SFXVolume = volume;
     }
 
     void OnDoneButton()
@@ -41,6 +62,8 @@ public class OptionUI : PopUpUI
 
     void ResetOptions()
     {
-
+        sliders["VolumeSlider"].value = 0.5f;
+        sliders["BGMSlider"].value = 0.5f;
+        sliders["SFXSlider"].value = 0.5f;
     }
 }

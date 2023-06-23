@@ -17,7 +17,7 @@ MonoBehaviour:
   Damage: 4
   Range: 10
   AttackSpeed: 2
-  MoveSpeed: 8
+  MoveSpeed: 5
   Exp: 8
   Size: 1
   floatdatas: []
