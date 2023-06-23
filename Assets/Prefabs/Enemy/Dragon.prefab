@@ -917,6 +917,7 @@ MonoBehaviour:
   damage: 0
   bleed: 0
   attack: 0
+  onGizmo: 1
   mouse: {fileID: 4465337371311552}
 --- !u!114 &-6360437108994956168
 MonoBehaviour:

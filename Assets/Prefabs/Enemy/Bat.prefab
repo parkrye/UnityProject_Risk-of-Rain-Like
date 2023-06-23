@@ -333,6 +333,7 @@ MonoBehaviour:
   damage: 0
   bleed: 0
   attack: 0
+  onGizmo: 1
 --- !u!135 &5521633955531390089
 SphereCollider:
   m_ObjectHideFlags: 0

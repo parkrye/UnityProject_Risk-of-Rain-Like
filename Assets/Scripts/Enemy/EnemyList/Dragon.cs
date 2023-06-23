@@ -4,7 +4,6 @@ using UnityEngine;
 public class Dragon : Enemy
 {
     [SerializeField] Transform mouse;
-    GameObject enemyFlame;
     bool attacking;
 
     protected override void Awake()
@@ -36,16 +35,13 @@ public class Dragon : Enemy
 
     IEnumerator Breath()
     {
-        Debug.Log($"{name} Start Breath!");
         attacking = true;
-        enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), transform, true);
-        enemyFlame.GetComponent<EnemyFlame>().Shot(damage, mouse);
+        GameObject enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), mouse.position, Quaternion.identity, transform);
         enemyFlame.transform.LookAt(mouse.position + transform.forward);
+        enemyFlame.GetComponent<EnemyFlame>().Shot(damage);
         yield return new WaitForSeconds(enemyData.floatdatas[0]);
         GameManager.Resource.Destroy(enemyFlame);
-        Debug.Log($"{name} End Breath!");
         yield return new WaitForSeconds(enemyData.floatdatas[1]);
-        Debug.Log($"{name} Ready Breath!");
         attacking = false;
     }
 }

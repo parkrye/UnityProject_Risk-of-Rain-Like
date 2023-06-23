@@ -4,57 +4,49 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float spawnDelay, spawnDistance;
+    [SerializeField] int enemyCount, enemyLimit;
     Transform player;
 
-    public void Initialize(float _spawnDelay, float _spawnDistance)
+    public void Initialize(float _spawnDelay, float _spawnDistance, int _enemyLimit)
     {
         spawnDelay = _spawnDelay;
         spawnDistance = _spawnDistance;
+        enemyLimit = _enemyLimit;
         player = GameManager.Data.Player.transform;
 
         StartCoroutine(Spawner());
     }
 
+    public void EnemyDie()
+    {
+        enemyCount--;
+    }
+
     IEnumerator Spawner()
     {
-        /*
         while(true)
         {
             yield return new WaitForSeconds(spawnDelay);
-            EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
+            if(enemyCount < enemyLimit)
+            {
+                EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
 
-            Vector3 spawnPosition = Vector3.zero;
-            float remainDistance = spawnDistance;
+                Vector3 spawnPosition = Vector3.zero;
+                float remainDistance = spawnDistance;
 
-            spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-            remainDistance -= spawnPosition.x;
+                spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
+                remainDistance -= spawnPosition.x;
 
-            spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-            remainDistance -= spawnPosition.y;
+                spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
+                remainDistance -= spawnPosition.y;
 
-            spawnPosition.z = remainDistance;
+                spawnPosition.z = remainDistance;
 
-            GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, player.position + spawnPosition, Quaternion.identity, true);
-            break;
+                GameObject enemy = GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, player.position + spawnPosition, Quaternion.identity, true);
+                enemy.GetComponent<Enemy>().EnemyDie.AddListener(EnemyDie);
+
+                enemyCount++;
+            }
         }
-        */
-
-        yield return new WaitForSeconds(spawnDelay);
-        EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
-
-        Vector3 spawnPosition = Vector3.zero;
-        float remainDistance = spawnDistance;
-
-        spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-        remainDistance -= spawnPosition.x;
-
-        spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-        remainDistance -= spawnPosition.y;
-
-        spawnPosition.z = remainDistance;
-
-        GameManager.Resource.Instantiate(enemyDatas[0].enemy, player.position + spawnPosition, Quaternion.identity, true);
-        GameManager.Resource.Instantiate(enemyDatas[1].enemy, player.position + spawnPosition, Quaternion.identity, true);
-
     }
 }

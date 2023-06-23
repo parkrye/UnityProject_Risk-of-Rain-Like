@@ -1,20 +1,27 @@
-using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DataManager : MonoBehaviour
 {
-    public float time;
-    public int difficulty;
+    public int Difficulty;
+    public float Time;
+    public bool RecordTime;
+    public UnityEvent TimeClock;
+
     public PlayerDataModel Player { get; set; }
 
     void Awake()
     {
-        time = 1f;
-        difficulty = 1;
+        Time = 0f;
+        Difficulty = 1;
     }
 
     void Update()
     {
-        time += Time.deltaTime;
+        if (RecordTime)
+        {
+            Time += UnityEngine.Time.deltaTime;
+            TimeClock?.Invoke();
+        }
     }
 }
