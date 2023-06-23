@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotTransform: {fileID: 4824572995031098}
   term: 0.5
-  range: 10
+  range: 8
 --- !u!33 &33312829900387776
 MeshFilter:
   m_ObjectHideFlags: 0

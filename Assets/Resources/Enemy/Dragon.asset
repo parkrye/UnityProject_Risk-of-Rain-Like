@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Dragon
   m_EditorClassIdentifier: 
   enemy: {fileID: 1594767147126006, guid: 33eba0da32885b84ebf38245df0735fa, type: 3}
-  MaxHP: 20
-  Damage: 0.005
+  MaxHP: 16
+  Damage: 0.00390625
   Range: 8
   AttackSpeed: 1
-  MoveSpeed: 3
-  Exp: 15
-  Size: 1.5
+  MoveSpeed: 4
+  Exp: 16
+  Size: 2
   floatdatas:
-  - 3
+  - 4
   - 2

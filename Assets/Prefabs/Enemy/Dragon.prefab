@@ -931,6 +931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  onGizmo: 1
 --- !u!1 &1610864841334552
 GameObject:
   m_ObjectHideFlags: 0
