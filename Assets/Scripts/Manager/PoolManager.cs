@@ -3,14 +3,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : MonoBehaviour, IInitializable
 {
     Dictionary<string, ObjectPool<GameObject>> poolDic;
     Dictionary<string, Transform> poolContainer;
     Transform poolRoot;
     Canvas canvasRoot;
 
-    void Awake()
+    public void Initialize()
     {
         poolDic = new Dictionary<string, ObjectPool<GameObject>>();
         poolContainer = new Dictionary<string, Transform>();

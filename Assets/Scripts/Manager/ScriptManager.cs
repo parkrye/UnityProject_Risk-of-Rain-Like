@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptManager : MonoBehaviour
+public class ScriptManager : MonoBehaviour, IInitializable
 {
     Dictionary<string, string> scripts;
 
-    void Awake()
+    public void Initialize()
     {
         scripts = new Dictionary<string, string>();
         LoadScripts();

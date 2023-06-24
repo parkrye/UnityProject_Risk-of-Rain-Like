@@ -5,9 +5,20 @@ using UnityEngine;
 /// <summary>
 /// 풀을 이용한 인스턴스 생성 및 삭제
 /// </summary>
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : MonoBehaviour, IInitializable
 {
     Dictionary<string, Object> resources = new Dictionary<string, Object>();
+
+    public void Initialize()
+    {
+        GameObject[] readyObjects = Resources.LoadAll<GameObject>("");
+        foreach(var readyObject in readyObjects)
+        {
+            IInitializable initializable = readyObject.GetComponent<IInitializable>();
+            initializable?.Initialize();
+        }
+    }
+
 
     public T[] LoadAll<T>(string path) where T : Object
     {

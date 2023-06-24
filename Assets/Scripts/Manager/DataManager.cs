@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DataManager : MonoBehaviour
+public class DataManager : MonoBehaviour, IInitializable
 {
     public int Difficulty;
     public float Time;
@@ -10,7 +10,7 @@ public class DataManager : MonoBehaviour
 
     public PlayerDataModel Player { get; set; }
 
-    void Awake()
+    public void Initialize()
     {
         Time = 0f;
         Difficulty = 1;
