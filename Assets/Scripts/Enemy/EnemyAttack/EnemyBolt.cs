@@ -5,7 +5,7 @@ public class EnemyBolt : BoltType
 {
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
             GameManager.Pool.Release(gameObject);

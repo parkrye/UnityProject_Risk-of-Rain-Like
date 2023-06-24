@@ -57,7 +57,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
 
     public void Die()
     {
-        StopAllCoroutines();
+        StopAttack();
         StartCoroutine(DieRoutine());
     }
 
@@ -88,7 +88,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
         }
     }
 
-    public void StopAttack()
+    public virtual void StopAttack()
     {
         attack = false;
     }

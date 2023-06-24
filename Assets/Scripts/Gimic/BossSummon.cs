@@ -6,20 +6,24 @@ public class BossSummon : MonoBehaviour
 {
     public float charge, chargeTime, chargeDistance;
     int counter;
-    [SerializeField] bool inArea;
+    [SerializeField] bool inArea, startSummon, onGizmo;
 
     public UnityEvent<SceneInfoUI.ObjectState> ObjectStateEvent;
 
     public void StartCharge()
     {
-        StartCoroutine(SummonCharge());
+        if (!startSummon)
+        {
+            StartCoroutine(SummonCharge());
+        }
     }
 
     IEnumerator SummonCharge()
     {
+        startSummon = true;
         counter = 0;
         GetComponent<SphereCollider>().radius = chargeDistance;
-        GetComponent<CircleDrawer>().Setting(60, chargeDistance);
+        GetComponent<CircleDrawer>().Setting(transform.position + Vector3.up, 60, chargeDistance);
         ObjectStateEvent?.Invoke(SceneInfoUI.ObjectState.Keep);
 
         while (charge < chargeTime)
@@ -78,7 +82,10 @@ public class BossSummon : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, chargeDistance);
+        if (onGizmo)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, chargeDistance);
+        }
     }
 }

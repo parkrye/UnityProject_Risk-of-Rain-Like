@@ -4,6 +4,7 @@ using UnityEngine;
 public class YLimiter : MonoBehaviour
 {
     [SerializeField] Transform[] transforms;
+    [SerializeField] Transform spawnTransform;
     
     public void Initialize()
     {
@@ -24,6 +25,10 @@ public class YLimiter : MonoBehaviour
                 if (Physics.Raycast(ray, out hit))
                 {
                     GameManager.Data.Player.transform.position = hit.point + Vector3.up;
+                }
+                else
+                {
+                    GameManager.Data.Player.transform.position = spawnTransform.position;
                 }
             }
         }

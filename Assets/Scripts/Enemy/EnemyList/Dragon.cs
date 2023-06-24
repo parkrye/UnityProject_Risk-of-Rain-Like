@@ -5,7 +5,7 @@ public class Dragon : Enemy
 {
     [SerializeField] Transform mouse;
     bool attacking;
-
+    GameObject enemyFlame;
     protected override void Awake()
     {
         attacking = false;
@@ -36,12 +36,19 @@ public class Dragon : Enemy
     IEnumerator Breath()
     {
         attacking = true;
-        GameObject enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), mouse.position, Quaternion.identity, transform);
+        enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), mouse.position, Quaternion.identity, transform);
         enemyFlame.transform.LookAt(mouse.position + transform.forward);
         enemyFlame.GetComponent<EnemyFlame>().Shot(damage);
         yield return new WaitForSeconds(enemyData.floatdatas[0]);
         GameManager.Resource.Destroy(enemyFlame);
         yield return new WaitForSeconds(enemyData.floatdatas[1]);
         attacking = false;
+    }
+
+    public override void StopAttack()
+    {
+        base.StopAttack();
+        GameManager.Resource.Destroy(enemyFlame);
+        StopCoroutine(AttackRoutine());
     }
 }

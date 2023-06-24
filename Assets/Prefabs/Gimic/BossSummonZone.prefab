@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -8731042664269190467}
   - component: {fileID: 1457231109387521737}
   m_Layer: 0
-  m_Name: TB_BuildingPoint
+  m_Name: BossSummonZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

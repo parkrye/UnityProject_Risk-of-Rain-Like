@@ -73,10 +73,17 @@ public class ResourceManager : MonoBehaviour
 
     public void Destroy(GameObject go)
     {
-        if (GameManager.Pool.IsContain(go))
-            GameManager.Pool.Release(go);
-        else
-            GameObject.Destroy(go);
+        try
+        {
+            if (GameManager.Pool.IsContain(go))
+                GameManager.Pool.Release(go);
+            else
+                GameObject.Destroy(go);
+        }
+        catch
+        {
+
+        }
     }
 
     public void Destroy(GameObject go, float delay)

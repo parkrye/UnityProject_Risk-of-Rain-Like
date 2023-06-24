@@ -5,16 +5,18 @@ using UnityEngine;
 public class CircleDrawer : MonoBehaviour
 {
     LineRenderer circleRenderer;
-    public int steps;
-    public float radius;
+    int steps;
+    float radius;
+    Vector3 target;
 
     void Awake()
     {
         circleRenderer = GetComponent<LineRenderer>();
     }
 
-    public void Setting(int _stpes, float _radius)
+    public void Setting(Vector3 _target, int _stpes, float _radius)
     {
+        target = _target;
         steps = _stpes;
         radius = _radius;
     }
@@ -22,10 +24,10 @@ public class CircleDrawer : MonoBehaviour
     /// <summary>
     /// 원형을 그리는 메소드
     /// </summary>
-    public void DrawCircle()
+    void DrawCircle()
     {
         // 선분 개수 지정
-        circleRenderer.positionCount = steps;
+        circleRenderer.positionCount = steps + 1;
 
         // 각 선분마다
         for(int currentStep = 0; currentStep < steps; currentStep++)
@@ -48,7 +50,7 @@ public class CircleDrawer : MonoBehaviour
             Vector3 currentPosition = new Vector3(x, 0f, y);
 
             // 선분을 그린다
-            circleRenderer.SetPosition(currentStep, transform.position + currentPosition);
+            circleRenderer.SetPosition(currentStep, target + currentPosition);
         }
     }
 }

@@ -13,7 +13,7 @@ public class EnemyFlame : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
         }
