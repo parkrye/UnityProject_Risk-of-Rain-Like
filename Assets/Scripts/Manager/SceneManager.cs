@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
-public class SceneManager : MonoBehaviour, IInitializable
+public class SceneManager : MonoBehaviour
 {
     LoadingUI loadingUI;
     Canvas loadingCanvas;
@@ -20,7 +20,7 @@ public class SceneManager : MonoBehaviour, IInitializable
         }
     }
 
-    public void Initialize()
+    void Awake()
     {
         loadingCanvas = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         loadingCanvas.gameObject.name = "LoadingCanvas";

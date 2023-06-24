@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIManager : MonoBehaviour, IInitializable
+public class UIManager : MonoBehaviour
 {
     EventSystem eventSystem;
     public Canvas sceneCanvas, popUpCanvas;
     Stack<PopUpUI> popUpStack;
 
-    public void Initialize()
+    void Awake()
     {
         eventSystem = GameManager.Resource.Instantiate<EventSystem>("UI/EventSystem");
         eventSystem.transform.parent = transform;

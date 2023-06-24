@@ -47,42 +47,35 @@ public class GameManager : MonoBehaviour
         resourceObj.name = "ResourceManager";
         resourceObj.transform.parent = transform;
         resourceManager = resourceObj.AddComponent<ResourceManager>();
-        resourceManager.Initialize();
 
         GameObject poolObj = new GameObject();
         poolObj.name = "PoolManager";
         poolObj.transform.parent = transform;
         poolManager = poolObj.AddComponent<PoolManager>();
-        poolManager.Initialize();
 
         GameObject dataObj = new GameObject();
         dataObj.name = "DataManager";
         dataObj.transform.parent = transform;
         dataManager = dataObj.AddComponent<DataManager>();
-        dataManager.Initialize();
 
         GameObject uiObj = new GameObject();
         uiObj.name = "UIManager";
         uiObj.transform.parent = transform;
         uiManager = uiObj.AddComponent<UIManager>();
-        uiManager.Initialize();
 
         GameObject sceneObj = new GameObject();
         sceneObj.name = "SceneManager";
         sceneObj.transform.parent = transform;
         sceneManager = sceneObj.AddComponent<SceneManager>();
-        sceneManager.Initialize();
 
         GameObject audioObj = new GameObject();
         audioObj.name = "AudioManager";
         audioObj.transform.parent = transform;
         audioManager = audioObj.AddComponent<AudioManager>();
-        audioManager.Initialize();
 
         GameObject scriptObj = new GameObject();
         scriptObj.name = "ScriptManager";
         scriptObj.transform.parent = transform;
         scriptManager = sceneObj.AddComponent<ScriptManager>();
-        scriptManager.Initialize();
     }
 }

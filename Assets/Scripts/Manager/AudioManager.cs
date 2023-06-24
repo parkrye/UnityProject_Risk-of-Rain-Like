@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour, IInitializable
+public class AudioManager : MonoBehaviour
 {
     public float MasterVolume
     {
@@ -66,7 +66,7 @@ public class AudioManager : MonoBehaviour, IInitializable
 
     AudioMixer audioMixer;
 
-    public void Initialize()
+    void Awake()
     {
         audioMixer = GameManager.Resource.Load<AudioMixer>("Audio/AudioMixer");
     }
