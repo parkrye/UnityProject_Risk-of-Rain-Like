@@ -6,21 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Warrior_Action2A", menuName = "Data/Skill/Warrior/Action2A")]
 public class Warrior_Action2A : Skill
 {
-    float prevArmor;
-
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Warrior2A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[1]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.playerDataModel.animator.SetBool("Guard", true);
-            prevArmor = hero.playerDataModel.armorPoint;
-            hero.playerDataModel.armorPoint *= 0.5f;
+            hero.playerDataModel.Buff(3, modifier);
 
             CoolCheck = false;
 
@@ -29,7 +21,7 @@ public class Warrior_Action2A : Skill
         else
         {
             hero.playerDataModel.animator.SetBool("Guard", false);
-            hero.playerDataModel.armorPoint = prevArmor;
+            hero.playerDataModel.Buff(3, 1 / modifier);
         }
         return false;
     }

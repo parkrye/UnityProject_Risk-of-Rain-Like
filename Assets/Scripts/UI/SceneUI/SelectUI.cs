@@ -71,7 +71,7 @@ public class SelectUI : SceneUI
             {
                 skillNum = 2;
             }
-            else if (!toggles[actionC].isOn)
+            else if (toggles[actionC].isOn)
             {
                 skillNum = 3;
             }

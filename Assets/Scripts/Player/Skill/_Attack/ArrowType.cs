@@ -50,7 +50,7 @@ public class ArrowType : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
             GameManager.Pool.Release(gameObject);

@@ -7,17 +7,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4cb987261ccddc4d80c8a861602f80c, type: 3}
+  m_Script: {fileID: 11500000, guid: e708d07dcaee2054a9d43aa7d6b6ab4f, type: 3}
   m_Name: Warrior_Action4B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 44
-  SkillDesc: 44
-  SkillIcon: {fileID: 21300000, guid: cf62c64581a1f48dcb9737334276c7b7, type: 3}
-  coolTime: 10
-  modifier: 1.2
-  coolCheck: 1
-  dashPower: 10
-  skillRange: 5
+  SkillName: Keen Mind
+  SkillDesc: Awake
+  SkillIcon: {fileID: 21300000, guid: a348aa04f846046b8b5ce0cc85878da9, type: 3}
+  coolTime: 20
+  modifier: 0.5
+  actionNum: 7
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  skillTime: 5

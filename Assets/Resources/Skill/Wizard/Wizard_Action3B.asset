@@ -18,7 +18,10 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: d6bf9fd619ff24ce58267141ada9bbaa, type: 3}
   coolTime: 10
   modifier: 0
-  coolCheck: 1
+  actionNum: 6
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
   teleportDistance: 10
   teleportCharge: 1.0099994
   nowCharge: 0

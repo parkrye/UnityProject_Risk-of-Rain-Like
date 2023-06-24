@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerDataModel : MonoBehaviour, IHitable
 {
@@ -82,11 +83,94 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         }
     }
 
-    public float moveSpeed, jumpPower, coolTime, attackDamage, armorPoint;
+    [SerializeField] float[] status;
+    public float MoveSpeed
+    {
+        get
+        {
+            return status[0] * buffModifier[0];
+        }
+        set
+        {
+            status[0] = value;
+        }
+    }
+    public float JumpPower
+    {
+        get
+        {
+            return status[1] * buffModifier[1];
+        }
+        set
+        {
+            status[1] = value;
+        }
+    }
+    public float AttackDamage
+    {
+        get
+        {
+            return status[2] * buffModifier[2];
+        }
+        set
+        {
+            status[2] = value;
+        }
+    }
+    public float ArmorPoint
+    {
+        get
+        {
+            return status[3] * buffModifier[3];
+        }
+        set
+        {
+            status[3] = value;
+        }
+    }
+    public float coolTime;
     public int jumpLimit, jumpCount;
-    public bool attackCooldown, controlleable, dodgeDamage;
+    public bool attackCooldown, controllable, dodgeDamage;
 
     public float mouseSensivity;
+    [SerializeField] float playerTimeScale;
+    public float TimeScale
+    { 
+        get 
+        { 
+            return playerTimeScale;
+        }
+        set
+        {
+            playerTimeScale = value;
+            animator.speed = playerTimeScale;
+        }
+    }
+
+    public float[] buffModifier;
+
+    /// <summary>
+    /// 사용시 곱할 값, 취소시 곱한 값의 역수 입력
+    /// 0: 이동속도, 1: 점프높이, 2: 공격력, 3: 방어력
+    /// </summary>
+    public void Buff(int num, float value)
+    {
+        switch (num)
+        {
+            case 0:
+                buffModifier[num] *= value;
+                break;
+            case 1:
+                buffModifier[num] *= value;
+                break;
+            case 2:
+                buffModifier[num] *= value;
+                break;
+            case 3:
+                buffModifier[num] *= value;
+                break;
+        }
+    }
 
     public bool[] coolChecks = new bool[4];
 
@@ -104,6 +188,10 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         playerMovement = GetComponent<PlayerMovementController>();
         playerCamera = GetComponent<PlayerCameraController>();
         inventory = GetComponent<Inventory>();
+
+        TimeScale = 1f;
+        status = new float[4] { 5f, 10f, 5f, 1f };
+        buffModifier = new float[4] { 1f, 1f, 1f, 1f };
 
         coolChecks = new bool[4];
         for (int i = 0; i < coolChecks.Length; i++)
@@ -147,7 +235,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     public void Hit(float damage)
     {
         if(!dodgeDamage)
-            NOWHP -= damage * armorPoint;
+            NOWHP -= damage * ArmorPoint;
     }
 
     public void Die()

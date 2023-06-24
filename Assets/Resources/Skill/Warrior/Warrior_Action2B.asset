@@ -7,15 +7,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 975639b8b8998344aa0f8fdf2c54f73c, type: 3}
+  m_Script: {fileID: 11500000, guid: e5a7c4c9f82e9014aa8226b60357a095, type: 3}
   m_Name: Warrior_Action2B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 22
-  SkillDesc: 22
-  SkillIcon: {fileID: 21300000, guid: 006f09b00039b439893f8261106e56df, type: 3}
-  coolTime: 1
-  modifier: 0
-  coolCheck: 1
+  SkillName: Shield Bash
+  SkillDesc: Make Them Dizzy
+  SkillIcon: {fileID: 21300000, guid: 24ec69765666542e5a2a8dc43e28ceb5, type: 3}
+  coolTime: 2
+  modifier: 0.5
+  actionNum: 5
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  stunTime: 0.5

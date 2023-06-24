@@ -15,14 +15,10 @@ MonoBehaviour:
   hero: {fileID: 0}
   SkillName: Roll
   SkillDesc: Traditional Dodge
-  SkillIcon: {fileID: 21300000, guid: 9048f1bbff3cf47ce8b0467ca61e0f4f, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 64910aa9bb3a74497a5a5dbbe2f5a468, type: 3}
   coolTime: 1
-  modifier: 0
-  actionKeys:
-  - Action1
-  - Action2
-  - Action3
-  - Action4
+  modifier: 0.5
+  actionNum: 2
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []

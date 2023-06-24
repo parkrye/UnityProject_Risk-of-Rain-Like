@@ -25,17 +25,20 @@ public class EnemyAI_TypeA : EnemyAI
     void Update()
     {
         state = StateCheck();
-        switch (state)
+        if (!enemy.isStunned)
         {
-            case AI_State.Approach:
-                Approach();
-                break;
-            case AI_State.Bypass:
-                ByPass();
-                break;
-            case AI_State.Atttack:
-                Attack();
-                break;
+            switch (state)
+            {
+                case AI_State.Approach:
+                    Approach();
+                    break;
+                case AI_State.Bypass:
+                    ByPass();
+                    break;
+                case AI_State.Atttack:
+                    Attack();
+                    break;
+            }
         }
     }
 

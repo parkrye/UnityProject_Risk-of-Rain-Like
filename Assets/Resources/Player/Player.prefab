@@ -5341,17 +5341,15 @@ MonoBehaviour:
   moveSpeed: 5
   jumpPower: 10
   coolTime: 1
-  climbPower: 5
   attackDamage: 5
   armorPoint: 1
   jumpLimit: 1
   jumpCount: 0
   attackCooldown: 0
   controlleable: 1
-  climbCheckLowHeight: 0.1
-  climbCheckHighHeight: 0.5
-  climbCheckLength: 0.5
+  dodgeDamage: 0
   mouseSensivity: 10
+  playerTimeScale: 1
   coolChecks: 01010101
   LevelEvent:
     m_PersistentCalls:

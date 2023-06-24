@@ -1,23 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoltType : MonoBehaviour
 {
-    protected TrailRenderer trail;
+    protected TrailRenderer[] trails;
     protected float damage;
     protected Collider coll;
     [SerializeField] protected float speed, yModifier;
 
     protected virtual void Awake()
     {
-        trail = GetComponent<TrailRenderer>();
+        trails = GetComponentsInChildren<TrailRenderer>();
         coll = GetComponent<Collider>();
     }
 
     void OnEnable()
     {
-        trail.enabled = false;
+        foreach(TrailRenderer trail in trails)
+            trail.enabled = false;
         coll.enabled = false;
     }
 
@@ -36,9 +36,12 @@ public class BoltType : MonoBehaviour
     protected virtual IEnumerator ReadyToShot(float delay)
     {
         yield return new WaitForSeconds(delay);
+        foreach (TrailRenderer trail in trails)
+        {
+            trail.Clear();
+            trail.enabled = true;
+        }
         coll.enabled = true;
-        trail.Clear();
-        trail.enabled = true;
         GameManager.Resource.Destroy(gameObject, 10f);
         while (true)
         {
@@ -49,12 +52,16 @@ public class BoltType : MonoBehaviour
 
     void OnDisable()
     {
-        trail.Clear();
+        foreach (TrailRenderer trail in trails)
+        {
+            trail.Clear();
+        }
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        Debug.Log(other.name);
+        if (other.CompareTag("Enemy"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
             GameManager.Pool.Release(gameObject);

@@ -30,11 +30,11 @@ public class PlayerCameraController : MonoBehaviour
         Ray ray = new Ray(lookFromTransform.position, (virtualCamera.transform.position - lookFromTransform.position));
         if(Physics.Raycast(ray, Vector3.Distance(virtualCamera.transform.position, lookFromTransform.position), LayerMask.GetMask("Ground")))
         {
-            cameraOffset = Vector3.Lerp(cameraOffset, closeCameraOffset, Time.deltaTime);
+            cameraOffset = Vector3.Lerp(cameraOffset, closeCameraOffset, Time.deltaTime * playerDataModel.TimeScale);
         }
         else
         {
-            cameraOffset = Vector3.Lerp(cameraOffset, defaultCameraOffset, Time.deltaTime);
+            cameraOffset = Vector3.Lerp(cameraOffset, defaultCameraOffset, Time.deltaTime * playerDataModel.TimeScale);
         }
     }
 
@@ -49,11 +49,11 @@ public class PlayerCameraController : MonoBehaviour
 
         if(xRotation < 0f)
         {
-            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, upViewOffset, -xRotation / 80f);
+            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, upViewOffset, (-xRotation / 80f));
         }
         else
         {
-            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, downViewOffset, xRotation / 80f);
+            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, downViewOffset, (xRotation / 80f));
         }
     }
 

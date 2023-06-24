@@ -9,20 +9,15 @@ public class Archer_Action4A : Skill, IEnumeratable
 {
     public float skillTime;
 
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Archer4A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[3]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             GameObject bombArrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/BombArrow"), true);
             bombArrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            bombArrow.GetComponent<BombArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, hero.playerDataModel.attackDamage * modifier, 0.5f);
+            bombArrow.GetComponent<BombArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, hero.playerDataModel.AttackDamage * modifier, 0.5f);
 
             CoolCheck = false;
 
@@ -33,8 +28,8 @@ public class Archer_Action4A : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        hero.playerDataModel.controlleable = false;
-        yield return new WaitForSeconds(skillTime);
-        hero.playerDataModel.controlleable = true;
+        hero.playerDataModel.controllable = false;
+        yield return new WaitForSeconds(skillTime / hero.playerDataModel.TimeScale);
+        hero.playerDataModel.controllable = true;
     }
 }

@@ -7,15 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a463c360e411de74ebe7de383f5c2b8c, type: 3}
+  m_Script: {fileID: 11500000, guid: f9be9de3a10ed3d40aaa02b28bc01e6a, type: 3}
   m_Name: Warrior_Action1B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 11
-  SkillDesc: 11
-  SkillIcon: {fileID: 21300000, guid: c6c887cce7af543b0bf0b150917f449c, type: 3}
+  SkillName: Slash
+  SkillDesc: Slash Foward
+  SkillIcon: {fileID: 21300000, guid: 32a876727f5564e62b50da0c88234cfe, type: 3}
   coolTime: 1
   modifier: 0.8
-  coolCheck: 1
+  actionNum: 4
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []

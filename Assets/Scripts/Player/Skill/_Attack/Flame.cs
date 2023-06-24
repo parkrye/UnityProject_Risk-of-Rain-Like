@@ -18,7 +18,7 @@ public class Flame : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
         }

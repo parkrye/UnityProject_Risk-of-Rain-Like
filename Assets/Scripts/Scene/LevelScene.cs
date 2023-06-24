@@ -12,7 +12,9 @@ public class LevelScene : BaseScene
 
     protected override IEnumerator LoadingRoutine()
     {
+        GameManager.Data.Player.controllable = false;
         yield return new WaitForEndOfFrame();
+
         startPositions = startPosition.GetComponentsInChildren<StartPositionGimic>();
         int spawnPosition = Random.Range(0, startPositions.Length);
         startPositions[spawnPosition].SetGimic();
@@ -46,6 +48,7 @@ public class LevelScene : BaseScene
         progress = 0.8f;
 
         GetComponent<YLimiter>().Initialize();
+        GameManager.Data.Player.controllable = true;
         progress = 1f;
 
         GameManager.Data.RecordTime = true;

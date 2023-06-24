@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 4360556698181842395}
   - component: {fileID: 33312829900387776}
   - component: {fileID: 23378221742810748}
-  - component: {fileID: 1490900943319357762}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,19 +100,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1490900943319357762
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367997974350908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6.1779227, y: 5.4715853, z: 6.1779227}
-  m_Center: {x: 0.00000023841858, y: 2.7357922, z: -0.00000023841858}
 --- !u!1 &1595137788046860
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +111,7 @@ GameObject:
   - component: {fileID: 4824572995031098}
   - component: {fileID: 33507938066120522}
   - component: {fileID: 23654648484849336}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TB_MageTower_Lvl1_Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

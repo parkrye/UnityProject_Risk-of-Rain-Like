@@ -17,14 +17,10 @@ public class Dragon : Enemy
     {
         while (true)
         {
-            if (attack)
+            if (attack && !attacking && !isStunned)
             {
-                if (!attacking)
-                {
-                    animator.SetTrigger("Attack");
-                    StartCoroutine(Breath());
-                }
-                yield return null;
+                animator.SetTrigger("Attack");
+                StartCoroutine(Breath());
             }
             else
             {
@@ -48,7 +44,11 @@ public class Dragon : Enemy
     public override void StopAttack()
     {
         base.StopAttack();
-        GameManager.Resource.Destroy(enemyFlame);
-        StopCoroutine(AttackRoutine());
+        if (isStunned)
+        {
+            attacking = false;
+            StopCoroutine(Breath());
+            GameManager.Resource.Destroy(enemyFlame);
+        }
     }
 }

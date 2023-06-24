@@ -9,16 +9,11 @@ public class Warrior_Action4A : Skill, IEnumeratable
 {
     public float dashPower, skillRange;
 
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Warrior4A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[3]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             CoolCheck = false;
 
@@ -29,10 +24,10 @@ public class Warrior_Action4A : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        hero.playerDataModel.controlleable = false;
+        hero.playerDataModel.controllable = false;
         hero.playerDataModel.playerMovement.dirModifier += (hero.playerDataModel.transform.forward + Vector3.up * 0.5f) * dashPower;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f / hero.playerDataModel.TimeScale);
 
         ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Explosion"), hero.playerDataModel.transform.position, Quaternion.identity, true);
         GameManager.Resource.Destroy(effect.gameObject, 2f);
@@ -41,11 +36,11 @@ public class Warrior_Action4A : Skill, IEnumeratable
         foreach (Collider collider in colliders)
         {
             IHitable hittable = collider.GetComponent<IHitable>();
-            hittable?.Hit(hero.playerDataModel.attackDamage * modifier);
+            hittable?.Hit(hero.playerDataModel.AttackDamage * modifier);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f / hero.playerDataModel.TimeScale);
 
-        hero.playerDataModel.controlleable = true;
+        hero.playerDataModel.controllable = true;
     }
 }

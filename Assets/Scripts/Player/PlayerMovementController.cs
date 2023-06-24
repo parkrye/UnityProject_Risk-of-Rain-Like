@@ -31,7 +31,7 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        if (Physics.Raycast(ray, 0.2f, LayerMask.GetMask("Ground")))
+        if (Physics.Raycast(ray, 0.3f, LayerMask.GetMask("Ground")))
         {
             if (descending && playerDataModel.rb.velocity.y < 0f)
             {
@@ -51,7 +51,7 @@ public class PlayerMovementController : MonoBehaviour
     void CheckSlope()
     {
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        if(Physics.Raycast(ray, out slopeHit, 0.2f, LayerMask.GetMask("Ground")))
+        if(Physics.Raycast(ray, out slopeHit, 0.3f, LayerMask.GetMask("Ground")))
         {
             var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             isSlope = angle != 0f && angle < slopeDegree;
@@ -81,7 +81,7 @@ public class PlayerMovementController : MonoBehaviour
         float animatorSide = playerDataModel.animator.GetFloat("Side");
 
         // 경사로 보정
-        float gravity = Mathf.Abs(playerDataModel.rb.velocity.y) - Physics.gravity.y * Time.deltaTime;
+        float gravity = Mathf.Abs(playerDataModel.rb.velocity.y) - Physics.gravity.y * Time.deltaTime * playerDataModel.TimeScale;
         if(playerDataModel.animator.GetBool("IsGround") && isSlope)
         {
             curVelocity = AdjustDirectionToSlope(moveDir);
@@ -94,20 +94,20 @@ public class PlayerMovementController : MonoBehaviour
         curVelocity = transform.right * curVelocity.x + transform.forward * curVelocity.z;
 
         // 이동
-        playerDataModel.rb.velocity = new Vector3(curVelocity.x, 0f, curVelocity.z) * playerDataModel.moveSpeed + Vector3.down * gravity + dirModifier;
-        if (dirModifier != Vector3.zero)
-            dirModifier = Vector3.Lerp(dirModifier, Vector3.zero, 0.1f);
+        playerDataModel.rb.velocity = (new Vector3(curVelocity.x, 0f, curVelocity.z) * playerDataModel.MoveSpeed * playerDataModel.TimeScale + Vector3.down * gravity + dirModifier);
+        if (Vector3.SqrMagnitude(dirModifier - Vector3.zero) > 0.1f)
+            dirModifier = Vector3.Lerp(dirModifier, Vector3.zero, Time.deltaTime * 5f);
 
         // 애니메이션
-        playerDataModel.animator.SetFloat("Foward", Mathf.Lerp(animatorFoward, moveDir.z, 0.1f));
-        playerDataModel.animator.SetFloat("Side", Mathf.Lerp(animatorSide, moveDir.x, 0.1f));
+        playerDataModel.animator.SetFloat("Foward", Mathf.Lerp(animatorFoward, moveDir.z, Time.deltaTime * playerDataModel.TimeScale * 5f));
+        playerDataModel.animator.SetFloat("Side", Mathf.Lerp(animatorSide, moveDir.x, Time.deltaTime * playerDataModel.TimeScale * 5f));
     }
 
     void OnMove(InputValue inputValue)
     {
         Vector2 tmp = inputValue.Get<Vector2>();
 
-        if (playerDataModel.controlleable)
+        if (playerDataModel.controllable)
             moveDir = new Vector3(tmp.x, 0f, tmp.y);
         else
             moveDir = Vector3.zero;
@@ -115,7 +115,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void OnJump(InputValue inputValue)
     {
-        if (playerDataModel.controlleable)
+        if (playerDataModel.controllable)
         {
             if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
             {

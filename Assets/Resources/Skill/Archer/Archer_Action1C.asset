@@ -18,9 +18,7 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: 4c2e103ee53f2497b8222fa8db303c8f, type: 3}
   coolTime: 0.8
   modifier: 0.5
-  actionKey: 0
+  actionNum: 8
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
-  resourcePath: Attack/Arrow
-  throwingSpeed: 50

@@ -7,16 +7,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Warrior_Action3A", menuName = "Data/Skill/Warrior/Action3A")]
 public class Warrior_Action3A : Skill, IEnumeratable
 {
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Warrior3A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[2]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             Vector3 dashVec = hero.playerDataModel.playerMovement.moveDir;
             if (dashVec.magnitude == 0f)
@@ -30,9 +25,9 @@ public class Warrior_Action3A : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f / hero.playerDataModel.TimeScale);
         hero.playerDataModel.dodgeDamage = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f / hero.playerDataModel.TimeScale);
         hero.playerDataModel.dodgeDamage = false;
     }
 }

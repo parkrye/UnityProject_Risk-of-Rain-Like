@@ -25,7 +25,7 @@ public class Warrior : Hero
 
     protected override void ChargeJump()
     {
-        playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.jumpPower * 1.2f * jumpCharge * 0.01f;
+        playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.JumpPower * 1.5f * jumpCharge * 0.01f;
         animator.SetTrigger("JumpH");
         animator.SetTrigger("JumpL");
     }

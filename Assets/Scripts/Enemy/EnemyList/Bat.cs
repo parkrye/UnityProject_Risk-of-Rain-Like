@@ -14,7 +14,7 @@ public class Bat : Enemy
     {
         while (true)
         {
-            if (attack)
+            if (attack && !isStunned)
             {
                 animator.SetTrigger("Attack");
                 GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), transform.position + Vector3.up, Quaternion.identity, true);

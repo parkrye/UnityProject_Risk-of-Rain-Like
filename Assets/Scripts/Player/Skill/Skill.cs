@@ -12,7 +12,10 @@ public abstract class Skill : ScriptableObject
     public float coolTime, modifier;
     bool coolCheck;
 
-    [SerializeField] protected string[] actionKeys = {"Action1", "Action2", "Action3", "Action4"};
+    protected string[] actionKeys = {"Action1A", "Action2A", "Action3A", "Action4A",
+                                    "Action1B", "Action2B", "Action3B", "Action4B",
+                                    "Action1C", "Action2C", "Action3C", "Action4C"};
+    [SerializeField] protected int actionNum;
     
     public bool CoolCheck
     {
@@ -38,8 +41,7 @@ public abstract class Skill : ScriptableObject
         {
             yield return null;
         }
-        yield return new WaitForSeconds(coolTime * modifier);
+        yield return new WaitForSeconds(coolTime * modifier / hero.playerDataModel.TimeScale);
         CoolCheck = true;
     }
-
 }

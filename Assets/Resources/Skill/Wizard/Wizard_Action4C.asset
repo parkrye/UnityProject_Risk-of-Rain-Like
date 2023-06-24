@@ -18,6 +18,8 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: 022f16cfd7d5647188b31ae1abc00634, type: 3}
   coolTime: 20
   modifier: 0.03
-  coolCheck: 1
+  actionNum: 11
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
   skillRange: 20
-  skillTerm: 0.5

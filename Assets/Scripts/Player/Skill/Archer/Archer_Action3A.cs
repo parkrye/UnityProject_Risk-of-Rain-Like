@@ -8,16 +8,11 @@ public class Archer_Action3A : Skill
 {
     public float stepDistance;
 
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Archer3A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[2]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             Vector3 stepVec = hero.playerDataModel.playerMovement.moveDir;
             if (stepVec.magnitude == 0f)

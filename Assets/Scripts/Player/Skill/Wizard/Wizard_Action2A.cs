@@ -8,22 +8,17 @@ public class Wizard_Action2A : Skill
 {
     GameObject flame;
 
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Wizard2A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[1]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.playerDataModel.animator.SetBool("Casting", true);
 
             flame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Flame"), hero.playerDataModel.playerAction.lookFromTransform, true);
             flame.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
             flame.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position + Vector3.up);
-            flame.GetComponent<Flame>().StartFlame(hero.playerDataModel.attackDamage * modifier);
+            flame.GetComponent<Flame>().StartFlame(hero.playerDataModel.AttackDamage * modifier);
 
             return true;
         }

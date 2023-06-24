@@ -18,9 +18,7 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: 6d97d3b88bacf4e8bb4116ea752e1f91, type: 3}
   coolTime: 1
   modifier: 0.6
-  actionKey: 0
+  actionNum: 8
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
-  resourcePath: Attack/EnergyBolt
-  throwingSpeed: 10

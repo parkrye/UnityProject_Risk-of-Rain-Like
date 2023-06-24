@@ -5,11 +5,11 @@ public class PowerPotion : ItemData
 {
     public override void GetFirstEffect()
     {
-        GameManager.Data.Player.attackDamage *= 1.1f;
+        GameManager.Data.Player.AttackDamage *= 1.1f;
     }
 
     public override void GetNextEffect()
     {
-        GameManager.Data.Player.attackDamage *= 1.05f;
+        GameManager.Data.Player.AttackDamage *= 1.05f;
     }
 }

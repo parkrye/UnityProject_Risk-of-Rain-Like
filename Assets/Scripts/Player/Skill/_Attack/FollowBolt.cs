@@ -9,9 +9,12 @@ public class FollowBolt : BoltType
     protected override IEnumerator ReadyToShot(float delay)
     {
         yield return new WaitForSeconds(delay);
+        foreach (TrailRenderer trail in trails)
+        {
+            trail.Clear();
+            trail.enabled = true;
+        }
         coll.enabled = true;
-        trail.Clear();
-        trail.enabled = true;
         GameManager.Resource.Destroy(gameObject, 5f);
         while (true)
         {

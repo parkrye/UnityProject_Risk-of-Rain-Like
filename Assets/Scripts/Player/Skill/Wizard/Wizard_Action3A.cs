@@ -10,11 +10,6 @@ public class Wizard_Action3A : Skill, IEnumeratable
     public float teleportDistance, teleportCharge;
     public bool nowCharge;
 
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Wizard3A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (nowCharge)
@@ -22,7 +17,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
 
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[2]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             return true;
         }
@@ -35,7 +30,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
         nowCharge = true;
         while (teleportCharge < 1f && nowCharge)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.01f / hero.playerDataModel.TimeScale);
             teleportCharge += 0.01f;
         }
         Teleport();

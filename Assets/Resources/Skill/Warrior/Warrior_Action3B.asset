@@ -7,15 +7,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55667c482aac3974e9fdd7918f3ad8be, type: 3}
+  m_Script: {fileID: 11500000, guid: bdafed1e3834cec4f947fac15f89829e, type: 3}
   m_Name: Warrior_Action3B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 33
-  SkillDesc: 33
-  SkillIcon: {fileID: 21300000, guid: 15795860a9d324250823686a664034a3, type: 3}
-  coolTime: 1
-  modifier: 0
-  coolCheck: 1
+  SkillName: Light Step
+  SkillDesc: Simple is Best
+  SkillIcon: {fileID: 21300000, guid: 9048f1bbff3cf47ce8b0467ca61e0f4f, type: 3}
+  coolTime: 10
+  modifier: 1.5
+  actionNum: 6
+  CoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  skillTime: 5

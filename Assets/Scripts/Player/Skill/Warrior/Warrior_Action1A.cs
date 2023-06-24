@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -8,16 +7,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Warrior_Action1A", menuName = "Data/Skill/Warrior/Action1A")]
 public class Warrior_Action1A : Skill, IEnumeratable
 {
-    void Awake()
-    {
-        SkillIcon = GameManager.Resource.Load<Icon>("Icon/Skill_Warrior1A").sprite;
-    }
-
     public override bool Active(bool isPressed)
     {
         if (isPressed)
         {
-            hero.playerDataModel.animator.SetTrigger(actionKeys[0]);
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             CoolCheck = false;
 
@@ -28,13 +22,16 @@ public class Warrior_Action1A : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        yield return new WaitForSeconds(0.08f);
+        yield return new WaitForSeconds(0.08f / hero.playerDataModel.TimeScale);
 
         Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerAction.lookFromTransform.position, hero.playerDataModel.playerAction.closeAttackRange);
         foreach (Collider collider in colliders)
         {
-            IHitable hittable = collider.GetComponent<IHitable>();
-            hittable?.Hit(hero.playerDataModel.attackDamage * modifier);
+            if(!collider.CompareTag("Player"))
+            {
+                IHitable hittable = collider.GetComponent<IHitable>();
+                hittable?.Hit(hero.playerDataModel.AttackDamage * modifier);
+            }
         }
     }
 }
