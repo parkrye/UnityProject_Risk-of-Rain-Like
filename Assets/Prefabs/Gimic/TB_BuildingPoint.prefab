@@ -143,6 +143,9 @@ MonoBehaviour:
   chargeTime: 60
   chargeDistance: 20
   inArea: 0
+  ObjectStateEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &3736156028876024928
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -190,7 +193,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 809e1de97d0710c40a3770a01457172a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
