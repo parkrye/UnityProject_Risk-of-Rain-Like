@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
             if(enemyCount < enemyLimit)
             {
                 GameObject enemy = EnemySummon.RandomLocationSummon(player, spawnDistance);
-                enemy.GetComponent<Enemy>().EnemyDie.AddListener(EnemyDie);
+                enemy.GetComponent<Enemy>().OnEnemyDieEvent.AddListener(EnemyDie);
 
                 enemyCount++;
             }
