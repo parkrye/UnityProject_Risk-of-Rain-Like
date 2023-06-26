@@ -6,13 +6,16 @@ using UnityEngine;
 /// ¹ßÂ÷±â
 /// </summary>
 [CreateAssetMenu(fileName = "Warrior_Action2C", menuName = "Data/Skill/Warrior/Action2C")]
-public class Warrior_Action2C : Skill, IEnumeratable
+public class Warrior_Action2C : Skill, IEnumeratable, ICriticable
 {
     public float knockbackDistance;
-    public override bool Active(bool isPressed)
+    float damage;
+
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {
+            damage = param[0];
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             CoolCheck = false;
@@ -32,7 +35,7 @@ public class Warrior_Action2C : Skill, IEnumeratable
             if (!collider.CompareTag("Player"))
             {
                 IHitable hittable = collider.GetComponent<IHitable>();
-                hittable?.Hit(hero.playerDataModel.AttackDamage * modifier);
+                hittable?.Hit(damage * modifier);
 
                 IMazable mazable = collider.GetComponent<IMazable>();
                 mazable?.KnockBack(knockbackDistance, hero.playerDataModel.transform);

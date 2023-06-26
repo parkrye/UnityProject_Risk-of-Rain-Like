@@ -12,7 +12,7 @@ public class Wizard_Action4A : Skill, IEnumeratable
     bool summon;
     GameObject tower;
 
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {

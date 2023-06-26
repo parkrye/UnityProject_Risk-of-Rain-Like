@@ -128,6 +128,28 @@ public class PlayerDataModel : MonoBehaviour, IHitable
             status[3] = value;
         }
     }
+    public float CriticalProbability
+    {
+        get
+        {
+            return status[4] * buffModifier[4];
+        }
+        set
+        {
+            status[4] = value;
+        }
+    }
+    public float CriticalRatio
+    {
+        get
+        {
+            return status[5] * buffModifier[5];
+        }
+        set
+        {
+            status[5] = value;
+        }
+    }
     public float coolTime;
     public int jumpLimit, jumpCount;
     public bool attackCooldown, controllable, dodgeDamage;
@@ -151,25 +173,11 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     /// <summary>
     /// 사용시 곱할 값, 취소시 곱한 값의 역수 입력
-    /// 0: 이동속도, 1: 점프높이, 2: 공격력, 3: 방어력
+    /// 0: 이동속도, 1: 점프높이, 2: 공격력, 3: 방어력, 4: 치명타 확률, 5: 치명타 배율
     /// </summary>
     public void Buff(int num, float value)
     {
-        switch (num)
-        {
-            case 0:
-                buffModifier[num] *= value;
-                break;
-            case 1:
-                buffModifier[num] *= value;
-                break;
-            case 2:
-                buffModifier[num] *= value;
-                break;
-            case 3:
-                buffModifier[num] *= value;
-                break;
-        }
+        buffModifier[num] *= value;
     }
 
     public bool[] coolChecks = new bool[4];
@@ -190,8 +198,8 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         inventory = GetComponent<Inventory>();
 
         TimeScale = 1f;
-        status = new float[4] { 5f, 10f, 5f, 1f };
-        buffModifier = new float[4] { 1f, 1f, 1f, 1f };
+        status = new float[6] { 5f, 10f, 5f, 1f, 1f, 1.2f };
+        buffModifier = new float[6] { 1f, 1f, 1f, 1f, 1f, 1f };
 
         coolChecks = new bool[4];
         for (int i = 0; i < coolChecks.Length; i++)

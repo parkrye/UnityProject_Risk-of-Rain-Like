@@ -4,14 +4,16 @@ using UnityEngine;
 /// 주변베기
 /// </summary>
 [CreateAssetMenu(fileName = "Warrior_Action1C", menuName = "Data/Skill/Warrior/Action1C")]
-public class Warrior_Action1C : Skill, IEnumeratable
+public class Warrior_Action1C : Skill, IEnumeratable, ICriticable
 {
     public float skillRangeModifier;
+    float damage;
 
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {
+            damage = param[0];
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             CoolCheck = false;
@@ -31,7 +33,7 @@ public class Warrior_Action1C : Skill, IEnumeratable
             if (!collider.CompareTag("Player"))
             {
                 IHitable hittable = collider.GetComponent<IHitable>();
-                hittable?.Hit(hero.playerDataModel.AttackDamage * modifier);
+                hittable?.Hit(damage * modifier);
             }
         }
     }

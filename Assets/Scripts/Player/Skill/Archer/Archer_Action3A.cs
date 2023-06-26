@@ -8,7 +8,7 @@ public class Archer_Action3A : Skill
 {
     public float stepDistance;
 
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {

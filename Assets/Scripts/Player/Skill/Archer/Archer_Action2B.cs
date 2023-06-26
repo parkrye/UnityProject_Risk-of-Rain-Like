@@ -4,9 +4,9 @@ using UnityEngine;
 /// ¼ö·ùÅº ÅõÃ´
 /// </summary>
 [CreateAssetMenu(fileName = "Archer_Action2B", menuName = "Data/Skill/Archer/Action2B")]
-public class Archer_Action2B : Skill
+public class Archer_Action2B : Skill, ICriticable
 {
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {
@@ -14,7 +14,7 @@ public class Archer_Action2B : Skill
 
             GameObject bomb = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Bomb"), true);
             bomb.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            bomb.GetComponent<BombArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, hero.playerDataModel.AttackDamage * modifier);
+            bomb.GetComponent<BombArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
 
             CoolCheck = false;
 

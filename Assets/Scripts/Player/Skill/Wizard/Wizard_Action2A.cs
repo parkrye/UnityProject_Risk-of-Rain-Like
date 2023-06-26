@@ -8,7 +8,7 @@ public class Wizard_Action2A : Skill
 {
     GameObject flame;
 
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {

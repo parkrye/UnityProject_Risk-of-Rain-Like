@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Warrior_Action3C", menuName = "Data/Skill/Warrior/Action3C")]
 public class Warrior_Action3C : Skill, IEnumeratable
 {
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {

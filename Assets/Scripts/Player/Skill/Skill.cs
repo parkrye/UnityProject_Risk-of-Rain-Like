@@ -33,7 +33,7 @@ public abstract class Skill : ScriptableObject
         CoolCheck = true;
     }
 
-    public abstract bool Active(bool isPressed);
+    public abstract bool Active(bool isPressed, params float[] param);
 
     public IEnumerator CoolTime(float modifier)
     {

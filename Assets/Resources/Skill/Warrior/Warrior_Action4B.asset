@@ -15,7 +15,7 @@ MonoBehaviour:
   hero: {fileID: 0}
   SkillName: Keen Mind
   SkillDesc: Awake
-  SkillIcon: {fileID: 21300000, guid: a348aa04f846046b8b5ce0cc85878da9, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 44d37949ad5f3400996eda2b86ce5c98, type: 3}
   coolTime: 20
   modifier: 0.5
   actionNum: 7

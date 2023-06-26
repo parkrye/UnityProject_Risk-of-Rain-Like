@@ -58,8 +58,12 @@ public abstract class Hero : MonoBehaviour
 
     public bool Action(int num, bool isPressed)
     {
-        if (skills[num].CoolCheck && skills[num].Active(isPressed))
+        if (skills[num].CoolCheck)
         {
+            if (skills[num] is ICriticable && Random.Range(0f, 10f) <= playerDataModel.CriticalProbability)
+                skills[num].Active(isPressed, playerDataModel.AttackDamage * playerDataModel.CriticalRatio);
+            else
+                skills[num].Active(isPressed, playerDataModel.AttackDamage);
             if (skills[num] is IEnumeratable)
                 StartCoroutine((skills[num] as IEnumeratable).enumerator());
             StartCoroutine(skills[num].CoolTime(playerDataModel.coolTime));

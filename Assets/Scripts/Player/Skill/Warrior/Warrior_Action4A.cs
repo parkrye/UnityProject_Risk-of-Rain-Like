@@ -5,14 +5,16 @@ using UnityEngine;
 /// 점프 강타
 /// </summary>
 [CreateAssetMenu(fileName = "Warrior_Action4A", menuName = "Data/Skill/Warrior/Action4A")]
-public class Warrior_Action4A : Skill, IEnumeratable
+public class Warrior_Action4A : Skill, IEnumeratable, ICriticable
 {
     public float dashPower, skillRange;
+    float damage;
 
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {
+            damage = param[0];
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             CoolCheck = false;
@@ -36,7 +38,7 @@ public class Warrior_Action4A : Skill, IEnumeratable
         foreach (Collider collider in colliders)
         {
             IHitable hittable = collider.GetComponent<IHitable>();
-            hittable?.Hit(hero.playerDataModel.AttackDamage * modifier);
+            hittable?.Hit(damage * modifier);
         }
 
         yield return new WaitForSeconds(0.5f / hero.playerDataModel.TimeScale);

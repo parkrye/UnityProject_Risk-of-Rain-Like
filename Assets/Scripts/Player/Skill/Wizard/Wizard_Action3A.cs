@@ -10,7 +10,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
     public float teleportDistance, teleportCharge;
     public bool nowCharge;
 
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (nowCharge)
             nowCharge = false;

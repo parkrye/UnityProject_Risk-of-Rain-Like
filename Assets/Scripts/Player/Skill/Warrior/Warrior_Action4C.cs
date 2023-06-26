@@ -9,7 +9,7 @@ public class Warrior_Action4C : Skill, IEnumeratable
 {
     public float skillTime;
 
-    public override bool Active(bool isPressed)
+    public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
         {

@@ -5340,9 +5340,10 @@ MonoBehaviour:
   level: 1
   status: []
   coolTime: 1
+  criticalProbability: 0
+  ciriticalRatio: 1.5
   jumpLimit: 1
   jumpCount: 0
-  coin: 0
   attackCooldown: 0
   controllable: 1
   dodgeDamage: 0
@@ -5350,16 +5351,16 @@ MonoBehaviour:
   playerTimeScale: 1
   buffModifier: []
   coolChecks: 01010101
-  LevelEvent:
+  OnLevelEvent:
     m_PersistentCalls:
       m_Calls: []
-  HPEvent:
+  OnHPEvent:
     m_PersistentCalls:
       m_Calls: []
-  EXPEvent:
+  OnEXPEvent:
     m_PersistentCalls:
       m_Calls: []
-  CoinEvent:
+  OnCoinEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &719491648340369631
