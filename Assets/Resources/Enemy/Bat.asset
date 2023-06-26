@@ -20,4 +20,5 @@ MonoBehaviour:
   MoveSpeed: 5
   Exp: 8
   Size: 1
+  Coin: 1
   floatdatas: []

@@ -8,10 +8,9 @@ using UnityEngine;
 /// </summary>
 public class EnemyAI_TypeA : EnemyAI
 {
-    enum AI_State { Approach, Bypass, Atttack }
+    enum AI_State { Approach, Bypass, Attack }
     [SerializeField] AI_State state;
     Stack<Vector3> bypass;
-    bool needToBypass;
     Vector3 prevPlayerPosition;
     [SerializeField] bool onGizmo;
 
@@ -25,6 +24,10 @@ public class EnemyAI_TypeA : EnemyAI
     void Update()
     {
         state = StateCheck();
+    }
+
+    void FixedUpdate()
+    {
         if (!enemy.isStunned)
         {
             switch (state)
@@ -35,7 +38,7 @@ public class EnemyAI_TypeA : EnemyAI
                 case AI_State.Bypass:
                     ByPass();
                     break;
-                case AI_State.Atttack:
+                case AI_State.Attack:
                     Attack();
                     break;
             }
@@ -47,19 +50,23 @@ public class EnemyAI_TypeA : EnemyAI
         RaycastHit hit;
         if(Physics.SphereCast(transform.position + Vector3.up, enemy.enemyData.Size, (player.position - transform.position).normalized, out hit, Vector3.Distance(player.position, transform.position) - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
         {
-            enemy.StopAttack();
+            if (state == AI_State.Attack)
+                enemy.StopAttack();
+            if (state != AI_State.Bypass)
+                StartCoroutine(FindBypass());
             return AI_State.Bypass;
         }
 
-        needToBypass = false;
-
         if (Vector3.SqrMagnitude(player.position - transform.position) <= Mathf.Pow(enemy.enemyData.Range, 2))
         {
-            return AI_State.Atttack;
+            if(state != AI_State.Attack)
+                enemy.StartAttack();
+            return AI_State.Attack;
         }
         else
         {
-            enemy.StopAttack();
+            if(state == AI_State.Attack)
+                enemy.StopAttack();
             return AI_State.Approach;
         }
     }
@@ -67,7 +74,6 @@ public class EnemyAI_TypeA : EnemyAI
     void Attack()
     {
         transform.LookAt(player.position + Vector3.up);
-        enemy.StartAttack();
     }
 
     void Approach()
@@ -78,20 +84,12 @@ public class EnemyAI_TypeA : EnemyAI
 
     void ByPass()
     {
-        if (!needToBypass)
+        if (bypass.Count > 0)
         {
-            StartCoroutine(FindBypass());
-        }
-
-        if (needToBypass)
-        {
-            if(bypass.Count > 0)
-            {
-                transform.LookAt(bypass.Peek());
-                transform.Translate((bypass.Peek() - (transform.position + Vector3.up)).normalized * enemy.enemyData.MoveSpeed * Time.deltaTime, Space.World);
-                if (Vector3.Distance(transform.position + Vector3.up, bypass.Peek()) <= 0.5f)
-                    bypass.Pop();
-            }
+            transform.LookAt(bypass.Peek());
+            transform.Translate((bypass.Peek() - (transform.position + Vector3.up)).normalized * enemy.enemyData.MoveSpeed * Time.deltaTime, Space.World);
+            if(Vector3.SqrMagnitude((transform.position + Vector3.up) - bypass.Peek()) <= Mathf.Pow(enemy.enemyData.Size * 0.5f, 2))
+                bypass.Pop();
         }
     }
 
@@ -100,9 +98,8 @@ public class EnemyAI_TypeA : EnemyAI
         transform.LookAt(player.position + Vector3.up);
         bypass = PathFinder.PathFindingForAerial(transform, player.position + Vector3.up, enemy.enemyData.Size);
         prevPlayerPosition = player.position;
-        needToBypass = true;
 
-        while (needToBypass)
+        while (state == AI_State.Bypass)
         {
             if(Vector3.SqrMagnitude(player.position - prevPlayerPosition) > 9f || bypass.Count == 0)
             {
@@ -119,7 +116,7 @@ public class EnemyAI_TypeA : EnemyAI
         if (onGizmo)
         {
             Gizmos.color = Color.green;
-            if (bypass.Count > 0)
+            if (state == AI_State.Bypass && bypass.Count > 0)
             {
                 foreach (var bypass in bypass)
                 {

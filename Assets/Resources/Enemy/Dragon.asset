@@ -20,6 +20,7 @@ MonoBehaviour:
   MoveSpeed: 4
   Exp: 16
   Size: 2
+  Coin: 2
   floatdatas:
   - 4
   - 2

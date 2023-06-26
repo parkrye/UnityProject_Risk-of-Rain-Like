@@ -13,7 +13,8 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
     [SerializeField] bool onGizmo;
     public bool isStunned, isSlowed;
 
-    public UnityEvent EnemyDie;
+    public UnityEvent OnEnemyDieEvent;
+    public UnityEvent<float> OnHPEvent;
 
     protected virtual void Awake()
     {
@@ -34,12 +35,13 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
 
     void OnDisable()
     {
-        EnemyDie?.Invoke();
+        OnEnemyDieEvent?.Invoke();
     }
 
     public void Hit(float damage)
     {
         hp -= damage;
+        OnHPEvent?.Invoke(hp);
         if (bleed)
         {
             ParticleSystem effect = GameManager.Resource.Instantiate(bleedParticle, transform.position, Quaternion.identity, true);
@@ -75,7 +77,8 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
     {
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(1f);
-        GameManager.Data.Player.EXP += enemyData.Exp / (GameManager.Data.Difficulty);
+        GameManager.Data.Player.Coin += (int)((enemyData.Coin + GameManager.Data.Time * 0.0016f) / (GameManager.Data.Difficulty));
+        GameManager.Data.Player.EXP += (int)((enemyData.Exp + GameManager.Data.Time * 0.0016f) / (GameManager.Data.Difficulty));
         if (Random.Range(0, 10) <= 3 - GameManager.Data.Difficulty)
             GameManager.Resource.Instantiate<ItemBox>("Item/ItemBox", transform.position, Quaternion.identity);
         GameManager.Resource.Destroy(gameObject);
