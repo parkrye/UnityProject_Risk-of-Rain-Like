@@ -12,12 +12,14 @@ public class ItemBox : MonoBehaviour
         item = items[Random.Range(0, items.Length)];
     }
 
-    void OnTriggerEnter(Collider other)
+    void FixedUpdate()
     {
-        if (other.tag == "Player")
-        {
-            GameManager.Data.Player.inventory.AddItem(item);
-            GameManager.Resource.Destroy(gameObject);
-        }
+        transform.Rotate(Vector3.up * Time.deltaTime);
+    }
+
+    public void Interact()
+    {
+        GameManager.Data.Player.inventory.AddItem(item);
+        GameManager.Resource.Destroy(gameObject);
     }
 }

@@ -6,9 +6,9 @@ public class SceneStatusUI : SceneUI
         UpdateHP();
         UpdateEXP();
 
-        GameManager.Data.Player.LevelEvent.AddListener(UpdateLevel);
-        GameManager.Data.Player.HPEvent.AddListener(UpdateHP);
-        GameManager.Data.Player.EXPEvent.AddListener(UpdateEXP);
+        GameManager.Data.Player.OnLevelEvent.AddListener(UpdateLevel);
+        GameManager.Data.Player.OnHPEvent.AddListener(UpdateHP);
+        GameManager.Data.Player.OnEXPEvent.AddListener(UpdateEXP);
     }
 
     public void UpdateLevel()

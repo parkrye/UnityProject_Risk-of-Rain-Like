@@ -10,6 +10,7 @@ public class SceneInfoUI : SceneUI
     {
         SettingDifficulty();
         GameManager.Data.TimeClock.AddListener(UpdateTime);
+        GameManager.Data.Player.OnCoinEvent.AddListener(UpdateCoinText);
     }
 
     /// <summary>
@@ -65,5 +66,10 @@ public class SceneInfoUI : SceneUI
                 texts["ObjectiveText"].text = "Objective\nComplete";
                 break;
         }
+    }
+
+    public void UpdateCoinText(int coin)
+    {
+        texts["CoinText"].text = coin.ToString();
     }
 }
