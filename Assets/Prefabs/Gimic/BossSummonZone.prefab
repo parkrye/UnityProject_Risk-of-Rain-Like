@@ -143,6 +143,8 @@ MonoBehaviour:
   chargeTime: 60
   chargeDistance: 20
   inArea: 0
+  startSummon: 0
+  onGizmo: 0
   ObjectStateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -157,7 +159,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 50
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-8731042664269190467
 MonoBehaviour:
@@ -171,8 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a99cb354b2f19245bea212d4b217102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steps: 12
-  radius: 50
 --- !u!120 &1457231109387521737
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class BossSummon : MonoBehaviour
         startSummon = true;
         counter = 0;
         GetComponent<SphereCollider>().radius = chargeDistance;
-        GetComponent<CircleDrawer>().Setting(transform.position + Vector3.up, 60, chargeDistance);
+        GetComponent<CircleDrawer>().Setting(transform.position + Vector3.up, 60, chargeDistance * 0.5f);
         ObjectStateEvent?.Invoke(SceneInfoUI.ObjectState.Keep);
 
         while (charge < chargeTime)

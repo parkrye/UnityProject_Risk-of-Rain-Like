@@ -1,16 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SummonPositionGimic : MonoBehaviour
 {
-    public GameObject Cover;    // 게임이 시작되면 사라지는 것
+    SphereCollider sphere;
+    [SerializeField] GameObject summonZone;
+
+    void Awake()
+    {
+        sphere = GetComponent<SphereCollider>();
+    }
+
+    Vector3 AdjustDirectionToSlope(Vector3 hitNormal, Vector3 direction)
+    {
+        return Vector3.ProjectOnPlane(direction, hitNormal).normalized;
+    }
 
     public void SetGimic()
     {
-        if (Cover != null)
+        float range = sphere.radius * 0.5f;
+
+        float xPos = Random.Range(-range * 0.5f, range * 0.5f);
+        float zPos = Random.Range(-range * 0.5f, range * 0.5f);
+
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position + Vector3.right * xPos + Vector3.forward * zPos, Vector3.down);
+        if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Ground")))
         {
-            Cover.SetActive(false);
+            summonZone.transform.position = hit.point;
+            summonZone.transform.LookAt(transform.position + AdjustDirectionToSlope(hit.normal, Vector3.forward));
         }
     }
 }
