@@ -31,7 +31,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
                 maxHP = 1f;
             else
                 maxHP = value;
-            HPEvent?.Invoke();
+            OnHPEvent?.Invoke();
         }
     }
 
@@ -43,7 +43,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
             if (value <= 0f)
             {
                 Die();
-                HPEvent?.Invoke();
+                OnHPEvent?.Invoke();
             }
             else
             {
@@ -51,7 +51,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
                     nowHP = MAXHP;
                 else
                     nowHP = value;
-                HPEvent?.Invoke();
+                OnHPEvent?.Invoke();
             }
         }
     }
@@ -67,7 +67,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
                 exp -= LEVEL * 100f;
                 LEVEL++;
             }
-            EXPEvent?.Invoke();
+            OnEXPEvent?.Invoke();
         }
     }
 
@@ -79,7 +79,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
             level = value;
             maxHP *= 1.1f;
             nowHP = MAXHP;
-            LevelEvent?.Invoke();
+            OnLevelEvent?.Invoke();
         }
     }
 
@@ -230,7 +230,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         Destroy(gameObject);
     }
 
-    public UnityEvent LevelEvent, HPEvent, EXPEvent;
+    public UnityEvent OnLevelEvent, OnHPEvent, OnEXPEvent;
 
     public void Hit(float damage)
     {
@@ -242,5 +242,13 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     {
         Debug.Log("you died");
         GameManager.Data.RecordTime = false;
+    }
+
+    int coin;
+    public UnityEvent<int> OnCoinEvent;
+    public int Coin
+    {
+        get { return coin; }
+        set { coin = value; OnCoinEvent?.Invoke(coin); }
     }
 }

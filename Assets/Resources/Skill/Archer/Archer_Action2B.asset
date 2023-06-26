@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e037ba358992540b8e78764a28edfe, type: 3}
+  m_Script: {fileID: 11500000, guid: cc207853fedd2f441a780fd4516b3806, type: 3}
   m_Name: Archer_Action2B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 2
-  SkillDesc: 2
-  SkillIcon: {fileID: 21300000, guid: 9048f1bbff3cf47ce8b0467ca61e0f4f, type: 3}
-  coolTime: 1
-  modifier: 0.2
+  SkillName: Bomb Throw
+  SkillDesc: This is Bomb
+  SkillIcon: {fileID: 21300000, guid: 8995cb6560cd446d994d7b26558d605e, type: 3}
+  coolTime: 5
+  modifier: 1
   actionNum: 5
   CoolEvent:
     m_PersistentCalls:

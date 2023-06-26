@@ -18,7 +18,7 @@ public class FollowBolt : BoltType
         GameManager.Resource.Destroy(gameObject, 5f);
         while (true)
         {
-            if (target == null || target.activeInHierarchy || target.activeSelf)
+            if (target == null || !target.activeInHierarchy || !target.activeSelf)
             {
                 if (SetTarget())
                 {

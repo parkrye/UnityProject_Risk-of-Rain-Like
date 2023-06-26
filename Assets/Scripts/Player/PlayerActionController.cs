@@ -8,10 +8,12 @@ public class PlayerActionController : MonoBehaviour
 
     public Transform lookAtTransform, lookFromTransform, interactTransform;
     public float closeAttackRange, interactRange;
+    float cosResult;
 
     void Awake()
     {
         playerDataModel = GetComponent<PlayerDataModel>();
+        cosResult = Mathf.Cos(60f * Mathf.Deg2Rad);
     }
 
     void OnAction1(InputValue inputValue)
@@ -51,11 +53,14 @@ public class PlayerActionController : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(interactTransform.position, interactRange);
         foreach (Collider collider in colliders)
         {
+            IInteractable interactable = collider.GetComponent<IInteractable>();
+            if (interactable == null)
+                continue;
             Vector3 dirTarget = (collider.transform.position - transform.position).normalized;
-            if (Vector3.Dot(transform.forward, dirTarget) < Mathf.Cos(60f * 0.5f * Mathf.Deg2Rad))
+            Debug.Log(Vector3.Dot(transform.forward, dirTarget) + ", " + cosResult);
+            if (Vector3.Dot(transform.forward, dirTarget) < cosResult)
                 continue;
 
-            IInteractable interactable = collider.GetComponent<IInteractable>();
             interactable?.Interact();
         }
     }

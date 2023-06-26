@@ -21,7 +21,8 @@ public class BombArrow : ArrowType
         GameManager.Resource.Destroy(gameObject, 10f);
         while (true)
         {
-            transform.Translate((transform.forward * speed + Vector3.up * Physics.gravity.y) * Time.deltaTime, Space.World);
+            transform.Translate((transform.forward * speed + Vector3.up * yVelocity) * Time.deltaTime, Space.World);
+            yVelocity += Physics.gravity.y * yAccModifier;
             yield return new WaitForFixedUpdate();
         }
     }

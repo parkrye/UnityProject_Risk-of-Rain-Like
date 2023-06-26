@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55667c482aac3974e9fdd7918f3ad8be, type: 3}
+  m_Script: {fileID: 11500000, guid: 07af60443d6743f4b949ba7e5d5929be, type: 3}
   m_Name: Warrior_Action3C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 33
-  SkillDesc: 33
-  SkillIcon: {fileID: 21300000, guid: 15795860a9d324250823686a664034a3, type: 3}
-  coolTime: 1
+  SkillName: Second Wind
+  SkillDesc: Heal Myself
+  SkillIcon: {fileID: 21300000, guid: 4c2e103ee53f2497b8222fa8db303c8f, type: 3}
+  coolTime: 20
   modifier: 0
   actionNum: 10
   CoolEvent:

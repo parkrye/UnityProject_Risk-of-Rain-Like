@@ -5,8 +5,8 @@ using UnityEngine;
 public class ArrowType : MonoBehaviour
 {
     protected TrailRenderer trail;
-    protected float damage;
-    [SerializeField] protected float speed, yModifier;
+    protected float damage, yVelocity;
+    [SerializeField] protected float speed, yModifier, yAccModifier;
 
     protected virtual void Awake()
     {
@@ -16,6 +16,7 @@ public class ArrowType : MonoBehaviour
     void OnEnable()
     {
         trail.enabled = false;
+        yVelocity = 0f;
     }
 
     public void Shot(Vector3 target, float _damage, float delay)
@@ -38,7 +39,8 @@ public class ArrowType : MonoBehaviour
         GameManager.Resource.Destroy(gameObject, 10f);
         while (true)
         {
-            transform.Translate((transform.forward * speed + Vector3.up * Physics.gravity.y) * Time.deltaTime, Space.World);
+            transform.Translate((transform.forward * speed + Vector3.up * yVelocity) * Time.deltaTime, Space.World);
+            yVelocity += Physics.gravity.y * yAccModifier;
             yield return new WaitForFixedUpdate();
         }
     }

@@ -60,7 +60,6 @@ public class BoltType : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);

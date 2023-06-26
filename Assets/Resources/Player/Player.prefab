@@ -5338,18 +5338,17 @@ MonoBehaviour:
   nowHP: 100
   exp: 0
   level: 1
-  moveSpeed: 5
-  jumpPower: 10
+  status: []
   coolTime: 1
-  attackDamage: 5
-  armorPoint: 1
   jumpLimit: 1
   jumpCount: 0
+  coin: 0
   attackCooldown: 0
-  controlleable: 1
+  controllable: 1
   dodgeDamage: 0
   mouseSensivity: 10
   playerTimeScale: 1
+  buffModifier: []
   coolChecks: 01010101
   LevelEvent:
     m_PersistentCalls:
@@ -5358,6 +5357,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   EXPEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  CoinEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &719491648340369631

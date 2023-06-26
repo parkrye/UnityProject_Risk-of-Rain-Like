@@ -62,25 +62,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // 이하 InGameUI
-    public T ShowInGameUI<T>(T inGameUI) where T : InGameUI
-    {
-        T ui = GameManager.Pool.GetUI(inGameUI);
-
-        return ui;
-    }
-
-    public T ShowInGameUI<T>(string path) where T : InGameUI
-    {
-        T ui = GameManager.Resource.Load<T>(path);
-        return ShowInGameUI(ui);
-    }
-
-    public void CloseInGameUI(InGameUI inGameUI)
-    {
-        GameManager.Pool.Release(inGameUI);
-    }
-
     // 이하 SceneUI
     public T ShowSceneUI<T>(T sceneUI) where T : SceneUI
     {
