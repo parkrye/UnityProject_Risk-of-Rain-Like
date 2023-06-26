@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebb38b6c9f33f44aaa12e037f836e32, type: 3}
+  m_Script: {fileID: 11500000, guid: 29131980da2d2804c93547b5999e9ff0, type: 3}
   m_Name: Archer_Action1B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 1
-  SkillDesc: 1
-  SkillIcon: {fileID: 21300000, guid: 4c2e103ee53f2497b8222fa8db303c8f, type: 3}
-  coolTime: 0.8
+  SkillName: Charge Shot
+  SkillDesc: Heavy Overwhelm Fast
+  SkillIcon: {fileID: 21300000, guid: 482884d1759cf4bdbad2fa53c99aee5c, type: 3}
+  coolTime: 1
   modifier: 0.5
   actionNum: 4
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
+  chargeSpeed: 2
+  charge: 0

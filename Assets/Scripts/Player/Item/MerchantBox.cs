@@ -29,7 +29,7 @@ public class MerchantBox : MonoBehaviour
     void FixedUpdate()
     {
         if (fall)
-            transform.Translate(Vector3.down * Time.deltaTime);
+            transform.Translate(Vector3.down * Time.deltaTime * 10f);
         transform.Rotate(Vector3.up * Time.deltaTime);
     }
 

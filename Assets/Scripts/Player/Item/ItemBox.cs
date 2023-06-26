@@ -14,7 +14,7 @@ public class ItemBox : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Rotate(Vector3.up * Time.deltaTime);
+        transform.Rotate(Vector3.up * Time.deltaTime * 10f);
     }
 
     public void Interact()

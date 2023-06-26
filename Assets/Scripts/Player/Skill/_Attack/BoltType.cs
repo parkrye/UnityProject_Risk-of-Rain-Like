@@ -11,7 +11,7 @@ public class BoltType : MonoBehaviour
     protected virtual void Awake()
     {
         trails = GetComponentsInChildren<TrailRenderer>();
-        coll = GetComponent<Collider>();
+        coll = GetComponentInChildren<Collider>();
     }
 
     void OnEnable()

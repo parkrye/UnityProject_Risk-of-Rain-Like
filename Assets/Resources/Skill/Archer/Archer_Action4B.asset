@@ -9,17 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab9ead8479d64540aa2e4f15abff9ee, type: 3}
+  m_Script: {fileID: 11500000, guid: d75d19765d12b5a4e9dce12d2ef84b24, type: 3}
   m_Name: Archer_Action4B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 4
-  SkillDesc: 4
-  SkillIcon: {fileID: 21300000, guid: c8de558d1809a431b853143ea7327b0d, type: 3}
-  coolTime: 20
-  modifier: 1
+  SkillName: Arrow Shower
+  SkillDesc: It is Rainy Day
+  SkillIcon: {fileID: 21300000, guid: 8f78f97a2d8e7498388d20b064d09528, type: 3}
+  coolTime: 30
+  modifier: 0.01
   actionNum: 7
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
-  skillTime: 1
+  step: 60
+  skillRange: 5

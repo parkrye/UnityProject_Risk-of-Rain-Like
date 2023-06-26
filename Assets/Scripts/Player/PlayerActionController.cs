@@ -57,7 +57,6 @@ public class PlayerActionController : MonoBehaviour
             if (interactable == null)
                 continue;
             Vector3 dirTarget = (collider.transform.position - transform.position).normalized;
-            Debug.Log(Vector3.Dot(transform.forward, dirTarget) + ", " + cosResult);
             if (Vector3.Dot(transform.forward, dirTarget) < cosResult)
                 continue;
 

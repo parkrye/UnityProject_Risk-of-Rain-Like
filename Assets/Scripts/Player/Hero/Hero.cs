@@ -64,7 +64,7 @@ public abstract class Hero : MonoBehaviour
                 skills[num].Active(isPressed, playerDataModel.AttackDamage * playerDataModel.CriticalRatio);
             else
                 skills[num].Active(isPressed, playerDataModel.AttackDamage);
-            if (skills[num] is IEnumeratable)
+            if (skills[num] is IEnumeratable && isPressed)
                 StartCoroutine((skills[num] as IEnumeratable).enumerator());
             StartCoroutine(skills[num].CoolTime(playerDataModel.coolTime));
             return true;
