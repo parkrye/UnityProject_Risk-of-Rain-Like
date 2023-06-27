@@ -6,10 +6,17 @@ public class Boomerang : BoltType
     [SerializeField] float rotateSpeed;
     Transform home;
     bool back;
+    MeshRenderer child;
 
-    public void Shot(Transform transform, Vector3 target, float _damage, float delay = 0f)
+    protected override void Awake()
     {
-        home = transform;
+        base.Awake();
+        child = GetComponentInChildren<MeshRenderer>();
+    }
+
+    public void Shot(Transform _transform, Vector3 target, float _damage, float delay = 0f)
+    {
+        home = _transform;
         transform.LookAt(target + Vector3.up * yModifier);
         damage = _damage;
         StartCoroutine(ReadyToShot(delay));
@@ -22,20 +29,20 @@ public class Boomerang : BoltType
 
         back = false;
         float backTime = 0f;
-        Vector3 rotate = Vector3.up * rotateSpeed * Time.deltaTime;
-        while (backTime < 5f)
+        Vector3 rotate = transform.up * rotateSpeed * Time.deltaTime;
+        while (backTime < 2f)
         {
             transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-            coll.transform.Rotate(rotate);
+            child.transform.Rotate(rotate);
             backTime += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
         back = true;
-        GameManager.Resource.Destroy(gameObject, 10f);
+        GameManager.Resource.Destroy(gameObject, 5f);
         while (true)
         {
-            transform.Translate((home.position - transform.position).normalized * speed * Time.deltaTime, Space.World);
-            coll.transform.Rotate(rotate);
+            transform.Translate((home.position + Vector3.up - transform.position).normalized * speed * Time.deltaTime, Space.World);
+            child.transform.Rotate(rotate);
             yield return new WaitForFixedUpdate();
         }
     }

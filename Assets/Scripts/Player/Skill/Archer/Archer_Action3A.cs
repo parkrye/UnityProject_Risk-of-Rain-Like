@@ -19,13 +19,13 @@ public class Archer_Action3A : Skill
                 stepVec.z = 1f;
 
             RaycastHit hit;
-            if (Physics.Raycast(hero.playerDataModel.transform.position + hero.playerDataModel.transform.up, (hero.playerDataModel.transform.right * stepVec.x + hero.playerDataModel.transform.forward * stepVec.z), out hit, stepDistance, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(hero.playerDataModel.playerTransform.position + hero.playerDataModel.playerTransform.up, (hero.playerDataModel.playerTransform.right * stepVec.x + hero.playerDataModel.playerTransform.forward * stepVec.z), out hit, stepDistance, LayerMask.GetMask("Ground")))
             {
-                hero.playerDataModel.transform.position = hit.point;
+                hero.playerDataModel.playerTransform.position = hit.point;
             }
             else
             {
-                hero.playerDataModel.transform.position += hero.playerDataModel.transform.right * stepVec.x + hero.playerDataModel.transform.forward * stepVec.z * stepDistance;
+                hero.playerDataModel.playerTransform.position += hero.playerDataModel.playerTransform.right * stepVec.x + hero.playerDataModel.playerTransform.forward * stepVec.z * stepDistance;
             }
 
             CoolCheck = false;

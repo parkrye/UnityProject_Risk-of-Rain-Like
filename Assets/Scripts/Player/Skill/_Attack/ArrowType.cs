@@ -44,7 +44,7 @@ public class ArrowType : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         trail.Clear();
     }

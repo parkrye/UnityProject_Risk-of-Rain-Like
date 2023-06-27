@@ -8,7 +8,6 @@ using UnityEngine;
 public class Archer_Action4B : Skill, ICriticable
 {
     [SerializeField] float skillRange;
-    RaycastHit hit;
     float damage;
     GameObject arrowShower;
 

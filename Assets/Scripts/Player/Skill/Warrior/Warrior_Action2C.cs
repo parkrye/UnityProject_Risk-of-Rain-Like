@@ -38,7 +38,7 @@ public class Warrior_Action2C : Skill, IEnumeratable, ICriticable
                 hittable?.Hit(damage * modifier);
 
                 IMazable mazable = collider.GetComponent<IMazable>();
-                mazable?.KnockBack(knockbackDistance, hero.playerDataModel.transform);
+                mazable?.KnockBack(knockbackDistance, hero.playerDataModel.playerTransform);
             }
         }
     }

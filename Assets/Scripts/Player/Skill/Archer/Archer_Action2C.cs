@@ -14,7 +14,7 @@ public class Archer_Action2C : Skill, ICriticable
 
             GameObject boomerang = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Boomerang"), true);
             boomerang.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            boomerang.GetComponent<Boomerang>().Shot(hero.playerDataModel.transform, hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
+            boomerang.GetComponent<Boomerang>().Shot(hero.playerDataModel.playerTransform, hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
 
             CoolCheck = false;
 

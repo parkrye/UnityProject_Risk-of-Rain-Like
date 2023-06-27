@@ -182,6 +182,15 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     public bool[] coolChecks = new bool[4];
 
+    public Transform playerTransform
+    {
+        get { return transform; }
+        set { transform.position = value.position;
+            transform.rotation = value.rotation;
+            transform.localScale = value.localScale;
+        }
+    }
+
     void Initailze()
     {
         GameManager.Data.Player = this;

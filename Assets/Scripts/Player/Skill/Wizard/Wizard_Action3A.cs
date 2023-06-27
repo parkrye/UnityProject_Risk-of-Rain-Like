@@ -39,13 +39,13 @@ public class Wizard_Action3A : Skill, IEnumeratable
     void Teleport()
     {
         RaycastHit hit;
-        if (Physics.Raycast(hero.playerDataModel.transform.position + Vector3.up, hero.playerDataModel.playerAction.lookFromTransform.forward.normalized, out hit, teleportDistance * teleportCharge, LayerMask.GetMask("Ground")))
+        if (Physics.Raycast(hero.playerDataModel.playerTransform.position + Vector3.up, hero.playerDataModel.playerAction.lookFromTransform.forward.normalized, out hit, teleportDistance * teleportCharge, LayerMask.GetMask("Ground")))
         {
-            hero.playerDataModel.transform.position = hit.point;
+            hero.playerDataModel.playerTransform.position = hit.point;
         }
         else
         {
-            hero.playerDataModel.transform.position += hero.playerDataModel.playerAction.lookFromTransform.forward * teleportDistance * teleportCharge;
+            hero.playerDataModel.playerTransform.position += hero.playerDataModel.playerAction.lookFromTransform.forward * teleportDistance * teleportCharge;
         }
         CoolCheck = false;
         hero.playerDataModel.animator.SetTrigger("Teleport");

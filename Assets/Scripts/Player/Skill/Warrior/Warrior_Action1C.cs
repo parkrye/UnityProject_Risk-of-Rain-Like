@@ -27,7 +27,7 @@ public class Warrior_Action1C : Skill, IEnumeratable, ICriticable
     {
         yield return new WaitForSeconds(0.08f / hero.playerDataModel.TimeScale);
 
-        Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.transform.position + Vector3.up, hero.playerDataModel.playerAction.closeAttackRange * skillRangeModifier);
+        Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerTransform.position + Vector3.up, hero.playerDataModel.playerAction.closeAttackRange * skillRangeModifier);
         foreach (Collider collider in colliders)
         {
             if (!collider.CompareTag("Player"))

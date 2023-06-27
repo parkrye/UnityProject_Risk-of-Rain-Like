@@ -12,13 +12,17 @@ public class FlagArrow : ArrowType
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
-            OnTriggerEnterEvent?.Invoke(transform);
             GameManager.Pool.Release(gameObject);
         }
         else if (1 << other.gameObject.layer == LayerMask.GetMask("Ground"))
         {
-            OnTriggerEnterEvent?.Invoke(transform);
             GameManager.Pool.Release(gameObject);
         }
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        OnTriggerEnterEvent?.Invoke(transform);
     }
 }
