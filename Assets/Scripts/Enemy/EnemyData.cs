@@ -12,6 +12,7 @@ public class EnemyData : ScriptableObject
     public float MoveSpeed;
     public float Exp;
     public float Size;
+    public float yModifier;
     public int Coin;
 
     public float[] floatdatas;

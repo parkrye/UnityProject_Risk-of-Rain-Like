@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Enemy : MonoBehaviour, IHitable, IMazable
+public abstract class Enemy : MonoBehaviour, IHitable
 {
     public EnemyData enemyData;
     [SerializeField] ParticleSystem bleedParticle;
@@ -12,6 +12,11 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
     public bool bleed, attack;
     [SerializeField] bool onGizmo;
     public bool isStunned, isSlowed;
+
+    public Vector3 enemyPos
+    {
+        get { return transform.position + Vector3.up * enemyData.yModifier; }
+    }
 
     public UnityEvent OnEnemyDieEvent;
     public UnityEvent<float> OnHPEvent;
@@ -24,8 +29,8 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
 
     void OnEnable()
     {
-        hp = enemyData.MaxHP * (1 + (GameManager.Data.Difficulty - 1) * 0.5f + GameManager.Data.Time * 0.0016f);
-        damage = enemyData.Damage * (1 + (GameManager.Data.Difficulty - 1) * 0.5f + GameManager.Data.Time * 0.0016f);
+        hp = enemyData.MaxHP * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
+        damage = enemyData.Damage * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
         bleed = false;
         attack = false;
         GetComponent<SphereCollider>().radius = enemyData.Size;
@@ -41,6 +46,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
     public void Hit(float damage)
     {
         hp -= damage;
+        GameManager.Data.Records["Damage"] += damage;
         OnHPEvent?.Invoke(hp);
         if (bleed)
         {
@@ -60,6 +66,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
 
     public void Die()
     {
+        GameManager.Data.Records["Kill"] += 1;
         StopAttack();
         StartCoroutine(DieRoutine());
     }
@@ -77,23 +84,27 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
     {
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(1f);
-        GameManager.Data.Player.Coin += (int)((enemyData.Coin + GameManager.Data.Time * 0.0016f) / (GameManager.Data.Difficulty));
-        GameManager.Data.Player.EXP += (int)((enemyData.Exp + GameManager.Data.Time * 0.0016f) / (GameManager.Data.Difficulty));
-        if (Random.Range(0, 10) <= 3 - GameManager.Data.Difficulty)
+        GameManager.Data.Player.Coin += (int)((enemyData.Coin + GameManager.Data.Records["Time"] * 0.0016f) / (GameManager.Data.Records["Difficulty"]));
+        GameManager.Data.Player.EXP += (int)((enemyData.Exp + GameManager.Data.Records["Time"] * 0.0016f) / (GameManager.Data.Records["Difficulty"]));
+        if (Random.Range(0, 10) <= 3 - GameManager.Data.Records["Difficulty"])
             GameManager.Resource.Instantiate<ItemBox>("Item/ItemBox", transform.position, Quaternion.identity);
         GameManager.Resource.Destroy(gameObject);
     }
 
-    public void StartAttack()
+    public virtual void StartAttack()
     {
         if(hp > 0)
         {
+            if(!attack)
+                StartCoroutine(AttackRoutine());
             attack = true;
         }
     }
 
     public virtual void StopAttack()
     {
+        if(attack)
+            StopCoroutine(AttackRoutine());
         attack = false;
     }
 
@@ -102,27 +113,11 @@ public abstract class Enemy : MonoBehaviour, IHitable, IMazable
         if (onGizmo)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position + Vector3.up, enemyData.Range);
+            Gizmos.DrawWireSphere(transform.position + Vector3.up * enemyData.Size, enemyData.Range);
         }
     }
 
     protected abstract IEnumerator AttackRoutine();
-
-    public void Stuned(float time)
-    {
-        if(!isStunned)
-        {
-            StartCoroutine(StunRoutine(time));
-        }
-    }
-
-    public void Slowed(float time, float modifier)
-    {
-        if (!isSlowed)
-        {
-            StartCoroutine(SlowRoutine(time, modifier));
-        }
-    }
 
     public void KnockBack(float distance, Transform backFrom)
     {

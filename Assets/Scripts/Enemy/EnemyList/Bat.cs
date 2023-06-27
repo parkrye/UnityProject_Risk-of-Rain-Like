@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bat : Enemy
+public class Bat : Enemy, IMazable
 {
     protected override void Awake()
     {
@@ -24,6 +24,22 @@ public class Bat : Enemy
             {
                 yield return null;
             }
+        }
+    }
+
+    public void Stuned(float time)
+    {
+        if (!isStunned)
+        {
+            StartCoroutine(StunRoutine(time));
+        }
+    }
+
+    public void Slowed(float time, float modifier)
+    {
+        if (!isSlowed)
+        {
+            StartCoroutine(SlowRoutine(time, modifier));
         }
     }
 }

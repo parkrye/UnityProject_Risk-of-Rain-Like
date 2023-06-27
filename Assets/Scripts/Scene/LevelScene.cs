@@ -7,8 +7,12 @@ public class LevelScene : BaseScene
     StartPositionGimic[] startPositions;
     [SerializeField] SummonPositionGimic summonPosition;
     [SerializeField] BossSummon bossSummonZone;
+    [SerializeField] EnemySpawner enemySpawner;
+    [SerializeField] ItemDropper itemDropper;
     [SerializeField] float spawnDelay, spawnDistance;
     [SerializeField] int enemyLimit;
+
+    public enum LevelState { Search, Keep, ComeBack, Fight, Win }
 
     protected override IEnumerator LoadingRoutine()
     {
@@ -35,19 +39,21 @@ public class LevelScene : BaseScene
         GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneItemUI").Initialize();
         GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneKeyUI").Initialize();
         GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneStatusUI").Initialize();
+        infoUI.UpdateObjective(LevelState.Search);
         progress = 0.4f;
-
-        // 목적 UI 세팅
-        infoUI.UpdateObjective(SceneInfoUI.ObjectState.Search);
-        bossSummonZone.ObjectStateEvent.AddListener(infoUI.UpdateObjective);
-        progress = 0.6f;
 
         // 에너미 스폰 설정
         if (spawnDelay == 0f)
             spawnDelay = 5f;
         if (spawnDistance == 0f)
             spawnDistance = 10f;
-        gameObject.AddComponent<EnemySpawner>().Initialize(spawnDelay, spawnDistance, enemyLimit);
+        enemySpawner.Initialize(spawnDelay, spawnDistance, enemyLimit);
+        progress = 0.6f;
+
+        // 이벤트 세팅
+        bossSummonZone.ObjectStateEvent.AddListener(infoUI.UpdateObjective);
+        bossSummonZone.ObjectStateEvent.AddListener(enemySpawner.StopSpawn);
+        bossSummonZone.ObjectStateEvent.AddListener(itemDropper.StopDrop);
         progress = 0.8f;
 
         // 플레이어 세팅

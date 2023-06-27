@@ -6,11 +6,11 @@ using static UnityEditor.ShaderData;
 public abstract class EnemyAI : MonoBehaviour
 {
     protected Enemy enemy;
-    protected Transform player;
+    protected Transform playerTransform;
 
     protected virtual void Awake()
     {
         enemy = GetComponent<Enemy>();
-        player = GameManager.Data.Player.transform;
+        playerTransform = GameManager.Data.Player.playerTransform;
     }
 }

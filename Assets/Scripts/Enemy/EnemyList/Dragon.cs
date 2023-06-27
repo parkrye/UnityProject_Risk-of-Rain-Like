@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Dragon : Enemy
+public class Dragon : Enemy, IMazable
 {
     [SerializeField] Transform mouse;
     bool attacking;
@@ -49,6 +49,22 @@ public class Dragon : Enemy
             attacking = false;
             StopCoroutine(Breath());
             GameManager.Resource.Destroy(enemyFlame);
+        }
+    }
+
+    public void Stuned(float time)
+    {
+        if (!isStunned)
+        {
+            StartCoroutine(StunRoutine(time));
+        }
+    }
+
+    public void Slowed(float time, float modifier)
+    {
+        if (!isSlowed)
+        {
+            StartCoroutine(SlowRoutine(time, modifier));
         }
     }
 }
