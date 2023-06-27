@@ -51,13 +51,18 @@ public class PlayerActionController : MonoBehaviour
     public void Interact()
     {
         Collider[] colliders = Physics.OverlapSphere(interactTransform.position, interactRange);
+        Vector3 playerPosition = transform.position;
+        Vector3 playerLook = new Vector3(transform.forward.x, 0f, transform.forward.z);
+        playerPosition.y = 0f;
         foreach (Collider collider in colliders)
         {
             IInteractable interactable = collider.GetComponent<IInteractable>();
             if (interactable == null)
                 continue;
-            Vector3 dirTarget = (collider.transform.position - transform.position).normalized;
-            if (Vector3.Dot(transform.forward, dirTarget) < cosResult)
+            Vector3 colliderPosition = collider.transform.position;
+            colliderPosition.y = 0f;
+            Vector3 dirTarget = (colliderPosition - playerPosition).normalized;
+            if (Vector3.Dot(playerLook, dirTarget) < cosResult)
                 continue;
 
             interactable?.Interact();

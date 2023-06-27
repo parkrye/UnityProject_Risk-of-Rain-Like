@@ -5,16 +5,29 @@ using UnityEngine;
 public class ItemBox : MonoBehaviour
 {
     ItemData item;
+    bool fall;
 
     void Awake()
     {
         ItemData[] items = GameManager.Resource.LoadAll<ItemData>("Item");
         item = items[Random.Range(0, items.Length)];
+        fall = true;
+    }
+
+    void Update()
+    {
+        if (fall)
+        {
+            Ray ray = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(ray, 2f, LayerMask.GetMask("Ground")))
+                fall = false;
+        }
     }
 
     void FixedUpdate()
     {
-        transform.Rotate(Vector3.up * Time.deltaTime * 10f);
+        if (fall)
+            transform.Translate(Vector3.down * Time.deltaTime * 10f);
     }
 
     public void Interact()

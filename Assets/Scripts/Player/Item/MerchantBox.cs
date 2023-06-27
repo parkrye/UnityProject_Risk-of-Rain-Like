@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MerchantBox : MonoBehaviour
 {
     ItemData item;
     int cost;
     bool fall;
+    [SerializeField] GameObject costObject;
 
     void Awake()
     {
@@ -14,6 +17,7 @@ public class MerchantBox : MonoBehaviour
         cost = (int)((Random.Range(1, 10) + GameManager.Data.Time * 0.016f) * GameManager.Data.Difficulty);
         item = items[Random.Range(0, items.Length)];
         fall = true;
+        costObject.GetComponentInChildren<TextMeshProUGUI>().text = cost.ToString();
     }
 
     void Update()
@@ -31,6 +35,11 @@ public class MerchantBox : MonoBehaviour
         if (fall)
             transform.Translate(Vector3.down * Time.deltaTime * 10f);
         transform.Rotate(Vector3.up * Time.deltaTime);
+    }
+
+    void LateUpdate()
+    {
+        costObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
     }
 
     public void Interact()
