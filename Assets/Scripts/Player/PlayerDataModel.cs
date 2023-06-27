@@ -47,6 +47,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
             }
             else
             {
+                GameManager.Data.Records["Heal"] += value - nowHP;
                 if(value > MAXHP)
                     nowHP = MAXHP;
                 else
@@ -251,8 +252,12 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     public void Hit(float damage)
     {
-        if(!dodgeDamage)
+        if (!dodgeDamage)
+        {
             NOWHP -= damage * ArmorPoint;
+            GameManager.Data.Records["Hit"] += damage * ArmorPoint;
+            GameManager.Data.Records["Guard"] += damage - damage * ArmorPoint;
+        }
     }
 
     public void Die()
