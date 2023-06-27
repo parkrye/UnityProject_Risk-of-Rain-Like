@@ -7,8 +7,17 @@ public class BossSummon : MonoBehaviour
     public float charge, chargeTime, chargeDistance;
     int counter;
     [SerializeField] bool inArea, startSummon, onGizmo;
+    [SerializeField] Transform bossTransform;
+    [SerializeField] GameObject zone, gate;
+    EnemyData bossData;
 
-    public UnityEvent<SceneInfoUI.ObjectState> ObjectStateEvent;
+    public UnityEvent<LevelScene.LevelState> ObjectStateEvent;
+
+    void OnEnable()
+    {
+        EnemyData[] bossList = GameManager.Resource.LoadAll<EnemyData>("Boss");
+        bossData = bossList[Random.Range(0, bossList.Length)];
+    }
 
     public void StartCharge()
     {
@@ -24,7 +33,7 @@ public class BossSummon : MonoBehaviour
         counter = 0;
         GetComponent<SphereCollider>().radius = chargeDistance;
         GetComponent<CircleDrawer>().Setting(transform.position + Vector3.up, 60, chargeDistance * 0.5f);
-        ObjectStateEvent?.Invoke(SceneInfoUI.ObjectState.Keep);
+        ObjectStateEvent?.Invoke(LevelScene.LevelState.Keep);
 
         while (charge < chargeTime)
         {
@@ -53,21 +62,27 @@ public class BossSummon : MonoBehaviour
 
     void SummonBoss()
     {
-        ObjectStateEvent?.Invoke(SceneInfoUI.ObjectState.Fight);
-        Debug.Log("Boss Summoned!");
+        zone.SetActive(false);
+        ObjectStateEvent?.Invoke(LevelScene.LevelState.Fight);
+        GameObject boss = EnemySummon.TargetLocationSummon(bossTransform, bossData);
+        boss.GetComponent<Boss>().OnEnemyDieEvent.AddListener(BeatBoss);
     }
 
-    public void WinByBoss()
+    public void BeatBoss()
     {
-        ObjectStateEvent?.Invoke(SceneInfoUI.ObjectState.Win);
+        ObjectStateEvent?.Invoke(LevelScene.LevelState.Win);
+        gate.SetActive(true);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            inArea = true;
-            ObjectStateEvent?.Invoke(SceneInfoUI.ObjectState.Keep);
+            if (charge < chargeTime)
+            {
+                inArea = true;
+            ObjectStateEvent?.Invoke(LevelScene.LevelState.Keep);
+            }
         }
     }
 
@@ -75,8 +90,11 @@ public class BossSummon : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            inArea = false;
-            ObjectStateEvent?.Invoke(SceneInfoUI.ObjectState.ComeBack);
+            if(charge < chargeTime)
+            {
+                inArea = false;
+                ObjectStateEvent?.Invoke(LevelScene.LevelState.ComeBack);
+            }
         }
     }
 

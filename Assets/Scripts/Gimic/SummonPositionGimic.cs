@@ -10,11 +10,6 @@ public class SummonPositionGimic : MonoBehaviour
         sphere = GetComponent<SphereCollider>();
     }
 
-    Vector3 AdjustDirectionToSlope(Vector3 hitNormal, Vector3 direction)
-    {
-        return Vector3.ProjectOnPlane(direction, hitNormal).normalized;
-    }
-
     public void SetGimic()
     {
         float range = sphere.radius * 0.5f;
@@ -27,7 +22,6 @@ public class SummonPositionGimic : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Ground")))
         {
             summonZone.transform.position = hit.point;
-            summonZone.transform.LookAt(transform.position + AdjustDirectionToSlope(hit.normal, Vector3.forward));
         }
     }
 }

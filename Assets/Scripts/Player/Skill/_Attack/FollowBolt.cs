@@ -22,7 +22,7 @@ public class FollowBolt : BoltType
             {
                 if (SetTarget())
                 {
-                    transform.Translate((target.transform.position - transform.position) * speed * Time.deltaTime, Space.World);
+                    transform.Translate((target.transform.position + Vector3.up - transform.position) * speed * Time.deltaTime, Space.World);
                 }
                 else
                 {
@@ -31,7 +31,7 @@ public class FollowBolt : BoltType
             }
             else
             {
-                transform.Translate((target.transform.position - transform.position) * speed * Time.deltaTime, Space.World);
+                transform.Translate((target.transform.position + Vector3.up - transform.position) * speed * Time.deltaTime, Space.World);
             }
                 
             yield return new WaitForFixedUpdate();
@@ -46,7 +46,7 @@ public class FollowBolt : BoltType
         {
             if (collider.tag == "Enemy")
             {
-                pq.Enqueue(collider.gameObject, Vector3.Distance(transform.position, collider.transform.position));
+                pq.Enqueue(collider.gameObject, Vector3.SqrMagnitude(collider.transform.position - transform.position));
             }
         }
         if(pq.Count > 0)

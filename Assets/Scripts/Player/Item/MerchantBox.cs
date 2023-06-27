@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MerchantBox : MonoBehaviour
 {
@@ -14,7 +11,7 @@ public class MerchantBox : MonoBehaviour
     void Awake()
     {
         ItemData[] items = GameManager.Resource.LoadAll<ItemData>("Item");
-        cost = (int)((Random.Range(1, 10) + GameManager.Data.Time * 0.016f) * GameManager.Data.Difficulty);
+        cost = (int)((Random.Range(1, 10) + GameManager.Data.Records["Time"] * 0.016f) * GameManager.Data.Records["Difficulty"]);
         item = items[Random.Range(0, items.Length)];
         fall = true;
         costObject.GetComponentInChildren<TextMeshProUGUI>().text = cost.ToString();

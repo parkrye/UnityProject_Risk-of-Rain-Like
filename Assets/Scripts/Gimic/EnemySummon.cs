@@ -32,7 +32,7 @@ public class EnemySummon : MonoBehaviour
     /// </summary>
     /// <param name="location">중심 위치</param>
     /// <param name="distance">랜덤 거리</param>
-    /// <param name="path">에너미 데이터의 위치</param>
+    /// <param name="path">에너미 데이터의 경로</param>
     /// <returns>소환한 에너미 오브젝트</returns>
     public static GameObject RandomLocationSummon(Transform location, float distance, string path)
     {
@@ -67,11 +67,23 @@ public class EnemySummon : MonoBehaviour
     /// 특정한 위치에 특정한 에너미를 소환하는 메소드
     /// </summary>
     /// <param name="location">소환 위치</param>
-    /// <param name="path">소환할 에너미 데이터의 위치</param>
+    /// <param name="path">소환할 에너미 데이터의 경로</param>
     /// <returns>소환한 에너미 오브젝트</returns>
     public static GameObject TargetLocationSummon(Transform location, string path)
     {
         GameObject enemy = GameManager.Resource.Instantiate(GameManager.Resource.Load<EnemyData>(path).enemy, location.position, Quaternion.identity, true);
+        return enemy;
+    }
+
+    /// <summary>
+    /// 특정한 위치에 특정한 에너미를 소환하는 메소드
+    /// </summary>
+    /// <param name="location">소환 위치</param>
+    /// <param name="enemyData">소환할 에너미 데이터</param>
+    /// <returns>소환한 에너미 오브젝트</returns>
+    public static GameObject TargetLocationSummon(Transform location, EnemyData enemyData)
+    {
+        GameObject enemy = GameManager.Resource.Instantiate(enemyData.enemy, location.position, Quaternion.identity, true);
         return enemy;
     }
 }

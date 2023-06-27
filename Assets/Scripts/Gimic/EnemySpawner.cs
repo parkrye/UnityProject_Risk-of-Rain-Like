@@ -36,4 +36,10 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+
+    public void StopSpawn(LevelScene.LevelState levelState)
+    {
+        if(levelState == LevelScene.LevelState.Keep)
+            StopCoroutine(Spawner());
+    }
 }

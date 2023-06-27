@@ -21,7 +21,7 @@ public class Wizard_Action4A : Skill, IEnumeratable
         else
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
-            tower.GetComponent<Tower>().SetTower(hero.playerDataModel.AttackDamage * modifier);
+            tower.GetComponent<Tower>().SetTower(param[0] * modifier);
             CoolCheck = false;
             summon = false;
         }

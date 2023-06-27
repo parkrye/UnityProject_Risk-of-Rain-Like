@@ -35,4 +35,10 @@ public class ItemDropper : MonoBehaviour
             yield return new WaitForSeconds(dropDelay);
         }
     }
+
+    public void StopDrop(LevelScene.LevelState levelState)
+    {
+        if (levelState == LevelScene.LevelState.Keep)
+            StopCoroutine(ItemDropRoutine());
+    }
 }
