@@ -98,7 +98,7 @@ public class SelectUI : SceneUI
     void RightButton()
     {
         characterNum++;
-        if (characterNum > virtualCameras.Length)
+        if (characterNum >= virtualCameras.Length)
             characterNum = 0;
         MoveCamera();
     }
