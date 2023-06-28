@@ -6,10 +6,12 @@ public class PathFinder : MonoBehaviour
     /// <summary>
     /// 간단한 공중 길찾기
     /// </summary>
-    /// <param name="start">시작 트랜스폼. start는 end를 바라보고 있어야 함</param>
+    /// <param name="startT">시작 트랜스폼(방향용). start는 end를 바라보고 있어야 함</param>
+    /// <param name="start">시작 좌표</param>
     /// <param name="end">종료 좌표</param>
+    /// <param name="radius">몸통 크기</param>
     /// <returns>이동 좌표 스택</returns>
-    public static Stack<Vector3> PathFinding(Transform start, Vector3 end, float radius)
+    public static Stack<Vector3> PathFinding(Transform startT, Vector3 start, Vector3 end, float radius)
     {
         Stack<Vector3> answer = new Stack<Vector3>();   // 반환 스택
 
@@ -21,7 +23,7 @@ public class PathFinder : MonoBehaviour
 
         // 초기 노드를 저장
         Node startNode = new Node();
-        startNode.position = start.position + Vector3.up;
+        startNode.position = start;
         nodes.Add(startNode.position, startNode);
         pq.Enqueue(startNode, 0);
 
@@ -58,7 +60,7 @@ public class PathFinder : MonoBehaviour
                             continue;
 
                         // 현재 탐색한 좌표
-                        Vector3 findPosition = node.position + (x * start.right + y * start.up + z * start.forward) * moveModifier;
+                        Vector3 findPosition = node.position + (x * startT.right + y * startT.up + z * startT.forward) * moveModifier;
 
                         // 이미 방문한 좌표라면 패스
                         if (visited.ContainsKey(findPosition))
@@ -125,6 +127,7 @@ public class PathFinder : MonoBehaviour
     static bool CheckPassable(Vector3 start, Vector3 end, float radius, int sum = 0)
     {
         float distance;
+        // x, y, z 이동량에 따라 약 1, 1.4, 1.7의 거리를 가짐
         if (sum > 0)
         {
             if (sum == 1)
@@ -138,7 +141,7 @@ public class PathFinder : MonoBehaviour
         {
             distance = Vector3.Distance(start, end);
         }
-        // x, y, z 모두 1씩 이동한 경우의 길이가 약 1.7f
+
         if (Physics.SphereCast(start, radius, (end - start).normalized, out _, distance, LayerMask.GetMask("Ground")))
         {
             return false;
