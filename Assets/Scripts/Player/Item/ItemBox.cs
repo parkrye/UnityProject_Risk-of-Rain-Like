@@ -28,6 +28,7 @@ public class ItemBox : MonoBehaviour
     {
         if (fall)
             transform.Translate(Vector3.down * Time.deltaTime * 10f);
+        transform.Rotate(Vector3.up);
     }
 
     public void Interact()

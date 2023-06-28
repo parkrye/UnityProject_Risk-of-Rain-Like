@@ -2,13 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Enemy : MonoBehaviour, IHitable
+public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 {
     public EnemyData enemyData;
     [SerializeField] ParticleSystem bleedParticle;
     protected Animator animator;
 
-    public float hp, damage;
+    public float hp, damage, moveSpeed, attackSpeed;
     public bool bleed, attack;
     [SerializeField] bool onGizmo;
     public bool isStunned, isSlowed;
@@ -31,6 +31,8 @@ public abstract class Enemy : MonoBehaviour, IHitable
     {
         hp = enemyData.MaxHP * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
         damage = enemyData.Damage * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
+        moveSpeed = enemyData.MoveSpeed;
+        attackSpeed = enemyData.AttackSpeed;
         bleed = false;
         attack = false;
         GetComponent<SphereCollider>().radius = enemyData.Size;
@@ -44,25 +46,36 @@ public abstract class Enemy : MonoBehaviour, IHitable
         OnEnemyDieEvent?.Invoke();
     }
 
-    public void Hit(float damage)
+    public void Hit(float damage, float Time)
     {
-        hp -= damage;
-        GameManager.Data.Records["Damage"] += damage;
-        OnHPEvent?.Invoke(hp);
-        if (bleed)
+        StartCoroutine(HitRoutine(damage, Time));
+    }
+
+    public IEnumerator HitRoutine(float damage, float time)
+    {
+        float nowTime = 0f;
+        do
         {
-            ParticleSystem effect = GameManager.Resource.Instantiate(bleedParticle, transform.position, Quaternion.identity, true);
-            GameManager.Resource.Destroy(effect.gameObject, 2f);
-            bleed = false;
-        }
-        if (hp <= 0f)
-        {
-            Die();
-        }
-        else
-        {
-            animator.SetTrigger("Hit");
-        }
+            hp -= damage;
+            GameManager.Data.Records["Damage"] += damage;
+            OnHPEvent?.Invoke(hp);
+            if (bleed)
+            {
+                ParticleSystem effect = GameManager.Resource.Instantiate(bleedParticle, transform.position, Quaternion.identity, true);
+                GameManager.Resource.Destroy(effect.gameObject, 2f);
+                bleed = false;
+            }
+            if (hp <= 0f)
+            {
+                Die();
+            }
+            else
+            {
+                animator.SetTrigger("Hit");
+            }
+            nowTime += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        } while (nowTime < time);
     }
 
     public void Die()
@@ -115,4 +128,32 @@ public abstract class Enemy : MonoBehaviour, IHitable
     }
 
     protected abstract IEnumerator AttackRoutine();
+
+    public bool TranslateGradually(Vector3 dir, float distance)
+    {
+        if (!Physics.SphereCast(enemyPos, enemyData.Size, dir, out _, distance))
+        {
+            transform.position += dir * distance;
+            return true;
+        }
+        return false;
+    }
+
+    public bool TranslateSuddenly(Vector3 pos, bool ignoreGround = true)
+    {
+        if (ignoreGround)
+        {
+            transform.position = pos;
+            return true;
+        }
+        else
+        {
+            if (!Physics.SphereCast(enemyPos, enemyData.Size, Vector3.up, out _, 0f))
+            {
+                transform.position = pos;
+                return true;
+            }
+            return false;
+        }
+    }
 }

@@ -38,7 +38,7 @@ public class BombArrow : ArrowType
             foreach (Collider collider in colliders)
             {
                 IHitable hitable = collider.GetComponent<IHitable>();
-                hitable?.Hit(damage);
+                hitable?.Hit(damage, 0f);
             }
             GameManager.Resource.Destroy(gameObject);
         }

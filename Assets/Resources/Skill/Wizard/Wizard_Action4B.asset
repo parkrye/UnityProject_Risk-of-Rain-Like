@@ -9,17 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02482a485e42d3d49a0effc1bbd15acb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e8f250c5279df64b9a8879df9293eaf, type: 3}
   m_Name: Wizard_Action4B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 444
-  SkillDesc: 444
-  SkillIcon: {fileID: 21300000, guid: 022f16cfd7d5647188b31ae1abc00634, type: 3}
-  coolTime: 20
-  modifier: 0.03
+  SkillName: Gyro Bolt
+  SkillDesc: Using Black Hole Mechanism
+  SkillIcon: {fileID: 21300000, guid: 55502c66063344fb2b31606342a3cba5, type: 3}
+  coolTime: 10
+  modifier: 0.002
   actionNum: 7
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
-  skillRange: 20
+  drawPower: 10
+  drawRange: 2.5

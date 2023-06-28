@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -242,14 +243,25 @@ public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
 
     public UnityEvent OnLevelEvent, OnHPEvent, OnEXPEvent;
 
-    public void Hit(float _damage)
+    public void Hit(float damage, float Time)
     {
         if (!dodgeDamage)
         {
-            float damage = DamageOccurrence(_damage);
-            NOWHP -= damage;
-            GameManager.Data.Records["Hit"] += damage;
+            StartCoroutine(HitRoutine(damage, Time));
         }
+    }
+
+    public IEnumerator HitRoutine(float damage, float time)
+    {
+        float nowTime = 0f;
+        do
+        {
+            float _damage = DamageOccurrence(damage);
+            NOWHP -= _damage;
+            GameManager.Data.Records["Hit"] += _damage;
+            nowTime += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        } while (nowTime < time);
     }
 
     public void Die()

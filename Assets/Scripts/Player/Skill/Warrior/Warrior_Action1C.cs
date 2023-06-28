@@ -33,7 +33,7 @@ public class Warrior_Action1C : Skill, IEnumeratable, ICriticable
             if (!collider.CompareTag("Player"))
             {
                 IHitable hittable = collider.GetComponent<IHitable>();
-                hittable?.Hit(damage * modifier);
+                hittable?.Hit(damage * modifier, 0f);
             }
         }
     }

@@ -38,7 +38,7 @@ public class Warrior_Action4A : Skill, IEnumeratable, ICriticable
         foreach (Collider collider in colliders)
         {
             IHitable hittable = collider.GetComponent<IHitable>();
-            hittable?.Hit(damage * modifier);
+            hittable?.Hit(damage * modifier, 0f);
         }
 
         yield return new WaitForSeconds(0.5f / hero.playerDataModel.TimeScale);

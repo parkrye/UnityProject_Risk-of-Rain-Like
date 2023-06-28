@@ -61,7 +61,7 @@ public class FollowBolt : BoltType
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<IHitable>()?.Hit(damage);
+            other.GetComponent<IHitable>()?.Hit(damage, 0f);
             GameManager.Resource.Destroy(gameObject);
         }
     }

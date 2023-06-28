@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3aae5b7927975c449ceaff1d0c72b6b, type: 3}
+  m_Script: {fileID: 11500000, guid: b2e93d4faf0a0f44bb2010b40848047b, type: 3}
   m_Name: Wizard_Action1B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 111
-  SkillDesc: 111
-  SkillIcon: {fileID: 21300000, guid: 6d97d3b88bacf4e8bb4116ea752e1f91, type: 3}
+  SkillName: Follow Bolt
+  SkillDesc: Convenient Magic Bolt
+  SkillIcon: {fileID: 21300000, guid: 5e256e48be18d4d2ebc4bc0c1995af39, type: 3}
   coolTime: 1
-  modifier: 0.6
+  modifier: 0.2
   actionNum: 4
   CoolEvent:
     m_PersistentCalls:

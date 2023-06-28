@@ -20,7 +20,7 @@ public class Flame : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<IHitable>()?.Hit(damage);
+            other.GetComponent<IHitable>()?.Hit(damage, 0f);
         }
     }
 }

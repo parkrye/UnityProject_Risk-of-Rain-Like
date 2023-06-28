@@ -51,7 +51,7 @@ public class Boomerang : BoltType
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<IHitable>()?.Hit(damage);
+            other.GetComponent<IHitable>()?.Hit(damage, 0f);
         }
         
         if ((1 << other.gameObject.layer) == LayerMask.GetMask("Ground"))

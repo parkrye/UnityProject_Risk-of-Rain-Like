@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bat : Enemy, IMazable
+public class Bat : Enemy, IMezable
 {
     protected override void Awake()
     {
@@ -63,13 +63,13 @@ public class Bat : Enemy, IMazable
     public IEnumerator SlowRoutine(float time, float modifier)
     {
         isSlowed = true;
-        float prevMoveSpeed = enemyData.MoveSpeed;
-        float prevAttackSpeed = enemyData.AttackSpeed;
-        enemyData.MoveSpeed *= modifier;
-        enemyData.AttackSpeed *= modifier;
+        float prevMoveSpeed = moveSpeed;
+        float prevAttackSpeed = attackSpeed;
+        moveSpeed *= modifier;
+        attackSpeed *= modifier;
         yield return new WaitForSeconds(time);
-        enemyData.MoveSpeed = prevMoveSpeed;
-        enemyData.AttackSpeed = prevAttackSpeed;
+        moveSpeed = prevMoveSpeed;
+        attackSpeed = prevAttackSpeed;
         isSlowed = false;
     }
 
@@ -78,7 +78,8 @@ public class Bat : Enemy, IMazable
         float now = 0f;
         while (now < distance)
         {
-            transform.Translate(backFrom.forward * Time.deltaTime);
+            TranslateGradually(backFrom.forward, distance * Time.deltaTime);
+            //transform.Translate(distance * Time.deltaTime * backFrom.forward, Space.World);
             now += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }

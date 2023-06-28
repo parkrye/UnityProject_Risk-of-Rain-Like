@@ -15,14 +15,10 @@ MonoBehaviour:
   hero: {fileID: 0}
   SkillName: Energy Bolt
   SkillDesc: Shot a Energy Bolt to Foward
-  SkillIcon: {fileID: 21300000, guid: 4b6befbf133704370bb29da715e368c8, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 272d90eccf9a0491fa281608391c6274, type: 3}
   coolTime: 1
   modifier: 0.6
-  actionKeys:
-  - Action1
-  - Action2
-  - Action3
-  - Action4
+  actionNum: 0
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []

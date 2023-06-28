@@ -11,7 +11,7 @@ public class FlagArrow : ArrowType
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<IHitable>()?.Hit(damage);
+            other.GetComponent<IHitable>()?.Hit(damage, 0f);
             GameManager.Resource.Destroy(gameObject);
         }
         else if (1 << other.gameObject.layer == LayerMask.GetMask("Ground"))

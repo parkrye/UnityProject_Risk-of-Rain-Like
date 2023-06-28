@@ -20,7 +20,6 @@ public class DataManager : MonoBehaviour
             { "Damage", 0 },
             { "Heal", 0 },
             { "Hit", 0 },
-            { "Guard", 0 },
         };
     }
 

@@ -31,7 +31,7 @@ public class MerchantBox : MonoBehaviour
     {
         if (fall)
             transform.Translate(Vector3.down * Time.deltaTime * 10f);
-        transform.Rotate(Vector3.up * Time.deltaTime);
+        transform.Rotate(Vector3.up);
     }
 
     void LateUpdate()

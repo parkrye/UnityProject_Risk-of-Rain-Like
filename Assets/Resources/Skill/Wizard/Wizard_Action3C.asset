@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7bf5e13c536d074298ca19de0d7214a, type: 3}
+  m_Script: {fileID: 11500000, guid: ebd63b1051ae63643b04ba807595367c, type: 3}
   m_Name: Wizard_Action3C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 333
-  SkillDesc: 333
-  SkillIcon: {fileID: 21300000, guid: d6bf9fd619ff24ce58267141ada9bbaa, type: 3}
-  coolTime: 10
-  modifier: 0
+  SkillName: Super Jump
+  SkillDesc: It is Super
+  SkillIcon: {fileID: 21300000, guid: 4b4c678e6ad9e4873b02ca8ca35d778f, type: 3}
+  coolTime: 5
+  modifier: 0.2
   actionNum: 10
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
-  teleportDistance: 10
-  teleportCharge: 1.0099994
-  nowCharge: 0
+  jumpPower: 100
+  skillRange: 5
+  dodgeTime: 1

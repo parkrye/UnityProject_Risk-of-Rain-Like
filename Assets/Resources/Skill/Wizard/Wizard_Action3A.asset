@@ -16,7 +16,7 @@ MonoBehaviour:
   SkillName: Teleport
   SkillDesc: Teleport to Foward
   SkillIcon: {fileID: 21300000, guid: d5fc92820481b43a2986103f885cef46, type: 3}
-  coolTime: 10
+  coolTime: 20
   modifier: 0
   actionNum: 2
   CoolEvent:

@@ -89,10 +89,17 @@ public class ResourceManager : MonoBehaviour
 
     public void Destroy(GameObject go, float delay)
     {
-        if (GameManager.Pool.IsContain(go))
-            StartCoroutine(DelayReleaseRoutine(go, delay));
-        else
-            GameObject.Destroy(go, delay);
+        try
+        {
+            if (GameManager.Pool.IsContain(go))
+                StartCoroutine(DelayReleaseRoutine(go, delay));
+            else
+                GameObject.Destroy(go, delay);
+        }
+        catch
+        {
+
+        }
     }
 
     IEnumerator DelayReleaseRoutine(GameObject go, float delay)

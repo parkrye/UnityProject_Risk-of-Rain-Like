@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public interface IMazable
+public interface IMezable
 {
     public void Stuned(float time);
 

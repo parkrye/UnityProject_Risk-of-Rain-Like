@@ -15,7 +15,7 @@ public class EnemyFlame : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<IHitable>()?.Hit(damage);
+            other.GetComponent<IHitable>()?.Hit(damage, 0f);
         }
     }
 }

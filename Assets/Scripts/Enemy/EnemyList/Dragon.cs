@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Dragon : Enemy, IMazable
+public class Dragon : Enemy, IMezable
 {
     [SerializeField] Transform mouse;
     bool attacking;
@@ -101,10 +101,10 @@ public class Dragon : Enemy, IMazable
     public IEnumerator KnockBackRoutine(float distance, Transform backFrom)
     {
         float now = 0f;
-        Vector3 knockBackVector = backFrom.forward;
         while (now < distance)
         {
-            transform.Translate(distance * Time.deltaTime * knockBackVector, Space.World);
+            TranslateGradually(backFrom.forward, distance * Time.deltaTime);
+            //transform.Translate(distance * Time.deltaTime * knockBackVector, Space.World);
             now += Time.deltaTime * distance;
             yield return new WaitForFixedUpdate();
         }

@@ -31,7 +31,7 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        if (Physics.Raycast(ray, 0.3f, LayerMask.GetMask("Ground")))
+        if (Physics.Raycast(ray, 0.5f, LayerMask.GetMask("Ground")))
         {
             if (descending && playerDataModel.rb.velocity.y < 0f)
             {

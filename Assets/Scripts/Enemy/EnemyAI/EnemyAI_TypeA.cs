@@ -52,31 +52,40 @@ public class EnemyAI_TypeA : EnemyAI
 
     AI_State StateCheck()
     {
-        float distance = Vector3.Distance(playerPos, enemy.enemyPos);
         playerPos = playerTransform.position + Vector3.up;
+        float distance = Vector3.Distance(playerPos, enemy.enemyPos);
 
-        if (Vector3.SqrMagnitude(playerPos - enemy.enemyPos) <= Mathf.Pow(enemy.enemyData.Range, 2))
+        if (distance <= enemy.enemyData.Range)
         {
-            if (!Physics.Raycast(enemy.enemyPos, (playerPos - enemy.enemyPos).normalized, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+            if(state != AI_State.Attack)
             {
-                enemy.StartAttack();
-                StopCoroutine(FindBypass());
-                return AI_State.Attack;
+                if (!Physics.Raycast(enemy.enemyPos, (playerPos - enemy.enemyPos).normalized, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+                {
+                    enemy.StartAttack();
+                    StopCoroutine(FindBypass());
+                    return AI_State.Attack;
+                }
             }
         }
 
-        if (Physics.SphereCast(enemy.enemyPos, enemy.enemyData.Size, (playerPos - enemy.enemyPos).normalized, out _, distance - enemy.enemyData.yModifier, LayerMask.GetMask("Ground")))
+        if(state != AI_State.Bypass)
         {
-            enemy.StopAttack();
-            StartCoroutine(FindBypass());
-            return AI_State.Bypass;
+            if (Physics.SphereCast(enemy.enemyPos, enemy.enemyData.Size, (playerPos - enemy.enemyPos).normalized, out _, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+            {
+                enemy.StopAttack();
+                StartCoroutine(FindBypass());
+                return AI_State.Bypass;
+            }
         }
-        else
+
+        if(distance > enemy.enemyData.Range)
         {
             enemy.StopAttack();
             StopCoroutine(FindBypass());
             return AI_State.Approach;
         }
+
+        return state;
     }
 
     void ApproachMove()
@@ -103,7 +112,7 @@ public class EnemyAI_TypeA : EnemyAI
 
     void DumbMove()
     {
-        transform.Rotate(Vector3.up * Time.deltaTime * 10f);
+        transform.Rotate(Vector3.up);
         deleteTimer += Time.deltaTime;
         if(deleteTimer > 60f)
             GameManager.Resource.Destroy(gameObject);
@@ -116,7 +125,7 @@ public class EnemyAI_TypeA : EnemyAI
             if (Vector3.SqrMagnitude(playerPos - prevPlayerPosition) > 9f || bypass.Count == 0)
             {
                 transform.LookAt(playerPos);
-                bypass = PathFinder.PathFinding(transform, playerPos, enemy.enemyData.Size);
+                bypass = PathFinder.PathFinding(transform, enemy.enemyPos, playerPos, enemy.enemyData.Size);
                 prevPlayerPosition = playerPos;
             }
 

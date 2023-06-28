@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// 마법탄을 발사
+/// 마법탄 발사
 /// </summary>
 [CreateAssetMenu(fileName = "Wizard_Action1A", menuName = "Data/Skill/Wizard/Action1A")]
 public class Wizard_Action1A : Skill, ICriticable
