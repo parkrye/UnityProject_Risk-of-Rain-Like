@@ -36,6 +36,7 @@ public abstract class Enemy : MonoBehaviour, IHitable
         GetComponent<SphereCollider>().radius = enemyData.Size;
         StopCoroutine(AttackRoutine());
         StartCoroutine(BleedingRoutine());
+        StartCoroutine(AttackRoutine());
     }
 
     void OnDisable()
@@ -95,16 +96,12 @@ public abstract class Enemy : MonoBehaviour, IHitable
     {
         if(hp > 0)
         {
-            if(!attack)
-                StartCoroutine(AttackRoutine());
             attack = true;
         }
     }
 
     public virtual void StopAttack()
     {
-        if(attack)
-            StopCoroutine(AttackRoutine());
         attack = false;
     }
 
@@ -118,46 +115,4 @@ public abstract class Enemy : MonoBehaviour, IHitable
     }
 
     protected abstract IEnumerator AttackRoutine();
-
-    public void KnockBack(float distance, Transform backFrom)
-    {
-        StartCoroutine(KnockBackRoutine(distance, backFrom));
-    }
-
-    public IEnumerator StunRoutine(float time)
-    {
-        isStunned = true;
-        animator.SetBool("Stun", isStunned);
-        StopAttack();
-        StopCoroutine(AttackRoutine());
-        yield return new WaitForSeconds(time);
-        isStunned = false;
-        animator.SetBool("Stun", isStunned);
-        StartAttack();
-        StartCoroutine(AttackRoutine());
-    }
-
-    public IEnumerator SlowRoutine(float time, float modifier)
-    {
-        isSlowed = true;
-        float prevMoveSpeed = enemyData.MoveSpeed;
-        float prevAttackSpeed = enemyData.AttackSpeed;
-        enemyData.MoveSpeed *= modifier;
-        enemyData.AttackSpeed *= modifier;
-        yield return new WaitForSeconds(time);
-        enemyData.MoveSpeed = prevMoveSpeed;
-        enemyData.AttackSpeed = prevAttackSpeed;
-        isSlowed = false;
-    }
-
-    public IEnumerator KnockBackRoutine(float distance, Transform backFrom)
-    {
-        float now = 0f;
-        while(now < distance)
-        {
-            transform.Translate(backFrom.forward * Time.deltaTime);
-            now += Time.deltaTime;
-            yield return new WaitForFixedUpdate();
-        }
-    }
 }

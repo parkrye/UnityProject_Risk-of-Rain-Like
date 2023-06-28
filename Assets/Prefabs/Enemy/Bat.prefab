@@ -1426,6 +1426,10 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 3143585279466658270}
+    - target: {fileID: 7763726094247414230, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
 --- !u!224 &3691342199496683475 stripped

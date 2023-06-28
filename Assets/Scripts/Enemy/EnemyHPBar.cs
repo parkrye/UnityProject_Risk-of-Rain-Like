@@ -10,7 +10,7 @@ public class EnemyHPBar : MonoBehaviour
     void Awake()
     {
         slider = GetComponent<Slider>();
-        slider.GetComponent<RectTransform>().localPosition = new Vector3(0f, enemy.enemyData.Size * 1.5f, 0f);
+        slider.GetComponent<RectTransform>().localPosition = new Vector3(0f, enemy.enemyData.Size + enemy.enemyData.yModifier + 0.5f, 0f);
         slider.GetComponent<RectTransform>().sizeDelta = new Vector2(enemy.enemyData.Size, enemy.enemyData.Size * 0.5f);
         slider.maxValue = enemy.enemyData.MaxHP;
         slider.value = enemy.hp;

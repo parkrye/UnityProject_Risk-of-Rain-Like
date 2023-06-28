@@ -102,8 +102,7 @@ public class EnemyAI_TypeA : EnemyAI
 
     void DumbMove()
     {
-        transform.LookAt(Vector3.up);
-        transform.Translate(enemy.enemyData.MoveSpeed * Time.deltaTime * Vector3.up, Space.World);
+        transform.Rotate(Vector3.up * Time.deltaTime * 10f);
     }
 
     IEnumerator FindBypass()
