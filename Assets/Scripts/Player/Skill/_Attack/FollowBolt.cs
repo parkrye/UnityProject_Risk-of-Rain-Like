@@ -22,16 +22,16 @@ public class FollowBolt : BoltType
             {
                 if (SetTarget())
                 {
-                    transform.Translate((target.transform.position + Vector3.up - transform.position) * speed * Time.deltaTime, Space.World);
+                    transform.Translate(speed * Time.deltaTime * (target.transform.position + Vector3.up - transform.position).normalized, Space.World);
                 }
                 else
                 {
-                    transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+                    transform.Translate(speed * Time.deltaTime * transform.forward, Space.World);
                 }
             }
             else
             {
-                transform.Translate((target.transform.position + Vector3.up - transform.position) * speed * Time.deltaTime, Space.World);
+                transform.Translate(speed * Time.deltaTime * (target.transform.position + Vector3.up - transform.position).normalized, Space.World);
             }
                 
             yield return new WaitForFixedUpdate();
@@ -44,7 +44,7 @@ public class FollowBolt : BoltType
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in colliders)
         {
-            if (collider.tag == "Enemy")
+            if (collider.CompareTag("Enemy"))
             {
                 pq.Enqueue(collider.gameObject, Vector3.SqrMagnitude(collider.transform.position - transform.position));
             }
@@ -55,5 +55,14 @@ public class FollowBolt : BoltType
             return true;
         }
         return false;
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            other.GetComponent<IHitable>()?.Hit(damage);
+            GameManager.Resource.Destroy(gameObject);
+        }
     }
 }

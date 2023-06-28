@@ -54,11 +54,11 @@ public class ArrowType : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
-            GameManager.Pool.Release(gameObject);
+            GameManager.Resource.Destroy(gameObject);
         }
         else if (1 << other.gameObject.layer == LayerMask.GetMask("Ground"))
         {
-            GameManager.Pool.Release(gameObject);
+            GameManager.Resource.Destroy(gameObject);
         }
     }
 }

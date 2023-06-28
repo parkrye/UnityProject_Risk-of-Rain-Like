@@ -57,12 +57,12 @@ public class Boomerang : BoltType
         if ((1 << other.gameObject.layer) == LayerMask.GetMask("Ground"))
         {
             back = false;
-            GameManager.Pool.Release(gameObject);
+            GameManager.Resource.Destroy(gameObject);
         }
         else if(back && other.CompareTag("Player"))
         {
             back = false;
-            GameManager.Pool.Release(gameObject);
+            GameManager.Resource.Destroy(gameObject);
         }
     }
 }

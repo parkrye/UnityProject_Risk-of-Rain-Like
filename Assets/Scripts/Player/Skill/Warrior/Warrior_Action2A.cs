@@ -4,7 +4,7 @@ using UnityEngine;
 /// 방패 올리기
 /// </summary>
 [CreateAssetMenu(fileName = "Warrior_Action2A", menuName = "Data/Skill/Warrior/Action2A")]
-public class Warrior_Action2A : Skill
+public class Warrior_Action2A : Skill, IDamageSubscriber
 {
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -12,7 +12,7 @@ public class Warrior_Action2A : Skill
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.playerDataModel.animator.SetBool("Guard", true);
-            hero.playerDataModel.Buff(3, modifier);
+            hero.playerDataModel.AddDamageSubscriber(this);
 
             CoolCheck = false;
 
@@ -21,8 +21,13 @@ public class Warrior_Action2A : Skill
         else
         {
             hero.playerDataModel.animator.SetBool("Guard", false);
-            hero.playerDataModel.Buff(3, 1 / modifier);
+            hero.playerDataModel.RemoveDamageSubscriber(this);
         }
         return false;
+    }
+
+    public float ModifiyDamage(float _damage)
+    {
+        return _damage * 0.5f;
     }
 }

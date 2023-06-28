@@ -5,13 +5,13 @@ public class BoltType : MonoBehaviour
 {
     protected TrailRenderer[] trails;
     protected float damage;
-    protected Collider coll;
+    protected SphereCollider coll;
     [SerializeField] protected float speed, yModifier;
 
     protected virtual void Awake()
     {
         trails = GetComponentsInChildren<TrailRenderer>();
-        coll = GetComponentInChildren<Collider>();
+        coll = GetComponentInChildren<SphereCollider>();
     }
 
     void OnEnable()
@@ -50,12 +50,13 @@ public class BoltType : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         foreach (TrailRenderer trail in trails)
         {
             trail.Clear();
         }
+        StopAllCoroutines();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -63,11 +64,11 @@ public class BoltType : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<IHitable>()?.Hit(damage);
-            GameManager.Pool.Release(gameObject);
+            GameManager.Resource.Destroy(gameObject);
         }
         else if ((1 << other.gameObject.layer) == LayerMask.GetMask("Ground"))
         {
-            GameManager.Pool.Release(gameObject);
+            GameManager.Resource.Destroy(gameObject);
         }
     }
 }

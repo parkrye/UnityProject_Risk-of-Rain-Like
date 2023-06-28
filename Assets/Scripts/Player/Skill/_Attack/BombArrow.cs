@@ -40,7 +40,7 @@ public class BombArrow : ArrowType
                 IHitable hitable = collider.GetComponent<IHitable>();
                 hitable?.Hit(damage);
             }
-            GameManager.Pool.Release(gameObject);
+            GameManager.Resource.Destroy(gameObject);
         }
     }
 }
