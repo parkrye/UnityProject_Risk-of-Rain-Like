@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SocialPlatforms;
 
-public class PlayerDataModel : MonoBehaviour, IHitable
+public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
 {
     public Hero hero;
     List<Hero> heroList;
@@ -118,7 +118,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
             status[2] = value;
         }
     }
-    public float ArmorPoint
+    public float CriticalProbability
     {
         get
         {
@@ -129,7 +129,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
             status[3] = value;
         }
     }
-    public float CriticalProbability
+    public float CriticalRatio
     {
         get
         {
@@ -138,17 +138,6 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         set
         {
             status[4] = value;
-        }
-    }
-    public float CriticalRatio
-    {
-        get
-        {
-            return status[5] * buffModifier[5];
-        }
-        set
-        {
-            status[5] = value;
         }
     }
     public float coolTime;
@@ -174,7 +163,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     /// <summary>
     /// 사용시 곱할 값, 취소시 곱한 값의 역수 입력
-    /// 0: 이동속도, 1: 점프높이, 2: 공격력, 3: 방어력, 4: 치명타 확률, 5: 치명타 배율
+    /// 0: 이동속도, 1: 점프높이, 2: 공격력, 3: 치명타 확률, 4: 치명타 배율
     /// </summary>
     public void Buff(int num, float value)
     {
@@ -186,8 +175,9 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     public Transform playerTransform
     {
         get { return transform; }
-        set { transform.position = value.position;
-            transform.rotation = value.rotation;
+        set 
+        {
+            transform.SetPositionAndRotation(value.position, value.rotation);
             transform.localScale = value.localScale;
         }
     }
@@ -208,12 +198,14 @@ public class PlayerDataModel : MonoBehaviour, IHitable
         inventory = GetComponent<Inventory>();
 
         TimeScale = 1f;
-        status = new float[6] { 5f, 10f, 5f, 1f, 1f, 1.2f };
-        buffModifier = new float[6] { 1f, 1f, 1f, 1f, 1f, 1f };
+        status = new float[5] { 5f, 10f, 5f, 1f, 1.2f };
+        buffModifier = new float[5] { 1f, 1f, 1f, 1f, 1f };
 
         coolChecks = new bool[4];
         for (int i = 0; i < coolChecks.Length; i++)
             coolChecks[i] = true;
+
+        damageSubscribers = new List<IDamageSubscriber>();
 
         DontDestroyOnLoad(gameObject);
     }
@@ -250,13 +242,13 @@ public class PlayerDataModel : MonoBehaviour, IHitable
 
     public UnityEvent OnLevelEvent, OnHPEvent, OnEXPEvent;
 
-    public void Hit(float damage)
+    public void Hit(float _damage)
     {
         if (!dodgeDamage)
         {
-            NOWHP -= damage * ArmorPoint;
-            GameManager.Data.Records["Hit"] += damage * ArmorPoint;
-            GameManager.Data.Records["Guard"] += damage - damage * ArmorPoint;
+            float damage = DamageOccurrence(_damage);
+            NOWHP -= damage;
+            GameManager.Data.Records["Hit"] += damage;
         }
     }
 
@@ -264,6 +256,34 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     {
         Debug.Log("you died");
         GameManager.Data.RecordTime = false;
+    }
+
+    List<IDamageSubscriber> damageSubscribers;
+
+    public void AddDamageSubscriber(IDamageSubscriber _subscriber)
+    {
+        damageSubscribers.Add(_subscriber);
+    }
+
+    public void RemoveDamageSubscriber(IDamageSubscriber _subscriber)
+    {
+        for(int i = damageSubscribers.Count - 1; i >= 0; i--)
+        {
+            if (damageSubscribers[i].Equals(_subscriber))
+            {
+                damageSubscribers.RemoveAt(i);
+            }
+        }
+    }
+
+    public float DamageOccurrence(float _damage)
+    {
+        float damage = _damage;
+        for (int i = 0; i < damageSubscribers.Count; i++)
+        {
+            damage = damageSubscribers[i].ModifiyDamage(damage);
+        }
+        return damage;
     }
 
     int coin;

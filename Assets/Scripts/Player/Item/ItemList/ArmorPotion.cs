@@ -1,15 +1,22 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ArmorPotion", menuName = "Data/Item/ArmorPotion")]
-public class ArmorPotion : ItemData
+public class ArmorPotion : ItemData, IDamageSubscriber
 {
+    [SerializeField] float armorRatio;
     public override void GetFirstEffect()
     {
-        GameManager.Data.Player.ArmorPoint *= 0.9f;
+        GameManager.Data.Player.AddDamageSubscriber(this);
+        armorRatio = 0.9f;
     }
 
     public override void GetNextEffect()
     {
-        GameManager.Data.Player.ArmorPoint *= 0.95f;
+        armorRatio *= 0.9f;
+    }
+
+    public float ModifiyDamage(float _damage)
+    {
+        return armorRatio * _damage;
     }
 }
