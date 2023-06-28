@@ -14,6 +14,7 @@ public class EnemyAI_TypeA : EnemyAI
     Vector3 prevPlayerPosition;
     [SerializeField] bool onGizmo;
     Vector3 playerPos;
+    [SerializeField] float deleteTimer;
 
     protected override void Awake()
     {
@@ -103,6 +104,9 @@ public class EnemyAI_TypeA : EnemyAI
     void DumbMove()
     {
         transform.Rotate(Vector3.up * Time.deltaTime * 10f);
+        deleteTimer += Time.deltaTime;
+        if(deleteTimer > 60f)
+            GameManager.Resource.Destroy(gameObject);
     }
 
     IEnumerator FindBypass()
