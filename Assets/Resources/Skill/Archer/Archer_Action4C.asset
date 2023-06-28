@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action4C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: 
-  SkillDesc: 
+  SkillName: Pierce Shot
+  SkillDesc: One Hand Three Arrows
   SkillIcon: {fileID: 21300000, guid: d0abed84aa6f5489fb1695cbcafffef0, type: 3}
   coolTime: 0.5
   modifier: 1

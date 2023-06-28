@@ -2164,6 +2164,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 88414381471268810}
   - {fileID: 2309519105339332795}
   m_Father: {fileID: 5383197575152445305}
   m_RootOrder: 4
@@ -3927,7 +3928,13 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Toe0'\n\tTransform
+    'Bip001 Spine1'\n\tTransform 'Bip001 R Calf'\n\tTransform 'Bip001 Spine'\n\tTransform
+    'Bip001 R Thigh'\n\tTransform 'Bip001 L Foot'\n\tTransform 'Bip001'\n\tTransform
+    'Bip001 L Thigh'\n\tTransform 'Bip001 R Foot'\n\tand more ...\n\tFrom animation
+    clip 'throw2'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -4674,7 +4681,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3503266946974414143}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4145458974699424206
 GameObject:
@@ -5340,13 +5347,12 @@ MonoBehaviour:
   level: 1
   status: []
   coolTime: 1
-  criticalProbability: 0
-  ciriticalRatio: 1.5
   jumpLimit: 1
   jumpCount: 0
   attackCooldown: 0
   controllable: 1
   dodgeDamage: 0
+  onGizmo: 1
   mouseSensivity: 10
   playerTimeScale: 1
   buffModifier: []
@@ -5396,6 +5402,7 @@ MonoBehaviour:
   lookAtTransform: {fileID: 2309519105339332795}
   lookFromTransform: {fileID: 3503266946974414143}
   interactTransform: {fileID: 3503266946974414143}
+  closeAttackTransform: {fileID: 88414381471268810}
   closeAttackRange: 1
   interactRange: 2
 --- !u!114 &6949231124553317690
@@ -5551,6 +5558,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.15645763, y: -0.002978608, z: -0.0138477385}
     m_Extent: {x: 0.20748457, y: 0.19796322, z: 0.1897618}
   m_DirtyAABB: 0
+--- !u!1 &4648765355355815357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88414381471268810}
+  m_Layer: 0
+  m_Name: CloseAttackTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &88414381471268810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4648765355355815357}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3503266946974414143}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4682679655625422935
 GameObject:
   m_ObjectHideFlags: 0
@@ -8341,7 +8379,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  attackTransform: {fileID: 2761276701445116720}
+  attackTransform: {fileID: 8556211554490718332}
   jumpCharge: 0
   ActionEvent:
     m_PersistentCalls:

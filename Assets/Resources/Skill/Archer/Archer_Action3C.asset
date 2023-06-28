@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
   SkillName: Anchor Arrow
-  SkillDesc: to the Titan
+  SkillDesc: Attack on Titan
   SkillIcon: {fileID: 21300000, guid: 2b0a4df3dbba1408bb9f322d40c4e86a, type: 3}
   coolTime: 10
   modifier: 0
@@ -22,4 +22,4 @@ MonoBehaviour:
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
-  anchorPower: 100
+  anchorPower: 50

@@ -6,7 +6,7 @@ public class PlayerActionController : MonoBehaviour
     PlayerDataModel playerDataModel;
     public Transform AttackTransform;
 
-    public Transform lookAtTransform, lookFromTransform, interactTransform;
+    public Transform lookAtTransform, lookFromTransform, interactTransform, closeAttackTransform;
     public float closeAttackRange, interactRange;
     float cosResult;
 
@@ -72,5 +72,14 @@ public class PlayerActionController : MonoBehaviour
     void OnInteract(InputValue inputValue)
     {
         Interact();
+    }
+
+    void OnDrawGizmos()
+    {
+        if (playerDataModel.onGizmo)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(closeAttackTransform.position, closeAttackRange);
+        }
     }
 }

@@ -37,13 +37,11 @@ public class Archer_Action3C : Skill, IEnumeratable, ICriticable
     {
         while (!anchorOn)
         {
-            CoolCheck = false;
             yield return null;
         }
 
         hero.playerDataModel.playerMovement.dirModifier += (anchorTransform.position - hero.playerDataModel.playerTransform.position).normalized * anchorPower;
 
         anchorOn = false;
-        CoolCheck = true;
     }
 }

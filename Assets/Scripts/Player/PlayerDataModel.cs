@@ -153,7 +153,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable
     }
     public float coolTime;
     public int jumpLimit, jumpCount;
-    public bool attackCooldown, controllable, dodgeDamage;
+    public bool attackCooldown, controllable, dodgeDamage, onGizmo;
 
     public float mouseSensivity;
     [SerializeField] float playerTimeScale;
