@@ -44,7 +44,7 @@ public class MerchantBox : MonoBehaviour
         if (GameManager.Data.Player.Coin >= cost)
         {
             GameManager.Data.Player.Coin -= cost;
-            GameManager.Data.Player.inventory.AddItem(item);
+            GameManager.Data.Player.Inventory.AddItem(item);
             GameManager.Resource.Destroy(gameObject);
         }
     }

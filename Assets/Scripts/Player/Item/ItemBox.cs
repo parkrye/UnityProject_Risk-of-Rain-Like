@@ -33,7 +33,7 @@ public class ItemBox : MonoBehaviour
 
     public void Interact()
     {
-        GameManager.Data.Player.inventory.AddItem(item);
+        GameManager.Data.Player.Inventory.AddItem(item);
         GameManager.Resource.Destroy(gameObject);
     }
 }

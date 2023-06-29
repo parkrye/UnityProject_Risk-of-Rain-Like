@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 플레이어 캐릭터의 데이터 저장소와 플레이어 캐릭터와 연관된 스크립트들의 중간 매체 역할을 하는 스크립트
@@ -17,14 +18,15 @@ public class PlayerDataModel : MonoBehaviour
     public Animator animator;                           // 캐릭터 애니메이터(직업에 포함된 애니메이터를 참조)
     public Rigidbody rb;                                // 캐릭터 강체
     public Inventory inventory;                         // 캐릭터 인벤토리
+    public Inventory Inventory { get { return inventory; } set { inventory = value; } }
 
     [SerializeField] float maxHP, nowHP, exp;   // 최대 체력, 현재 체력, 현재 경험치
     [SerializeField] int level, coin;           // 현재 레벨, 현재 금화
     [SerializeField] float[] status;            // 능력치 배열(이동속도, 점프높이, 공격력, 치명타 확률, 치명타 배율)
     public float[] buffModifier;                // 각 능력치에 대한 버프 배열
 
-    public int jumpLimit, jumpCount;                                        // 한계 점프 수, 현재 점프 수
-    public bool attackCooldown, controllable, dodgeDamage, onGizmo, onESC;  // 공격 쿨타임 여부, 조종 가능 여부, 회피 여부, 기즈모 출력 여부, ESC창 여부
+    public int jumpLimit, jumpCount;                                                // 한계 점프 수, 현재 점프 수
+    public bool attackCooldown, controllable, dodgeDamage, onGizmo, onESC, alive;   // 공격 쿨타임 여부, 조종 가능 여부, 회피 여부, 기즈모 출력 여부, ESC창 여부
 
     public float coolTime;                  // 쿨타임
     public bool[] coolChecks = new bool[4]; // 각 액션에 대한 쿨타임 여부
@@ -58,10 +60,10 @@ public class PlayerDataModel : MonoBehaviour
         playerMovement = GetComponent<PlayerMovementController>();
         playerCamera = GetComponent<PlayerCameraController>();
         playerSystem = GetComponent<PlayerSystemController>();
-        inventory = GetComponent<Inventory>();
+        Inventory = GetComponent<Inventory>();
 
         TimeScale = 1f;
-        status = new float[5] { 5f, 10f, 5f, 1f, 1.2f };
+        status = new float[5] { 5f, 10f, 10f, 1f, 1.2f };
         buffModifier = new float[5] { 1f, 1f, 1f, 1f, 1f };
 
         coolChecks = new bool[4];
@@ -69,6 +71,7 @@ public class PlayerDataModel : MonoBehaviour
             coolChecks[i] = true;
 
         damageSubscribers = new List<IDamageSubscriber>();
+        alive = true;
 
         DontDestroyOnLoad(gameObject);
     }
@@ -93,12 +96,17 @@ public class PlayerDataModel : MonoBehaviour
         {
             if (value <= 0f)
             {
-                playerSystem.Die();
-                OnHPEvent?.Invoke();
+                if (alive)
+                {
+                    alive = false;
+                    OnHPEvent?.Invoke();
+                    playerSystem.Die();
+                }
             }
             else
             {
-                GameManager.Data.Records["Heal"] += value - nowHP;
+                if(value >= nowHP)
+                    GameManager.Data.Records["Heal"] += value - nowHP;
                 if(value > MAXHP)
                     nowHP = MAXHP;
                 else

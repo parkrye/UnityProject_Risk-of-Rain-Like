@@ -4,9 +4,12 @@ using UnityEngine.Events;
 
 public class DataManager : MonoBehaviour
 {
-    public bool RecordTime;
+    bool recordTime;
+    Dictionary<string, float> records;
+
     public UnityEvent TimeClock;
-    public Dictionary<string, float> Records;
+    public bool RecordTime { get { return recordTime; } set { recordTime = value; } }
+    public Dictionary<string, float> Records { get { return records; } set { records = value; } }
 
     public PlayerDataModel Player { get; set; }
 
@@ -14,7 +17,7 @@ public class DataManager : MonoBehaviour
     {
         if (RecordTime)
         {
-            Records["Time"] += UnityEngine.Time.deltaTime;
+            Records["Time"] += Time.deltaTime;
             TimeClock?.Invoke();
         }
     }

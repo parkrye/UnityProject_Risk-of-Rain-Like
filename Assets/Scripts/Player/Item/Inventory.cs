@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
     Dictionary<ItemData, int> inventory;
     public UnityEvent<ItemData, int> ItemEvent;
 
+    public Dictionary<ItemData, int> GetInventory {  get { return inventory; } }
+
     void Awake()
     {
         inventory = new Dictionary<ItemData, int>();

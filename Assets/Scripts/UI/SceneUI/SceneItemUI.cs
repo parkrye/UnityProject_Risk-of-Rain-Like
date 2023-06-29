@@ -5,7 +5,7 @@ public class SceneItemUI : SceneUI
 {
     public override void Initialize()
     {
-        GameManager.Data.Player.inventory.ItemEvent.AddListener(AddItem);
+        GameManager.Data.Player.Inventory.ItemEvent.AddListener(AddItem);
     }
 
     /// <summary>

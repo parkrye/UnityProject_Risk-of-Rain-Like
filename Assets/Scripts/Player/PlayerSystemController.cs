@@ -21,6 +21,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         {
             foreach (var hero in playerDataModel.heroList)
                 hero.gameObject.SetActive(false);
+            playerDataModel.heroNum = num;
             playerDataModel.heroList[num].gameObject.SetActive(true);
             playerDataModel.hero = playerDataModel.heroList[num];
             playerDataModel.animator = playerDataModel.hero.animator;
@@ -72,8 +73,8 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
 
     public void Die()
     {
-        Debug.Log("you died");
         GameManager.Data.RecordTime = false;
+        GameManager.UI.ShowPopupUI<PopUpUI>("UI/RecordUI");
     }
 
     public void AddDamageSubscriber(IDamageSubscriber _subscriber)
