@@ -9,7 +9,7 @@ public class BossSummon : MonoBehaviour
     [SerializeField] bool inArea, startSummon, onGizmo;
     [SerializeField] Transform bossTransform;
     [SerializeField] GameObject zone, gate;
-    EnemyData bossData;
+    [SerializeField] EnemyData bossData;
 
     public UnityEvent<LevelScene.LevelState> ObjectStateEvent;
 
@@ -30,7 +30,7 @@ public class BossSummon : MonoBehaviour
     IEnumerator SummonCharge()
     {
         startSummon = true;
-        counter = 0;
+        counter = 1;
         GetComponent<SphereCollider>().radius = chargeDistance;
         GetComponent<CircleDrawer>().Setting(transform.position + Vector3.up, 60, chargeDistance * 0.5f);
         ObjectStateEvent?.Invoke(LevelScene.LevelState.Keep);
@@ -39,22 +39,22 @@ public class BossSummon : MonoBehaviour
         {
             if (inArea)
             {
-                charge += Time.deltaTime;
+                charge += 0.1f;
             }
 
-            if(charge > counter * (chargeTime * 0.2f))
+            if(charge > counter * (chargeTime * 0.3f))
             {
                 counter++;
                 SummonGuardians();
             }
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
         SummonBoss();
     }
 
     void SummonGuardians()
     {
-        for(int i = 0; i < counter * 5; i++)
+        for(int i = 0; i < counter + GameManager.Data.Records["Difficulty"]; i++)
         {
             EnemySummon.RandomLocationSummon(transform, 30f);
         }
@@ -64,7 +64,7 @@ public class BossSummon : MonoBehaviour
     {
         zone.SetActive(false);
         ObjectStateEvent?.Invoke(LevelScene.LevelState.Fight);
-        GameObject boss = EnemySummon.TargetLocationSummon(bossTransform, bossData);
+        GameObject boss = EnemySummon.TargetLocationSummon(bossTransform, bossData); // 현재 여기서 중단됨
         boss.GetComponent<Boss>().OnEnemyDieEvent.AddListener(BeatBoss);
     }
 

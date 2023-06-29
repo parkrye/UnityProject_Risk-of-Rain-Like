@@ -32,8 +32,8 @@ public class Dragon : Enemy, IMezable
     IEnumerator Breath()
     {
         attacking = true;
-        enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), mouse.position, Quaternion.identity, transform);
-        enemyFlame.transform.LookAt(mouse.position + transform.forward);
+        enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), attackTransform.position, Quaternion.identity, transform);
+        enemyFlame.transform.LookAt(attackTransform.position + transform.forward);
         enemyFlame.GetComponent<EnemyFlame>().Shot(damage);
         yield return new WaitForSeconds(enemyData.floatdatas[0]);
         GameManager.Resource.Destroy(enemyFlame);

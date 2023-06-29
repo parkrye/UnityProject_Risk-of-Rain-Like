@@ -16,7 +16,7 @@ public class Bat : Enemy, IMezable
             if (attack && !isStunned)
             {
                 animator.SetTrigger("Attack");
-                GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), transform.position + Vector3.up, Quaternion.identity, true);
+                GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), attackTransform.position, Quaternion.identity, true);
                 enemyBolt.GetComponent<EnemyBolt>().Shot(GameManager.Data.Player.transform.position, damage);
                 yield return new WaitForSeconds(enemyData.AttackSpeed);
             }

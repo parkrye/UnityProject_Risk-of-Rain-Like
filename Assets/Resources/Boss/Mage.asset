@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c2c7d60fd7855045938c261fe243b3f, type: 3}
-  m_Name: Golem
+  m_Name: Mage
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1706760125350986, guid: 45f36e2270151a542be4982f9f1dd581, type: 3}
-  MaxHP: 100
-  Damage: 20
-  Range: 10
-  AttackSpeed: 5
-  MoveSpeed: 0
+  enemy: {fileID: 1201003157251696, guid: f397a44c833ad65409eba4bce5ea62ed, type: 3}
+  MaxHP: 80
+  Damage: 5
+  Range: 20
+  AttackSpeed: 1
+  MoveSpeed: 2
   Exp: 30
   Size: 1
   yModifier: 1.5
-  Coin: 20
+  Coin: 30
   floatdatas:
-  - 1
-  - 5
+  - 1.3

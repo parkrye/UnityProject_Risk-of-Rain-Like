@@ -13,13 +13,13 @@ public class EnemyHPBar : MonoBehaviour
         slider.GetComponent<RectTransform>().localPosition = new Vector3(0f, enemy.enemyData.Size + enemy.enemyData.yModifier + 0.5f, 0f);
         slider.GetComponent<RectTransform>().sizeDelta = new Vector2(enemy.enemyData.Size, enemy.enemyData.Size * 0.5f);
         slider.maxValue = enemy.enemyData.MaxHP;
-        slider.value = enemy.hp;
+        slider.value = enemy.HP;
         enemy.OnHPEvent.AddListener(SetValue);
     }
 
     void OnEnable()
     {
-        slider.value = enemy.hp;
+        slider.value = enemy.HP;
     }
 
     public void SetValue(float value)

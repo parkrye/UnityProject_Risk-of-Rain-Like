@@ -1,17 +1,30 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 {
     public EnemyData enemyData;
     [SerializeField] ParticleSystem bleedParticle;
     protected Animator animator;
+    public Transform attackTransform;
 
     public float hp, damage, moveSpeed, attackSpeed;
+    public float HP 
+    { 
+        get { return hp; } 
+        set 
+        { 
+            if (value > enemyData.MaxHP) 
+                hp = enemyData.MaxHP;  
+            else
+                hp = value;
+        } 
+    }
     public bool bleed, attack;
     [SerializeField] bool onGizmo;
-    public bool isStunned, isSlowed;
+    public bool isStunned, isSlowed, alive;
 
     public Vector3 enemyPos
     {
@@ -29,14 +42,15 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 
     void OnEnable()
     {
-        hp = enemyData.MaxHP * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
+        HP = enemyData.MaxHP * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
         damage = enemyData.Damage * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
         moveSpeed = enemyData.MoveSpeed;
         attackSpeed = enemyData.AttackSpeed;
         bleed = false;
         attack = false;
+        alive = true;
         GetComponent<SphereCollider>().radius = enemyData.Size;
-        StopCoroutine(AttackRoutine());
+        StopAllCoroutines();
         StartCoroutine(BleedingRoutine());
         StartCoroutine(AttackRoutine());
     }
@@ -56,18 +70,22 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         float nowTime = 0f;
         do
         {
-            hp -= damage;
+            HP -= damage;
             GameManager.Data.Records["Damage"] += damage;
-            OnHPEvent?.Invoke(hp);
+            OnHPEvent?.Invoke(HP);
             if (bleed)
             {
                 ParticleSystem effect = GameManager.Resource.Instantiate(bleedParticle, transform.position, Quaternion.identity, true);
                 GameManager.Resource.Destroy(effect.gameObject, 2f);
                 bleed = false;
             }
-            if (hp <= 0f)
+            if (HP <= 0f)
             {
-                Die();
+                if (alive)
+                {
+                    alive = false;
+                    Die();
+                }
             }
             else
             {
@@ -107,7 +125,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 
     public virtual void StartAttack()
     {
-        if(hp > 0)
+        if(HP > 0)
         {
             attack = true;
         }

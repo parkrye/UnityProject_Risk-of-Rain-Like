@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 패턴 1: 근접 공격
+/// 패턴 2: 휴식
+/// </summary>
 public class Golem : Boss
 {
     protected override void Awake()
@@ -27,9 +31,20 @@ public class Golem : Boss
             if (attack)
             {
                 animator.SetTrigger("Attack");
+
+                Collider[] colliders = Physics.OverlapSphere(attackTransform.position, enemyData.floatdatas[1]);
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.CompareTag("Player"))
+                    {
+                        IHitable hittable = collider.GetComponent<IHitable>();
+                        hittable?.Hit(damage, 0f);
+                    }
+                }
                 yield return new WaitForSeconds(enemyData.AttackSpeed);
                 animator.SetBool("SerialAttack", !animator.GetBool("SerialAttack"));
             }
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -38,7 +53,7 @@ public class Golem : Boss
         animator.SetBool("Heal", true);
         while (true)
         {
-            hp += enemyData.floatdatas[0] * Time.deltaTime;
+            HP += enemyData.floatdatas[0] * Time.deltaTime;
             yield return null;
         }
     }

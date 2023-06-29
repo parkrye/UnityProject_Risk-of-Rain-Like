@@ -25,12 +25,15 @@ public class EnemyAI_TypeA : EnemyAI
 
     void Update()
     {
-        state = StateCheck();
+        if (enemy.alive)
+        {
+            state = StateCheck();
+        }
     }
 
     void FixedUpdate()
     {
-        if (!enemy.isStunned)
+        if (!enemy.isStunned && enemy.alive)
         {
             switch (state)
             {

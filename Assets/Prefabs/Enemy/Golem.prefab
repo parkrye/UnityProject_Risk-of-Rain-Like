@@ -283,7 +283,8 @@ Transform:
   m_LocalPosition: {x: -0.35097727, y: 0.0024428486, z: 0.0000000028397997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4233089903018122476}
   m_Father: {fileID: 4756819222344582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1439,13 +1440,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
   bleedParticle: {fileID: 0}
+  attackTransform: {fileID: 4233089903018122476}
   hp: 0
   damage: 0
+  moveSpeed: 0
+  attackSpeed: 0
   bleed: 0
   attack: 0
-  onGizmo: 1
+  onGizmo: 0
   isStunned: 0
   isSlowed: 0
+  alive: 0
   OnEnemyDieEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2044,6 +2049,37 @@ Transform:
   m_Father: {fileID: 4747753011016932}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3559335876453636329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4233089903018122476}
+  m_Layer: 0
+  m_Name: AttackTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4233089903018122476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559335876453636329}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.583, z: -0.174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4531514364337162}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &149961780349311900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2051,6 +2087,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4191744185429214}
     m_Modifications:
+    - target: {fileID: 355019989568681749, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 355019989568681751, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
       propertyPath: m_Name
       value: EnemyHPCanvas

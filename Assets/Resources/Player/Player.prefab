@@ -5356,7 +5356,9 @@ MonoBehaviour:
   attackCooldown: 0
   controllable: 1
   dodgeDamage: 0
-  onGizmo: 1
+  onGizmo: 0
+  onESC: 0
+  alive: 0
   coolTime: 1
   coolChecks: 01010101
   mouseSensivity: 10
