@@ -19,8 +19,11 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        CheckGround();
-        CheckSlope();
+        if (!playerDataModel.onESC)
+        {
+            CheckGround();
+            CheckSlope();
+        }
     }
 
     void CheckGround()
@@ -72,7 +75,10 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        if (!playerDataModel.onESC)
+        {
+            Move();
+        }
     }
 
     void Move()

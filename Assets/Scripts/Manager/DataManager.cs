@@ -10,19 +10,6 @@ public class DataManager : MonoBehaviour
 
     public PlayerDataModel Player { get; set; }
 
-    void Awake()
-    {
-        Records = new Dictionary<string, float>
-        {
-            { "Time", 0 },
-            { "Difficulty", 1 },
-            { "Kill", 0 },
-            { "Damage", 0 },
-            { "Heal", 0 },
-            { "Hit", 0 },
-        };
-    }
-
     void Update()
     {
         if (RecordTime)
@@ -37,12 +24,17 @@ public class DataManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Records = new Dictionary<string, float>
         {
-            { "Time", 0 },
-            { "Difficulty", 1 },
-            { "Kill", 0 },
-            { "Damage", 0 },
-            { "Heal", 0 },
+            { "Time", 0f },
+            { "Difficulty", 1f },
+            { "Kill", 0f },
+            { "Damage", 0f },
+            { "Heal", 0f },
+            { "Hit", 0f },
         };
-        Player.DestroyCharacter();
+        if(Player != null)
+        {
+            Player.playerSystem.DestroyCharacter();
+            Player = null;
+        }
     }
 }

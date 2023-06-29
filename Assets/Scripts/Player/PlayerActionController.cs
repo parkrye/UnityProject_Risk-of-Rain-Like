@@ -1,11 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerActionController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
-    public Transform AttackTransform;
 
+    public Transform AttackTransform;
     public Transform lookAtTransform, lookFromTransform, interactTransform, closeAttackTransform;
     public float closeAttackRange, interactRange;
     float cosResult;
@@ -57,7 +58,7 @@ public class PlayerActionController : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             IInteractable interactable = collider.GetComponent<IInteractable>();
-            if (interactable == null)
+            if (!interactable)
                 continue;
             Vector3 colliderPosition = collider.transform.position;
             colliderPosition.y = 0f;
@@ -72,6 +73,14 @@ public class PlayerActionController : MonoBehaviour
     void OnInteract(InputValue inputValue)
     {
         Interact();
+    }
+
+    void OnESC(InputValue inputValue)
+    {
+        if (!playerDataModel.onESC && GameManager.Scene.CurScene.name.StartsWith("LevelScene"))
+        {
+            GameManager.UI.ShowPopupUI<PopUpUI>("UI/ESCUI");
+        }
     }
 
     void OnDrawGizmos()

@@ -1,28 +1,78 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SocialPlatforms;
 
-public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
+/// <summary>
+/// 플레이어 캐릭터의 데이터 저장소와 플레이어 캐릭터와 연관된 스크립트들의 중간 매체 역할을 하는 스크립트
+/// </summary>
+public class PlayerDataModel : MonoBehaviour
 {
-    public Hero hero;
-    List<Hero> heroList;
-    public Animator animator;
-    public Rigidbody rb;
-    public PlayerActionController playerAction;
-    public PlayerMovementController playerMovement;
-    public PlayerCameraController playerCamera;
-    public Inventory inventory;
-    [SerializeField][Range(0, 2)] public int heroNum;
+    public PlayerActionController playerAction;         // 플레이어의 행동과 관련된 작업을 하는 스크립트
+    public PlayerMovementController playerMovement;     // 플레이어의 이동과 관련된 작업을 하는 스크립트
+    public PlayerCameraController playerCamera;         // 플레이어의 카메라와 관련된 작업을 하는 스크립트
+    public PlayerSystemController playerSystem;         // 플레이어 캐릭터와 관련된 작업을 하는 스크립트
+    public Hero hero;                                   // 현재 사용중인 캐릭터 직업
+    public List<Hero> heroList;                         // 사용할 수 있는 직업 리스트
+    [SerializeField][Range(0, 2)] public int heroNum;   // 선택된 직업 번호
+    public Animator animator;                           // 캐릭터 애니메이터(직업에 포함된 애니메이터를 참조)
+    public Rigidbody rb;                                // 캐릭터 강체
+    public Inventory inventory;                         // 캐릭터 인벤토리
+
+    [SerializeField] float maxHP, nowHP, exp;   // 최대 체력, 현재 체력, 현재 경험치
+    [SerializeField] int level, coin;           // 현재 레벨, 현재 금화
+    [SerializeField] float[] status;            // 능력치 배열(이동속도, 점프높이, 공격력, 치명타 확률, 치명타 배율)
+    public float[] buffModifier;                // 각 능력치에 대한 버프 배열
+
+    public int jumpLimit, jumpCount;                                        // 한계 점프 수, 현재 점프 수
+    public bool attackCooldown, controllable, dodgeDamage, onGizmo, onESC;  // 공격 쿨타임 여부, 조종 가능 여부, 회피 여부, 기즈모 출력 여부, ESC창 여부
+
+    public float coolTime;                  // 쿨타임
+    public bool[] coolChecks = new bool[4]; // 각 액션에 대한 쿨타임 여부
+
+    public float mouseSensivity;            // 마우스 민감도
+    [SerializeField] float playerTimeScale; // 플레이어 시간 배율
+
+    public UnityEvent OnLevelEvent, OnHPEvent, OnEXPEvent;  // 레벨 업에 대한 이벤트, 체력 변화에 대한 이벤트, 경험치 변화에 대한 이벤트
+    public UnityEvent<int> OnCoinEvent;                     // 금화 획득에 대한 이벤트
+    public List<IDamageSubscriber> damageSubscribers;       // 데미지 발생과 연관된 인터페이스 리스트
 
     void Awake()
     {
         Initailze();
     }
 
-    [SerializeField] float maxHP, nowHP, exp;
-    [SerializeField] int level;
+    /// <summary>
+    /// 초기화 메소드
+    /// </summary>
+    void Initailze()
+    {
+        GameManager.Data.Player = this;
+
+        heroList = new List<Hero>();
+        heroList.AddRange(GetComponentsInChildren<Hero>());
+        foreach (var hero in heroList)
+            hero.gameObject.SetActive(false);
+
+        rb = GetComponent<Rigidbody>();
+        playerAction = GetComponent<PlayerActionController>();
+        playerMovement = GetComponent<PlayerMovementController>();
+        playerCamera = GetComponent<PlayerCameraController>();
+        playerSystem = GetComponent<PlayerSystemController>();
+        inventory = GetComponent<Inventory>();
+
+        TimeScale = 1f;
+        status = new float[5] { 5f, 10f, 5f, 1f, 1.2f };
+        buffModifier = new float[5] { 1f, 1f, 1f, 1f, 1f };
+
+        coolChecks = new bool[4];
+        for (int i = 0; i < coolChecks.Length; i++)
+            coolChecks[i] = true;
+
+        damageSubscribers = new List<IDamageSubscriber>();
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     public float MAXHP
     {
         get { return maxHP; }
@@ -43,7 +93,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
         {
             if (value <= 0f)
             {
-                Die();
+                playerSystem.Die();
                 OnHPEvent?.Invoke();
             }
             else
@@ -85,7 +135,6 @@ public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
         }
     }
 
-    [SerializeField] float[] status;
     public float MoveSpeed
     {
         get
@@ -141,12 +190,7 @@ public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
             status[4] = value;
         }
     }
-    public float coolTime;
-    public int jumpLimit, jumpCount;
-    public bool attackCooldown, controllable, dodgeDamage, onGizmo;
 
-    public float mouseSensivity;
-    [SerializeField] float playerTimeScale;
     public float TimeScale
     { 
         get 
@@ -160,19 +204,6 @@ public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
         }
     }
 
-    public float[] buffModifier;
-
-    /// <summary>
-    /// 사용시 곱할 값, 취소시 곱한 값의 역수 입력
-    /// 0: 이동속도, 1: 점프높이, 2: 공격력, 3: 치명타 확률, 4: 치명타 배율
-    /// </summary>
-    public void Buff(int num, float value)
-    {
-        buffModifier[num] *= value;
-    }
-
-    public bool[] coolChecks = new bool[4];
-
     public Transform playerTransform
     {
         get { return transform; }
@@ -183,123 +214,6 @@ public class PlayerDataModel : MonoBehaviour, IHitable, IDamagePublisher
         }
     }
 
-    void Initailze()
-    {
-        GameManager.Data.Player = this;
-
-        heroList = new List<Hero>();
-        heroList.AddRange(GetComponentsInChildren<Hero>());
-        foreach (var hero in heroList)
-            hero.gameObject.SetActive(false);
-
-        rb = GetComponent<Rigidbody>();
-        playerAction = GetComponent<PlayerActionController>();
-        playerMovement = GetComponent<PlayerMovementController>();
-        playerCamera = GetComponent<PlayerCameraController>();
-        inventory = GetComponent<Inventory>();
-
-        TimeScale = 1f;
-        status = new float[5] { 5f, 10f, 5f, 1f, 1.2f };
-        buffModifier = new float[5] { 1f, 1f, 1f, 1f, 1f };
-
-        coolChecks = new bool[4];
-        for (int i = 0; i < coolChecks.Length; i++)
-            coolChecks[i] = true;
-
-        damageSubscribers = new List<IDamageSubscriber>();
-
-        DontDestroyOnLoad(gameObject);
-    }
-
-    /// <summary>
-    /// 캐릭터 선택
-    /// </summary>
-    /// <param name="num"></param>
-    /// <returns>선택 성공 여부</returns>
-    public bool SelectHero(int num)
-    {
-        if (num >= 0 && num < heroList.Count)
-        {
-            foreach (var hero in heroList)
-                hero.gameObject.SetActive(false);
-            heroList[num].gameObject.SetActive(true);
-            hero = heroList[num];
-            animator = hero.animator;
-            hero.playerDataModel = this;
-            animator.SetInteger("Hero", num);
-            playerAction.AttackTransform = hero.attackTransform;
-            return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    /// 캐릭터 파괴
-    /// </summary>
-    public void DestroyCharacter()
-    {
-        Destroy(gameObject);
-    }
-
-    public UnityEvent OnLevelEvent, OnHPEvent, OnEXPEvent;
-
-    public void Hit(float damage, float Time)
-    {
-        if (!dodgeDamage)
-        {
-            StartCoroutine(HitRoutine(damage, Time));
-        }
-    }
-
-    public IEnumerator HitRoutine(float damage, float time)
-    {
-        float nowTime = 0f;
-        do
-        {
-            float _damage = DamageOccurrence(damage);
-            NOWHP -= _damage;
-            GameManager.Data.Records["Hit"] += _damage;
-            nowTime += 0.1f;
-            yield return new WaitForSeconds(0.1f);
-        } while (nowTime < time);
-    }
-
-    public void Die()
-    {
-        Debug.Log("you died");
-        GameManager.Data.RecordTime = false;
-    }
-
-    List<IDamageSubscriber> damageSubscribers;
-
-    public void AddDamageSubscriber(IDamageSubscriber _subscriber)
-    {
-        damageSubscribers.Add(_subscriber);
-    }
-
-    public void RemoveDamageSubscriber(IDamageSubscriber _subscriber)
-    {
-        for(int i = damageSubscribers.Count - 1; i >= 0; i--)
-        {
-            if (damageSubscribers[i].Equals(_subscriber))
-            {
-                damageSubscribers.RemoveAt(i);
-            }
-        }
-    }
-
-    public float DamageOccurrence(float _damage)
-    {
-        float damage = _damage;
-        for (int i = 0; i < damageSubscribers.Count; i++)
-        {
-            damage = damageSubscribers[i].ModifiyDamage(damage);
-        }
-        return damage;
-    }
-
-    int coin;
-    public UnityEvent<int> OnCoinEvent;
     public int Coin
     {
         get { return coin; }

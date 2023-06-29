@@ -27,33 +27,39 @@ public class PlayerCameraController : MonoBehaviour
 
     void Update()
     {
-        Ray ray = new Ray(lookFromTransform.position, (virtualCamera.transform.position - lookFromTransform.position));
-        if(Physics.Raycast(ray, Vector3.Distance(virtualCamera.transform.position, lookFromTransform.position), LayerMask.GetMask("Ground")))
+        if (!playerDataModel.onESC)
         {
-            cameraOffset = Vector3.Lerp(cameraOffset, closeCameraOffset, Time.deltaTime * playerDataModel.TimeScale);
-        }
-        else
-        {
-            cameraOffset = Vector3.Lerp(cameraOffset, defaultCameraOffset, Time.deltaTime * playerDataModel.TimeScale);
+            Ray ray = new Ray(lookFromTransform.position, (virtualCamera.transform.position - lookFromTransform.position));
+            if (Physics.Raycast(ray, Vector3.Distance(virtualCamera.transform.position, lookFromTransform.position), LayerMask.GetMask("Ground")))
+            {
+                cameraOffset = Vector3.Lerp(cameraOffset, closeCameraOffset, Time.deltaTime * playerDataModel.TimeScale);
+            }
+            else
+            {
+                cameraOffset = Vector3.Lerp(cameraOffset, defaultCameraOffset, Time.deltaTime * playerDataModel.TimeScale);
+            }
         }
     }
 
     void LateUpdate()
     {
-        transform.localEulerAngles += new Vector3(0f, pointerPos.x * playerDataModel.mouseSensivity * Time.deltaTime, 0f);
-
-        xRotation -= pointerPos.y * Mathf.Sqrt(playerDataModel.mouseSensivity) * 10f * Time.deltaTime;
-        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-
-        lookFromTransform.localEulerAngles = new Vector3(xRotation, 0f, 0f);
-
-        if(xRotation < 0f)
+        if (!playerDataModel.onESC)
         {
-            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, upViewOffset, (-xRotation / 80f));
-        }
-        else
-        {
-            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, downViewOffset, (xRotation / 80f));
+            transform.localEulerAngles += new Vector3(0f, pointerPos.x * playerDataModel.mouseSensivity * Time.deltaTime, 0f);
+
+            xRotation -= pointerPos.y * Mathf.Sqrt(playerDataModel.mouseSensivity) * 10f * Time.deltaTime;
+            xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
+            lookFromTransform.localEulerAngles = new Vector3(xRotation, 0f, 0f);
+
+            if (xRotation < 0f)
+            {
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, upViewOffset, (-xRotation / 80f));
+            }
+            else
+            {
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, downViewOffset, (xRotation / 80f));
+            }
         }
     }
 
