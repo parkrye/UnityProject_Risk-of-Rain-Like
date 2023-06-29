@@ -99,11 +99,13 @@ public class EnemyAI_TypeA : EnemyAI
         transform.LookAt(playerPos);
         if (moveSide)
         {
-            moveSide = enemy.TranslateGradually(transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime);
+            if (!enemy.TranslateGradually(transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime))
+                moveSide = !moveSide;
         }
         else
         {
-            moveSide = enemy.TranslateGradually(-transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime);
+            if (!enemy.TranslateGradually(-transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime))
+                moveSide = !moveSide;
         }
     }
 

@@ -131,7 +131,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 
     public bool TranslateGradually(Vector3 dir, float distance)
     {
-        if (!Physics.SphereCast(enemyPos, enemyData.Size, dir, out _, distance))
+        if (!Physics.SphereCast(enemyPos, enemyData.Size, dir, out _, distance, LayerMask.GetMask("Ground")))
         {
             transform.position += dir * distance;
             return true;
@@ -148,7 +148,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         }
         else
         {
-            if (!Physics.SphereCast(enemyPos, enemyData.Size, Vector3.up, out _, 0f))
+            if (!Physics.SphereCast(enemyPos, enemyData.Size, Vector3.up, out _, 0f, LayerMask.GetMask("Ground")))
             {
                 transform.position = pos;
                 return true;
