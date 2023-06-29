@@ -17,7 +17,7 @@ MonoBehaviour:
   SkillDesc: Convenient Magic Bolt
   SkillIcon: {fileID: 21300000, guid: 5e256e48be18d4d2ebc4bc0c1995af39, type: 3}
   coolTime: 1
-  modifier: 0.2
+  modifier: 0.4
   actionNum: 4
   CoolEvent:
     m_PersistentCalls:

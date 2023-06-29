@@ -17,7 +17,7 @@ MonoBehaviour:
   SkillDesc: Shot a Arrow to 3 way of Foward
   SkillIcon: {fileID: 21300000, guid: 9257faaf4f9604399a8681876a7f4059, type: 3}
   coolTime: 1
-  modifier: 0.2
+  modifier: 0.3
   actionNum: 1
   CoolEvent:
     m_PersistentCalls:

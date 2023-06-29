@@ -24,10 +24,10 @@ public class Archer_Action3B : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
+        hero.playerDataModel.playerSystem.Buff(3, modifier);
         hero.playerDataModel.playerSystem.Buff(4, modifier);
-        hero.playerDataModel.playerSystem.Buff(5, modifier);
         yield return new WaitForSeconds(skillTime);
+        hero.playerDataModel.playerSystem.Buff(3, 1 / modifier);
         hero.playerDataModel.playerSystem.Buff(4, 1 / modifier);
-        hero.playerDataModel.playerSystem.Buff(5, 1 / modifier);
     }
 }

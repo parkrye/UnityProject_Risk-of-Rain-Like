@@ -7,7 +7,7 @@ public class GyroBolt : BoltType
 
     public void Shot(Vector3 target, float _damage, float _delay, float _drawPower, float _drawRange)
     {
-        coll.radius = _drawRange;
+        (coll as SphereCollider).radius = _drawRange;
         size.localScale = Vector3.one * _drawRange * 2f;
         drawPower = _drawPower;
         Shot(target, _damage, _delay);

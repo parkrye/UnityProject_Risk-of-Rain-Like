@@ -17,7 +17,7 @@ MonoBehaviour:
   SkillDesc: Automatic Arrow
   SkillIcon: {fileID: 21300000, guid: 617c0e170d3fc477eaec8b447420d340, type: 3}
   coolTime: 0.5
-  modifier: 0.3
+  modifier: 0.4
   actionNum: 8
   CoolEvent:
     m_PersistentCalls:

@@ -5,13 +5,13 @@ public class BoltType : MonoBehaviour
 {
     protected TrailRenderer[] trails;
     protected float damage;
-    protected SphereCollider coll;
+    protected Collider coll;
     [SerializeField] protected float speed, yModifier;
 
     protected virtual void Awake()
     {
         trails = GetComponentsInChildren<TrailRenderer>();
-        coll = GetComponentInChildren<SphereCollider>();
+        coll = GetComponentInChildren<Collider>();
     }
 
     void OnEnable()
