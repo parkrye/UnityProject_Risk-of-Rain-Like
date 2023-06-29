@@ -13,7 +13,7 @@ public class SceneManager : MonoBehaviour
     {
         get
         {
-            if (curScene == null)
+            if (!curScene)
                 curScene = GameObject.FindObjectOfType<BaseScene>();
 
             return curScene;
@@ -50,7 +50,7 @@ public class SceneManager : MonoBehaviour
             yield return null;
         }
 
-        if (CurScene != null)
+        if (CurScene)
         {
             CurScene.LoadAsync();
             while (CurScene.progress < 1f)

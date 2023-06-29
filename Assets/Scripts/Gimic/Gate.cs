@@ -6,6 +6,5 @@ public class Gate : MonoBehaviour
     {
         GameManager.Data.RecordTime = false;
         GameManager.Scene.LoadScene("TitleScene");
-        GameManager.Data.Initialize();
     }
 }

@@ -24,14 +24,14 @@ public class Warrior_Action4C : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        hero.playerDataModel.Buff(0, modifier);
-        hero.playerDataModel.Buff(1, modifier);
-        hero.playerDataModel.Buff(2, modifier);
-        hero.playerDataModel.Buff(3, 1 / modifier);
+        hero.playerDataModel.playerSystem.Buff(0, modifier);
+        hero.playerDataModel.playerSystem.Buff(1, modifier);
+        hero.playerDataModel.playerSystem.Buff(2, modifier);
+        hero.playerDataModel.playerSystem.Buff(3, 1 / modifier);
         yield return new WaitForSeconds(skillTime);
-        hero.playerDataModel.Buff(0, 1 / modifier);
-        hero.playerDataModel.Buff(1, 1 / modifier);
-        hero.playerDataModel.Buff(2, 1 / modifier);
-        hero.playerDataModel.Buff(3, modifier);
+        hero.playerDataModel.playerSystem.Buff(0, 1 / modifier);
+        hero.playerDataModel.playerSystem.Buff(1, 1 / modifier);
+        hero.playerDataModel.playerSystem.Buff(2, 1 / modifier);
+        hero.playerDataModel.playerSystem.Buff(3, modifier);
     }
 }

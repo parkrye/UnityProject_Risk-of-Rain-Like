@@ -6,7 +6,7 @@ public class ArmorPotion : ItemData, IDamageSubscriber
     [SerializeField] float armorRatio;
     public override void GetFirstEffect()
     {
-        GameManager.Data.Player.AddDamageSubscriber(this);
+        GameManager.Data.Player.playerSystem.AddDamageSubscriber(this);
         armorRatio = 0.9f;
     }
 

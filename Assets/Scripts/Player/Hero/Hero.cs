@@ -23,7 +23,7 @@ public abstract class Hero : MonoBehaviour
 
     public void SettingSkill(int slot, Skill skill)
     {
-        if (slot < 0 || slot >= skills.Length || skill == null)
+        if (slot < 0 || slot >= skills.Length ||! skill)
         {
             return;
         }

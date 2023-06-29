@@ -10,7 +10,7 @@ public class GameSetting : MonoBehaviour
 
     static void InitGameManager()
     {
-        if (GameManager.Instance == null)
+        if (!GameManager.Instance)
         {
             GameObject gameManager = new();
             gameManager.name = "GameManager";

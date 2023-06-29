@@ -14,9 +14,9 @@ public class Wizard_Action4C : Skill, ICriticable
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
-            GameObject gyroBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/PoisonSwamp"), true);
-            gyroBolt.transform.position = hero.playerDataModel.transform.position;
-            gyroBolt.GetComponent<PoisonSwamp>().SpwanSwamp(param[0] * modifier, skillRange, skillTime);
+            GameObject poisonSwamp = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/PoisonSwamp"), true);
+            poisonSwamp.transform.position = hero.playerDataModel.transform.position;
+            poisonSwamp.GetComponent<PoisonSwamp>().SpwanSwamp(param[0] * modifier, skillRange, skillTime);
 
             CoolCheck = false;
             return true;

@@ -12,7 +12,7 @@ public class Warrior_Action2A : Skill, IDamageSubscriber
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.playerDataModel.animator.SetBool("Guard", true);
-            hero.playerDataModel.AddDamageSubscriber(this);
+            hero.playerDataModel.playerSystem.AddDamageSubscriber(this);
 
             CoolCheck = false;
 
@@ -21,7 +21,7 @@ public class Warrior_Action2A : Skill, IDamageSubscriber
         else
         {
             hero.playerDataModel.animator.SetBool("Guard", false);
-            hero.playerDataModel.RemoveDamageSubscriber(this);
+            hero.playerDataModel.playerSystem.RemoveDamageSubscriber(this);
         }
         return false;
     }

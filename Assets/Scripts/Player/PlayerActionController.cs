@@ -58,7 +58,7 @@ public class PlayerActionController : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             IInteractable interactable = collider.GetComponent<IInteractable>();
-            if (!interactable)
+            if (interactable is null)
                 continue;
             Vector3 colliderPosition = collider.transform.position;
             colliderPosition.y = 0f;

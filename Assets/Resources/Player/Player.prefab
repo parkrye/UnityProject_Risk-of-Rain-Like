@@ -5261,6 +5261,7 @@ GameObject:
   - component: {fileID: 719491648340369631}
   - component: {fileID: 3988545672618533068}
   - component: {fileID: 6949231124553317690}
+  - component: {fileID: 4882045718182639571}
   - component: {fileID: 2363396865791106682}
   - component: {fileID: 3467954275447997977}
   - component: {fileID: 4395810161299156051}
@@ -5333,30 +5334,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f85fe186be83df4bb41b842dd59aef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 6851718156748075464}
-  animator: {fileID: 7537184508920932075}
-  rb: {fileID: 3467954275447997977}
   playerAction: {fileID: 3988545672618533068}
   playerMovement: {fileID: 719491648340369631}
   playerCamera: {fileID: 6949231124553317690}
-  inventory: {fileID: 2363396865791106682}
+  playerSystem: {fileID: 0}
+  hero: {fileID: 6851718156748075464}
+  heroList: []
   heroNum: 0
+  animator: {fileID: 7537184508920932075}
+  rb: {fileID: 3467954275447997977}
+  inventory: {fileID: 2363396865791106682}
   maxHP: 100
   nowHP: 100
   exp: 0
   level: 1
+  coin: 0
   status: []
-  coolTime: 1
+  buffModifier: []
   jumpLimit: 1
   jumpCount: 0
   attackCooldown: 0
   controllable: 1
   dodgeDamage: 0
   onGizmo: 1
+  coolTime: 1
+  coolChecks: 01010101
   mouseSensivity: 10
   playerTimeScale: 1
-  buffModifier: []
-  coolChecks: 01010101
   OnLevelEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5427,6 +5431,18 @@ MonoBehaviour:
   virtualCamera: {fileID: 5676688275852963327}
   lookFromTransform: {fileID: 3503266946974414143}
   lookAtTransform: {fileID: 2309519105339332795}
+--- !u!114 &4882045718182639571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4574023989982931356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c8619fdfeadb144bfc14126a82b440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2363396865791106682
 MonoBehaviour:
   m_ObjectHideFlags: 0

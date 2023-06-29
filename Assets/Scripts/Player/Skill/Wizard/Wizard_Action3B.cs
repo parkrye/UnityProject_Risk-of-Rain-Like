@@ -19,7 +19,7 @@ public class Wizard_Action3B : Skill, IDamageSubscriber
                 magicFlat = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Particle/MagicFlat"), hero.transform.position, Quaternion.identity, hero.transform, true);
             summonMagicFlat = true;
             shieldPoint = param[0];
-            hero.playerDataModel.AddDamageSubscriber(this);
+            hero.playerDataModel.playerSystem.AddDamageSubscriber(this);
             CoolCheck = false;
             return true;
         }
@@ -30,7 +30,7 @@ public class Wizard_Action3B : Skill, IDamageSubscriber
     {
         if(_damage > shieldPoint)
         {
-            hero.playerDataModel.RemoveDamageSubscriber(this);
+            hero.playerDataModel.playerSystem.RemoveDamageSubscriber(this);
             GameManager.Resource.Destroy(magicFlat);
             summonMagicFlat = false;
             return _damage - shieldPoint;

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dc3ba4473f6ac4eb0e39a075f9401e, type: 3}
   m_Name: EasyModeIcon
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 32250abfcff114351bc3e4b4c26e5ce8, type: 3}
+  sprite: {fileID: 21300000, guid: dc616340029fe46f488deb0845bf7a59, type: 3}
