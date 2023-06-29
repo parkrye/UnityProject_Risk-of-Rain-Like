@@ -74,16 +74,12 @@ public class ResourceManager : MonoBehaviour
 
     public void Destroy(GameObject go)
     {
-        try
+        if (go)
         {
             if (GameManager.Pool.IsContain(go))
                 GameManager.Pool.Release(go);
             else
                 GameObject.Destroy(go);
-        }
-        catch
-        {
-
         }
     }
 
@@ -101,7 +97,10 @@ public class ResourceManager : MonoBehaviour
     IEnumerator DelayReleaseRoutine(GameObject go, float delay)
     {
         yield return new WaitForSeconds(delay);
-        GameManager.Pool.Release(go);
+        if (go)
+        {
+            GameManager.Pool.Release(go);
+        }
     }
 
     public void Destroy(Component component, float delay = 0f)

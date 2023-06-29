@@ -9,6 +9,8 @@ public class SceneManager : MonoBehaviour
 
     BaseScene curScene;
 
+    public bool ReadyToPlay { get; private set; }
+
     public BaseScene CurScene
     {
         get
@@ -39,6 +41,7 @@ public class SceneManager : MonoBehaviour
 
     IEnumerator LoadingRoutine(string sceneName)
     {
+        ReadyToPlay = false;
         loadingUI.SetProgress(0f);
         loadingUI.FadeIn();
         yield return new WaitForSeconds(1f);
@@ -53,9 +56,9 @@ public class SceneManager : MonoBehaviour
         if (CurScene)
         {
             CurScene.LoadAsync();
-            while (CurScene.progress < 1f)
+            while (CurScene.Progress < 1f)
             {
-                loadingUI.SetProgress(Mathf.Lerp(0.5f, 1f, CurScene.progress));
+                loadingUI.SetProgress(Mathf.Lerp(0.5f, 1f, CurScene.Progress));
                 yield return null;
             }
         }
@@ -63,5 +66,6 @@ public class SceneManager : MonoBehaviour
         loadingUI.SetProgress(1f);
         loadingUI.FadeOut();
         yield return new WaitForSeconds(1f);
+        ReadyToPlay = true;
     }
 }

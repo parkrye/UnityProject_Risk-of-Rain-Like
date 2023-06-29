@@ -25,11 +25,11 @@ public class LevelScene : BaseScene
         int spawnPosition = Random.Range(0, startPositions.Length);
         startPositions[spawnPosition].SetGimic();
         GameManager.Data.Player.transform.position = startPositions[spawnPosition].transform.position;
-        progress = 0.1f;
+        Progress = 0.1f;
 
         // 보스존 위치 설정
         summonPosition.SetGimic();
-        progress = 0.2f;
+        Progress = 0.2f;
 
         // UI 세팅
         GameManager.UI.CreateSceneCanvas();
@@ -40,7 +40,7 @@ public class LevelScene : BaseScene
         GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneKeyUI").Initialize();
         GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneStatusUI").Initialize();
         infoUI.UpdateObjective(LevelState.Search);
-        progress = 0.4f;
+        Progress = 0.4f;
 
         // 에너미 스폰 설정
         if (spawnDelay == 0f)
@@ -48,18 +48,18 @@ public class LevelScene : BaseScene
         if (spawnDistance == 0f)
             spawnDistance = 10f;
         enemySpawner.Initialize(spawnDelay, spawnDistance, enemyLimit);
-        progress = 0.6f;
+        Progress = 0.6f;
 
         // 이벤트 세팅
         bossSummonZone.ObjectStateEvent.AddListener(infoUI.UpdateObjective);
         bossSummonZone.ObjectStateEvent.AddListener(enemySpawner.StopSpawn);
         bossSummonZone.ObjectStateEvent.AddListener(itemDropper.StopDrop);
-        progress = 0.8f;
+        Progress = 0.8f;
 
         // 플레이어 세팅
         GetComponent<YLimiter>().Initialize();
         GameManager.Data.Player.controllable = true;
         GameManager.Data.RecordTime = true;
-        progress = 1f;
+        Progress = 1f;
     }
 }

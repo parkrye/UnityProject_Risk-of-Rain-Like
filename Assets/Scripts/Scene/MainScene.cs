@@ -8,8 +8,8 @@ public class MainScene : BaseScene
         GameManager.UI.CreateSceneCanvas();
         GameManager.UI.CreatePopupCanvas();
         yield return new WaitForEndOfFrame();
-        progress = 0.5f;
+        Progress = 0.5f;
         GameManager.UI.ShowSceneUI<SceneUI>("UI/MainSceneUI");
-        progress = 1f;
+        Progress = 1f;
     }
 }

@@ -10,6 +10,7 @@ public class PlayerActionController : MonoBehaviour
     public Transform lookAtTransform, lookFromTransform, interactTransform, closeAttackTransform;
     public float closeAttackRange, interactRange;
     float cosResult;
+    ESCUI escUI;
 
     void Awake()
     {
@@ -77,9 +78,19 @@ public class PlayerActionController : MonoBehaviour
 
     void OnESC(InputValue inputValue)
     {
-        if (!playerDataModel.onESC && GameManager.Scene.CurScene.name.StartsWith("LevelScene"))
+        if (inputValue.isPressed)
         {
-            GameManager.UI.ShowPopupUI<PopUpUI>("UI/ESCUI");
+            if (GameManager.Scene.CurScene.name.StartsWith("LevelScene") && GameManager.Scene.ReadyToPlay)
+            {
+                if (!playerDataModel.onESC)
+                {
+                    escUI = GameManager.UI.ShowPopupUI<ESCUI>("UI/ESCUI");
+                }
+                else
+                {
+                    escUI?.CloseUI();
+                }
+            }
         }
     }
 

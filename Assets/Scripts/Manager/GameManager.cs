@@ -76,6 +76,12 @@ public class GameManager : MonoBehaviour
         GameObject scriptObj = new GameObject();
         scriptObj.name = "ScriptManager";
         scriptObj.transform.parent = transform;
-        scriptManager = sceneObj.AddComponent<ScriptManager>();
+        scriptManager = scriptObj.AddComponent<ScriptManager>();
+    }
+
+    public static void ResetSession()
+    {
+        dataManager.Initialize();
+        poolManager.Initialize();
     }
 }

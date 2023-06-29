@@ -12,7 +12,7 @@ public class EnemyAI_TypeA : EnemyAI
     [SerializeField] AI_State state;
     Stack<Vector3> bypass;
     Vector3 prevPlayerPosition;
-    [SerializeField] bool onGizmo;
+    [SerializeField] bool onGizmo, moveSide;
     Vector3 playerPos;
     [SerializeField] float deleteTimer;
 
@@ -97,6 +97,14 @@ public class EnemyAI_TypeA : EnemyAI
     void AttackMove()
     {
         transform.LookAt(playerPos);
+        if (moveSide)
+        {
+            moveSide = enemy.TranslateGradually(transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            moveSide = enemy.TranslateGradually(-transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime);
+        }
     }
 
     void ByPassMove()

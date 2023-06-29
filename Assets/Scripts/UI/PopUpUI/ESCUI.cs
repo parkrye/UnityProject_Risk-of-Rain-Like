@@ -10,6 +10,14 @@ public class ESCUI : PopUpUI
         buttons["BackTitleButton"].onClick.AddListener(BackTitleButton);
     }
 
+    public override void CloseUI()
+    {
+        GameManager.Data.Player.onESC = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        base.CloseUI();
+    }
+
     void OnEnable()
     {
         GameManager.Data.Player.onESC = true;
@@ -19,9 +27,6 @@ public class ESCUI : PopUpUI
 
     void ResumeButton()
     {
-        GameManager.Data.Player.onESC = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1f;
         CloseUI();
     }
 
