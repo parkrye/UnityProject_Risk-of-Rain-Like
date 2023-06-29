@@ -1,19 +1,27 @@
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectUI : SceneUI
 {
     int characterNum;
     CinemachineVirtualCamera[] virtualCameras;
+    [SerializeField] Color selected, nonSelected;
 
     public override void Initialize()
     {
+        selected = new Color(1f, 1f, 1f);
+        nonSelected = new Color(0.5f, 0.5f, 0.5f);
+
         virtualCameras = GameObject.Find("Cams").GetComponentsInChildren<CinemachineVirtualCamera>();
 
         buttons["Left"].onClick.AddListener(LeftButton);
         buttons["Right"].onClick.AddListener(RightButton);
         buttons["Select"].onClick.AddListener(SelectButton);
         buttons["Main"].onClick.AddListener(MainButton);
+        buttons["EasyButton"].onClick.AddListener(() => ChangeDifficulty(1));
+        buttons["NormalButton"].onClick.AddListener(() => ChangeDifficulty(2));
+        buttons["HardButton"].onClick.AddListener(() => ChangeDifficulty(3));
 
         for(int slot = 1; slot <= 4; slot++)
         {
@@ -37,6 +45,7 @@ public class SelectUI : SceneUI
             toggles[actionA].isOn = true;
         }
         MoveCamera();
+        ChangeDifficulty();
     }
 
     void SelectButton()
@@ -53,8 +62,8 @@ public class SelectUI : SceneUI
 
     void StartLevel()
     {
-        GameObject player = GameManager.Resource.Instantiate<GameObject>("Player/Player");
-        player.GetComponent<PlayerDataModel>().SelectHero(characterNum);
+        GameObject player = GameManager.Resource.Instantiate<GameObject>("Player/Player", false);
+        player.GetComponent<PlayerDataModel>().playerSystem.SelectHero(characterNum);
         for (int slot = 1; slot <= 4; slot++)
         {
             var actionA = $"Action{slot}A";
@@ -79,7 +88,57 @@ public class SelectUI : SceneUI
             player.GetComponent<PlayerDataModel>().hero.SettingSkill(slot, skillNum);
         }
 
-        GameManager.Scene.LoadScene("LevelScene");
+        GameManager.Scene.LoadScene("LevelScene_Field");
+    }
+
+    void ChangeDifficulty(int num = 1)
+    {
+        GameManager.Data.Records["Difficulty"] = num;
+        switch(num)
+        {
+            case 1:
+                foreach(Image image in buttons["EasyButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = selected;
+                }
+                foreach(Image image in buttons["NormalButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = nonSelected;
+                }
+                foreach(Image image in buttons["HardButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = nonSelected;
+                }
+                break;
+            case 2:
+                foreach (Image image in buttons["EasyButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = nonSelected;
+                }
+                foreach (Image image in buttons["NormalButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = selected;
+                }
+                foreach (Image image in buttons["HardButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = nonSelected;
+                }
+                break;
+            case 3:
+                foreach (Image image in buttons["EasyButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = nonSelected;
+                }
+                foreach (Image image in buttons["NormalButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = nonSelected;
+                }
+                foreach (Image image in buttons["HardButton"].GetComponentsInChildren<Image>())
+                {
+                    image.color = selected;
+                }
+                break;
+        }
     }
 
     void CancelSelect()

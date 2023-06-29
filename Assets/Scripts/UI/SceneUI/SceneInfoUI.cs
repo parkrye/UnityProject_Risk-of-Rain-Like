@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SceneInfoUI : SceneUI
 {
     public override void Initialize()
@@ -14,13 +16,13 @@ public class SceneInfoUI : SceneUI
     {
         switch(GameManager.Data.Records["Difficulty"])
         {
-            case 1:
+            case 1f:
                 images["DifficultyImage"].sprite = GameManager.Resource.Load<Icon>("Icon/EasyModeIcon").sprite;
                 break;
-            case 2:
+            case 2f:
                 images["DifficultyImage"].sprite = GameManager.Resource.Load<Icon>("Icon/NormalModeIcon").sprite;
                 break;
-            case 3:
+            case 3f:
                 images["DifficultyImage"].sprite = GameManager.Resource.Load<Icon>("Icon/HardModeIcon").sprite;
                 break;
         }
