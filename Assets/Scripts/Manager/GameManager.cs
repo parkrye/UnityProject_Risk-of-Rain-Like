@@ -82,6 +82,6 @@ public class GameManager : MonoBehaviour
     public static void ResetSession()
     {
         dataManager.Initialize();
-        poolManager.Initialize();
+        poolManager.Reset();
     }
 }

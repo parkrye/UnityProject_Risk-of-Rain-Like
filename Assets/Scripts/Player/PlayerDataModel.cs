@@ -25,8 +25,8 @@ public class PlayerDataModel : MonoBehaviour
     [SerializeField] float[] status;            // 능력치 배열(이동속도, 점프높이, 공격력, 치명타 확률, 치명타 배율)
     public float[] buffModifier;                // 각 능력치에 대한 버프 배열
 
-    public int jumpLimit, jumpCount;                                                // 한계 점프 수, 현재 점프 수
-    public bool attackCooldown, controllable, dodgeDamage, onGizmo, onESC, alive;   // 공격 쿨타임 여부, 조종 가능 여부, 회피 여부, 기즈모 출력 여부, ESC창 여부
+    public int jumpLimit, jumpCount;                                                            // 한계 점프 수, 현재 점프 수
+    public bool attackCooldown, controllable, dodgeDamage, onGizmo, onESC, alive, onSession;    // 공격 쿨타임 여부, 조종 가능 여부, 회피 여부, 기즈모 출력 여부, ESC창 여부
 
     public float coolTime;                  // 쿨타임
     public bool[] coolChecks = new bool[4]; // 각 액션에 대한 쿨타임 여부

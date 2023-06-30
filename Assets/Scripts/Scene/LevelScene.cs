@@ -31,10 +31,10 @@ public class LevelScene : BaseScene
         GameManager.UI.CreatePopupCanvas();
         SceneInfoUI infoUI = GameManager.UI.ShowSceneUI<SceneInfoUI>("UI/SceneInfoUI");
         infoUI.Initialize();
-        GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneItemUI").Initialize();
-        GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneKeyUI").Initialize();
-        GameManager.UI.ShowSceneUI<SceneUI>("UI/SceneStatusUI").Initialize();
         infoUI.UpdateObjective(LevelState.Search);
+        GameManager.UI.ShowSceneUI<SceneItemUI>("UI/SceneItemUI").Initialize();
+        GameManager.UI.ShowSceneUI<SceneKeyUI>("UI/SceneKeyUI").Initialize();
+        GameManager.UI.ShowSceneUI<SceneStatusUI>("UI/SceneStatusUI").Initialize();
         Progress = 0.4f;
 
         // 에너미 스폰 설정
@@ -80,6 +80,7 @@ public class LevelScene : BaseScene
         // 플레이어 세팅
         GetComponent<YLimiter>().Initialize();
         GameManager.Data.Player.controllable = true;
+        GameManager.Data.Player.onSession = true;
         GameManager.Data.RecordTime = true;
         Progress = 1f;
     }

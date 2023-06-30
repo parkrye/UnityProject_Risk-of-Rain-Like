@@ -22,6 +22,12 @@ public class PoolManager : MonoBehaviour
         canvasRoot.transform.SetParent(transform, false);
     }
 
+    public void Reset()
+    {
+        poolDic = new Dictionary<string, ObjectPool<GameObject>>();
+        poolContainer = new Dictionary<string, Transform>();
+    }
+
     public T Get<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : Object
     {
         if (original is GameObject)

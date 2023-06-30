@@ -30,6 +30,12 @@ public class UIManager : MonoBehaviour
         popUpStack = new Stack<PopUpUI>();
     }
 
+    public T GetPlayerSceneUI<T>() where T : SceneUI
+    {
+        T ui = sceneCanvas.GetComponentInChildren<T>();
+        return ui;
+    }
+
     // юлго PopUpUI
     public T ShowPopupUI<T>(T popup) where T : PopUpUI
     {
