@@ -1,16 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StartPositionGimic : MonoBehaviour
 {
-    public GameObject Door;    // 게임이 시작되면 사라지는 것
+    SphereCollider sphere;
 
-    public void SetGimic()
+    void Awake()
     {
-        if(Door != null)
+        sphere = GetComponent<SphereCollider>();
+    }
+
+    public void SetGimic(GameObject _target)
+    {
+        float range = sphere.radius;
+
+        float xPos = Random.Range(-range, range);
+        float zPos = Random.Range(-range, range);
+
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position + Vector3.right * xPos + Vector3.forward * zPos, Vector3.down);
+        if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Ground")))
         {
-            Door.SetActive(false);
+            _target.transform.position = hit.point;
         }
     }
 }

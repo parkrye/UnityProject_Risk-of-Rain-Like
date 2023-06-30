@@ -33,7 +33,7 @@ public class EnemyDrain : MonoBehaviour
         {
             GameManager.Data.Player.playerSystem.Hit(damage, 0f);
             enemy.HP += damage * 0.5f;
-            lineRenderer.SetPosition(0, GameManager.Data.Player.playerTransform.position + Vector3.up);
+            lineRenderer.SetPosition(1, GameManager.Data.Player.playerTransform.position + Vector3.up);
             yield return new WaitForSeconds(0.1f);
         }
     }

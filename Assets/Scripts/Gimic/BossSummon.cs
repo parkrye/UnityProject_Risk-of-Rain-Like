@@ -10,13 +10,16 @@ public class BossSummon : MonoBehaviour
     [SerializeField] Transform bossTransform;
     [SerializeField] GameObject zone, gate;
     [SerializeField] EnemyData bossData;
+    ParticleSystem summonParticle, bossSummonParticle;
 
     public UnityEvent<LevelScene.LevelState> ObjectStateEvent;
 
-    void OnEnable()
+    void Awake()
     {
         EnemyData[] bossList = GameManager.Resource.LoadAll<EnemyData>("Boss");
         bossData = bossList[Random.Range(0, bossList.Length)];
+        summonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Spawn");
+        bossSummonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Boss");
     }
 
     public void StartCharge()
@@ -56,7 +59,11 @@ public class BossSummon : MonoBehaviour
     {
         for(int i = 0; i < counter + GameManager.Data.Records["Difficulty"]; i++)
         {
-            EnemySummon.RandomLocationSummon(transform, 30f);
+            GameObject enemy = EnemySummon.RandomLocationSummon(transform, 30f);
+            ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
+            effect.transform.position = enemy.transform.position;
+            effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
+            GameManager.Resource.Destroy(effect.gameObject, 2f);
         }
     }
 
@@ -64,7 +71,17 @@ public class BossSummon : MonoBehaviour
     {
         zone.SetActive(false);
         ObjectStateEvent?.Invoke(LevelScene.LevelState.Fight);
-        GameObject boss = EnemySummon.TargetLocationSummon(bossTransform, bossData); // 현재 여기서 중단됨
+        ParticleSystem effect = GameManager.Resource.Instantiate(bossSummonParticle, true);
+        effect.transform.position = bossTransform.position;
+        effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
+        GameManager.Resource.Destroy(effect.gameObject, 3.5f);
+        StartCoroutine(BossSummonRoutine());
+    }
+
+    IEnumerator BossSummonRoutine()
+    {
+        yield return new WaitForSeconds(3.5f);
+        GameObject boss = EnemySummon.TargetLocationSummon(bossTransform, bossData);
         boss.GetComponent<Boss>().OnEnemyDieEvent.AddListener(BeatBoss);
     }
 

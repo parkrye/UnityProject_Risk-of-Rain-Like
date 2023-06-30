@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float spawnDelay, spawnDistance;
     [SerializeField] int enemyCount, enemyLimit;
     Transform player;
+    ParticleSystem summonParticle;
 
     public void Initialize(float _spawnDelay, float _spawnDistance, int _enemyLimit)
     {
@@ -13,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
         spawnDistance = _spawnDistance;
         enemyLimit = _enemyLimit;
         player = GameManager.Data.Player.transform;
+        summonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Spawn");
 
         StartCoroutine(Spawner());
     }
@@ -31,6 +33,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 GameObject enemy = EnemySummon.RandomLocationSummon(player, spawnDistance);
                 enemy.GetComponent<Enemy>().OnEnemyDieEvent.AddListener(EnemyDie);
+                ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
+                effect.transform.position = enemy.transform.position;
+                effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
+                GameManager.Resource.Destroy(effect.gameObject, 2f);
 
                 enemyCount++;
             }

@@ -24,7 +24,7 @@ public class YLimiter : MonoBehaviour
                 Ray ray = new Ray(new Vector3(player.x, transforms[1].position.y, player.z), Vector3.down);
                 if (Physics.Raycast(ray, out hit))
                 {
-                    GameManager.Data.Player.transform.position = hit.point + Vector3.up;
+                    GameManager.Data.Player.transform.position = hit.point + Vector3.up * 2f;
                 }
                 else
                 {

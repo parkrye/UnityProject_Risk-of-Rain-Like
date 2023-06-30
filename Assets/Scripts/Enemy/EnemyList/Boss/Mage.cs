@@ -46,7 +46,6 @@ public class Mage : Boss
                         break;
                     case MagicMode.Bolt:
                         animator.SetTrigger("Bolt");
-                        
                         for(int i = 0; i < 5; i++)
                         {
                             GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), attackTransform.position, Quaternion.identity, true);
