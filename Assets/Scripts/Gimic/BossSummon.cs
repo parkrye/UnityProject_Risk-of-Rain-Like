@@ -80,7 +80,7 @@ public class BossSummon : MonoBehaviour
 
     IEnumerator BossSummonRoutine()
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3f);
         GameObject boss = EnemySummon.TargetLocationSummon(bossTransform, bossData);
         boss.GetComponent<Boss>().OnEnemyDieEvent.AddListener(BeatBoss);
     }
