@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -7,7 +6,6 @@ public class PoolManager : MonoBehaviour
 {
     Dictionary<string, ObjectPool<GameObject>> poolDic;
     Dictionary<string, Transform> poolContainer;
-    Transform poolRoot;
     Canvas canvasRoot;
 
     void Awake()
@@ -19,7 +17,6 @@ public class PoolManager : MonoBehaviour
     {
         poolDic = new Dictionary<string, ObjectPool<GameObject>>();
         poolContainer = new Dictionary<string, Transform>();
-        poolRoot = new GameObject("PoolRoot").transform;
         canvasRoot = GameManager.Resource.Instantiate<Canvas>("UI/Canvas");
         canvasRoot.name = "CanvasRoot";
         canvasRoot.transform.SetParent(transform, false);
@@ -154,7 +151,7 @@ public class PoolManager : MonoBehaviour
     {
         GameObject root = new GameObject();
         root.gameObject.name = $"{key}Container";
-        root.transform.parent = poolRoot;
+        root.transform.parent = transform;
         poolContainer.Add(key, root.transform);
 
         ObjectPool<GameObject> pool = new ObjectPool<GameObject>(
