@@ -5,6 +5,9 @@ public class SceneInfoUI : SceneUI
     public override void Initialize()
     {
         SettingDifficulty();
+
+        GameManager.Data.TimeClock.RemoveAllListeners();
+        GameManager.Data.Player.OnCoinEvent.RemoveAllListeners();
         GameManager.Data.TimeClock.AddListener(UpdateTime);
         GameManager.Data.Player.OnCoinEvent.AddListener(UpdateCoinText);
     }

@@ -6,16 +6,8 @@ public class SceneItemUI : SceneUI
 {
     public override void Initialize()
     {
+        GameManager.Data.Player.Inventory.ItemEvent.RemoveAllListeners();
         GameManager.Data.Player.Inventory.ItemEvent.AddListener(AddItem);
-        Setting();
-    }
-
-    void Setting()
-    {
-        foreach (KeyValuePair<ItemData, int> item in GameManager.Data.Player.Inventory.GetInventory)
-        {
-            AddItem(item.Key, item.Value);
-        }
     }
 
     /// <summary>

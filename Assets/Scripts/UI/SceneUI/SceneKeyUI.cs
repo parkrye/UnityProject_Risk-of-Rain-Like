@@ -11,6 +11,7 @@ public class SceneKeyUI : SceneUI
         enableColor = new Color(0f, 0f, 0f, 0f);
         disableColor = new Color(0f, 0f, 0f, 0.8f);
         SettingKeyIcons();
+        GameManager.Data.Player.hero.ActionEvent.RemoveAllListeners();
         GameManager.Data.Player.hero.ActionEvent.AddListener(UpdateCoolTime);
     }
 

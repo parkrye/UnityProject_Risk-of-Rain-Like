@@ -37,16 +37,16 @@ public class EnemyAI_TypeB : EnemyAI
             if(state != AI_State.CloseRange)
             {
                 boss.ChangeToClose();
+                state = AI_State.CloseRange;
             }
-            state = AI_State.CloseRange;
         }
         else
         {
             if (state != AI_State.FarRange)
             {
                 boss.ChangeToFar();
+                state = AI_State.FarRange;
             }
-            state = AI_State.FarRange;
         }
     }
 

@@ -6,6 +6,9 @@ public class SceneStatusUI : SceneUI
         UpdateHP();
         UpdateEXP();
 
+        GameManager.Data.Player.OnLevelEvent.RemoveAllListeners();
+        GameManager.Data.Player.OnHPEvent.RemoveAllListeners();
+        GameManager.Data.Player.OnEXPEvent.RemoveAllListeners();
         GameManager.Data.Player.OnLevelEvent.AddListener(UpdateLevel);
         GameManager.Data.Player.OnHPEvent.AddListener(UpdateHP);
         GameManager.Data.Player.OnEXPEvent.AddListener(UpdateEXP);
