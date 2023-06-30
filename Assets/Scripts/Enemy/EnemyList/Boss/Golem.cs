@@ -7,21 +7,24 @@ using UnityEngine;
 /// </summary>
 public class Golem : Boss
 {
+    IEnumerator healCoroutine;
+
     protected override void Awake()
     {
         enemyData = GameManager.Resource.Load<EnemyData>("Boss/Golem");
+        healCoroutine = HealRoutine();
         base.Awake();
     }
 
     public override void ChangeToClose()
     {
         animator.SetBool("Heal", false);
-        StopCoroutine(HealRoutine());
+        StopCoroutine(healCoroutine);
     }
 
     public override void ChangeToFar()
     {
-        StartCoroutine(HealRoutine());
+        StartCoroutine(healCoroutine);
     }
 
     protected override IEnumerator AttackRoutine()
