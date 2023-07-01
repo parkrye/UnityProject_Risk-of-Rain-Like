@@ -238,5 +238,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 32
   yModifier: 8
-  yAccModifier: 0.01
+  yAccModifier: 0.05
   range: 4

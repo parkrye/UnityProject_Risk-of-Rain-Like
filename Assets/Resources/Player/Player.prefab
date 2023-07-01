@@ -5359,6 +5359,7 @@ MonoBehaviour:
   onGizmo: 0
   onESC: 0
   alive: 0
+  onSession: 0
   coolTime: 1
   coolChecks: 01010101
   mouseSensivity: 10
@@ -5390,7 +5391,7 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0, z: 0}
   dirModifier: {x: 0, y: 0, z: 0}
   curVelocity: {x: 0, y: 0, z: 0}
-  slopeDegree: 120
+  slopeDegree: 60
   isSlope: 0
 --- !u!114 &3988545672618533068
 MonoBehaviour:

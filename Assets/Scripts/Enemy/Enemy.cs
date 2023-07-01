@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 {
@@ -50,6 +49,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         attack = false;
         alive = true;
         GetComponent<SphereCollider>().radius = enemyData.Size;
+        GetComponent<SphereCollider>().center = Vector3.up * enemyData.yModifier;
         StopAllCoroutines();
         StartCoroutine(BleedingRoutine());
         StartCoroutine(AttackRoutine());

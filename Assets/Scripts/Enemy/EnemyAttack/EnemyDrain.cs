@@ -28,12 +28,15 @@ public class EnemyDrain : MonoBehaviour
 
     IEnumerator DrainRoutine()
     {
-        lineRenderer.SetPosition(0, startTransform.position);
         while (true)
         {
             GameManager.Data.Player.playerSystem.Hit(damage, 0f);
+            Vector3 dir = GameManager.Data.Player.playerTransform.position - enemy.attackTransform.position;
+            for (int i = 0; i < 11; i ++)
+            {
+                lineRenderer.SetPosition(i, enemy.attackTransform.position + dir * i * 0.1f + Vector3.up * Mathf.Sin(i * 18f * Mathf.Rad2Deg));
+            }
             enemy.HP += damage * 0.5f;
-            lineRenderer.SetPosition(1, GameManager.Data.Player.playerTransform.position + Vector3.up);
             yield return new WaitForSeconds(0.1f);
         }
     }

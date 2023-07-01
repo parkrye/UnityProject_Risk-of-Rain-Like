@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b152f5f91ee3b4945bec1081a22a9d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 24
+  speed: 32
   yModifier: 8
   yAccModifier: 0.05
   OnTriggerEnterEvent:

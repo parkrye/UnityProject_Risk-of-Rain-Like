@@ -36,7 +36,6 @@ public class Golem : Boss
             if (attack)
             {
                 animator.SetTrigger("Attack");
-                Debug.Log("Golem Attack");
 
                 Collider[] colliders = Physics.OverlapSphere(attackTransform.position, enemyData.floatdatas[1]);
                 foreach (Collider collider in colliders)

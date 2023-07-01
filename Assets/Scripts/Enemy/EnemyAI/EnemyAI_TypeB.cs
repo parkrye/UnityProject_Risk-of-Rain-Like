@@ -16,7 +16,7 @@ public class EnemyAI_TypeB : EnemyAI
     {
         base.Awake();
         boss = GetComponent<Boss>();
-        state = AI_State.CloseRange;
+        state = AI_State.FarRange;
     }
 
     void OnEnable()

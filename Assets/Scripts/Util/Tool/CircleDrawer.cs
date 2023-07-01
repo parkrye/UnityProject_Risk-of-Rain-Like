@@ -42,7 +42,7 @@ public class CircleDrawer : MonoBehaviour
             float x = radius * Mathf.Cos(angle);
             float y = radius * Mathf.Sin(angle);
 
-            circleRenderer.SetPosition(currentStep, target + new Vector3(x, y, 0f));
+            circleRenderer.SetPosition(currentStep, target + new Vector3(x, 0f, y));
 
             angle += 2f * Mathf.PI / steps;
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -102,12 +103,12 @@ public class EnemyAI_TypeA : EnemyAI
         transform.LookAt(playerPos);
         if (moveSide)
         {
-            if (!enemy.TranslateGradually(transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime))
+            if (!enemy.TranslateGradually(transform.right, enemy.enemyData.MoveSpeed * 0.5f * Time.deltaTime))
                 moveSide = !moveSide;
         }
         else
         {
-            if (!enemy.TranslateGradually(-transform.right, enemy.enemyData.MoveSpeed * Time.deltaTime))
+            if (!enemy.TranslateGradually(-transform.right, enemy.enemyData.MoveSpeed * 0.5f * Time.deltaTime))
                 moveSide = !moveSide;
         }
     }
@@ -116,7 +117,7 @@ public class EnemyAI_TypeA : EnemyAI
     {
         if (bypass.Count > 0)
         {
-            transform.LookAt(bypass.Peek());
+            transform.LookAt(Vector3.Lerp(transform.forward, bypass.Peek(), Time.deltaTime));
             transform.Translate(enemy.enemyData.MoveSpeed * Time.deltaTime * (bypass.Peek() - enemy.enemyPos).normalized, Space.World);
             if(Vector3.SqrMagnitude((enemy.enemyPos) - bypass.Peek()) <= 1f)
                 bypass.Pop();
