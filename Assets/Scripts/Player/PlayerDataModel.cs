@@ -135,8 +135,7 @@ public class PlayerDataModel : MonoBehaviour
         set
         {
             level = value;
-            maxHP *= 1.1f;
-            nowHP = MAXHP;
+            playerSystem.LevelUp();
             OnLevelEvent?.Invoke();
         }
     }

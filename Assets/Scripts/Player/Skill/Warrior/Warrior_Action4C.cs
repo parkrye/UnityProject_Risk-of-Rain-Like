@@ -24,6 +24,7 @@ public class Warrior_Action4C : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
+        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Berserk"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         hero.playerDataModel.playerSystem.Buff(0, modifier);
         hero.playerDataModel.playerSystem.Buff(1, modifier);
         hero.playerDataModel.playerSystem.Buff(2, modifier);
@@ -33,5 +34,6 @@ public class Warrior_Action4C : Skill, IEnumeratable
         hero.playerDataModel.playerSystem.Buff(1, 1 / modifier);
         hero.playerDataModel.playerSystem.Buff(2, 1 / modifier);
         hero.playerDataModel.playerSystem.Buff(3, modifier);
+        GameManager.Resource.Destroy(effect);
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -29,6 +28,9 @@ public class Warrior_Action2C : Skill, IEnumeratable, ICriticable
     {
         yield return new WaitForSeconds(0.08f / hero.playerDataModel.TimeScale);
 
+        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Dirt"), hero.playerDataModel.playerAction.AttackTransform.position, Quaternion.identity, true);
+        effect.transform.LookAt(effect.transform.position + hero.playerDataModel.playerTransform.forward);
+        GameManager.Resource.Destroy(effect.gameObject, 1f);
         Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerAction.closeAttackTransform.position, hero.playerDataModel.playerAction.closeAttackRange);
         foreach (Collider collider in colliders)
         {

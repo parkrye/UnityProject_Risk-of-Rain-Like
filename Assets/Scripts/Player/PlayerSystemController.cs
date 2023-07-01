@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
 {
@@ -69,6 +70,16 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
             nowTime += 0.1f;
             yield return new WaitForSeconds(0.1f);
         } while (nowTime < time);
+    }
+
+    public void LevelUp()
+    {
+        playerDataModel.MAXHP *= 1.1f;
+        playerDataModel.NOWHP = playerDataModel.MAXHP;
+        playerDataModel.AttackDamage *= 1.1f;
+
+        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/LevelUp"), playerDataModel.playerTransform.position, Quaternion.identity, true);
+        GameManager.Resource.Destroy(effect.gameObject, 0.2f);
     }
 
     public void Die()

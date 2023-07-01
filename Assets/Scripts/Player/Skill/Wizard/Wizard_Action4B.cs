@@ -13,6 +13,8 @@ public class Wizard_Action4B : Skill, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
+            GameManager.Resource.Destroy(effect.gameObject, 2f);
 
             GameObject gyroBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/GyroBolt"), true);
             gyroBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

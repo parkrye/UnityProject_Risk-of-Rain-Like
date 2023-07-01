@@ -36,6 +36,8 @@ public class Golem : Boss
             if (attack)
             {
                 animator.SetTrigger("Attack");
+                ParticleSystem effect = GameManager.Resource.Instantiate<ParticleSystem>("Particle/Explosion", attackTransform.position, Quaternion.identity, true);
+                GameManager.Resource.Destroy(effect.gameObject, enemyData.AttackSpeed * 0.8f);
 
                 Collider[] colliders = Physics.OverlapSphere(attackTransform.position, enemyData.floatdatas[1]);
                 foreach (Collider collider in colliders)

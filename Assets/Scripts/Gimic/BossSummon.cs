@@ -10,7 +10,7 @@ public class BossSummon : MonoBehaviour
     [SerializeField] Transform bossTransform;
     [SerializeField] GameObject zone, gate;
     [SerializeField] EnemyData bossData;
-    ParticleSystem summonParticle, bossSummonParticle;
+    ParticleSystem bossZoneParticle, summonParticle, bossSummonParticle, bossZoneParticleObject;
 
     public UnityEvent<LevelScene.LevelState> ObjectStateEvent;
 
@@ -18,14 +18,21 @@ public class BossSummon : MonoBehaviour
     {
         EnemyData[] bossList = GameManager.Resource.LoadAll<EnemyData>("Boss");
         bossData = bossList[Random.Range(0, bossList.Length)];
+        bossZoneParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_BossZone");
         summonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Spawn");
         bossSummonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Boss");
+    }
+
+    void OnEnable()
+    {
+        bossZoneParticleObject = GameManager.Resource.Instantiate(bossZoneParticle);
     }
 
     public void StartCharge()
     {
         if (!startSummon)
         {
+            GameManager.Resource.Destroy(bossZoneParticleObject);
             StartCoroutine(SummonCharge());
         }
     }

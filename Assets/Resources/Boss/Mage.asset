@@ -20,7 +20,7 @@ MonoBehaviour:
   MoveSpeed: 2
   Exp: 30
   Size: 1
-  yModifier: 1.5
+  yModifier: 0.5
   Coin: 30
   floatdatas:
   - 1.3
