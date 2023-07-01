@@ -72,8 +72,6 @@ public class PlayerDataModel : MonoBehaviour
 
         damageSubscribers = new List<IDamageSubscriber>();
         alive = true;
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public float MAXHP
