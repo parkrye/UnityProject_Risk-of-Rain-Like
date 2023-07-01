@@ -12,6 +12,7 @@ public class Warrior_Action3C : Skill, IEnumeratable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.powerupSource.Play();
 
             CoolCheck = false;
 

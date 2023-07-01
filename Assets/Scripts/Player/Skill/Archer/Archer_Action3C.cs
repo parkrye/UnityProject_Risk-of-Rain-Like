@@ -16,6 +16,8 @@ public class Archer_Action3C : Skill, IEnumeratable, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
+
             GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/FlagArrow"), true);
             arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
             arrow.GetComponent<FlagArrow>().OnTriggerEnterEvent.AddListener(AnchorDrag);

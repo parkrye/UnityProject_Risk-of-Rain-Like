@@ -8,6 +8,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     [SerializeField] ParticleSystem bleedParticle;
     protected Animator animator;
     public Transform attackTransform;
+    [SerializeField] AudioSource hitAudio;
 
     public float hp, damage, moveSpeed, attackSpeed;
     public float HP 
@@ -37,6 +38,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     {
         bleedParticle = GameManager.Resource.Load<ParticleSystem>("Particle/Bleed");
         animator = gameObject.GetComponent<Animator>();
+        hitAudio = GameManager.Resource.Instantiate<AudioSource>("Audio/SFX/Hit");
     }
 
     void OnEnable()
@@ -75,6 +77,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
             OnHPEvent?.Invoke(HP);
             if (bleed)
             {
+                hitAudio.Play();
                 ParticleSystem effect = GameManager.Resource.Instantiate(bleedParticle, transform.position, Quaternion.identity, true);
                 GameManager.Resource.Destroy(effect.gameObject, 2f);
                 bleed = false;

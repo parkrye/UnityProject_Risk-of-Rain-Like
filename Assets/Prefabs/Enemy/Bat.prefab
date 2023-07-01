@@ -331,6 +331,7 @@ MonoBehaviour:
   enemyData: {fileID: 0}
   bleedParticle: {fileID: 0}
   attackTransform: {fileID: 4068004843715600}
+  hitAudio: {fileID: 0}
   hp: 0
   damage: 0
   moveSpeed: 0

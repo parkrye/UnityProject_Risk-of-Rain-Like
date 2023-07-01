@@ -18,7 +18,6 @@ public class LevelScene : BaseScene
     {
         // 플레이어 조작 제한
         GameManager.Data.Player.controllable = false;
-        yield return new WaitForEndOfFrame();
 
         // 플레이어, 보스존 시작 위치 설정
         startPositionGimic = GetComponent<StartPositionGimic>();
@@ -82,6 +81,8 @@ public class LevelScene : BaseScene
         GameManager.Data.Player.controllable = true;
         GameManager.Data.Player.onSession = true;
         GameManager.Data.RecordTime = true;
+
+        yield return new WaitForEndOfFrame();
         Progress = 1f;
     }
 }

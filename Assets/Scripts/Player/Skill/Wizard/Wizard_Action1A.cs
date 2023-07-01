@@ -11,6 +11,7 @@ public class Wizard_Action1A : Skill, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
             GameManager.Resource.Destroy(effect.gameObject, 2f);

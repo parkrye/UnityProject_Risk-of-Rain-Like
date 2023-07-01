@@ -32,6 +32,7 @@ public class ShockBolt : BoltType
 
     void Shock()
     {
+        GameManager.Resource.Instantiate<GameObject>("Audio/SFX/Shock");
         ParticleSystem effect = GameManager.Resource.Instantiate(fireworkParticle, transform.position, Quaternion.identity, true);
         GameManager.Resource.Destroy(effect.gameObject, 2f);
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);

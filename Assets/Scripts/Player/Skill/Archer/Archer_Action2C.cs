@@ -11,6 +11,7 @@ public class Archer_Action2C : Skill, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             GameObject boomerang = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Boomerang"), true);
             boomerang.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

@@ -11,8 +11,9 @@ public class Archer_Action2A : Skill, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
-            for(int i = -1; i <= 1; i++)
+            for (int i = -1; i <= 1; i++)
             {
                 GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
                 arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

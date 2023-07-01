@@ -18,6 +18,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.powerupSource.Play();
 
             return true;
         }

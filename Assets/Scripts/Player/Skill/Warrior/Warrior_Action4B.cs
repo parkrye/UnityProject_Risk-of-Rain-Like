@@ -14,6 +14,7 @@ public class Warrior_Action4B : Skill, IEnumeratable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.powerupSource.Play();
 
             CoolCheck = false;
 

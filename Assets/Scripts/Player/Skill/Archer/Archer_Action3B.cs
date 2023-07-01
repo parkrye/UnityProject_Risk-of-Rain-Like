@@ -13,9 +13,11 @@ public class Archer_Action3B : Skill, IEnumeratable
     {
         if (isPressed)
         {
+            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.powerupSource.Play();
+
             ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Swift"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
             GameManager.Resource.Destroy(effect.gameObject, 0.8f);
-            hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
             CoolCheck = false;
 

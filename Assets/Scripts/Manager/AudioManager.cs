@@ -3,6 +3,13 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    AudioMixer audioMixer;
+
+    void Awake()
+    {
+        audioMixer = GameManager.Resource.Load<AudioMixer>("Audio/AudioMixer");
+    }
+
     public float MasterVolume
     {
         get 
@@ -19,7 +26,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
-                audioMixer.SetFloat("Master", -40f + value * 20f);
+                audioMixer.SetFloat("Master", -40f + value * 40f);
             }
         }
     }
@@ -39,7 +46,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
-                audioMixer.SetFloat("BGM", -40f + value * 20f);
+                audioMixer.SetFloat("BGM", -40f + value * 40f);
             }
         }
     }
@@ -59,15 +66,8 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
-                audioMixer.SetFloat("SFX", -40f + value * 20f);
+                audioMixer.SetFloat("SFX", -40f + value * 40f);
             }
         }
-    }
-
-    AudioMixer audioMixer;
-
-    void Awake()
-    {
-        audioMixer = GameManager.Resource.Load<AudioMixer>("Audio/AudioMixer");
     }
 }

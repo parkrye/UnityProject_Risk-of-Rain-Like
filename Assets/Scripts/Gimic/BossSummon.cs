@@ -11,6 +11,7 @@ public class BossSummon : MonoBehaviour
     [SerializeField] GameObject zone, gate;
     [SerializeField] EnemyData bossData;
     ParticleSystem bossZoneParticle, summonParticle, bossSummonParticle, bossZoneParticleObject;
+    [SerializeField] AudioSource bellAudio, enemySummonAudio, lazerAudio;
 
     public UnityEvent<LevelScene.LevelState> ObjectStateEvent;
 
@@ -32,6 +33,7 @@ public class BossSummon : MonoBehaviour
     {
         if (!startSummon)
         {
+            lazerAudio.Stop();
             GameManager.Resource.Destroy(bossZoneParticleObject);
             StartCoroutine(SummonCharge());
         }
@@ -55,6 +57,7 @@ public class BossSummon : MonoBehaviour
             if(charge > counter * (chargeTime * 0.3f))
             {
                 counter++;
+                enemySummonAudio.Play();
                 SummonGuardians();
             }
             yield return new WaitForSeconds(0.1f);
@@ -83,6 +86,7 @@ public class BossSummon : MonoBehaviour
 
     void SummonBoss()
     {
+        bellAudio.Play();
         zone.SetActive(false);
         ObjectStateEvent?.Invoke(LevelScene.LevelState.Fight);
         ParticleSystem effect = GameManager.Resource.Instantiate(bossSummonParticle, true);

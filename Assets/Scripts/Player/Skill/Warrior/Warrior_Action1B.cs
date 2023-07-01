@@ -12,6 +12,7 @@ public class Warrior_Action1B : Skill, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             GameObject slash = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Slash"), true);
             slash.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

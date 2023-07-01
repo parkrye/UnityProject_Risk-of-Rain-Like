@@ -9,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] Vector3 curVelocity;
     [SerializeField] float slopeDegree;
     [SerializeField] bool isSlope;
+    [SerializeField] AudioSource jumpAudio;
     RaycastHit slopeHit;
     bool descending;
 
@@ -125,7 +126,8 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
             {
-                playerDataModel.hero.Jump(inputValue.isPressed);
+                if (playerDataModel.hero.Jump(inputValue.isPressed))
+                    jumpAudio.Play();
             }
             else
             {

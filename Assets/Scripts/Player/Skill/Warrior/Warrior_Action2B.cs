@@ -15,7 +15,9 @@ public class Warrior_Action2B : Skill, IEnumeratable, ICriticable
         if (isPressed)
         {
             damage = param[0];
+
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             CoolCheck = false;
 

@@ -8,6 +8,7 @@ public abstract class Hero : MonoBehaviour
     public Animator animator;
     public Skill[] skills;
     public Transform attackTransform;
+    public AudioSource attackSource, powerupSource;
 
     [SerializeField] protected int jumpCharge;
     protected bool nowCharge;

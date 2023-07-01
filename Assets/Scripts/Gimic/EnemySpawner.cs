@@ -5,6 +5,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] float spawnDelay, spawnDistance;
     [SerializeField] int enemyCount, enemyLimit;
+    [SerializeField] AudioSource summonAudio;
     Transform player;
     ParticleSystem summonParticle;
 
@@ -34,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
                 GameObject enemy = EnemySummon.RandomLocationSummon(player, spawnDistance);
                 if (enemy)
                 {
+                    summonAudio.Play();
                     enemy.GetComponent<Enemy>().OnEnemyDieEvent.AddListener(EnemyDie);
                     ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
                     effect.transform.position = enemy.transform.position;

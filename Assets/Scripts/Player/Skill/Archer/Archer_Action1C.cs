@@ -13,6 +13,7 @@ public class Archer_Action1C : Skill, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/FollowEnergyBolt"), true);
             arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

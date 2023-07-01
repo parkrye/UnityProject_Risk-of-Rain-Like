@@ -20,6 +20,7 @@ public class Archer_Action1B : Skill, ICriticable, IEnumeratable
         else
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
             arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

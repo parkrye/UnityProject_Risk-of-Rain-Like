@@ -14,6 +14,7 @@ public class Archer_Action4A : Skill, IEnumeratable, ICriticable
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             GameObject bombArrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/BombArrow"), true);
             bombArrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

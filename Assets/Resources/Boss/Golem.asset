@@ -16,7 +16,7 @@ MonoBehaviour:
   MaxHP: 100
   Damage: 20
   Range: 10
-  AttackSpeed: 5
+  AttackSpeed: 2
   MoveSpeed: 0
   Exp: 30
   Size: 1

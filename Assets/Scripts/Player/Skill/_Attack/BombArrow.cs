@@ -31,6 +31,7 @@ public class BombArrow : ArrowType
     {
         if (other.tag == "Enemy" || (1 << other.gameObject.layer == LayerMask.GetMask("Ground")))
         {
+            GameManager.Resource.Instantiate<GameObject>("Audio/SFX/Explosion");
             ParticleSystem effect = GameManager.Resource.Instantiate(bombParticle, transform.position, Quaternion.identity, true);
             GameManager.Resource.Destroy(effect.gameObject, 2f);
 

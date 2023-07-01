@@ -5,14 +5,15 @@ public class ReadyScene : BaseScene
 {
     protected override IEnumerator LoadingRoutine()
     {
+        GameManager.Resource.Instantiate<GameObject>("Audio/BGM/BGM_Ready");
+        Progress = 0.3f;
+
         GameManager.UI.CreateSceneCanvas();
         GameManager.UI.CreatePopupCanvas();
         GameManager.UI.ShowSceneUI<SelectUI>("UI/SelectUI").Initialize();
-        for (int i = 0; i < 100; i++)
-        {
-            yield return new WaitForSecondsRealtime(0.01f);
-            Progress += 0.01f;
-        }
+        Progress = 0.6f;
+
+        yield return new WaitForEndOfFrame();
         Progress = 1f;
     }
 }

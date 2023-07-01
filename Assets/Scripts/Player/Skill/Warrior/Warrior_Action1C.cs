@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+
 /// <summary>
 /// 주변베기
 /// </summary>
@@ -14,7 +15,9 @@ public class Warrior_Action1C : Skill, IEnumeratable, ICriticable
         if (isPressed)
         {
             damage = param[0];
+
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
+            hero.attackSource.Play();
 
             CoolCheck = false;
 

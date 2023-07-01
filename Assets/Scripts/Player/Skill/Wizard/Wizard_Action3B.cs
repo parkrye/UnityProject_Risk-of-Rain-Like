@@ -15,7 +15,9 @@ public class Wizard_Action3B : Skill, IDamageSubscriber
         if (isPressed)
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
-            if(!summonMagicFlat)
+            hero.powerupSource.Play();
+
+            if (!summonMagicFlat)
                 magicFlat = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Particle/MagicFlat"), hero.transform.position, Quaternion.identity, hero.transform, true);
             summonMagicFlat = true;
             shieldPoint = param[0];
