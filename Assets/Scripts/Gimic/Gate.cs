@@ -6,14 +6,22 @@ public class Gate : MonoBehaviour
     {
         GameManager.Data.RecordTime = false;
 
-        switch (Random.Range(0, 2))
+        string nextSceneName = GameManager.Scene.CurScene.name;
+        while(nextSceneName == GameManager.Scene.CurScene.name)
         {
-            case 0:
-                GameManager.Scene.LoadScene("LevelScene_Field");
-                break;
-            case 1:
-                GameManager.Scene.LoadScene("LevelScene_Castle");
-                break;
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    nextSceneName = "LevelScene_Field";
+                    break;
+                case 1:
+                    nextSceneName = "LevelScene_Castle";
+                    break;
+                case 2:
+                    nextSceneName = "LevelScene_Viking";
+                    break;
+            }
         }
+        GameManager.Scene.LoadScene(nextSceneName);
     }
 }

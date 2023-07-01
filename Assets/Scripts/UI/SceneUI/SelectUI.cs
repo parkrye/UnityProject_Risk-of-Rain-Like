@@ -62,7 +62,7 @@ public class SelectUI : SceneUI
 
     void StartLevel()
     {
-        GameObject player = GameManager.Resource.InstantiateDontDestroyOnLoad<GameObject>("Player/Player", false);
+        GameObject player = GameManager.Resource.InstantiateDontDestroyOnLoad<GameObject>("Player/Player", null, false);
         player.GetComponent<PlayerDataModel>().playerSystem.SelectHero(characterNum);
         for (int slot = 1; slot <= 4; slot++)
         {
@@ -88,13 +88,16 @@ public class SelectUI : SceneUI
             player.GetComponent<PlayerDataModel>().hero.SettingSkill(slot, skillNum);
         }
 
-        switch(Random.Range(0, 2))
+        switch(Random.Range(0, 3))
         {
             case 0:
                 GameManager.Scene.LoadScene("LevelScene_Field");
                 break;
             case 1:
                 GameManager.Scene.LoadScene("LevelScene_Castle");
+                break;
+            case 2:
+                GameManager.Scene.LoadScene("LevelScene_Viking");
                 break;
         }
     }

@@ -184,7 +184,8 @@ public class PoolManager : MonoBehaviour
             actionOnGet: (GameObject obj) =>
             {
                 obj.gameObject.SetActive(true);
-                obj.transform.parent = SceneTransform();
+                if(!obj.GetComponent<RectTransform>())
+                    obj.transform.parent = SceneTransform();
             },
             actionOnRelease: (GameObject obj) =>
             {

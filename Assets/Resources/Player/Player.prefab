@@ -5434,6 +5434,7 @@ MonoBehaviour:
   curVelocity: {x: 0, y: 0, z: 0}
   slopeDegree: 60
   isSlope: 0
+  jumpAudio: {fileID: 4155263033519050691}
 --- !u!114 &3988545672618533068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10781,6 +10782,11 @@ PrefabInstance:
 --- !u!4 &2734208128902349665 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3583838348894394871, guid: c5e56e2b3c7c8cb48bef498daf2a38aa, type: 3}
+  m_PrefabInstance: {fileID: 1462968609779227286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &4155263033519050691 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3307884604786414933, guid: c5e56e2b3c7c8cb48bef498daf2a38aa, type: 3}
   m_PrefabInstance: {fileID: 1462968609779227286}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4584901696258480551

@@ -71,9 +71,9 @@ public class ResourceManager : MonoBehaviour
         return Instantiate<T>(path, Vector3.zero, Quaternion.identity, null, pooling);
     }
 
-    public T InstantiateDontDestroyOnLoad<T>(string path, bool pooling = false) where T : Object
+    public T InstantiateDontDestroyOnLoad<T>(string path, Transform parent = null, bool pooling = false) where T : Object
     {
-        T instantiated = Instantiate<T>(path, Vector3.zero, Quaternion.identity, null, pooling);
+        T instantiated = Instantiate<T>(path, Vector3.zero, Quaternion.identity, parent, pooling);
         DontDestroyOnLoad(instantiated);
         return instantiated;
     }

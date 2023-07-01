@@ -26,7 +26,8 @@ public class BossSummon : MonoBehaviour
 
     void OnEnable()
     {
-        bossZoneParticleObject = GameManager.Resource.Instantiate(bossZoneParticle);
+        bossZoneParticleObject = GameManager.Resource.Instantiate(bossZoneParticle, transform.position, Quaternion.identity, transform, false);
+        bossZoneParticleObject.transform.LookAt(transform.position + Vector3.up);
     }
 
     public void StartCharge()
