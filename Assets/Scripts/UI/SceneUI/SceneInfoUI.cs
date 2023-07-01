@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class SceneInfoUI : SceneUI
 {
     public override void Initialize()

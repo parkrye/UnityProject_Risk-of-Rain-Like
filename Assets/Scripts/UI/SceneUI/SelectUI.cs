@@ -62,7 +62,7 @@ public class SelectUI : SceneUI
 
     void StartLevel()
     {
-        GameObject player = GameManager.Resource.Instantiate<GameObject>("Player/Player", false);
+        GameObject player = GameManager.Resource.InstantiateDontDestroyOnLoad<GameObject>("Player/Player", false);
         player.GetComponent<PlayerDataModel>().playerSystem.SelectHero(characterNum);
         for (int slot = 1; slot <= 4; slot++)
         {

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 
@@ -18,7 +17,7 @@ public class SceneItemUI : SceneUI
     {
         if(quantity == 1)
         {
-            Image newItemImage =  GameManager.Resource.Instantiate<Image>("UI/ItemImage", transform);
+            Image newItemImage =  GameManager.Resource.InstantiateDontDestroyOnLoad<Image>("UI/ItemImage", transform);
             newItemImage.sprite = itemData.ItemIcon;
             newItemImage.name = itemData.ItemName;
         }
