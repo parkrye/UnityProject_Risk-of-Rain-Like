@@ -30,7 +30,7 @@ public class SceneManager : MonoBehaviour
         loadingCanvas.transform.SetParent(transform, false);
 
         LoadingUI _loadingUI = Resources.Load<LoadingUI>("UI/LoadingUI");
-        loadingUI = Instantiate(_loadingUI);
+        loadingUI = GameManager.Resource.Instantiate(_loadingUI);
         loadingUI.transform.SetParent(loadingCanvas.transform, false);
     }
 

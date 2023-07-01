@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -72,18 +71,14 @@ public class ResourceManager : MonoBehaviour
         return Instantiate<T>(path, Vector3.zero, Quaternion.identity, null, pooling);
     }
 
-    public void Destroy(GameObject go)
+    public T InstantiateDontDestroyOnLoad<T>(string path, bool pooling = false) where T : Object
     {
-        if (go)
-        {
-            if (GameManager.Pool.IsContain(go))
-                GameManager.Pool.Release(go);
-            else
-                GameObject.Destroy(go);
-        }
+        T instantiated = Instantiate<T>(path, Vector3.zero, Quaternion.identity, null, pooling);
+        DontDestroyOnLoad(instantiated);
+        return instantiated;
     }
 
-    public void Destroy(GameObject go, float delay)
+    public void Destroy(GameObject go, float delay = 0f)
     {
         if (go)
         {

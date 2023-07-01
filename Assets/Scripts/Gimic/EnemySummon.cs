@@ -10,21 +10,25 @@ public class EnemySummon : MonoBehaviour
     /// <returns>소환한 에너미 오브젝트</returns>
     public static GameObject RandomLocationSummon(Transform location, float distance)
     {
-        EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
+        if (GameManager.Scene.ReadyToPlay)
+        {
+            EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
 
-        Vector3 spawnPosition = Vector3.zero;
-        float remainDistance = distance;
+            Vector3 spawnPosition = Vector3.zero;
+            float remainDistance = distance;
 
-        spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-        remainDistance -= spawnPosition.x;
+            spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
+            remainDistance -= spawnPosition.x;
 
-        spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-        remainDistance -= spawnPosition.y;
+            spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
+            remainDistance -= spawnPosition.y;
 
-        spawnPosition.z = remainDistance;
+            spawnPosition.z = remainDistance;
 
-        GameObject enemy = GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, location.position + spawnPosition, Quaternion.identity, true);
-        return enemy;
+            GameObject enemy = GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, location.position + spawnPosition, Quaternion.identity, true);
+            return enemy;
+        }
+        return null;
     }
 
     /// <summary>
@@ -36,19 +40,23 @@ public class EnemySummon : MonoBehaviour
     /// <returns>소환한 에너미 오브젝트</returns>
     public static GameObject RandomLocationSummon(Transform location, float distance, string path)
     {
-        Vector3 spawnPosition = Vector3.zero;
-        float remainDistance = distance;
+        if (GameManager.Scene.ReadyToPlay)
+        {
+            Vector3 spawnPosition = Vector3.zero;
+            float remainDistance = distance;
 
-        spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-        remainDistance -= spawnPosition.x;
+            spawnPosition.x = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
+            remainDistance -= spawnPosition.x;
 
-        spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
-        remainDistance -= spawnPosition.y;
+            spawnPosition.y = Random.Range(remainDistance * 0.2f, remainDistance * 0.8f);
+            remainDistance -= spawnPosition.y;
 
-        spawnPosition.z = remainDistance;
+            spawnPosition.z = remainDistance;
 
-        GameObject enemy = GameManager.Resource.Instantiate(GameManager.Resource.Load<EnemyData>(path).enemy, location.position + spawnPosition, Quaternion.identity, true);
-        return enemy;
+            GameObject enemy = GameManager.Resource.Instantiate(GameManager.Resource.Load<EnemyData>(path).enemy, location.position + spawnPosition, Quaternion.identity, true);
+            return enemy;
+        }
+        return null;
     }
 
     /// <summary>
@@ -58,9 +66,13 @@ public class EnemySummon : MonoBehaviour
     /// <returns>소환한 에너미 오브젝트</returns>
     public static GameObject TargetLocationSummon(Transform location)
     {
-        EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
-        GameObject enemy = GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, location.position, Quaternion.identity, true);
-        return enemy;
+        if (GameManager.Scene.ReadyToPlay)
+        {
+            EnemyData[] enemyDatas = GameManager.Resource.LoadAll<EnemyData>("Enemy");
+            GameObject enemy = GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, location.position, Quaternion.identity, true);
+            return enemy;
+        }
+        return null;
     }
 
     /// <summary>
@@ -71,8 +83,12 @@ public class EnemySummon : MonoBehaviour
     /// <returns>소환한 에너미 오브젝트</returns>
     public static GameObject TargetLocationSummon(Transform location, string path)
     {
-        GameObject enemy = GameManager.Resource.Instantiate(GameManager.Resource.Load<EnemyData>(path).enemy, location.position, Quaternion.identity, true);
-        return enemy;
+        if (GameManager.Scene.ReadyToPlay)
+        {
+            GameObject enemy = GameManager.Resource.Instantiate(GameManager.Resource.Load<EnemyData>(path).enemy, location.position, Quaternion.identity, true);
+            return enemy;
+        }
+        return null;
     }
 
     /// <summary>
@@ -83,7 +99,11 @@ public class EnemySummon : MonoBehaviour
     /// <returns>소환한 에너미 오브젝트</returns>
     public static GameObject TargetLocationSummon(Transform location, EnemyData enemyData)
     {
-        GameObject enemy = GameManager.Resource.Instantiate(enemyData.enemy, location.position, Quaternion.identity, true);
-        return enemy;
+        if (GameManager.Scene.ReadyToPlay)
+        {
+            GameObject enemy = GameManager.Resource.Instantiate(enemyData.enemy, location.position, Quaternion.identity, true);
+            return enemy;
+        }
+        return null;
     }
 }

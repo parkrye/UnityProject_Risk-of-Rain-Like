@@ -60,10 +60,17 @@ public class BossSummon : MonoBehaviour
         for(int i = 0; i < counter + GameManager.Data.Records["Difficulty"]; i++)
         {
             GameObject enemy = EnemySummon.RandomLocationSummon(transform, 30f);
-            ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
-            effect.transform.position = enemy.transform.position;
-            effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
-            GameManager.Resource.Destroy(effect.gameObject, 2f);
+            if (enemy)
+            {
+                ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
+                effect.transform.position = enemy.transform.position;
+                effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
+                GameManager.Resource.Destroy(effect.gameObject, 2f);
+            }
+            else
+            {
+                break;
+            }
         }
     }
 
@@ -82,7 +89,10 @@ public class BossSummon : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         GameObject boss = EnemySummon.TargetLocationSummon(bossTransform, bossData);
-        boss.GetComponent<Boss>().OnEnemyDieEvent.AddListener(BeatBoss);
+        if (boss)
+        {
+            boss.GetComponent<Boss>().OnEnemyDieEvent.AddListener(BeatBoss);
+        }
     }
 
     public void BeatBoss()

@@ -32,13 +32,20 @@ public class EnemySpawner : MonoBehaviour
             if(enemyCount < enemyLimit)
             {
                 GameObject enemy = EnemySummon.RandomLocationSummon(player, spawnDistance);
-                enemy.GetComponent<Enemy>().OnEnemyDieEvent.AddListener(EnemyDie);
-                ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
-                effect.transform.position = enemy.transform.position;
-                effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
-                GameManager.Resource.Destroy(effect.gameObject, 2f);
+                if (enemy)
+                {
+                    enemy.GetComponent<Enemy>().OnEnemyDieEvent.AddListener(EnemyDie);
+                    ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
+                    effect.transform.position = enemy.transform.position;
+                    effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
+                    GameManager.Resource.Destroy(effect.gameObject, 2f);
 
-                enemyCount++;
+                    enemyCount++;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }

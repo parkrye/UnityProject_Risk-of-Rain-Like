@@ -7,6 +7,7 @@ public class PoolManager : MonoBehaviour
     Dictionary<string, ObjectPool<GameObject>> poolDic;
     Dictionary<string, Transform> poolContainer;
     Canvas canvasRoot;
+    Transform sceneTransform;
 
     void Awake()
     {
@@ -26,6 +27,19 @@ public class PoolManager : MonoBehaviour
     {
         poolDic = new Dictionary<string, ObjectPool<GameObject>>();
         poolContainer = new Dictionary<string, Transform>();
+    }
+
+    Transform SceneTransform()
+    {
+        if (sceneTransform)
+        {
+            return sceneTransform;
+        }
+        else
+        {
+            sceneTransform = GameManager.Resource.Instantiate<Transform>("Container");
+            return sceneTransform;
+        }
     }
 
     public T Get<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : Object
@@ -163,14 +177,14 @@ public class PoolManager : MonoBehaviour
         ObjectPool<GameObject> pool = new ObjectPool<GameObject>(
             createFunc: () =>
             {
-                GameObject obj = Instantiate(prefab);
+                GameObject obj = GameManager.Resource.Instantiate(prefab);
                 obj.gameObject.name = key;
                 return obj;
             },
             actionOnGet: (GameObject obj) =>
             {
                 obj.gameObject.SetActive(true);
-                obj.transform.parent = null;
+                obj.transform.parent = SceneTransform();
             },
             actionOnRelease: (GameObject obj) =>
             {
@@ -179,9 +193,9 @@ public class PoolManager : MonoBehaviour
             },
             actionOnDestroy: (GameObject obj) =>
             {
-                Destroy(obj);
+                GameManager.Resource.Destroy(obj);
             }
-            );
+        );
         poolDic.Add(key, pool);
     }
 
@@ -282,7 +296,7 @@ public class PoolManager : MonoBehaviour
         ObjectPool<GameObject> pool = new ObjectPool<GameObject>(
             createFunc: () =>
             {
-                GameObject obj = Instantiate(prefab);
+                GameObject obj = GameManager.Resource.Instantiate(prefab);
                 obj.gameObject.name = key;
                 return obj;
             },
@@ -297,9 +311,9 @@ public class PoolManager : MonoBehaviour
             },
             actionOnDestroy: (GameObject obj) =>
             {
-                Destroy(obj);
+                GameManager.Resource.Destroy(obj);
             }
-            );
+        );
         poolDic.Add(key, pool);
     }
 }
