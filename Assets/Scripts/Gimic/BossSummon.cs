@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.ParticleSystem;
 
 public class BossSummon : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class BossSummon : MonoBehaviour
     void OnEnable()
     {
         lazerAudio.Play();
-        bossSummonParticle.gameObject.SetActive(true);
+        bossZoneParticle.Play();
     }
 
     public void StartCharge()
@@ -34,7 +35,7 @@ public class BossSummon : MonoBehaviour
         if (!startSummon)
         {
             lazerAudio.Stop();
-            bossSummonParticle.gameObject.SetActive(false);
+            bossZoneParticle.Stop();
             StartCoroutine(SummonCharge());
         }
     }

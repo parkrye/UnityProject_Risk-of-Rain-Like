@@ -31,6 +31,6 @@ public class Warrior_Action4B : Skill, IEnumeratable
         yield return new WaitForSeconds(skillTime / hero.playerDataModel.TimeScale);
         Time.timeScale = 1f;
         hero.playerDataModel.TimeScale = 1f;
-        GameManager.Resource.Destroy(effect);
+        GameManager.Resource.Destroy(effect.gameObject);
     }
 }

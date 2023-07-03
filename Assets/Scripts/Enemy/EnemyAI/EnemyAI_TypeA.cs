@@ -26,7 +26,7 @@ public class EnemyAI_TypeA : EnemyAI
 
     void Update()
     {
-        if (enemy.alive)
+        if (enemy.isActiveAndEnabled && enemy.alive)
         {
             state = StateCheck();
         }

@@ -65,4 +65,21 @@ public class DataManager : MonoBehaviour
     {
         CSVRW.WriteCSV_Achievements(Achievement);
     }
+
+    /// <summary>
+    /// Achivement를 초기화하는 메소드
+    /// </summary>
+    public void ResetAchivement()
+    {
+        Achievement["StageCount"] = 0;
+        Achievement["TimeCount"] = 0;
+        Achievement["KillCount"] = 0;
+        Achievement["DamageCount"] = 0;
+        Achievement["HitCount"] = 0;
+        Achievement["HealCount"] = 0;
+        Achievement["MoneyCount"] = 0;
+        Achievement["CostCount"] = 0;
+        Achievement["LevelCount"] = 0;
+        CSVRW.WriteCSV_Achievements(Achievement);
+    }
 }

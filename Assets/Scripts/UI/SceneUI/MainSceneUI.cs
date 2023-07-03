@@ -15,6 +15,7 @@ public class MainSceneUI : SceneUI
         buttons["Start"].onClick.AddListener(OnStartButton);
         buttons["Option"].onClick.AddListener(OnOptionButton);
         buttons["Quit"].onClick.AddListener(OnQuitButton);
+        buttons["Reset"].onClick.AddListener(OnResetButton);
         click = false;
     }
 
@@ -60,5 +61,14 @@ public class MainSceneUI : SceneUI
             buttons["Quit"].GetComponent<Animator>().SetTrigger("Click");
             StartCoroutine(QuitButtonRoutine());
         }
+    }
+
+    void OnResetButton()
+    {
+        YesNoPopUpUI ui = GameManager.UI.ShowPopupUI<YesNoPopUpUI>("UI/YesNoUI");
+        ui.SetText(0, "데이터를 초기화하시겠습니까?");
+        ui.SetText(1, "예");
+        ui.SetText(2, "아니오");
+        ui.YesEvent.AddListener(() => { GameManager.Data.ResetAchivement(); });
     }
 }

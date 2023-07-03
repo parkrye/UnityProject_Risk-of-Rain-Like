@@ -42,6 +42,7 @@ public class SceneManager : MonoBehaviour
     IEnumerator LoadingRoutine(string sceneName)
     {
         ReadyToPlay = false;
+        Time.timeScale = 1f;
         loadingUI.SetProgress(0f);
         loadingUI.FadeIn();
         yield return new WaitForSeconds(1f);

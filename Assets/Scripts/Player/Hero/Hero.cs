@@ -59,7 +59,7 @@ public abstract class Hero : MonoBehaviour
 
     public bool Action(int num, bool isPressed)
     {
-        if (GameManager.Scene.ReadyToPlay)
+        if (GameManager.Scene.ReadyToPlay && playerDataModel.alive)
         {
             if (skills[num].CoolCheck)
             {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
     }
 
     // юлго PopUpUI
+
     public T ShowPopupUI<T>(T popup) where T : PopUpUI
     {
         if (popUpStack.Count > 0)

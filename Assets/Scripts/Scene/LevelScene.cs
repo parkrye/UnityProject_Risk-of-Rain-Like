@@ -21,8 +21,8 @@ public class LevelScene : BaseScene
 
         // 플레이어, 보스존 시작 위치 설정
         startPositionGimic = GetComponent<StartPositionGimic>();
-        startPositionGimic.SetGimic(GameManager.Data.Player.gameObject);
-        startPositionGimic.SetGimic(bossZone);
+        startPositionGimic.SetGimic(GameManager.Data.Player.gameObject, 1f);
+        startPositionGimic.SetGimic(bossZone, 2f);
         Progress = 0.2f;
 
         // UI 세팅

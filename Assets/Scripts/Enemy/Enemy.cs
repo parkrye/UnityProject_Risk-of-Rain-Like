@@ -38,11 +38,12 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     {
         bleedParticle = GameManager.Resource.Load<ParticleSystem>("Particle/Bleed");
         animator = gameObject.GetComponent<Animator>();
-        hitAudio = GameManager.Resource.Instantiate<AudioSource>("Audio/SFX/Hit");
     }
 
     void OnEnable()
     {
+        hitAudio = GameManager.Resource.Instantiate<AudioSource>("Audio/SFX/Hit");
+
         HP = enemyData.MaxHP * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
         damage = enemyData.Damage * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
         moveSpeed = enemyData.MoveSpeed;

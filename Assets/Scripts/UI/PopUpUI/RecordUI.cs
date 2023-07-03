@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -55,8 +56,6 @@ public class RecordUI : PopUpUI
 
         buttons["RetryButton"].onClick.AddListener(RetryButton);
         buttons["TitleButton"].onClick.AddListener(TitleButton);
-
-        CheckAchievement();
     }
 
     void OnEnable()
@@ -67,76 +66,12 @@ public class RecordUI : PopUpUI
 
     void RetryButton()
     {
-        Time.timeScale = 1f;
-        GameManager.ResetSession();
         GameManager.Scene.LoadScene("ReadyScene");
+        GameManager.ResetSession();
     }
 
     void TitleButton()
     {
-        Time.timeScale = 1f;
         GameManager.Scene.LoadScene("TitleScene");
-    }
-
-    void CheckAchievement()
-    {
-        bool achive = false;
-
-        if (GameManager.Data.Records["Stage"] > GameManager.Data.Achievement["StageCount"])
-        {
-            GameManager.Data.SetAchievement("StageCount", (int)GameManager.Data.Records["Stage"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Records["Time"] > GameManager.Data.Achievement["TimeCount"])
-        {
-            GameManager.Data.SetAchievement("TimeCount", (int)GameManager.Data.Records["Time"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Records["Kill"] > GameManager.Data.Achievement["KillCount"])
-        {
-            GameManager.Data.SetAchievement("KillCount", (int)GameManager.Data.Records["Kill"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Records["Damage"] > GameManager.Data.Achievement["DamageCount"])
-        {
-            GameManager.Data.SetAchievement("DamageCount", (int)GameManager.Data.Records["Damage"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Records["Hit"] > GameManager.Data.Achievement["HitCount"])
-        {
-            GameManager.Data.SetAchievement("HitCount", (int)GameManager.Data.Records["Hit"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Records["Heal"] > GameManager.Data.Achievement["HealCount"])
-        {
-            GameManager.Data.SetAchievement("HealCount", (int)GameManager.Data.Records["Heal"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Records["Money"] > GameManager.Data.Achievement["MoneyCount"])
-        {
-            GameManager.Data.SetAchievement("MoneyCount", (int)GameManager.Data.Records["Money"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Records["Cost"] > GameManager.Data.Achievement["CostCount"])
-        {
-            GameManager.Data.SetAchievement("CostCount", (int)GameManager.Data.Records["Cost"]);
-            achive = true;
-        }
-
-        if (GameManager.Data.Player.LEVEL > GameManager.Data.Achievement["LevelCount"])
-        {
-            GameManager.Data.SetAchievement("LevelCount", GameManager.Data.Player.LEVEL);
-            achive = true;
-        }
-
-        if(achive)
-            GameManager.Data.SaveAchiveMent();
     }
 }
