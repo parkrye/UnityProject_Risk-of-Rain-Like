@@ -1,5 +1,4 @@
 using Cinemachine;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +10,7 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] Vector3 cameraOffset, downViewOffset, upViewOffset, defaultCameraOffset, closeCameraOffset;
     [SerializeField] float xRotation;
     [SerializeField] CinemachineVirtualCamera virtualCamera;
+    public Camera minimapCamera;
 
     public Transform lookFromTransform, lookAtTransform;
 

@@ -34,6 +34,7 @@ public class LevelScene : BaseScene
         GameManager.UI.ShowSceneUI<SceneItemUI>("UI/SceneItemUI").Initialize();
         GameManager.UI.ShowSceneUI<SceneKeyUI>("UI/SceneKeyUI").Initialize();
         GameManager.UI.ShowSceneUI<SceneStatusUI>("UI/SceneStatusUI").Initialize();
+        GameManager.UI.ShowSceneUI<SceneMinimapUI>("UI/SceneMinimapUI").Initialize();
         Progress = 0.4f;
 
         // 에너미 스폰 설정
