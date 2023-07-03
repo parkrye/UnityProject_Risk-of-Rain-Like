@@ -14,7 +14,7 @@ public class Wizard_Action4C : Skill, ICriticable
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
+            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
             GameManager.Resource.Destroy(effect.gameObject, 2f);
 
             GameObject poisonSwamp = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/PoisonSwamp"), true);

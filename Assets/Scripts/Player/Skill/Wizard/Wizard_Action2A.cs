@@ -16,7 +16,7 @@ public class Wizard_Action2A : Skill
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.playerDataModel.animator.SetBool("Casting", true);
 
-            effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
+            effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
             flame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Flame"), hero.playerDataModel.playerAction.lookFromTransform, true);
             flame.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
             flame.transform.LookAt(hero.playerDataModel.playerAction.lookAtTransform.position + Vector3.up);

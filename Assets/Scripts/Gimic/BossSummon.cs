@@ -10,7 +10,7 @@ public class BossSummon : MonoBehaviour
     [SerializeField] Transform bossTransform;
     [SerializeField] GameObject zone, gate;
     [SerializeField] EnemyData bossData;
-    ParticleSystem bossZoneParticle, summonParticle, bossSummonParticle, bossZoneParticleObject;
+    [SerializeField] ParticleSystem bossZoneParticle, summonParticle, bossSummonParticle;
     [SerializeField] AudioSource bellAudio, enemySummonAudio, lazerAudio;
 
     public UnityEvent<LevelScene.LevelState> ObjectStateEvent;
@@ -19,15 +19,14 @@ public class BossSummon : MonoBehaviour
     {
         EnemyData[] bossList = GameManager.Resource.LoadAll<EnemyData>("Boss");
         bossData = bossList[Random.Range(0, bossList.Length)];
-        bossZoneParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_BossZone");
         summonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Spawn");
         bossSummonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Boss");
     }
 
     void OnEnable()
     {
-        bossZoneParticleObject = GameManager.Resource.Instantiate(bossZoneParticle, transform.position, Quaternion.identity, transform, false);
-        bossZoneParticleObject.transform.LookAt(transform.position + Vector3.up);
+        lazerAudio.Play();
+        bossSummonParticle.gameObject.SetActive(true);
     }
 
     public void StartCharge()
@@ -35,7 +34,7 @@ public class BossSummon : MonoBehaviour
         if (!startSummon)
         {
             lazerAudio.Stop();
-            GameManager.Resource.Destroy(bossZoneParticleObject);
+            bossSummonParticle.gameObject.SetActive(false);
             StartCoroutine(SummonCharge());
         }
     }

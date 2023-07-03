@@ -27,7 +27,7 @@ public class Warrior_Action4B : Skill, IEnumeratable
     {
         ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Electricity"), hero.playerDataModel.playerTransform.position + Vector3.up, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         Time.timeScale = modifier;
-        hero.playerDataModel.TimeScale = 1 / modifier;
+        hero.playerDataModel.TimeScale = 1f / modifier;
         yield return new WaitForSeconds(skillTime / hero.playerDataModel.TimeScale);
         Time.timeScale = 1f;
         hero.playerDataModel.TimeScale = 1f;

@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.EditorCoroutines.Editor;
 using UnityEngine;
 
 /// <summary>
@@ -16,7 +15,7 @@ public class Wizard_Action3C : Skill, IEnumeratable
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/FireworkBlueLarge"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
+            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/FireworkBlueLarge"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
             GameManager.Resource.Destroy(effect.gameObject, 2f);
             Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerTransform.position, skillRange);
             foreach (Collider collider in colliders)
