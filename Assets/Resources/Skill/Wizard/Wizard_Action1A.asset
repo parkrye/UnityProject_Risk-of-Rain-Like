@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard_Action1A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Energy Bolt
-  SkillDesc: Shot a Energy Bolt to Foward
+  SkillName: "\uB9C8\uD0C4"
+  SkillDesc: "\uC804\uBC29\uC73C\uB85C \uB9C8\uD0C4\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 272d90eccf9a0491fa281608391c6274, type: 3}
   coolTime: 1
   modifier: 0.6

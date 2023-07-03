@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Archer_Action4B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Arrow Shower
-  SkillDesc: It is Rainy Day
+  SkillName: "\uD654\uC0B4\uBE44"
+  SkillDesc: "\uD654\uC0B4\uC774 \uBA85\uC911\uD55C \uC704\uCE58\uB85C \uD654\uC0B4\uBE44\uB97C
+    \uBD80\uB985\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 8f78f97a2d8e7498388d20b064d09528, type: 3}
   coolTime: 30
   modifier: 0.02

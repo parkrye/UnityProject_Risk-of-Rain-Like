@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action1C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Follow Arrow
-  SkillDesc: Automatic Arrow
+  SkillName: "\uC720\uB3C4 \uC0AC\uACA9"
+  SkillDesc: "\uCCA8\uB2E8 \uC790\uB3D9\uD654 \uD654\uC0B4"
   SkillIcon: {fileID: 21300000, guid: 617c0e170d3fc477eaec8b447420d340, type: 3}
   coolTime: 0.5
   modifier: 0.4

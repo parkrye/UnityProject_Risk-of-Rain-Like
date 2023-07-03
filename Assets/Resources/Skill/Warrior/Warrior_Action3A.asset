@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action3A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Roll
-  SkillDesc: Traditional Dodge
+  SkillName: "\uAD6C\uB974\uAE30"
+  SkillDesc: "\uC804\uD1B5\uC801\uC778 \uD68C\uD53C \uBC29\uBC95"
   SkillIcon: {fileID: 21300000, guid: 64910aa9bb3a74497a5a5dbbe2f5a468, type: 3}
   coolTime: 1
   modifier: 0.5

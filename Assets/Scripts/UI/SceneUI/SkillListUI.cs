@@ -4,7 +4,7 @@ using UnityEngine;
 public class SkillListUI : SceneUI, IPointerEnterHandler, IPointerExitHandler
 {
     public Skill skill;
-    SkillDescUI skillDescUI;
+    DescUI skillDescUI;
     Vector3 posOffset;
 
     protected override void Awake()
@@ -15,8 +15,8 @@ public class SkillListUI : SceneUI, IPointerEnterHandler, IPointerExitHandler
 
     public override void Initialize()
     {
-        skillDescUI = GameManager.Resource.Load<SkillDescUI>("UI/SkillDescUI");
-        posOffset = new Vector3(100f, 0f, 0f);
+        skillDescUI = GameManager.Resource.Load<DescUI>("UI/DescUI");
+        posOffset = new Vector3(100f, 50f, 0f);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

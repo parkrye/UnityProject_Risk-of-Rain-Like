@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard_Action3C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Super Jump
-  SkillDesc: It is Super
+  SkillName: "\uC288\uD37C \uC810\uD504"
+  SkillDesc: "\uC544\uC8FC \uC288\uD37C\uD569\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 4b4c678e6ad9e4873b02ca8ca35d778f, type: 3}
   coolTime: 5
   modifier: 0.2

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action3C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Anchor Arrow
-  SkillDesc: Attack on Titan
+  SkillName: "\uC575\uCEE4 \uD654\uC0B4"
+  SkillDesc: "\uC9C4\uACA9\uD569\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 2b0a4df3dbba1408bb9f322d40c4e86a, type: 3}
   coolTime: 10
   modifier: 0

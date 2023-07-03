@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b326f2a44e5854f9ed68e0691e5bed, type: 3}
   m_Name: GoldCoin
   m_EditorClassIdentifier: 
-  ItemName: Gold Coin
-  ItemDesc: Greed Makes Fast
+  ItemName: "\uAE08\uD654"
+  ItemDesc: "\uD0D0\uC695\uC740 \uC0AC\uB78C\uC744 \uBE60\uB974\uAC8C \uB9CC\uB4ED\uB2C8\uB2E4"
   ItemIcon: {fileID: 21300000, guid: 6c4394cb378784f759f57663d1ba1a62, type: 3}

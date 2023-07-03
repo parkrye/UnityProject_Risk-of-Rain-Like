@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action1B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Slash
-  SkillDesc: Slash Foward
+  SkillName: "\uAC80\uAE30"
+  SkillDesc: "\uC804\uBC29\uC73C\uB85C \uAC80\uAE30\uB97C \uC3D8\uC544\uB0C5\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 32a876727f5564e62b50da0c88234cfe, type: 3}
   coolTime: 1
   modifier: 0.8

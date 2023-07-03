@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard_Action2A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Fire Breath
-  SkillDesc: Maybe It's Breath
+  SkillName: "\uBD88\uC758 \uC228\uACB0"
+  SkillDesc: "\uC544\uB9C8\uB3C4 \uC228\uACB0\uC774 \uB9DE\uC2B5\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 4460493b17a0e4beaaeaa6ba43c37f4e, type: 3}
   coolTime: 5
   modifier: 0.005

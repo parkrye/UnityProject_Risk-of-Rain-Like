@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action3B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Hawk Eye
-  SkillDesc: Why you see like that
+  SkillName: "\uB9E4\uC758 \uB208"
+  SkillDesc: "\uB0A0\uCE74\uB86D\uAC8C \uB208\uC744 \uB739\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: a348aa04f846046b8b5ce0cc85878da9, type: 3}
   coolTime: 10
   modifier: 2

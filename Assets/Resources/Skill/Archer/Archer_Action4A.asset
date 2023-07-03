@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action4A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Explosion Shot
-  SkillDesc: Shot a Bomb Arrow to Foward
+  SkillName: "\uD3ED\uBC1C \uD654\uC0B4"
+  SkillDesc: "\uCDE8\uAE09 \uC8FC\uC758"
   SkillIcon: {fileID: 21300000, guid: 04781ddf1640d48e4b784ad7268ba9ad, type: 3}
   coolTime: 20
   modifier: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action1C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Circle Slash
-  SkillDesc: Slash Around
+  SkillName: "\uC6D0\uD615 \uBCA0\uAE30"
+  SkillDesc: "\uC8FC\uBCC0\uC758 \uC801\uB4E4\uC744 \uBCA0\uC5B4\uB0C5\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: fd27e3f6b435d4425a4e5034f96cdef3, type: 3}
   coolTime: 1.5
   modifier: 0.9

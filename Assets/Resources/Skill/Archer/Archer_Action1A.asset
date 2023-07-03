@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action1A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Fast Shot
-  SkillDesc: Shot a Arrow to Foward
+  SkillName: "\uC18D\uC0AC"
+  SkillDesc: "\uC804\uBC29\uC73C\uB85C \uBE60\uB974\uAC8C \uD654\uC0B4\uC744 \uC19D\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: d6bf9fd619ff24ce58267141ada9bbaa, type: 3}
   coolTime: 0.8
   modifier: 0.5

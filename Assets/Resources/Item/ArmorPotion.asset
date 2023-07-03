@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b21ca0f667386146a86e0b1d0cdd149, type: 3}
   m_Name: ArmorPotion
   m_EditorClassIdentifier: 
-  ItemName: Armor Potion
-  ItemDesc: Like Wearing Armor
+  ItemName: "\uBC29\uC5B4 \uD3EC\uC158"
+  ItemDesc: "\uB9C8\uCE58 \uAC11\uC637\uC744 \uC785\uC740 \uAC83 \uAC19\uC2B5\uB2C8\uB2E4"
   ItemIcon: {fileID: 21300000, guid: 2a280aa90446b40508fa33c8d702f8f0, type: 3}
+  armorRatio: 0

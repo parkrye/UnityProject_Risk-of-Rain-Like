@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action2C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Boomerang
-  SkillDesc: I Like Boomerang
+  SkillName: "\uBD80\uBA54\uB791"
+  SkillDesc: "\uC0AC\uB791\uC740 \uB3CC\uC544\uC635\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: ef488320a1037477b9937ad14125f21b, type: 3}
   coolTime: 5
   modifier: 0.9

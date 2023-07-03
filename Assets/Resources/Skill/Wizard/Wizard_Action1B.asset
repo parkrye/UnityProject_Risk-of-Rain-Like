@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard_Action1B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Follow Bolt
-  SkillDesc: Convenient Magic Bolt
+  SkillName: "\uC720\uB3C4 \uB9C8\uD0C4"
+  SkillDesc: "\uAC04\uD3B8\uD55C \uB9C8\uD0C4"
   SkillIcon: {fileID: 21300000, guid: 5e256e48be18d4d2ebc4bc0c1995af39, type: 3}
   coolTime: 1
   modifier: 0.4

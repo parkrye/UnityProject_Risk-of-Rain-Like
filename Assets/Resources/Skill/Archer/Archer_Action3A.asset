@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action3A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Quick Step
-  SkillDesc: Move Fast
+  SkillName: "\uD035\uC2A4\uD0ED"
+  SkillDesc: "\uC9E7\uC740 \uAC70\uB9AC\uB97C \uBE60\uB974\uAC8C \uC774\uB3D9\uD569\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 657e61396de954dd58c72903864114bf, type: 3}
   coolTime: 5
   modifier: 0

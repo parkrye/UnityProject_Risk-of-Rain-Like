@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard_Action2C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Poison Bolt
-  SkillDesc: How Brutal!
+  SkillName: "\uC800\uC8FC"
+  SkillDesc: "\uB054\uCC0D\uD55C \uC800\uC8FC\uC785\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 8a94ca56fa5d0485ab678593da84d890, type: 3}
   coolTime: 10
   modifier: 0.005

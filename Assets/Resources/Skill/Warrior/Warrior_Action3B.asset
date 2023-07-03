@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action3B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Light Step
-  SkillDesc: Simple is Best
+  SkillName: "\uAC00\uBCBC\uC6B4 \uBC1C\uAC78\uC74C"
+  SkillDesc: "\uAC04\uB2E8\uD560 \uC218\uB85D \uD6CC\uB96D\uD569\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 9048f1bbff3cf47ce8b0467ca61e0f4f, type: 3}
   coolTime: 10
   modifier: 1.5

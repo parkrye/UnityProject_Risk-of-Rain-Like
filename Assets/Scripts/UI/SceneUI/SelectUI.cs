@@ -51,9 +51,9 @@ public class SelectUI : SceneUI
     void SelectButton()
     {
         YesNoPopUpUI yesNoPopUpUI = GameManager.UI.ShowPopupUI<YesNoPopUpUI>("UI/YesNoUI");
-        yesNoPopUpUI.SetText(0, "Start Level?");
-        yesNoPopUpUI.SetText(1, "Yes");
-        yesNoPopUpUI.SetText(2, "No");
+        yesNoPopUpUI.SetText(0, "이대로 도전하시겠습니까?");
+        yesNoPopUpUI.SetText(1, "예");
+        yesNoPopUpUI.SetText(2, "아니오");
         yesNoPopUpUI.YesEvent.RemoveAllListeners();
         yesNoPopUpUI.NoEvent.RemoveAllListeners();
         yesNoPopUpUI.YesEvent.AddListener(StartLevel);

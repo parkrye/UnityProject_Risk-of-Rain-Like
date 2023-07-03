@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action2C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Kick
-  SkillDesc: Kick These Butt
+  SkillName: "\uBC1C\uCC28\uAE30"
+  SkillDesc: "\uAC77\uC5B4\uCC2C \uC801\uC744 \uB0A0\uB824\uBC84\uB9BD\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: eb05a7f6b38564ad09eb563e25b6c798, type: 3}
   coolTime: 1
   modifier: 0.5

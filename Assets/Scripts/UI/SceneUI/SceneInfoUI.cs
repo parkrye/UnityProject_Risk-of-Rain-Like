@@ -48,19 +48,19 @@ public class SceneInfoUI : SceneUI
         switch (objectState)
         {
             case LevelScene.LevelState.Search:
-                texts["ObjectiveText"].text = "Objective\nFind Zone";
+                texts["ObjectiveText"].text = "목표\n성소를 찾아라";
                 break;
             case LevelScene.LevelState.Keep:
-                texts["ObjectiveText"].text = "Objective\nKeep Zone";
+                texts["ObjectiveText"].text = "목표\n성소를 지켜라";
                 break;
             case LevelScene.LevelState.ComeBack:
-                texts["ObjectiveText"].text = "Objective\nBack to Zone";
+                texts["ObjectiveText"].text = "목표\n성소로 돌아가라";
                 break;
             case LevelScene.LevelState.Fight:
-                texts["ObjectiveText"].text = "Objective\nKill Boss";
+                texts["ObjectiveText"].text = "목표\n보스를 잡아라";
                 break;
             case LevelScene.LevelState.Win:
-                texts["ObjectiveText"].text = "Objective\nComplete";
+                texts["ObjectiveText"].text = "목표\n완료";
                 break;
         }
     }

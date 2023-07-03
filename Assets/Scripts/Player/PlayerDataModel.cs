@@ -222,6 +222,14 @@ public class PlayerDataModel : MonoBehaviour
     public int Coin
     {
         get { return coin; }
-        set { coin = value; OnCoinEvent?.Invoke(coin); }
+        set 
+        { 
+            if(value > coin)
+                GameManager.Data.Records["Money"] += (value - coin);
+            else if(value < coin)
+                GameManager.Data.Records["Cost"] += (coin - value);
+            coin = value; 
+            OnCoinEvent?.Invoke(coin); 
+        }
     }
 }

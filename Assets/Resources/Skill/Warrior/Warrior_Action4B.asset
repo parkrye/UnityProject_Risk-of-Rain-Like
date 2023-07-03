@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action4B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Keen Mind
-  SkillDesc: Awake
+  SkillName: "\uB0A0\uCE74\uB85C\uC6B4 \uC815\uC2E0"
+  SkillDesc: "\uAE68\uC5B4\uB0A9\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 44d37949ad5f3400996eda2b86ce5c98, type: 3}
   coolTime: 20
   modifier: 0.5

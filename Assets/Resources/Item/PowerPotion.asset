@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52787f3d00e2674d80ba53dffbdc854, type: 3}
   m_Name: PowerPotion
   m_EditorClassIdentifier: 
-  ItemName: Power Potion
-  ItemDesc: Not Protein
+  ItemName: "\uD798\uC758 \uD3EC\uC158"
+  ItemDesc: "\uB2E8\uBC31\uC9C8 \uBCF4\uCDA9\uC81C\uB294 \uC544\uB2D9\uB2C8\uB2E4"
   ItemIcon: {fileID: 21300000, guid: 338766860e7104c7da0c9077a4cfad71, type: 3}

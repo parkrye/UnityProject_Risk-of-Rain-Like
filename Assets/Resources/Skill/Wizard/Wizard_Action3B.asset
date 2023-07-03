@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard_Action3B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Magic Shield
-  SkillDesc: Friend of Magus
+  SkillName: "\uB9C8\uBC95 \uBC29\uD328"
+  SkillDesc: "\uB9C8\uBC95\uC0AC\uB4E4\uC758 \uC9C4\uC815\uD55C \uCE5C\uAD6C"
   SkillIcon: {fileID: 21300000, guid: 07aa89d2416874192aa53a2e6356a068, type: 3}
   coolTime: 10
   modifier: 0

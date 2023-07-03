@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action3C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Second Wind
-  SkillDesc: Heal Myself
+  SkillName: "\uC7AC\uC0DD\uC758 \uBC14\uB78C"
+  SkillDesc: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 4c2e103ee53f2497b8222fa8db303c8f, type: 3}
   coolTime: 20
   modifier: 0

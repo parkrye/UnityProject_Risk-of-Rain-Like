@@ -10,6 +10,7 @@ public class DataManager : MonoBehaviour
     public UnityEvent TimeClock;
     public bool RecordTime { get { return recordTime; } set { recordTime = value; } }
     public Dictionary<string, float> Records { get { return records; } set { records = value; } }
+    public Dictionary<string, int> Achievement { get; private set; }
 
     public PlayerDataModel Player { get; set; }
 
@@ -27,17 +28,41 @@ public class DataManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Records = new Dictionary<string, float>
         {
+            { "Stage", 1f },
             { "Time", 0f },
             { "Difficulty", 1f },
             { "Kill", 0f },
             { "Damage", 0f },
             { "Heal", 0f },
             { "Hit", 0f },
+            { "Money", 0f },
+            { "Cost", 0f },
         };
-        if(Player != null)
+
+        Achievement = CSVRW.ReadCSV_Achievements();
+
+        if (Player != null)
         {
             Player.playerSystem.DestroyCharacter();
             Player = null;
         }
+    }
+
+    /// <summary>
+    /// Achivement의 특정 값을 수정하는 메소드
+    /// </summary>
+    /// <param name="index">Achivement의 키</param>
+    /// <param name="value">Achivement에 저장할 값</param>
+    public void SetAchievement(string index, int value)
+    {
+        Achievement[index] = value;
+    }
+
+    /// <summary>
+    /// Achivement를 저장하는 메소드
+    /// </summary>
+    public void SaveAchiveMent()
+    {
+        CSVRW.WriteCSV_Achievements(Achievement);
     }
 }

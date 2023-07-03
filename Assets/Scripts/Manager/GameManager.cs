@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     static UIManager uiManager;
     static SceneManager sceneManager;
     static AudioManager audioManager;
-    static ScriptManager scriptManager;
 
     public static GameManager Instance { get { return instance; } }
     public static PoolManager Pool { get { return poolManager; } }
@@ -20,7 +19,6 @@ public class GameManager : MonoBehaviour
     public static UIManager UI {  get { return uiManager; } }
     public static SceneManager Scene { get { return sceneManager; } }
     public static AudioManager Audio { get { return audioManager; } }
-    public static ScriptManager Script { get { return scriptManager; } }
 
     void Awake()
     {
@@ -72,11 +70,6 @@ public class GameManager : MonoBehaviour
         audioObj.name = "AudioManager";
         audioObj.transform.parent = transform;
         audioManager = audioObj.AddComponent<AudioManager>();
-
-        GameObject scriptObj = new GameObject();
-        scriptObj.name = "ScriptManager";
-        scriptObj.transform.parent = transform;
-        scriptManager = scriptObj.AddComponent<ScriptManager>();
     }
 
     public static void ResetSession()

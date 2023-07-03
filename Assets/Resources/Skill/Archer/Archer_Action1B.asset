@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer_Action1B
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Charge Shot
-  SkillDesc: Heavy Overwhelm Fast
+  SkillName: "\uC7A5\uC804 \uC0AC\uACA9"
+  SkillDesc: "\uD55C \uBC1C \uD55C \uBC1C\uC5D0 \uD798\uC744 \uB2F4\uC544\uB0C5\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 482884d1759cf4bdbad2fa53c99aee5c, type: 3}
   coolTime: 1
   modifier: 0.5

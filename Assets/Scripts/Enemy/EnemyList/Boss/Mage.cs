@@ -38,7 +38,6 @@ public class Mage : Boss
                 {
                     case MagicMode.Drain:
                         animator.SetBool("Drain", true);
-                        Debug.Log("Mage Drain");
                         GameObject enemyDrain = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyDrain"), attackTransform.position, Quaternion.identity, true);
                         enemyDrain.GetComponent<EnemyDrain>().StartDrain(this);
                         yield return new WaitForSeconds(enemyData.floatdatas[0]);

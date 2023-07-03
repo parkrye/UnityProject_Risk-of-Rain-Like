@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action4A
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Jump Attack
-  SkillDesc: Jump and Attack
+  SkillName: "\uC810\uD504 \uACF5\uACA9"
+  SkillDesc: "\uB6F0\uC5B4\uC62C\uB77C \uADF8\uB300\uB85C \uB0B4\uB824\uCE69\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: e8935d233693f4b48806cece1e461421, type: 3}
   coolTime: 10
   modifier: 1.5

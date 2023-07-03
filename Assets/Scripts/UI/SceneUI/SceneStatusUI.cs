@@ -16,7 +16,7 @@ public class SceneStatusUI : SceneUI
 
     public void UpdateLevel()
     {
-        texts["LevelText"].text = $"Lv {GameManager.Data.Player.LEVEL}";
+        texts["LevelText"].text = $"·¹º§ {GameManager.Data.Player.LEVEL}";
         sliders["HPBar"].maxValue = GameManager.Data.Player.MAXHP;
         sliders["EXPBar"].maxValue = GameManager.Data.Player.LEVEL * 100f;
     }

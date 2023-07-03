@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Warrior_Action4C
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  SkillName: Berserk
-  SkillDesc: Every Warrior Use This
+  SkillName: "\uAD11\uD654"
+  SkillDesc: "\uB9CE\uC740 \uC804\uC0AC\uAC00 \uC774 \uAE30\uC220\uC744 \uC0AC\uB791\uD569\uB2C8\uB2E4"
   SkillIcon: {fileID: 21300000, guid: 6d97d3b88bacf4e8bb4116ea752e1f91, type: 3}
   coolTime: 30
   modifier: 1.2
