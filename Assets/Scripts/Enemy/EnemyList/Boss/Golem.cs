@@ -40,12 +40,11 @@ public class Golem : Boss
                 GameManager.Resource.Destroy(effect.gameObject, enemyData.AttackSpeed * 0.8f);
 
                 Collider[] colliders = Physics.OverlapSphere(attackTransform.position, enemyData.floatdatas[1]);
-                foreach (Collider collider in colliders)
+                for(int i = 0; i < colliders.Length; i++)
                 {
-                    if (collider.CompareTag("Player"))
+                    if (colliders[i].CompareTag("Player"))
                     {
-                        Debug.Log("Player Hit");
-                        IHitable hittable = collider.GetComponent<IHitable>();
+                        IHitable hittable = colliders[i].GetComponent<IHitable>();
                         hittable?.Hit(damage, 0f);
                     }
                 }

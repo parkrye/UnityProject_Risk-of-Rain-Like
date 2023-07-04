@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,7 @@ public class EnemyHPBar : MonoBehaviour
     void OnEnable()
     {
         slider.value = enemy.HP;
+        StartCoroutine(LookRoutine());
     }
 
     public void SetValue(float value)
@@ -27,8 +29,12 @@ public class EnemyHPBar : MonoBehaviour
         slider.value = value;
     }
 
-    void LateUpdate()
+    IEnumerator LookRoutine()
     {
-        transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        while (isActiveAndEnabled)
+        {
+            transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

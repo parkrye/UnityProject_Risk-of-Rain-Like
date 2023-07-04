@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +14,7 @@ public class PlayerActionController : MonoBehaviour
     void Awake()
     {
         playerDataModel = GetComponent<PlayerDataModel>();
-        cosResult = Mathf.Cos(60f * Mathf.Deg2Rad);
+        cosResult = Trigonometrics.Cos(60f);
     }
 
     void OnAction1(InputValue inputValue)
@@ -56,12 +55,12 @@ public class PlayerActionController : MonoBehaviour
         Vector3 playerPosition = transform.position;
         Vector3 playerLook = new Vector3(transform.forward.x, 0f, transform.forward.z);
         playerPosition.y = 0f;
-        foreach (Collider collider in colliders)
+        for(int i = 0; i < colliders.Length; i++)
         {
-            IInteractable interactable = collider.GetComponent<IInteractable>();
+            IInteractable interactable = colliders[i].GetComponent<IInteractable>();
             if (interactable is null)
                 continue;
-            Vector3 colliderPosition = collider.transform.position;
+            Vector3 colliderPosition = colliders[i].transform.position;
             colliderPosition.y = 0f;
             Vector3 dirTarget = (colliderPosition - playerPosition).normalized;
             if (Vector3.Dot(playerLook, dirTarget) < cosResult)

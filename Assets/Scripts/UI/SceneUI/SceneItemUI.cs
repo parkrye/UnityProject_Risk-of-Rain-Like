@@ -39,11 +39,11 @@ public class SceneItemUI : SceneUI
         else
         {
             Image[] images = GetComponentsInChildren<Image>();
-            foreach (Image image in images)
+            for(int i = 0; i < images.Length; i++)
             {
-                if(image.name == itemData.ItemName)
+                if (images[i].name == itemData.ItemName)
                 {
-                    image.GetComponentInChildren<TextMeshProUGUI>().text = quantity.ToString();
+                    images[i].GetComponentInChildren<TextMeshProUGUI>().text = quantity.ToString();
                     return;
                 }
             }

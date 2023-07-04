@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 355019989568681749}
   - component: {fileID: 355019989568681748}
   m_Layer: 5
-  m_Name: EnemyHPCanvas
+  m_Name: HPCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

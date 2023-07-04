@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class AchivementUI : SceneUI
@@ -40,55 +41,58 @@ public class AchivementUI : SceneUI
 
         foreach (KeyValuePair<string, List<int>> pair in GameManager.Data.Achivements)
         {
-            string achiveTitle, achiveContent;
+            StringBuilder achiveTitle = new(), achiveContent = new();
             switch (pair.Key)
             {
                 default:
                 case "StageCount":
-                    achiveTitle = "등산가";
-                    achiveContent = "회 다음 스테이지에 도달한다";
+                    achiveTitle.Append("등산가");
+                    achiveContent.Append("회 다음 스테이지에 도달한다");
                     break;
                 case "LevelCount":
-                    achiveTitle = "모험자";
-                    achiveContent = " 레벨을 달성한다";
+                    achiveTitle.Append("모험자");
+                    achiveContent.Append(" 레벨을 달성한다");
                     break;
                 case "TimeCount":
-                    achiveTitle = "생존자";
-                    achiveContent = "초 생존한다";
+                    achiveTitle.Append("생존자");
+                    achiveContent.Append("초 생존한다");
                     break;
                 case "KillCount":
-                    achiveTitle = "학살자";
-                    achiveContent = "마리의 적을 사냥한다";
+                    achiveTitle.Append("학살자");
+                    achiveContent.Append("마리의 적을 사냥한다");
                     break;
                 case "DamageCount":
-                    achiveTitle = "딜러";
-                    achiveContent = " 데미지를 입힌다";
+                    achiveTitle.Append("딜러");
+                    achiveContent.Append(" 데미지를 입힌다");
                     break;
                 case "HitCount":
-                    achiveTitle = "탱커";
-                    achiveContent = " 데미지를 입는다";
+                    achiveTitle.Append("탱커");
+                    achiveContent.Append(" 데미지를 입는다");
                     break;
                 case "HealCount":
-                    achiveTitle = "힐러";
-                    achiveContent = " 데미지를 회복한다";
+                    achiveTitle.Append("힐러");
+                    achiveContent.Append(" 데미지를 회복한다");
                     break;
                 case "MoneyCount":
-                    achiveTitle = "부자";
-                    achiveContent = "의 재화를 획득한다";
+                    achiveTitle.Append("부자");
+                    achiveContent.Append("의 재화를 획득한다");
                     break;
                 case "CostCount":
-                    achiveTitle = "납세자";
-                    achiveContent = "의 재화를 소모한다";
+                    achiveTitle.Append("납세자");
+                    achiveContent.Append("의 재화를 소모한다");
                     break;
             }
 
             for (int i = 1; i < pair.Value.Count; i++)
             {
-                string content = pair.Value[i].ToString() + achiveContent;
+                StringBuilder content = new();
+                content.Append(pair.Value[i].ToString());
+                content.Append(achiveContent);
+                achiveTitle.Append($"({i})");
                 if (pair.Value[0] >= pair.Value[i])
-                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(clearIcon, achiveTitle + $"({i})", content);
+                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(clearIcon, achiveTitle.ToString(), content.ToString());
                 else
-                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(noneIcon, achiveTitle + $"({i})", content);
+                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(noneIcon, achiveTitle.ToString(), content.ToString());
 
                 achiveCount++;
             }

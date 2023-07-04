@@ -11,9 +11,9 @@ public class ArrowShower : MonoBehaviour
 
     public void Shot(Transform target, float damage)
     {
-        foreach (var arrow in arrows)
+        for(int i = 0; i < arrows.Length; i++)
         {
-            arrow.Shot(target.position, damage);
+            arrows[i].Shot(target.position, damage);
         }
     }
 }

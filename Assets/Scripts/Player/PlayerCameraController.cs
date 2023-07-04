@@ -47,7 +47,7 @@ public class PlayerCameraController : MonoBehaviour
         {
             transform.localEulerAngles += new Vector3(0f, pointerPos.x * playerDataModel.mouseSensivity * Time.deltaTime, 0f);
 
-            xRotation -= pointerPos.y * Mathf.Sqrt(playerDataModel.mouseSensivity) * 10f * Time.deltaTime;
+            xRotation -= pointerPos.y * playerDataModel.mouseSensivity * 0.3f * Time.deltaTime;
             xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
             lookFromTransform.localEulerAngles = new Vector3(xRotation, 0f, 0f);

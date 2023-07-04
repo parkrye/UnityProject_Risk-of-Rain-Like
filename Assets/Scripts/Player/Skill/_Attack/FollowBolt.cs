@@ -9,10 +9,10 @@ public class FollowBolt : BoltType
     protected override IEnumerator ReadyToShot(float delay)
     {
         yield return new WaitForSeconds(delay);
-        foreach (TrailRenderer trail in trails)
+        for(int i = 0; i < trails.Length; i++)
         {
-            trail.Clear();
-            trail.enabled = true;
+            trails[i].Clear();
+            trails[i].enabled = true;
         }
         coll.enabled = true;
         GameManager.Resource.Destroy(gameObject, 5f);
@@ -42,14 +42,14 @@ public class FollowBolt : BoltType
     {
         PriorityQueue<GameObject, float> pq = new PriorityQueue<GameObject, float>();
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            if (collider.CompareTag("Enemy"))
+            if (colliders[i].CompareTag("Enemy"))
             {
-                pq.Enqueue(collider.gameObject, Vector3.SqrMagnitude(collider.transform.position - transform.position));
+                pq.Enqueue(colliders[i].gameObject, Vector3.SqrMagnitude(colliders[i].transform.position - transform.position));
             }
         }
-        if(pq.Count > 0)
+        if (pq.Count > 0)
         {
             target = pq.Dequeue();
             return true;

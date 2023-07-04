@@ -36,9 +36,9 @@ public class ShockBolt : BoltType
         ParticleSystem effect = GameManager.Resource.Instantiate(fireworkParticle, transform.position, Quaternion.identity, true);
         GameManager.Resource.Destroy(effect.gameObject, 2f);
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        foreach (Collider collider in colliders)
+        for(int i = 0; i < colliders.Length; i++)
         {
-            IMezable mazable = collider.GetComponent<IMezable>();
+            IMezable mazable = colliders[i].GetComponent<IMezable>();
             mazable?.Stuned(stunTime);
         }
         GameManager.Resource.Destroy(gameObject);

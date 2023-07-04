@@ -42,7 +42,7 @@ public class Wizard : Hero
         while (floating)
         {
             yield return new WaitForFixedUpdate();
-            if (Mathf.Abs(playerDataModel.rb.velocity.y) > 1f)
+            if ((playerDataModel.rb.velocity.y < 0 ? -playerDataModel.rb.velocity.y : playerDataModel.rb.velocity.y) > 1f)
                 floating = false;
         }
         playerDataModel.rb.useGravity = true;

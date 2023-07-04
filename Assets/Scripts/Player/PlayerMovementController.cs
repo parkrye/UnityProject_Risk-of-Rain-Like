@@ -88,7 +88,7 @@ public class PlayerMovementController : MonoBehaviour
         float animatorSide = playerDataModel.animator.GetFloat("Side");
 
         // 경사로 보정
-        float gravity = Mathf.Abs(playerDataModel.rb.velocity.y) - Physics.gravity.y * Time.deltaTime * playerDataModel.TimeScale;
+        float gravity = (playerDataModel.rb.velocity.y < 0 ? -playerDataModel.rb.velocity.y : playerDataModel.rb.velocity.y) - Physics.gravity.y * Time.deltaTime * playerDataModel.TimeScale;
         if(playerDataModel.animator.GetBool("IsGround") && isSlope)
         {
             curVelocity = AdjustDirectionToSlope(moveDir);

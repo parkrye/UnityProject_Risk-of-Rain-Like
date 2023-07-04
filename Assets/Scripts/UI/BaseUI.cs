@@ -31,47 +31,47 @@ public abstract class BaseUI : MonoBehaviour
         toggles = new Dictionary<string, Toggle>();
 
         RectTransform[] childrenRect = GetComponentsInChildren<RectTransform>();
-        foreach (var child in childrenRect)
+        for(int i = 0; i < childrenRect.Length; i++)
         {
-            string key = child.name;
+            string key = childrenRect[i].name;
             if (!transforms.ContainsKey(key))
             {
-                transforms[key] = child;
+                transforms[key] = childrenRect[i];
 
-                if (child.GetComponent<Button>())
+                if (childrenRect[i].GetComponent<Button>())
                 {
                     if (!buttons.ContainsKey(key))
-                        buttons[key] = child.GetComponent<Button>();
+                        buttons[key] = childrenRect[i].GetComponent<Button>();
                 }
 
-                if (child.GetComponent<TMP_Text>())
+                if (childrenRect[i].GetComponent<TMP_Text>())
                 {
                     if (!texts.ContainsKey(key))
-                        texts[key] = child.GetComponent<TMP_Text>();
+                        texts[key] = childrenRect[i].GetComponent<TMP_Text>();
                 }
 
-                if (child.GetComponent<Slider>())
+                if (childrenRect[i].GetComponent<Slider>())
                 {
                     if(!sliders.ContainsKey(key))
-                        sliders[key] = child.GetComponent<Slider>();
+                        sliders[key] = childrenRect[i].GetComponent<Slider>();
                 }
 
-                if (child.GetComponent<Image>())
+                if (childrenRect[i].GetComponent<Image>())
                 {
                     if (!images.ContainsKey(key))
-                        images[key] = child.GetComponent<Image>();
+                        images[key] = childrenRect[i].GetComponent<Image>();
                 }
 
-                if (child.GetComponent<ToggleGroup>())
+                if (childrenRect[i].GetComponent<ToggleGroup>())
                 {
                     if (!toggleGroups.ContainsKey(key))
-                        toggleGroups[key] = child.GetComponent<ToggleGroup>();
+                        toggleGroups[key] = childrenRect[i].GetComponent<ToggleGroup>();
                 }
 
-                if (child.GetComponent<Toggle>())
+                if (childrenRect[i].GetComponent<Toggle>())
                 {
                     if (!toggles.ContainsKey(key))
-                        toggles[key] = child.GetComponent<Toggle>();
+                        toggles[key] = childrenRect[i].GetComponent<Toggle>();
                 }
             }
         }

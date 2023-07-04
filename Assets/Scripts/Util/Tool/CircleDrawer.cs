@@ -39,12 +39,12 @@ public class CircleDrawer : MonoBehaviour
         for (int currentStep = 0; currentStep < steps; currentStep++)
         {
             // 삼각함수로 angle에 대한 x, y 위치를 지정
-            float x = radius * Mathf.Cos(angle);
-            float y = radius * Mathf.Sin(angle);
+            float x = radius * Trigonometrics.Cos(angle);
+            float y = radius * Trigonometrics.Sin(angle);
 
             circleRenderer.SetPosition(currentStep, target + new Vector3(x, 0f, y));
 
-            angle += 2f * Mathf.PI / steps;
+            angle += 360f / steps;
         }
     }
 }

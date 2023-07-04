@@ -36,10 +36,13 @@ public class Warrior_Action4A : Skill, IEnumeratable, ICriticable
         ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Crack"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
 
         Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerTransform.position, skillRange);
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            IHitable hittable = collider.GetComponent<IHitable>();
-            hittable?.Hit(damage * modifier, 0f);
+            if (!colliders[i].CompareTag("Player"))
+            {
+                IHitable hittable = colliders[i].GetComponent<IHitable>();
+                hittable?.Hit(damage * modifier, 0f);
+            }
         }
 
         yield return new WaitForSeconds(0.5f / hero.playerDataModel.TimeScale);

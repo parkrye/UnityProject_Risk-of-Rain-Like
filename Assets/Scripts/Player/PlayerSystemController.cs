@@ -19,8 +19,8 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
     {
         if (num >= 0 && num < playerDataModel.heroList.Count)
         {
-            foreach (var hero in playerDataModel.heroList)
-                hero.gameObject.SetActive(false);
+            for(int i = 0; i < playerDataModel.heroList.Count; i++)
+                playerDataModel.heroList[i].gameObject.SetActive(false);
             playerDataModel.heroNum = num;
             playerDataModel.heroList[num].gameObject.SetActive(true);
             playerDataModel.hero = playerDataModel.heroList[num];

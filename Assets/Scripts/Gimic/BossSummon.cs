@@ -115,7 +115,7 @@ public class BossSummon : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             if (charge < chargeTime)
             {
@@ -127,7 +127,7 @@ public class BossSummon : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
             if(charge < chargeTime)
             {

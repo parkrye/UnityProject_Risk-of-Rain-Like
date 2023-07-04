@@ -108,45 +108,45 @@ public class SelectUI : SceneUI
         switch(num)
         {
             case 1:
-                foreach(Image image in buttons["EasyButton"].GetComponentsInChildren<Image>())
+                for(int i = 0; i < buttons["EasyButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = selected;
+                    buttons["EasyButton"].GetComponentsInChildren<Image>()[i].color = selected;
                 }
-                foreach(Image image in buttons["NormalButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["NormalButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = nonSelected;
+                    buttons["NormalButton"].GetComponentsInChildren<Image>()[i].color = nonSelected;
                 }
-                foreach(Image image in buttons["HardButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["HardButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = nonSelected;
+                    buttons["HardButton"].GetComponentsInChildren<Image>()[i].color = nonSelected;
                 }
                 break;
             case 2:
-                foreach (Image image in buttons["EasyButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["EasyButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = nonSelected;
+                    buttons["EasyButton"].GetComponentsInChildren<Image>()[i].color = nonSelected;
                 }
-                foreach (Image image in buttons["NormalButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["NormalButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = selected;
+                    buttons["NormalButton"].GetComponentsInChildren<Image>()[i].color = selected;
                 }
-                foreach (Image image in buttons["HardButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["HardButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = nonSelected;
+                    buttons["HardButton"].GetComponentsInChildren<Image>()[i].color = nonSelected;
                 }
                 break;
             case 3:
-                foreach (Image image in buttons["EasyButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["EasyButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = nonSelected;
+                    buttons["EasyButton"].GetComponentsInChildren<Image>()[i].color = nonSelected;
                 }
-                foreach (Image image in buttons["NormalButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["NormalButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = nonSelected;
+                    buttons["NormalButton"].GetComponentsInChildren<Image>()[i].color = nonSelected;
                 }
-                foreach (Image image in buttons["HardButton"].GetComponentsInChildren<Image>())
+                for (int i = 0; i < buttons["HardButton"].GetComponentsInChildren<Image>().Length; i++)
                 {
-                    image.color = selected;
+                    buttons["HardButton"].GetComponentsInChildren<Image>()[i].color = selected;
                 }
                 break;
         }

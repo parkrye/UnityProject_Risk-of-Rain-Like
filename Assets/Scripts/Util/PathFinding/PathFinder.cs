@@ -67,7 +67,7 @@ public class PathFinder : MonoBehaviour
                             continue;
 
                         // 사이에 벽이 있다면 패스
-                        if (!CheckPassable(node.position, findPosition, radius, (Mathf.Abs(x) + Mathf.Abs(y) + Mathf.Abs(z))))
+                        if (!CheckPassable(node.position, findPosition, radius, ((x < 0 ? -x : x) + (y < 0 ? -y : y) + (z < 0 ? -z : z))))
                             continue;
 
                         float g = node.g + x * x + y * y + z * z;                // 이동 거리 + 이동한 거리 (대략)

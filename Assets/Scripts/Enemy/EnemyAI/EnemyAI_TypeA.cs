@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -24,33 +23,41 @@ public class EnemyAI_TypeA : EnemyAI
         bypass = new Stack<Vector3>();
     }
 
-    void Update()
+    protected override IEnumerator StateRoutine()
     {
-        if (enemy.isActiveAndEnabled && enemy.alive)
+        while (isActiveAndEnabled)
         {
-            state = StateCheck();
+            if (enemy.isActiveAndEnabled && enemy.alive)
+            {
+                state = StateCheck();
+            }
+            yield return null;
         }
     }
 
-    void FixedUpdate()
+    protected override IEnumerator BehaviorRoutine()
     {
-        if (!enemy.isStunned && enemy.alive)
+        while (isActiveAndEnabled)
         {
-            switch (state)
+            if (!enemy.isStunned && enemy.alive)
             {
-                case AI_State.Approach:
-                    ApproachMove();
-                    break;
-                case AI_State.Bypass:
-                    ByPassMove();
-                    break;
-                case AI_State.Attack:
-                    AttackMove();
-                    break;
-                case AI_State.Dumb:
-                    DumbMove();
-                    break;
+                switch (state)
+                {
+                    case AI_State.Approach:
+                        ApproachMove();
+                        break;
+                    case AI_State.Bypass:
+                        ByPassMove();
+                        break;
+                    case AI_State.Attack:
+                        AttackMove();
+                        break;
+                    case AI_State.Dumb:
+                        DumbMove();
+                        break;
+                }
             }
+            yield return new WaitForFixedUpdate();
         }
     }
 

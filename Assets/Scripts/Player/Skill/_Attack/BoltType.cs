@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BoltType : MonoBehaviour
+public abstract class BoltType : MonoBehaviour
 {
     protected TrailRenderer[] trails;
     protected float damage;
@@ -16,8 +16,8 @@ public class BoltType : MonoBehaviour
 
     void OnEnable()
     {
-        foreach(TrailRenderer trail in trails)
-            trail.enabled = false;
+        for(int i = 0; i < trails.Length; i++)
+            trails[i].enabled = false;
         coll.enabled = false;
     }
 
@@ -36,10 +36,10 @@ public class BoltType : MonoBehaviour
     protected virtual IEnumerator ReadyToShot(float delay)
     {
         yield return new WaitForSeconds(delay);
-        foreach (TrailRenderer trail in trails)
+        for (int i = 0; i < trails.Length; i++)
         {
-            trail.Clear();
-            trail.enabled = true;
+            trails[i].Clear();
+            trails[i].enabled = false;
         }
         coll.enabled = true;
         GameManager.Resource.Destroy(gameObject, 10f);
@@ -52,9 +52,9 @@ public class BoltType : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        foreach (TrailRenderer trail in trails)
+        for (int i = 0; i < trails.Length; i++)
         {
-            trail.Clear();
+            trails[i].Clear();
         }
         StopAllCoroutines();
     }

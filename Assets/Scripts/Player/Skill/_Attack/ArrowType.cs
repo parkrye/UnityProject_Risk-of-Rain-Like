@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ArrowType : MonoBehaviour
+public abstract class ArrowType : MonoBehaviour
 {
     protected TrailRenderer trail;
     protected float damage, yVelocity;

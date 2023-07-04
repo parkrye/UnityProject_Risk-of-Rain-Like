@@ -34,14 +34,14 @@ public class Warrior_Action2B : Skill, IEnumeratable, ICriticable
         effect.transform.LookAt(effect.transform.position + hero.playerDataModel.playerTransform.forward);
         GameManager.Resource.Destroy(effect.gameObject, 1f);
         Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerAction.closeAttackTransform.position, hero.playerDataModel.playerAction.closeAttackRange);
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            if (!collider.CompareTag("Player"))
+            if (!colliders[i].CompareTag("Player"))
             {
-                IHitable hittable = collider.GetComponent<IHitable>();
+                IHitable hittable = colliders[i].GetComponent<IHitable>();
                 hittable?.Hit(damage * modifier, 0f);
 
-                IMezable mazable = collider.GetComponent<IMezable>();
+                IMezable mazable = colliders[i].GetComponent<IMezable>();
                 mazable?.Stuned(stunTime);
             }
         }

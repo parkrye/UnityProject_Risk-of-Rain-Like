@@ -17,10 +17,13 @@ public class Wizard_Action3C : Skill, IEnumeratable
 
             ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/FireworkBlueLarge"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
             Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerTransform.position, skillRange);
-            foreach (Collider collider in colliders)
+            for (int i = 0; i < colliders.Length; i++)
             {
-                IHitable hittable = collider.GetComponent<IHitable>();
-                hittable?.Hit(param[0] * modifier, 0f);
+                if (!colliders[i].CompareTag("Player"))
+                {
+                    IHitable hittable = colliders[i].GetComponent<IHitable>();
+                    hittable?.Hit(param[0] * modifier, 0f);
+                }
             }
 
             hero.playerDataModel.playerMovement.dirModifier += Vector3.up * jumpPower;

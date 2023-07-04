@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// 플레이어 캐릭터의 데이터 저장소와 플레이어 캐릭터와 연관된 스크립트들의 중간 매체 역할을 하는 스크립트
@@ -52,8 +51,8 @@ public class PlayerDataModel : MonoBehaviour
 
         heroList = new List<Hero>();
         heroList.AddRange(GetComponentsInChildren<Hero>());
-        foreach (var hero in heroList)
-            hero.gameObject.SetActive(false);
+        for(int i = 0; i < heroList.Count; i++)
+            heroList[i].gameObject.SetActive(false);
 
         rb = GetComponent<Rigidbody>();
         playerAction = GetComponent<PlayerActionController>();

@@ -29,17 +29,20 @@ public class BombArrow : ArrowType
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy" || (1 << other.gameObject.layer == LayerMask.GetMask("Ground")))
+        if (other.CompareTag("Enemy") || (1 << other.gameObject.layer == LayerMask.GetMask("Ground")))
         {
             GameManager.Resource.Instantiate<GameObject>("Audio/SFX/Explosion");
             ParticleSystem effect = GameManager.Resource.Instantiate(bombParticle, transform.position, Quaternion.identity, true);
             GameManager.Resource.Destroy(effect.gameObject, 2f);
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-            foreach (Collider collider in colliders)
+            for(int i = 0; i < colliders.Length; i++)
             {
-                IHitable hitable = collider.GetComponent<IHitable>();
-                hitable?.Hit(damage, 0f);
+                if (!colliders[i].CompareTag("Player"))
+                {
+                    IHitable hitable = colliders[i].GetComponent<IHitable>();
+                    hitable?.Hit(damage, 0f);
+                }
             }
             GameManager.Resource.Destroy(gameObject);
         }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class EnemyAI : MonoBehaviour
@@ -10,4 +11,13 @@ public abstract class EnemyAI : MonoBehaviour
         enemy = GetComponent<Enemy>();
         playerTransform = GameManager.Data.Player.playerTransform;
     }
+
+    protected virtual void OnEnable()
+    {
+        StartCoroutine(StateRoutine());
+        StartCoroutine(BehaviorRoutine());
+    }
+
+    protected abstract IEnumerator StateRoutine();
+    protected abstract IEnumerator BehaviorRoutine();
 }
