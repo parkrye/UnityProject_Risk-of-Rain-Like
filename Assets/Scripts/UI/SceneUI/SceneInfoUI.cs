@@ -15,7 +15,7 @@ public class SceneInfoUI : SceneUI
     /// </summary>
     void SettingDifficulty()
     {
-        switch(GameManager.Data.Records["Difficulty"])
+        switch(GameManager.Data.NowRecords["Difficulty"])
         {
             case 1f:
                 images["DifficultyImage"].sprite = GameManager.Resource.Load<Icon>("Icon/EasyModeIcon").sprite;
@@ -34,7 +34,7 @@ public class SceneInfoUI : SceneUI
     /// </summary>
     public void UpdateTime()
     {
-        int seconds = (int)GameManager.Data.Records["Time"];
+        int seconds = (int)GameManager.Data.NowRecords["Time"];
         string minText = seconds / 60 < 10 ? "0" + (seconds / 60).ToString() : (seconds / 60).ToString();
         string secText = seconds % 60 < 10 ? "0" + (seconds % 60).ToString() : (seconds % 60).ToString();
         texts["TimeText"].text = $"{minText}:{secText}";

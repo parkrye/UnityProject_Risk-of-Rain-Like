@@ -9,9 +9,9 @@ public class RecordUI : PopUpUI
     protected override void Awake()
     {
         base.Awake();
-        texts["StageText"].text += ((int)GameManager.Data.Records["Stage"]).ToString();
-        texts["TimeText"].text += ((int)GameManager.Data.Records["Time"]).ToString();
-        switch (GameManager.Data.Records["Difficulty"])
+        texts["StageText"].text += ((int)GameManager.Data.NowRecords["Stage"]).ToString();
+        texts["TimeText"].text += ((int)GameManager.Data.NowRecords["Time"]).ToString();
+        switch (GameManager.Data.NowRecords["Difficulty"])
         {
             case 1f:
                 texts["DifficultyText"].text += "Easy";
@@ -23,12 +23,12 @@ public class RecordUI : PopUpUI
                 texts["DifficultyText"].text += "Hard";
                 break;
         }
-        texts["KillText"].text += ((int)GameManager.Data.Records["Kill"]).ToString();
-        texts["DamageText"].text += ((int)GameManager.Data.Records["Damage"]).ToString();
-        texts["HitText"].text += ((int)GameManager.Data.Records["Hit"]).ToString();
-        texts["HealText"].text += ((int)GameManager.Data.Records["Heal"]).ToString();
-        texts["MoneyText"].text += ((int)GameManager.Data.Records["Money"]).ToString();
-        texts["CostText"].text += ((int)GameManager.Data.Records["Cost"]).ToString();
+        texts["KillText"].text += ((int)GameManager.Data.NowRecords["Kill"]).ToString();
+        texts["DamageText"].text += ((int)GameManager.Data.NowRecords["Damage"]).ToString();
+        texts["HitText"].text += ((int)GameManager.Data.NowRecords["Hit"]).ToString();
+        texts["HealText"].text += ((int)GameManager.Data.NowRecords["Heal"]).ToString();
+        texts["MoneyText"].text += ((int)GameManager.Data.NowRecords["Money"]).ToString();
+        texts["CostText"].text += ((int)GameManager.Data.NowRecords["Cost"]).ToString();
 
         switch (GameManager.Data.Player.heroNum)
         {

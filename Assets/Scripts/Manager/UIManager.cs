@@ -71,10 +71,13 @@ public class UIManager : MonoBehaviour
     }
 
     // юлго SceneUI
-    public T ShowSceneUI<T>(T sceneUI) where T : SceneUI
+    public T ShowSceneUI<T>(T sceneUI, Transform parent = null) where T : SceneUI
     {
         T ui = GameManager.Pool.GetUI(sceneUI);
-        ui.transform.SetParent(sceneCanvas.transform, false);
+        if (!parent)
+            ui.transform.SetParent(sceneCanvas.transform, false);
+        else
+            ui.transform.SetParent(parent, false);
 
         return ui;
     }

@@ -104,7 +104,7 @@ public class PlayerDataModel : MonoBehaviour
             else
             {
                 if(value >= nowHP)
-                    GameManager.Data.Records["Heal"] += value - nowHP;
+                    GameManager.Data.NowRecords["Heal"] += value - nowHP;
                 if(value > MAXHP)
                     nowHP = MAXHP;
                 else
@@ -225,9 +225,9 @@ public class PlayerDataModel : MonoBehaviour
         set 
         { 
             if(value > coin)
-                GameManager.Data.Records["Money"] += (value - coin);
+                GameManager.Data.NowRecords["Money"] += (value - coin);
             else if(value < coin)
-                GameManager.Data.Records["Cost"] += (coin - value);
+                GameManager.Data.NowRecords["Cost"] += (coin - value);
             coin = value; 
             OnCoinEvent?.Invoke(coin); 
         }

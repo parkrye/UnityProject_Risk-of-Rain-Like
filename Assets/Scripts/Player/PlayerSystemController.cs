@@ -65,7 +65,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         {
             float _damage = DamageOccurrence(damage);
             playerDataModel.NOWHP -= _damage;
-            GameManager.Data.Records["Hit"] += _damage;
+            GameManager.Data.NowRecords["Hit"] += _damage;
             nowTime += 0.1f;
             yield return new WaitForSeconds(0.1f);
         } while (nowTime < time);
@@ -112,6 +112,10 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         return damage;
     }
 
+    /// <summary>
+    /// 사망시 데이터 정산 및 UI 생성에 대한 코루틴
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DieRoutine()
     {
         GameManager.Data.RecordTime = false;
@@ -120,88 +124,98 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         bool achive = false;
 
         yield return null;
-        if (GameManager.Data.Records["Stage"] > GameManager.Data.Achievement["StageCount"])
+        GameManager.Data.SetAchives("StageCount", (int)GameManager.Data.NowRecords["Stage"]);
+        if (GameManager.Data.NowRecords["Stage"] > GameManager.Data.Records["StageCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"스테이지 기록 갱신!\n{GameManager.Data.Achievement["StageCount"]} => {(int)GameManager.Data.Records["Stage"]}");
-            GameManager.Data.SetAchievement("StageCount", (int)GameManager.Data.Records["Stage"]);
+            notifyUI.SetText($"스테이지 기록 갱신!\n{GameManager.Data.Records["StageCount"]} => {(int)GameManager.Data.NowRecords["Stage"]}");
+            GameManager.Data.SetRecords("StageCount", (int)GameManager.Data.NowRecords["Stage"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Records["Time"] > GameManager.Data.Achievement["TimeCount"])
+        GameManager.Data.SetAchives("TimeCount", (int)GameManager.Data.NowRecords["Time"]);
+        if (GameManager.Data.NowRecords["Time"] > GameManager.Data.Records["TimeCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"생존시간 기록 갱신!\n{GameManager.Data.Achievement["TimeCount"]} => {(int)GameManager.Data.Records["Time"]}");
-            GameManager.Data.SetAchievement("TimeCount", (int)GameManager.Data.Records["Time"]);
+            notifyUI.SetText($"생존시간 기록 갱신!\n{GameManager.Data.Records["TimeCount"]} => {(int)GameManager.Data.NowRecords["Time"]}");
+            GameManager.Data.SetRecords("TimeCount", (int)GameManager.Data.NowRecords["Time"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Records["Kill"] > GameManager.Data.Achievement["KillCount"])
+        GameManager.Data.SetAchives("KillCount", (int)GameManager.Data.NowRecords["Kill"]);
+        if (GameManager.Data.NowRecords["Kill"] > GameManager.Data.Records["KillCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"처치 수 기록 갱신!\n{GameManager.Data.Achievement["KillCount"]} => {(int)GameManager.Data.Records["Kill"]}");
-            GameManager.Data.SetAchievement("KillCount", (int)GameManager.Data.Records["Kill"]);
+            notifyUI.SetText($"처치 수 기록 갱신!\n{GameManager.Data.Records["KillCount"]} => {(int)GameManager.Data.NowRecords["Kill"]}");
+            GameManager.Data.SetRecords("KillCount", (int)GameManager.Data.NowRecords["Kill"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Records["Damage"] > GameManager.Data.Achievement["DamageCount"])
+        GameManager.Data.SetAchives("DamageCount", (int)GameManager.Data.NowRecords["Damage"]);
+        if (GameManager.Data.NowRecords["Damage"] > GameManager.Data.Records["DamageCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"가한 피해량 기록 갱신!\n{GameManager.Data.Achievement["DamageCount"]} => {(int)GameManager.Data.Records["Damage"]}");
-            GameManager.Data.SetAchievement("DamageCount", (int)GameManager.Data.Records["Damage"]);
+            notifyUI.SetText($"가한 피해량 기록 갱신!\n{GameManager.Data.Records["DamageCount"]} => {(int)GameManager.Data.NowRecords["Damage"]}");
+            GameManager.Data.SetRecords("DamageCount", (int)GameManager.Data.NowRecords["Damage"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Records["Hit"] > GameManager.Data.Achievement["HitCount"])
+        GameManager.Data.SetAchives("HitCount", (int)GameManager.Data.NowRecords["Hit"]);
+        if (GameManager.Data.NowRecords["Hit"] > GameManager.Data.Records["HitCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"받은 피해량 기록 갱신!\n{GameManager.Data.Achievement["HitCount"]} => {GameManager.Data.Records["Hit"]}");
-            GameManager.Data.SetAchievement("HitCount", (int)GameManager.Data.Records["Hit"]);
+            notifyUI.SetText($"받은 피해량 기록 갱신!\n{GameManager.Data.Records["HitCount"]} => {GameManager.Data.NowRecords["Hit"]}");
+            GameManager.Data.SetRecords("HitCount", (int)GameManager.Data.NowRecords["Hit"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Records["Heal"] > GameManager.Data.Achievement["HealCount"])
+        GameManager.Data.SetAchives("HealCount", (int)GameManager.Data.NowRecords["Heal"]);
+        if (GameManager.Data.NowRecords["Heal"] > GameManager.Data.Records["HealCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"회복량 기록 갱신!\n{GameManager.Data.Achievement["HealCount"]} => {(int)GameManager.Data.Records["Heal"]}");
-            GameManager.Data.SetAchievement("HealCount", (int)GameManager.Data.Records["Heal"]);
+            notifyUI.SetText($"회복량 기록 갱신!\n{GameManager.Data.Records["HealCount"]} => {(int)GameManager.Data.NowRecords["Heal"]}");
+            GameManager.Data.SetRecords("HealCount", (int)GameManager.Data.NowRecords["Heal"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Records["Money"] > GameManager.Data.Achievement["MoneyCount"])
+        GameManager.Data.SetAchives("MoneyCount", (int)GameManager.Data.NowRecords["Money"]);
+        if (GameManager.Data.NowRecords["Money"] > GameManager.Data.Records["MoneyCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"획득 재화 기록 갱신!\n{GameManager.Data.Achievement["MoneyCount"]} => {(int)GameManager.Data.Records["Money"]}");
-            GameManager.Data.SetAchievement("MoneyCount", (int)GameManager.Data.Records["Money"]);
+            notifyUI.SetText($"획득 재화 기록 갱신!\n{GameManager.Data.Records["MoneyCount"]} => {(int)GameManager.Data.NowRecords["Money"]}");
+            GameManager.Data.SetRecords("MoneyCount", (int)GameManager.Data.NowRecords["Money"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Records["Cost"] > GameManager.Data.Achievement["CostCount"])
+        GameManager.Data.SetAchives("CostCount", (int)GameManager.Data.NowRecords["Cost"]);
+        if (GameManager.Data.NowRecords["Cost"] > GameManager.Data.Records["CostCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"사용 재화 기록 갱신!\n{GameManager.Data.Achievement["CostCount"]} => {(int)GameManager.Data.Records["Cost"]}");
-            GameManager.Data.SetAchievement("CostCount", (int)GameManager.Data.Records["Cost"]);
+            notifyUI.SetText($"사용 재화 기록 갱신!\n{GameManager.Data.Records["CostCount"]} => {(int)GameManager.Data.NowRecords["Cost"]}");
+            GameManager.Data.SetRecords("CostCount", (int)GameManager.Data.NowRecords["Cost"]);
             achive = true;
         }
 
         yield return null;
-        if (GameManager.Data.Player.LEVEL > GameManager.Data.Achievement["LevelCount"])
+        GameManager.Data.SetAchives("LevelCount", (int)GameManager.Data.Player.LEVEL);
+        if (GameManager.Data.Player.LEVEL > GameManager.Data.Records["LevelCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"레벨 기록 갱신!\n{GameManager.Data.Achievement["LevelCount"]} => {GameManager.Data.Player.LEVEL}");
-            GameManager.Data.SetAchievement("LevelCount", GameManager.Data.Player.LEVEL);
+            notifyUI.SetText($"레벨 기록 갱신!\n{GameManager.Data.Records["LevelCount"]} => {GameManager.Data.Player.LEVEL}");
+            GameManager.Data.SetRecords("LevelCount", GameManager.Data.Player.LEVEL);
             achive = true;
         }
 
         yield return null;
+        GameManager.Data.SaveAchivements();
         if (achive)
-            GameManager.Data.SaveAchiveMent();
+            GameManager.Data.SaveRecords();
     }
 }

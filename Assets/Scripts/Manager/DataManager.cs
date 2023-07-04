@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,8 +10,9 @@ public class DataManager : MonoBehaviour
 
     public UnityEvent TimeClock;
     public bool RecordTime { get { return recordTime; } set { recordTime = value; } }
-    public Dictionary<string, float> Records { get { return records; } set { records = value; } }
-    public Dictionary<string, int> Achievement { get; private set; }
+    public Dictionary<string, float> NowRecords { get { return records; } set { records = value; } }
+    public Dictionary<string, int> Records { get; private set; }
+    public Dictionary<string, List<int>> Achivements { get; set; }
 
     public PlayerDataModel Player { get; set; }
 
@@ -18,7 +20,7 @@ public class DataManager : MonoBehaviour
     {
         if (RecordTime)
         {
-            Records["Time"] += Time.deltaTime;
+            NowRecords["Time"] += Time.deltaTime;
             TimeClock?.Invoke();
         }
     }
@@ -26,7 +28,7 @@ public class DataManager : MonoBehaviour
     public void Initialize()
     {
         Cursor.lockState = CursorLockMode.None;
-        Records = new Dictionary<string, float>
+        NowRecords = new Dictionary<string, float>
         {
             { "Stage", 1f },
             { "Time", 0f },
@@ -39,47 +41,71 @@ public class DataManager : MonoBehaviour
             { "Cost", 0f },
         };
 
-        Achievement = CSVRW.ReadCSV_Achievements();
+        Records = CSVRW.ReadCSV_Records();
 
         if (Player != null)
         {
             Player.playerSystem.DestroyCharacter();
             Player = null;
         }
+
+        Achivements = CSVRW.ReadCSV_Achivements();
     }
 
     /// <summary>
-    /// Achivement의 특정 값을 수정하는 메소드
+    /// 기록의 특정 값을 수정하는 메소드
+    /// </summary>
+    /// <param name="index">Records의 키</param>
+    /// <param name="value">Records에 저장할 값</param>
+    public void SetRecords(string index, int value)
+    {
+        if(!Records.ContainsKey(index))
+            throw new IndexOutOfRangeException();
+        Records[index] = value;
+    }
+
+    /// <summary>
+    /// 기록을 저장하는 메소드
+    /// </summary>
+    public void SaveRecords()
+    {
+        CSVRW.WriteCSV_Records(Records);
+    }
+
+    /// <summary>
+    /// 기록을 초기화하는 메소드
+    /// </summary>
+    public void ResetRecords()
+    {
+        Records["StageCount"] = 0;
+        Records["TimeCount"] = 0;
+        Records["KillCount"] = 0;
+        Records["DamageCount"] = 0;
+        Records["HitCount"] = 0;
+        Records["HealCount"] = 0;
+        Records["MoneyCount"] = 0;
+        Records["CostCount"] = 0;
+        Records["LevelCount"] = 0;
+        CSVRW.WriteCSV_Records(Records);
+    }
+
+    /// <summary>
+    /// 업적의 특정 값을 수정하는 메소드
     /// </summary>
     /// <param name="index">Achivement의 키</param>
     /// <param name="value">Achivement에 저장할 값</param>
-    public void SetAchievement(string index, int value)
+    public void SetAchives(string index, int value)
     {
-        Achievement[index] = value;
+        if (!Achivements.ContainsKey(index))
+            throw new IndexOutOfRangeException();
+        int total = Achivements[index][0] + value;
+        Achivements[index][0] = total;
     }
-
     /// <summary>
-    /// Achivement를 저장하는 메소드
+    /// 업적을 저장하는 메소드
     /// </summary>
-    public void SaveAchiveMent()
+    public void SaveAchivements()
     {
-        CSVRW.WriteCSV_Achievements(Achievement);
-    }
-
-    /// <summary>
-    /// Achivement를 초기화하는 메소드
-    /// </summary>
-    public void ResetAchivement()
-    {
-        Achievement["StageCount"] = 0;
-        Achievement["TimeCount"] = 0;
-        Achievement["KillCount"] = 0;
-        Achievement["DamageCount"] = 0;
-        Achievement["HitCount"] = 0;
-        Achievement["HealCount"] = 0;
-        Achievement["MoneyCount"] = 0;
-        Achievement["CostCount"] = 0;
-        Achievement["LevelCount"] = 0;
-        CSVRW.WriteCSV_Achievements(Achievement);
+        CSVRW.WriteCSV_Achivements(Achivements);
     }
 }

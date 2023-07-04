@@ -104,7 +104,7 @@ public class SelectUI : SceneUI
 
     void ChangeDifficulty(int num = 1)
     {
-        GameManager.Data.Records["Difficulty"] = num;
+        GameManager.Data.NowRecords["Difficulty"] = num;
         switch(num)
         {
             case 1:
