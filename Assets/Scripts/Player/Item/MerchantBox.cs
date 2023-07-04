@@ -1,45 +1,32 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
-public class MerchantBox : MonoBehaviour
+public class MerchantBox : ItemBox
 {
-    ItemData item;
-    int cost;
-    bool fall;
-    [SerializeField] GameObject costObject;
+    protected int cost;
+    [SerializeField] protected GameObject costObject;
 
-    void Awake()
+    protected override void OnEnable()
     {
-        ItemData[] items = GameManager.Resource.LoadAll<ItemData>("Item");
+        base.OnEnable();
         cost = (int)((Random.Range(1, 10) + GameManager.Data.NowRecords["Time"] * 0.016f) * GameManager.Data.NowRecords["Difficulty"]);
-        item = items[Random.Range(0, items.Length)];
         fall = true;
         costObject.GetComponentInChildren<TextMeshProUGUI>().text = cost.ToString();
+
+        StartCoroutine(LookRoutine());
     }
 
-    void Update()
+    protected virtual IEnumerator LookRoutine()
     {
-        if (fall)
+        while (isActiveAndEnabled)
         {
-            Ray ray = new Ray(transform.position, Vector3.down);
-            if (Physics.Raycast(ray, 2f, LayerMask.GetMask("Ground")))
-                fall = false;
+            costObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+            yield return new WaitForEndOfFrame();
         }
     }
 
-    void FixedUpdate()
-    {
-        if (fall)
-            transform.Translate(Vector3.down * Time.deltaTime * 10f);
-        transform.Rotate(Vector3.up);
-    }
-
-    void LateUpdate()
-    {
-        costObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-    }
-
-    public void Interact()
+    public override void Interact()
     {
         if (GameManager.Data.Player.Coin >= cost)
         {

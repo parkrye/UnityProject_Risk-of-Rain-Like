@@ -1,37 +1,43 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemBox : MonoBehaviour
 {
-    ItemData item;
-    bool fall;
+    protected ItemData item;
+    protected bool fall;
 
-    void Awake()
+    protected virtual void OnEnable()
     {
         ItemData[] items = GameManager.Resource.LoadAll<ItemData>("Item");
         item = items[Random.Range(0, items.Length)];
         fall = true;
+
+        StartCoroutine(FallRoutine());
+        StartCoroutine(TurnRoutine());
     }
 
-    void Update()
+    protected virtual IEnumerator FallRoutine()
     {
-        if (fall)
+        while (fall)
         {
             Ray ray = new Ray(transform.position, Vector3.down);
             if (Physics.Raycast(ray, 2f, LayerMask.GetMask("Ground")))
                 fall = false;
+            yield return null;
         }
     }
 
-    void FixedUpdate()
+    protected virtual IEnumerator TurnRoutine()
     {
-        if (fall)
+        while (fall)
+        {
             transform.Translate(Vector3.down * Time.deltaTime * 10f);
-        transform.Rotate(Vector3.up);
+            transform.Rotate(Vector3.up);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
         GameManager.Data.Player.Inventory.AddItem(item);
         GameManager.Resource.Destroy(gameObject);
