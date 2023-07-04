@@ -53,6 +53,5 @@ public class EnemyAI_TypeB : EnemyAI
     void FixedUpdate()
     {
         transform.LookAt(playerPos);
-        transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y, 0f);
     }
 }

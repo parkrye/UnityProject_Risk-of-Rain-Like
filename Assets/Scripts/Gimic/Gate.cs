@@ -7,7 +7,7 @@ public class Gate : MonoBehaviour
         GameManager.Data.RecordTime = false;
 
         string nextSceneName = GameManager.Scene.CurScene.name;
-        while(nextSceneName != GameManager.Scene.CurScene.name)
+        while (nextSceneName == GameManager.Scene.CurScene.name)
         {
             switch (Random.Range(0, 3))
             {
@@ -23,6 +23,7 @@ public class Gate : MonoBehaviour
             }
         }
         GameManager.Data.NowRecords["Stage"] += 1f;
+        Debug.Log(nextSceneName);
         GameManager.Scene.LoadScene(nextSceneName);
     }
 }

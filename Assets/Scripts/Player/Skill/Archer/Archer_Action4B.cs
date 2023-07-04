@@ -30,9 +30,9 @@ public class Archer_Action4B : Skill, ICriticable
         return false;
     }
 
-    void ShotArrowShower(Transform transform)
+    void ShotArrowShower(Transform target)
     {
         arrowShower = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/ArrowShower"), true);
-        arrowShower.GetComponent<ArrowShower>().Shot(transform, damage);
+        arrowShower.GetComponent<ArrowShower>().Shot(target, damage);
     }
 }

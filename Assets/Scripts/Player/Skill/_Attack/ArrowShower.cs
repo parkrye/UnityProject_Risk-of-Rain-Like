@@ -1,21 +1,19 @@
-using System.Collections;
 using UnityEngine;
 
 public class ArrowShower : MonoBehaviour
 {
-    public void Shot(Transform transform, float damage)
+    [SerializeField] Arrow[] arrows;
+
+    void Awake()
     {
-        StartCoroutine(ShowerRoutine(transform, damage));
+        arrows = GetComponentsInChildren<Arrow>();
     }
 
-    IEnumerator ShowerRoutine(Transform transform, float damage)
+    public void Shot(Transform target, float damage)
     {
-        for (int i = 0; i < 50; i++)
+        foreach (var arrow in arrows)
         {
-            GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
-            arrow.transform.position = transform.position + Vector3.right * Random.Range(-7.5f, 7.5f) + Vector3.forward * Random.Range(-7.5f, 7.5f) + Vector3.up * 50f;
-            arrow.GetComponent<Arrow>().Shot(transform.position, damage);
-            yield return new WaitForSeconds(0.02f);
+            arrow.Shot(target.position, damage);
         }
     }
 }

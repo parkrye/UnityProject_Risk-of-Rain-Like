@@ -67,12 +67,9 @@ public class LevelScene : BaseScene
                 GameManager.Resource.Instantiate<PositionFixer>("Particle/Dust").SetTarget(GameManager.Data.Player.playerTransform);
                 break;
             case 1:
-                GameManager.Resource.Instantiate<PositionFixer>("Particle/FireFly").SetTarget(GameManager.Data.Player.playerTransform);
-                break;
-            case 2:
                 GameManager.Resource.Instantiate<PositionFixer>("Particle/Fog").SetTarget(GameManager.Data.Player.playerTransform);
                 break;
-            case 3:
+            case 2:
                 GameManager.Resource.Instantiate<PositionFixer>("Particle/Rain").SetTarget(GameManager.Data.Player.playerTransform);
                 break;
         }
