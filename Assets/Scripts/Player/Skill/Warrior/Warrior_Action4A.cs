@@ -34,7 +34,6 @@ public class Warrior_Action4A : Skill, IEnumeratable, ICriticable
         yield return new WaitForSeconds(1f / hero.playerDataModel.TimeScale);
 
         ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Crack"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
-        GameManager.Resource.Destroy(effect.gameObject, 2f);
 
         Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerTransform.position, skillRange);
         foreach (Collider collider in colliders)

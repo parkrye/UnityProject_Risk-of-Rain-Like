@@ -16,7 +16,6 @@ public class Wizard_Action1C : Skill, ICriticable
             hero.attackSource.Play();
 
             ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
-            GameManager.Resource.Destroy(effect.gameObject, 2f);
 
             GameObject slowEnergyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/SlowEnergyBolt"), true);
             slowEnergyBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;

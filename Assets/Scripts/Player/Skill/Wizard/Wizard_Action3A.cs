@@ -51,6 +51,5 @@ public class Wizard_Action3A : Skill, IEnumeratable
         CoolCheck = false;
         hero.playerDataModel.animator.SetTrigger("Teleport");
         ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
-        GameManager.Resource.Destroy(effect.gameObject, 2f);
     }
 }
