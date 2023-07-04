@@ -19,7 +19,7 @@ MonoBehaviour:
   AttackSpeed: 1
   MoveSpeed: 4
   Exp: 16
-  Size: 0.5
+  Size: 1.5
   yModifier: 1.5
   Coin: 2
   floatdatas:

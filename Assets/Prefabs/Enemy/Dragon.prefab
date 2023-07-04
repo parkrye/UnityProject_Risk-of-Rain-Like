@@ -899,7 +899,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &6402558820805264569
 MonoBehaviour:
@@ -1701,7 +1701,7 @@ PrefabInstance:
     - target: {fileID: 997461275950488288, guid: e50c709e4240578418e14ac8b64393d3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 52afa9e4bf9887a44aedbc2a547b658c, type: 2}
+      objectReference: {fileID: 2100000, guid: bc234ee1e309a7a43810b211965eb8be, type: 2}
     - target: {fileID: 3654606288608174765, guid: e50c709e4240578418e14ac8b64393d3, type: 3}
       propertyPath: m_Name
       value: MinimapChecker

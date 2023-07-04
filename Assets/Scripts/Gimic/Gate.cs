@@ -22,7 +22,7 @@ public class Gate : MonoBehaviour
                     break;
             }
         }
-        GameManager.Data.Records["Stage"] += 1f;
+        GameManager.Data.NowRecords["Stage"] += 1f;
         GameManager.Scene.LoadScene(nextSceneName);
     }
 }

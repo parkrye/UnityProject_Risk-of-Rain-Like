@@ -44,8 +44,8 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     {
         hitAudio = GameManager.Resource.Instantiate<AudioSource>("Audio/SFX/Hit");
 
-        HP = enemyData.MaxHP * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
-        damage = enemyData.Damage * (1 + (GameManager.Data.Records["Difficulty"] - 1) * 0.5f + GameManager.Data.Records["Time"] * 0.0016f);
+        HP = enemyData.MaxHP * (1 + (GameManager.Data.NowRecords["Difficulty"] - 1) * 0.5f + GameManager.Data.NowRecords["Time"] * 0.0016f);
+        damage = enemyData.Damage * (1 + (GameManager.Data.NowRecords["Difficulty"] - 1) * 0.5f + GameManager.Data.NowRecords["Time"] * 0.0016f);
         moveSpeed = enemyData.MoveSpeed;
         attackSpeed = enemyData.AttackSpeed;
         bleed = false;
@@ -74,7 +74,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         do
         {
             HP -= damage;
-            GameManager.Data.Records["Damage"] += damage;
+            GameManager.Data.NowRecords["Damage"] += damage;
             OnHPEvent?.Invoke(HP);
             if (bleed)
             {
@@ -102,7 +102,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 
     public void Die()
     {
-        GameManager.Data.Records["Kill"] += 1;
+        GameManager.Data.NowRecords["Kill"] += 1;
         StopAttack();
         StartCoroutine(DieRoutine());
     }
@@ -120,9 +120,9 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     {
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(1f);
-        GameManager.Data.Player.Coin += (int)((enemyData.Coin + GameManager.Data.Records["Time"] * 0.0016f) / (GameManager.Data.Records["Difficulty"]));
-        GameManager.Data.Player.EXP += (int)((enemyData.Exp + GameManager.Data.Records["Time"] * 0.0016f) / (GameManager.Data.Records["Difficulty"]));
-        if (Random.Range(0, 10) <= 3 - GameManager.Data.Records["Difficulty"])
+        GameManager.Data.Player.Coin += (int)((enemyData.Coin + GameManager.Data.NowRecords["Time"] * 0.0016f) / (GameManager.Data.NowRecords["Difficulty"]));
+        GameManager.Data.Player.EXP += (int)((enemyData.Exp + GameManager.Data.NowRecords["Time"] * 0.0016f) / (GameManager.Data.NowRecords["Difficulty"]));
+        if (Random.Range(0, 10) <= 3 - GameManager.Data.NowRecords["Difficulty"])
             GameManager.Resource.Instantiate<ItemBox>("Item/ItemBox", transform.position, Quaternion.identity);
         GameManager.Resource.Destroy(gameObject);
     }

@@ -11,7 +11,7 @@ public class MerchantBox : MonoBehaviour
     void Awake()
     {
         ItemData[] items = GameManager.Resource.LoadAll<ItemData>("Item");
-        cost = (int)((Random.Range(1, 10) + GameManager.Data.Records["Time"] * 0.016f) * GameManager.Data.Records["Difficulty"]);
+        cost = (int)((Random.Range(1, 10) + GameManager.Data.NowRecords["Time"] * 0.016f) * GameManager.Data.NowRecords["Difficulty"]);
         item = items[Random.Range(0, items.Length)];
         fall = true;
         costObject.GetComponentInChildren<TextMeshProUGUI>().text = cost.ToString();

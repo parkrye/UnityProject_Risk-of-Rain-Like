@@ -10807,6 +10807,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 803505001640057614}
     m_Modifications:
+    - target: {fileID: 997461275950488288, guid: e50c709e4240578418e14ac8b64393d3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2ce03f3115e3ea46b3fa21073d3649f, type: 2}
     - target: {fileID: 3654606288608174765, guid: e50c709e4240578418e14ac8b64393d3, type: 3}
       propertyPath: m_Name
       value: MinimapChecker

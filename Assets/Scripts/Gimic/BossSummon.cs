@@ -68,7 +68,7 @@ public class BossSummon : MonoBehaviour
 
     void SummonGuardians()
     {
-        for(int i = 0; i < counter + GameManager.Data.Records["Difficulty"]; i++)
+        for(int i = 0; i < counter + GameManager.Data.NowRecords["Difficulty"]; i++)
         {
             GameObject enemy = EnemySummon.RandomLocationSummon(transform, 30f);
             if (enemy)
