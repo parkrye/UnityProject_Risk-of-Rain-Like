@@ -27,9 +27,9 @@ public class TowerBoxSetter : MonoBehaviour
             ray = new Ray(transform.position + Vector3.right * xPos + Vector3.forward * zPos, Vector3.down);
             Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Ground"));
 
-            GameObject box = GameManager.Resource.Instantiate<GameObject>("Item/Tower");
-            box.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            GameManager.Resource.Instantiate<MinimapMarker>("Marker/MinimapMarker_Tower", true).StartFollowing(box.transform);
+            GameObject towerBox = GameManager.Resource.Instantiate<GameObject>("Item/TowerBox");
+            towerBox.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            GameManager.Resource.Instantiate<MinimapMarker>("Marker/MinimapMarker_Tower", true).StartFollowing(towerBox.transform);
         }
     }
 }

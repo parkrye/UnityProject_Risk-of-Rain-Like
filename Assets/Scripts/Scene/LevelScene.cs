@@ -7,6 +7,7 @@ public class LevelScene : BaseScene
     [SerializeField] BossSummon bossSummonZone;
     [SerializeField] EnemySpawner enemySpawner;
     [SerializeField] ItemDropper itemDropper;
+    [SerializeField] TowerBoxSetter towerBoxSetter;
     [SerializeField] GameObject bossZone;
     [SerializeField] GameObject directionalLight;
     [SerializeField] float spawnDelay, spawnDistance;
@@ -53,6 +54,7 @@ public class LevelScene : BaseScene
         bossSummonZone.ObjectStateEvent.AddListener(infoUI.UpdateObjective);
         bossSummonZone.ObjectStateEvent.AddListener(enemySpawner.StopSpawn);
         bossSummonZone.ObjectStateEvent.AddListener(itemDropper.StopDrop);
+        towerBoxSetter.SetTowerBoxes();
         Progress = 0.8f;
 
         // 레벨 배경 설정

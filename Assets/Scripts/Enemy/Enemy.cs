@@ -24,7 +24,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         } 
     }
     public bool bleed, attack;
-    [SerializeField] protected bool onGizmo;
+    [SerializeField] public bool onGizmo;
     public bool isStunned, isSlowed, alive;
 
     public Vector3 EnemyPos

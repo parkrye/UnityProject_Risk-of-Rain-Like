@@ -9,18 +9,29 @@ public class TowerBox : MerchantBox
     [SerializeField] GameObject hpObject;
     [SerializeField] GameObject boxObject, towerObject;
     [SerializeField] Transform attackTransform;
+    [SerializeField] MeshRenderer towerRenderer;
+    [SerializeField] Material attackModeMaterial, healModeMaterial;
     enum SupportType { Attack, Heal }
     [SerializeField] SupportType supportType;
     FollowBolt followBolt;
 
+    private void Awake()
+    {
+        slider = GetComponentInChildren<Slider>();
+        followBolt = GameManager.Resource.Load<FollowBolt>("Attack/FollowEnergyBolt");
+        towerRenderer = towerObject.GetComponent<MeshRenderer>();
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
-        slider = GetComponentInChildren<Slider>();
-        followBolt = GameManager.Resource.Load<FollowBolt>("Attack/FollowEnergyBolt");
         supportType = SupportType.Attack;
+        towerRenderer.material = attackModeMaterial;
         if (Random.Range(0, 2) == 1)
+        {
             supportType = SupportType.Heal;
+            towerRenderer.material = healModeMaterial;
+        }
 
         boxObject.SetActive(true);
         towerObject.SetActive(false);
@@ -30,22 +41,11 @@ public class TowerBox : MerchantBox
         slider.value = cost;
     }
 
-    protected override IEnumerator LookRoutine()
-    {
-        while (this)
-        {
-            if (box)
-                costObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-            else
-                hpObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
     public override void Interact()
     {
         if (box && GameManager.Data.Player.Coin >= cost)
         {
+            StopAllCoroutines();
             GameManager.Data.Player.Coin -= cost;
             boxObject.SetActive(false);
             towerObject.SetActive(true);
@@ -67,7 +67,7 @@ public class TowerBox : MerchantBox
                     slider.value -= cost * 0.1f;
                     break;
                 case SupportType.Heal:
-                    GameManager.Data.Player.NOWHP += cost * 0.1f;
+                    GameManager.Data.Player.NOWHP += cost * 0.5f;
                     slider.value -= cost * 0.1f;
                     break;
             }
