@@ -340,7 +340,7 @@ MonoBehaviour:
   attackSpeed: 0
   bleed: 0
   attack: 0
-  onGizmo: 0
+  onGizmo: 1
   isStunned: 0
   isSlowed: 0
   alive: 0
@@ -376,7 +376,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  onGizmo: 1
   moveSide: 0
   deleteTimer: 0
 --- !u!1 &1147369430959092

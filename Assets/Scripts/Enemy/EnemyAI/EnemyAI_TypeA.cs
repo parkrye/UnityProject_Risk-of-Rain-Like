@@ -12,7 +12,7 @@ public class EnemyAI_TypeA : EnemyAI
     [SerializeField] AI_State state;
     Stack<Vector3> bypass;
     Vector3 prevPlayerPosition;
-    [SerializeField] bool onGizmo, moveSide;
+    [SerializeField] bool moveSide;
     Vector3 playerPos;
     [SerializeField] float deleteTimer;
 
@@ -31,7 +31,7 @@ public class EnemyAI_TypeA : EnemyAI
             {
                 state = StateCheck();
             }
-            yield return null;
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -64,39 +64,38 @@ public class EnemyAI_TypeA : EnemyAI
     AI_State StateCheck()
     {
         playerPos = playerTransform.position + Vector3.up;
-        float sqrDistance = Vector3.SqrMagnitude(playerPos - enemy.EnemyPos);
+        float distance = Vector3.Distance(playerPos, enemy.EnemyPos);
 
-        if (sqrDistance <= enemy.enemyData.Range * enemy.enemyData.Range)
+        if (distance <= enemy.enemyData.Range)
         {
-            if(state != AI_State.Attack)
+            if (!Physics.Raycast(enemy.EnemyPos, (playerPos - enemy.EnemyPos).normalized, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
             {
-                if (Physics.Raycast(enemy.EnemyPos, (playerPos - enemy.EnemyPos).normalized, sqrDistance, LayerMask.GetMask("Player")))
+                if (state != AI_State.Attack)
                 {
                     enemy.StartAttack();
-                    StopCoroutine(FindBypass());
-                    return AI_State.Attack;
                 }
+                return AI_State.Attack;
             }
         }
 
-        if(state != AI_State.Bypass)
+        if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, (playerPos - enemy.EnemyPos).normalized, out _, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
         {
-            if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, (playerPos - enemy.EnemyPos).normalized, out _, Mathf.Sqrt(sqrDistance) - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+            if (state != AI_State.Bypass)
             {
                 enemy.StopAttack();
                 StartCoroutine(FindBypass());
-                return AI_State.Bypass;
             }
+            return AI_State.Bypass;
         }
 
-        if(sqrDistance > enemy.enemyData.Range * enemy.enemyData.Range)
+
+        if (distance > enemy.enemyData.Range)
         {
             enemy.StopAttack();
-            StopCoroutine(FindBypass());
             return AI_State.Approach;
         }
 
-        return AI_State.Dumb;
+        return state;
     }
 
     void ApproachMove()
@@ -141,6 +140,7 @@ public class EnemyAI_TypeA : EnemyAI
 
     IEnumerator FindBypass()
     {
+        yield return null;
         while (state == AI_State.Bypass)
         {
             if (Vector3.SqrMagnitude(playerPos - prevPlayerPosition) > 9f || bypass.Count == 0)
@@ -160,7 +160,7 @@ public class EnemyAI_TypeA : EnemyAI
 
     void OnDrawGizmos()
     {
-        if (onGizmo)
+        if (enemy.onGizmo)
         {
             Gizmos.color = Color.green;
             if (state == AI_State.Bypass && bypass.Count > 0)
