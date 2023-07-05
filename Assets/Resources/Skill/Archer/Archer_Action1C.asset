@@ -22,3 +22,4 @@ MonoBehaviour:
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
+  followBolt: {fileID: 5303587468460941373, guid: ef9c3c7bde094814cb22119110c00ff8, type: 3}

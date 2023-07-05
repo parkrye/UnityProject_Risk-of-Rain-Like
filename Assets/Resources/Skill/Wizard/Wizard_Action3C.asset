@@ -25,3 +25,4 @@ MonoBehaviour:
   jumpPower: 100
   skillRange: 5
   dodgeTime: 1
+  FireworkEffect: {fileID: 19886120, guid: 5702e2a6fea804b45b49b70d8feaf7ae, type: 3}

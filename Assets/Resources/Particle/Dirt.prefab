@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4772118390566308}
   - component: {fileID: 198006683868144142}
   - component: {fileID: 199297475237371646}
+  - component: {fileID: 71838033578241455}
   m_Layer: 0
   m_Name: Dirt
   m_TagString: Untagged
@@ -4891,3 +4892,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &71838033578241455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878560746460868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0803cb5b77c0a84a815c1226f8afcb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 1

@@ -25,9 +25,9 @@ public class SelectUI : SceneUI
 
         for(int slot = 1; slot <= 4; slot++)
         {
-            var actionA = $"Action{slot}A";
-            var actionB = $"Action{slot}B";
-            var actionC = $"Action{slot}C";
+            string actionA = $"Action{slot}A";
+            string actionB = $"Action{slot}B";
+            string actionC = $"Action{slot}C";
 
             toggles[actionA].group = toggleGroups[$"Action{slot}"];
             toggles[actionB].group = toggleGroups[$"Action{slot}"];
@@ -66,11 +66,11 @@ public class SelectUI : SceneUI
         player.GetComponent<PlayerDataModel>().playerSystem.SelectHero(characterNum);
         for (int slot = 1; slot <= 4; slot++)
         {
-            var actionA = $"Action{slot}A";
-            var actionB = $"Action{slot}B";
-            var actionC = $"Action{slot}C";
+            string actionA = $"Action{slot}A";
+            string actionB = $"Action{slot}B";
+            string actionC = $"Action{slot}C";
 
-            var skillNum = 1;
+            int skillNum = 1;
 
             if (toggles[actionA].isOn)
             {
@@ -198,9 +198,9 @@ public class SelectUI : SceneUI
     {
         for (int slot = 1; slot <= 4; slot++)
         {
-            var actionA = $"Action{slot}A";
-            var actionB = $"Action{slot}B";
-            var actionC = $"Action{slot}C";
+            string actionA = $"Action{slot}A";
+            string actionB = $"Action{slot}B";
+            string actionC = $"Action{slot}C";
 
             switch (characterNum)
             {

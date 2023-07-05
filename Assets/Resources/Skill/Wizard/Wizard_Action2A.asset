@@ -22,3 +22,5 @@ MonoBehaviour:
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  flamePrefab: {fileID: 1262176118376158700, guid: bfcb922d57897bb449bf4d439b25690a, type: 3}

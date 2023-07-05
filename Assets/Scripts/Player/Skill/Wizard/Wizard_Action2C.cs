@@ -7,6 +7,8 @@ using UnityEngine;
 public class Wizard_Action2C : Skill, ICriticable
 {
     public float poisonTime;
+    [SerializeField] ParticleSystem magicEffect;
+    [SerializeField] PoisonBolt poisonBoltPrefab;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -15,11 +17,11 @@ public class Wizard_Action2C : Skill, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+            GameManager.Resource.Instantiate(magicEffect, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
 
-            GameObject poisonBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/PoisonBolt"), true);
+            PoisonBolt poisonBolt = GameManager.Resource.Instantiate(poisonBoltPrefab, true);
             poisonBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            poisonBolt.GetComponent<PoisonBolt>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier, 0f, poisonTime);
+            poisonBolt.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier, 0f, poisonTime);
 
             CoolCheck = false;
 

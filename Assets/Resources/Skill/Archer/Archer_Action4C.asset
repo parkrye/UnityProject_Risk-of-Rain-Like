@@ -26,3 +26,4 @@ MonoBehaviour:
   count: 0
   limit: 3
   chargeTime: 10
+  arrow: {fileID: 3226053477481829421, guid: 8362af6eb093cf94e8f96217f0b7b813, type: 3}

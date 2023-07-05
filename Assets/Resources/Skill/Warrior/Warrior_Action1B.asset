@@ -22,3 +22,4 @@ MonoBehaviour:
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
+  slash: {fileID: 9136091886580325148, guid: 6f73e5ce48e076443b2a6fc23e66017c, type: 3}

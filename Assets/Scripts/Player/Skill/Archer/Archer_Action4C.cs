@@ -11,6 +11,7 @@ public class Archer_Action4C : Skill, ICriticable, IEnumeratable
     [SerializeField] int count, limit;
     Stack<int> stack = new Stack<int>();
     [SerializeField] float chargeTime;
+    [SerializeField] Arrow arrow;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -23,9 +24,9 @@ public class Archer_Action4C : Skill, ICriticable, IEnumeratable
                 hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
                 hero.attackSource.Play();
 
-                GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
-                arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-                arrow.GetComponent<Arrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
+                Arrow ArrowAttack = GameManager.Resource.Instantiate(arrow, true);
+                ArrowAttack.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
+                ArrowAttack.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
 
                 CoolCheck = false;
             }
@@ -37,7 +38,7 @@ public class Archer_Action4C : Skill, ICriticable, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        yield return new WaitForSeconds(chargeTime);
+        yield return new WaitForSeconds(chargeTime * hero.playerDataModel.ReverseTimeScale);
         if(stack.Count == count && count > 0)
             count = stack.Pop();
     }

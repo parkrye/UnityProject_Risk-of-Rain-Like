@@ -8,6 +8,8 @@ using UnityEngine;
 public class Warrior_Action4B : Skill, IEnumeratable
 {
     public float skillTime;
+    public float reverseModifier;
+    [SerializeField] ParticleSystem electricity;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -25,10 +27,10 @@ public class Warrior_Action4B : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Electricity"), hero.playerDataModel.playerTransform.position + Vector3.up, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+        ParticleSystem effect = GameManager.Resource.Instantiate(electricity, hero.playerDataModel.playerTransform.position + Vector3.up, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         Time.timeScale = modifier;
-        hero.playerDataModel.TimeScale = 1f / modifier;
-        yield return new WaitForSeconds(skillTime / hero.playerDataModel.TimeScale);
+        hero.playerDataModel.TimeScale = reverseModifier;
+        yield return new WaitForSeconds(skillTime * hero.playerDataModel.ReverseTimeScale);
         Time.timeScale = 1f;
         hero.playerDataModel.TimeScale = 1f;
         GameManager.Resource.Destroy(effect);

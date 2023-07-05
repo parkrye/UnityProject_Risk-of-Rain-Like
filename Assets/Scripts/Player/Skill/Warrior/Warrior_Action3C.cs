@@ -7,6 +7,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Warrior_Action3C", menuName = "Data/Skill/Warrior/Action3C")]
 public class Warrior_Action3C : Skill, IEnumeratable
 {
+    [SerializeField] ParticleSystem sparkle;
+
     public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
@@ -23,12 +25,12 @@ public class Warrior_Action3C : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Sparkle"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+        ParticleSystem effect = GameManager.Resource.Instantiate(sparkle, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         hero.playerDataModel.playerSystem.Buff(0, modifier);
-        hero.playerDataModel.NOWHP += hero.playerDataModel.MAXHP / 5f;
+        hero.playerDataModel.NOWHP += hero.playerDataModel.MAXHP * 0.2f;
         for(int i = 0; i < 100; i++)
         {
-            hero.playerDataModel.NOWHP += hero.playerDataModel.MAXHP < 100f ? 0.1f : hero.playerDataModel.MAXHP / 1000f;
+            hero.playerDataModel.NOWHP += hero.playerDataModel.MAXHP < 100f ? 0.1f : hero.playerDataModel.MAXHP * 0.001f;
             yield return new WaitForSeconds(0.1f);
         }
         GameManager.Resource.Destroy(effect);

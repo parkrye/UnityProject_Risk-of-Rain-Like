@@ -7,6 +7,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Warrior_Action1B", menuName = "Data/Skill/Warrior/Action1B")]
 public class Warrior_Action1B : Skill, ICriticable
 {
+    [SerializeField] Bolt slash;
+
     public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
@@ -14,9 +16,9 @@ public class Warrior_Action1B : Skill, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            GameObject slash = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Slash"), true);
-            slash.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            slash.GetComponent<Bolt>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier, 0.05f);
+            Bolt slashAttack = GameManager.Resource.Instantiate(slash, true);
+            slashAttack.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
+            slashAttack.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier, 0.05f);
 
             CoolCheck = false;
 

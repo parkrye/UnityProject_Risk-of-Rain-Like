@@ -24,3 +24,5 @@ MonoBehaviour:
       m_Calls: []
   drawPower: 10
   drawRange: 2.5
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  gyroBoltPrefab: {fileID: 1398750967321013632, guid: 5f7dcdc9fb38e8a4d8ce323f3a197ec9, type: 3}

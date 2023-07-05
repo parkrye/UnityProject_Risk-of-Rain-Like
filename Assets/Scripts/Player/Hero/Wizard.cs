@@ -36,7 +36,7 @@ public class Wizard : Hero
 
     IEnumerator FloaterJump()
     {
-        yield return new WaitForSeconds(0.2f / playerDataModel.TimeScale);
+        yield return new WaitForSeconds(0.2f * playerDataModel.ReverseTimeScale);
         playerDataModel.playerMovement.dirModifier.y = 0f;
         playerDataModel.rb.useGravity = false;
         while (floating)

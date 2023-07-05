@@ -23,3 +23,4 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   shieldPoint: 0
+  magicFlatPRefab: {fileID: 19898698, guid: e49403f034d74ee44aa8a41b0ee4abfd, type: 3}

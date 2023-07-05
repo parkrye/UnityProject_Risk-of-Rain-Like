@@ -20,7 +20,7 @@ public class PlayerCameraController : MonoBehaviour
         playerDataModel = GetComponent<PlayerDataModel>();
         defaultCameraOffset = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
         cameraOffset = defaultCameraOffset;
-        closeCameraOffset = cameraOffset / 10f;
+        closeCameraOffset = cameraOffset * 0.1f;
         downViewOffset = new Vector3(0f, 5f, -2.5f);
         upViewOffset = new Vector3(0f, 0f, -0.5f);
     }
@@ -47,18 +47,18 @@ public class PlayerCameraController : MonoBehaviour
         {
             transform.localEulerAngles += new Vector3(0f, pointerPos.x * playerDataModel.mouseSensivity * Time.deltaTime, 0f);
 
-            xRotation -= pointerPos.y * playerDataModel.mouseSensivity * 0.3f * Time.deltaTime;
+            xRotation -= pointerPos.y * playerDataModel.mouseSensivity * 3f * Time.deltaTime;
             xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
             lookFromTransform.localEulerAngles = new Vector3(xRotation, 0f, 0f);
 
             if (xRotation < 0f)
             {
-                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, upViewOffset, (-xRotation / 80f));
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, upViewOffset, (-xRotation * 0.0125f));
             }
             else
             {
-                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, downViewOffset, (xRotation / 80f));
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(cameraOffset, downViewOffset, (xRotation * 0.0125f));
             }
         }
     }

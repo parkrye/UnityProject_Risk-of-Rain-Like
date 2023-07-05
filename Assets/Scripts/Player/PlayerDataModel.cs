@@ -31,7 +31,7 @@ public class PlayerDataModel : MonoBehaviour
     public bool[] coolChecks = new bool[4]; // 각 액션에 대한 쿨타임 여부
 
     public float mouseSensivity;            // 마우스 민감도
-    [SerializeField] float playerTimeScale; // 플레이어 시간 배율
+    [SerializeField] bool playerTimeScaleMultiplier;  // 플레이어 시간 배속 여부
 
     public UnityEvent OnLevelEvent, OnHPEvent, OnEXPEvent;  // 레벨 업에 대한 이벤트, 체력 변화에 대한 이벤트, 경험치 변화에 대한 이벤트
     public UnityEvent<int> OnCoinEvent;                     // 금화 획득에 대한 이벤트
@@ -61,7 +61,7 @@ public class PlayerDataModel : MonoBehaviour
         playerSystem = GetComponent<PlayerSystemController>();
         Inventory = GetComponent<Inventory>();
 
-        TimeScale = 1f;
+        playerTimeScaleMultiplier = false;
         status = new float[5] { 5f, 10f, 10f, 1f, 1.2f };
         buffModifier = new float[5] { 1f, 1f, 1f, 1f, 1f };
 
@@ -198,13 +198,29 @@ public class PlayerDataModel : MonoBehaviour
     public float TimeScale
     { 
         get 
-        { 
-            return playerTimeScale;
+        {
+            if (playerTimeScaleMultiplier)
+                return 2f;
+            else
+                return 1f;
         }
         set
         {
-            playerTimeScale = value;
-            animator.speed = playerTimeScale;
+            if (value == 2f)
+                playerTimeScaleMultiplier = true;
+            else
+                playerTimeScaleMultiplier = false;
+        }
+    }
+
+    public float ReverseTimeScale
+    {
+        get
+        {
+            if (playerTimeScaleMultiplier)
+                return 0.5f;
+            else
+                return 1f;
         }
     }
 

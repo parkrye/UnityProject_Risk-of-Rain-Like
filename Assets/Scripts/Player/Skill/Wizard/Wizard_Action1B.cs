@@ -8,6 +8,8 @@ using UnityEngine;
 public class Wizard_Action1B : Skill, ICriticable, IEnumeratable
 {
     float damage;
+    [SerializeField] ParticleSystem magicEffect;
+    [SerializeField] FollowBolt bolt;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -16,7 +18,7 @@ public class Wizard_Action1B : Skill, ICriticable, IEnumeratable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+            ParticleSystem effect = GameManager.Resource.Instantiate(magicEffect, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
             damage = param[0] * modifier;
             CoolCheck = false;
 
@@ -29,10 +31,10 @@ public class Wizard_Action1B : Skill, ICriticable, IEnumeratable
     {
         for (int i = 0; i < 3; i++)
         {
-            GameObject followBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/FollowEnergyBolt"), true);
+            FollowBolt followBolt = GameManager.Resource.Instantiate(bolt, true);
             followBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            followBolt.GetComponent<FollowBolt>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, damage);
-            yield return new WaitForSeconds(0.3f);
+            followBolt.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, damage);
+            yield return new WaitForSeconds(0.3f * hero.playerDataModel.ReverseTimeScale);
         }
     }
 }

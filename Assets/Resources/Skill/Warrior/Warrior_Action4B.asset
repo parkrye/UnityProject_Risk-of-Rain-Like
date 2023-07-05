@@ -23,3 +23,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   skillTime: 5
+  reverseModifier: 2
+  electricity: {fileID: 198018749353404848, guid: a22bb852cf433044e8752ea7fe62f570, type: 3}

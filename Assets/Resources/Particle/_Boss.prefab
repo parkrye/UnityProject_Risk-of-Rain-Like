@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4027604870923254}
   - component: {fileID: 198260048058854124}
   - component: {fileID: 199816333619576516}
+  - component: {fileID: 8208395600171801690}
   m_Layer: 0
   m_Name: _Boss
   m_TagString: Untagged
@@ -4910,6 +4911,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8208395600171801690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236643204216662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0803cb5b77c0a84a815c1226f8afcb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 4
 --- !u!1 &1419194491794776
 GameObject:
   m_ObjectHideFlags: 0

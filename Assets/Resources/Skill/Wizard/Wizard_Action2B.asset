@@ -24,3 +24,5 @@ MonoBehaviour:
       m_Calls: []
   shockRange: 2
   shockTime: 1
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  ShockBoltPrefab: {fileID: 5706986853138454475, guid: d6c8bcbd596b8044c99ead7fb428f299, type: 3}

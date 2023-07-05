@@ -22,3 +22,5 @@ MonoBehaviour:
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  bolt: {fileID: 5303587468460941373, guid: ef9c3c7bde094814cb22119110c00ff8, type: 3}

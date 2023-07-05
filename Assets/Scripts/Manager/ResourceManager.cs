@@ -100,6 +100,6 @@ public class ResourceManager : MonoBehaviour
 
     public void Destroy(Component component, float delay = 0f)
     {
-        Component.Destroy(component, delay);
+        Destroy(component.gameObject, delay);
     }
 }

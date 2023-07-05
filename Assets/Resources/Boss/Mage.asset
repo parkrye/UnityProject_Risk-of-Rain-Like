@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1201003157251696, guid: f397a44c833ad65409eba4bce5ea62ed, type: 3}
   MaxHP: 80
-  Damage: 5
+  Damage: 3
   Range: 20
   AttackSpeed: 1
   MoveSpeed: 2

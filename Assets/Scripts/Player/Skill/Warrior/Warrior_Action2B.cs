@@ -9,6 +9,7 @@ public class Warrior_Action2B : Skill, IEnumeratable, ICriticable
 {
     public float stunTime;
     float damage;
+    [SerializeField] ParticleSystem dirt;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -28,11 +29,9 @@ public class Warrior_Action2B : Skill, IEnumeratable, ICriticable
 
     public IEnumerator enumerator()
     {
-        yield return new WaitForSeconds(0.08f / hero.playerDataModel.TimeScale);
+        yield return new WaitForSeconds(0.08f * hero.playerDataModel.ReverseTimeScale);
 
-        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Dirt"), hero.playerDataModel.playerAction.AttackTransform.position, Quaternion.identity, true);
-        effect.transform.LookAt(effect.transform.position + hero.playerDataModel.playerTransform.forward);
-        GameManager.Resource.Destroy(effect.gameObject, 1f);
+        GameManager.Resource.Instantiate(dirt, hero.playerDataModel.playerAction.AttackTransform.position, Quaternion.identity, true);
         Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerAction.closeAttackTransform.position, hero.playerDataModel.playerAction.closeAttackRange);
         for (int i = 0; i < colliders.Length; i++)
         {

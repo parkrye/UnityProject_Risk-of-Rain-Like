@@ -38,40 +38,46 @@ public abstract class BaseUI : MonoBehaviour
             {
                 transforms[key] = childrenRect[i];
 
-                if (childrenRect[i].GetComponent<Button>())
+                Button btn = childrenRect[i].GetComponent<Button>();
+                if (btn)
                 {
                     if (!buttons.ContainsKey(key))
-                        buttons[key] = childrenRect[i].GetComponent<Button>();
+                        buttons[key] = btn;
                 }
 
-                if (childrenRect[i].GetComponent<TMP_Text>())
+                TMP_Text txt = childrenRect[i].GetComponent<TMP_Text>();
+                if (txt)
                 {
                     if (!texts.ContainsKey(key))
-                        texts[key] = childrenRect[i].GetComponent<TMP_Text>();
+                        texts[key] = txt;
                 }
 
-                if (childrenRect[i].GetComponent<Slider>())
+                Slider sld = childrenRect[i].GetComponent<Slider>();
+                if (sld)
                 {
                     if(!sliders.ContainsKey(key))
-                        sliders[key] = childrenRect[i].GetComponent<Slider>();
+                        sliders[key] = sld;
                 }
 
-                if (childrenRect[i].GetComponent<Image>())
+                Image img = childrenRect[i].GetComponent<Image>();
+                if (img)
                 {
                     if (!images.ContainsKey(key))
-                        images[key] = childrenRect[i].GetComponent<Image>();
+                        images[key] = img;
                 }
 
-                if (childrenRect[i].GetComponent<ToggleGroup>())
+                ToggleGroup tgg = childrenRect[i].GetComponent<ToggleGroup>();
+                if (tgg)
                 {
                     if (!toggleGroups.ContainsKey(key))
-                        toggleGroups[key] = childrenRect[i].GetComponent<ToggleGroup>();
+                        toggleGroups[key] = tgg;
                 }
 
-                if (childrenRect[i].GetComponent<Toggle>())
+                Toggle tgl = childrenRect[i].GetComponent<Toggle>();
+                if (tgl)
                 {
                     if (!toggles.ContainsKey(key))
-                        toggles[key] = childrenRect[i].GetComponent<Toggle>();
+                        toggles[key] = tgl;
                 }
             }
         }
@@ -79,12 +85,11 @@ public abstract class BaseUI : MonoBehaviour
 
     protected virtual void AddClickAudio()
     {
-        GameObject audio = GameManager.Resource.Instantiate<GameObject>("Audio/SFX/UI");
+        AudioSource audio = GameManager.Resource.Instantiate<AudioSource>("Audio/SFX/UI");
         audio.transform.parent = transform;
-        clickAudio = audio.GetComponent<AudioSource>();
         foreach (KeyValuePair<string, Button> button in buttons)
         {
-            button.Value.onClick.AddListener(() => { clickAudio.Play(); });
+            button.Value.onClick.AddListener(() => { audio.Play(); });
         }
     }
 

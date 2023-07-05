@@ -5,11 +5,13 @@ public class Dragon : Enemy, IMezable
 {
     [SerializeField] Transform mouse;
     bool attacking;
-    GameObject enemyFlame;
+    EnemyFlame enemyFlame, flameAttack;
+
     protected override void Awake()
     {
         attacking = false;
         enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Dragon");
+        enemyFlame = GameManager.Resource.Load<EnemyFlame>("EnemyAttack/EnemyFlame");
         base.Awake();
     }
 
@@ -32,11 +34,11 @@ public class Dragon : Enemy, IMezable
     IEnumerator Breath()
     {
         attacking = true;
-        enemyFlame = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyFlame"), attackTransform.position, Quaternion.identity, transform);
-        enemyFlame.transform.LookAt(attackTransform.position + transform.forward);
-        enemyFlame.GetComponent<EnemyFlame>().Shot(damage);
+        flameAttack = GameManager.Resource.Instantiate(enemyFlame, attackTransform.position, Quaternion.identity, transform);
+        flameAttack.transform.LookAt(attackTransform.position + transform.forward);
+        flameAttack.Shot(damage);
         yield return new WaitForSeconds(enemyData.floatdatas[0]);
-        GameManager.Resource.Destroy(enemyFlame);
+        GameManager.Resource.Destroy(flameAttack);
         yield return new WaitForSeconds(enemyData.floatdatas[1]);
         attacking = false;
     }
@@ -48,7 +50,7 @@ public class Dragon : Enemy, IMezable
         {
             attacking = false;
             StopCoroutine(Breath());
-            GameManager.Resource.Destroy(enemyFlame);
+            GameManager.Resource.Destroy(flameAttack);
         }
     }
 

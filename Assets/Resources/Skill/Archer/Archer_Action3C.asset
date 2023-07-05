@@ -23,3 +23,4 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   anchorPower: 50
+  flag: {fileID: 6048142935316789590, guid: a8ec701984fc17442b1887998e4d33a1, type: 3}

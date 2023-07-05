@@ -23,3 +23,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   skillTime: 5
+  reverseModifier: 0.5
+  swift: {fileID: 198141240525739734, guid: e57dd934961ce0e4d9f17115bb382f19, type: 3}

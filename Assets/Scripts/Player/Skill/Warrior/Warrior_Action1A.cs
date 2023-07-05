@@ -8,6 +8,8 @@ using UnityEngine;
 public class Warrior_Action1A : Skill, IEnumeratable, ICriticable
 {
     float damage;
+    [SerializeField] ParticleSystem slash;
+
     public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
@@ -26,11 +28,10 @@ public class Warrior_Action1A : Skill, IEnumeratable, ICriticable
 
     public IEnumerator enumerator()
     {
-        yield return new WaitForSeconds(0.08f / hero.playerDataModel.TimeScale);
+        yield return new WaitForSeconds(0.08f * hero.playerDataModel.ReverseTimeScale);
 
-        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/_SlashSmall"), hero.playerDataModel.playerAction.AttackTransform.position, Quaternion.identity, true);
+        ParticleSystem effect = GameManager.Resource.Instantiate(slash, hero.playerDataModel.playerAction.AttackTransform.position, Quaternion.identity, true);
         effect.transform.LookAt(effect.transform.position + hero.playerDataModel.playerTransform.forward);
-        GameManager.Resource.Destroy(effect.gameObject, 0.2f);
 
         Collider[] colliders = Physics.OverlapSphere(hero.playerDataModel.playerAction.closeAttackTransform.position, hero.playerDataModel.playerAction.closeAttackRange);
         for(int i = 0; i < colliders.Length; i++)

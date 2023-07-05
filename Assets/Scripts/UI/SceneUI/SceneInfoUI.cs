@@ -34,9 +34,8 @@ public class SceneInfoUI : SceneUI
     /// </summary>
     public void UpdateTime()
     {
-        int seconds = (int)GameManager.Data.NowRecords["Time"];
-        string minText = seconds / 60 < 10 ? "0" + (seconds / 60).ToString() : (seconds / 60).ToString();
-        string secText = seconds % 60 < 10 ? "0" + (seconds % 60).ToString() : (seconds % 60).ToString();
+        string minText = GameManager.Data.Time[1] < 10 ? "0" + GameManager.Data.Time[1].ToString() : GameManager.Data.Time[1].ToString();
+        string secText = GameManager.Data.Time[0] < 10 ? "0" + GameManager.Data.Time[0].ToString() : GameManager.Data.Time[0].ToString();
         texts["TimeText"].text = $"{minText}:{secText}";
     }
 

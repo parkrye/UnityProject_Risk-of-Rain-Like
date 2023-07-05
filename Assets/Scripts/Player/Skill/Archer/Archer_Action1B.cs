@@ -8,6 +8,7 @@ using UnityEngine;
 public class Archer_Action1B : Skill, ICriticable, IEnumeratable
 {
     [SerializeField] float chargeSpeed, charge;
+    [SerializeField] Arrow arrow;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -22,9 +23,9 @@ public class Archer_Action1B : Skill, ICriticable, IEnumeratable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
-            arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            arrow.GetComponent<Arrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier * charge);
+            Arrow arrowAttack = GameManager.Resource.Instantiate(arrow, true);
+            arrowAttack.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
+            arrowAttack.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier * charge);
 
             CoolCheck = false;
             return true;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,24 +7,17 @@ using UnityEngine.Events;
 public class DataManager : MonoBehaviour
 {
     bool recordTime;
+    int[] time;
     Dictionary<string, float> records;
 
     public UnityEvent TimeClock;
     public bool RecordTime { get { return recordTime; } set { recordTime = value; } }
+    public int[] Time { get { return time; } set { time = value; } } 
     public Dictionary<string, float> NowRecords { get { return records; } set { records = value; } }
     public Dictionary<string, int> Records { get; private set; }
     public Dictionary<string, List<int>> Achivements { get; set; }
 
     public PlayerDataModel Player { get; set; }
-
-    void Update()
-    {
-        if (RecordTime)
-        {
-            NowRecords["Time"] += Time.deltaTime;
-            TimeClock?.Invoke();
-        }
-    }
 
     public void Initialize()
     {
@@ -50,6 +44,25 @@ public class DataManager : MonoBehaviour
         }
 
         Achivements = CSVRW.ReadCSV_Achivements();
+
+        time = new int[2];
+
+        StartCoroutine(TimeRoutine());
+    }
+
+    IEnumerator TimeRoutine()
+    {
+        while (this)
+        {
+            if (++time[1] >= 60)
+            {
+                time[0]++;
+                time[1] = 0;
+            }
+            NowRecords["Time"] += 1f;
+            TimeClock?.Invoke();
+            yield return new WaitForSecondsRealtime(1f);
+        }
     }
 
     /// <summary>

@@ -7,6 +7,8 @@ using UnityEngine;
 public class Wizard_Action4C : Skill, ICriticable
 {
     [SerializeField] float skillRange, skillTime;
+    [SerializeField] ParticleSystem magicEffect;
+    [SerializeField] PoisonSwamp poisonSwampPrefab;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -14,11 +16,11 @@ public class Wizard_Action4C : Skill, ICriticable
         {
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+            GameManager.Resource.Instantiate(magicEffect, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
 
-            GameObject poisonSwamp = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/PoisonSwamp"), true);
+            PoisonSwamp poisonSwamp = GameManager.Resource.Instantiate(poisonSwampPrefab, true);
             poisonSwamp.transform.position = hero.playerDataModel.transform.position;
-            poisonSwamp.GetComponent<PoisonSwamp>().SpwanSwamp(param[0] * modifier, skillRange, skillTime);
+            poisonSwamp.SpwanSwamp(param[0] * modifier, skillRange, skillTime);
 
             CoolCheck = false;
             return true;

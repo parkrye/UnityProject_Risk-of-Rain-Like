@@ -76,7 +76,6 @@ public class BossSummon : MonoBehaviour
                 ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
                 effect.transform.position = enemy.transform.position;
                 effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
-                GameManager.Resource.Destroy(effect.gameObject, 2f);
             }
             else
             {
@@ -93,7 +92,6 @@ public class BossSummon : MonoBehaviour
         ParticleSystem effect = GameManager.Resource.Instantiate(bossSummonParticle, true);
         effect.transform.position = bossTransform.position;
         effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
-        GameManager.Resource.Destroy(effect.gameObject, 3.5f);
         StartCoroutine(BossSummonRoutine());
     }
 

@@ -23,3 +23,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   skillRange: 20
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  towerPrefab: {fileID: 4360556698181842395, guid: be0b768028397264d9c378dbd4f93277, type: 3}

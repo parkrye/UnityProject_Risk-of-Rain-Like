@@ -25,3 +25,4 @@ MonoBehaviour:
   teleportDistance: 20
   teleportCharge: 0.34999993
   nowCharge: 0
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}

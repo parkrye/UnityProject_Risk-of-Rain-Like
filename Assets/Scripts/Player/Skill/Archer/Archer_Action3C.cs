@@ -8,6 +8,7 @@ using UnityEngine;
 public class Archer_Action3C : Skill, IEnumeratable, ICriticable
 {
     [SerializeField] float anchorPower;
+    [SerializeField] FlagArrow flag;
     Transform anchorTransform;
     bool anchorOn;
 
@@ -18,10 +19,10 @@ public class Archer_Action3C : Skill, IEnumeratable, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/FlagArrow"), true);
+            FlagArrow arrow = GameManager.Resource.Instantiate(flag, true);
             arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            arrow.GetComponent<FlagArrow>().OnTriggerEnterEvent.AddListener(AnchorDrag);
-            arrow.GetComponent<FlagArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
+            arrow.OnTriggerEnterEvent.AddListener(AnchorDrag);
+            arrow.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
             CoolCheck = false;
             return true;
         }

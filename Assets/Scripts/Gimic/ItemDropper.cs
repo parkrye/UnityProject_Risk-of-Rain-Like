@@ -31,7 +31,8 @@ public class ItemDropper : MonoBehaviour
 
             GameObject drop = GameManager.Resource.Instantiate<GameObject>("Item/MerchantBox");
             drop.transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            
+            GameManager.Resource.Instantiate<MinimapMarker>("Marker/MinimapMarker_Box", true).StartFollowing(drop.transform);
+
             yield return new WaitForSeconds(dropDelay);
         }
     }

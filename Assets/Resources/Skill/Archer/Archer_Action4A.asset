@@ -23,3 +23,4 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   skillTime: 1
+  bomb: {fileID: 4043702332561494989, guid: 5c818e8eeae517a4c8f0be7c1f8ab3a9, type: 3}

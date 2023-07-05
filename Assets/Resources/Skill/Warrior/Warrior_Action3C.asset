@@ -22,3 +22,4 @@ MonoBehaviour:
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
+  sparkle: {fileID: 198905374007765354, guid: ad1aa46afd04a6942bb772aa5c443642, type: 3}

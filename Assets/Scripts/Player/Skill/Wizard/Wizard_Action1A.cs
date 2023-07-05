@@ -6,6 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Wizard_Action1A", menuName = "Data/Skill/Wizard/Action1A")]
 public class Wizard_Action1A : Skill, ICriticable
 {
+    [SerializeField] ParticleSystem magicEffect;
+    [SerializeField] Bolt bolt;
+
     public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
@@ -13,11 +16,11 @@ public class Wizard_Action1A : Skill, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+            GameManager.Resource.Instantiate(magicEffect, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
 
-            GameObject energyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/EnergyBolt"), true);
+            Bolt energyBolt = GameManager.Resource.Instantiate(bolt, true);
             energyBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            energyBolt.GetComponent<Bolt>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
+            energyBolt.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
 
             CoolCheck = false;
 

@@ -24,3 +24,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   skillRange: 5
+  flag: {fileID: 6048142935316789590, guid: a8ec701984fc17442b1887998e4d33a1, type: 3}
+  shower: {fileID: 7291586581497970994, guid: da2c3491f29e7944e96ffcba0183be90, type: 3}

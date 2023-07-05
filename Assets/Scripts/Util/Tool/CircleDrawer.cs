@@ -34,6 +34,7 @@ public class CircleDrawer : MonoBehaviour
 
         // 선분 개수 지정
         circleRenderer.positionCount = steps;
+        float reverseStep = 1 / steps;
 
         // 각 선분마다
         for (int currentStep = 0; currentStep < steps; currentStep++)
@@ -44,7 +45,7 @@ public class CircleDrawer : MonoBehaviour
 
             circleRenderer.SetPosition(currentStep, target + new Vector3(x, 0f, y));
 
-            angle += 360f / steps;
+            angle += 360f * reverseStep;
         }
     }
 }

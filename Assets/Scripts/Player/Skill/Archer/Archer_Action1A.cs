@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Archer_Action1A", menuName = "Data/Skill/Archer/Action1A")]
 public class Archer_Action1A : Skill, ICriticable
 {
+    [SerializeField] Arrow arrow;
+
     public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
@@ -13,9 +15,9 @@ public class Archer_Action1A : Skill, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Arrow"), true);
-            arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            arrow.GetComponent<Arrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
+            Arrow arrowAttack = GameManager.Resource.Instantiate(arrow, true);
+            arrowAttack.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
+            arrowAttack.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
 
             CoolCheck = false;
 

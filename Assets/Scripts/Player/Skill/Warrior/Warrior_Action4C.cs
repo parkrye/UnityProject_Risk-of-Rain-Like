@@ -8,6 +8,8 @@ using UnityEngine;
 public class Warrior_Action4C : Skill, IEnumeratable
 {
     public float skillTime;
+    public float ReverseModifier;
+    [SerializeField] ParticleSystem blood;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -25,16 +27,18 @@ public class Warrior_Action4C : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Berserk"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+        ParticleSystem effect = GameManager.Resource.Instantiate(blood, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         hero.playerDataModel.playerSystem.Buff(0, modifier);
         hero.playerDataModel.playerSystem.Buff(1, modifier);
         hero.playerDataModel.playerSystem.Buff(2, modifier);
-        hero.playerDataModel.playerSystem.Buff(3, 1 / modifier);
-        yield return new WaitForSeconds(skillTime);
-        hero.playerDataModel.playerSystem.Buff(0, 1 / modifier);
-        hero.playerDataModel.playerSystem.Buff(1, 1 / modifier);
-        hero.playerDataModel.playerSystem.Buff(2, 1 / modifier);
         hero.playerDataModel.playerSystem.Buff(3, modifier);
+        hero.playerDataModel.playerSystem.Buff(4, modifier);
+        yield return new WaitForSeconds(skillTime);
+        hero.playerDataModel.playerSystem.Buff(0, ReverseModifier);
+        hero.playerDataModel.playerSystem.Buff(1, ReverseModifier);
+        hero.playerDataModel.playerSystem.Buff(2, ReverseModifier);
+        hero.playerDataModel.playerSystem.Buff(3, ReverseModifier);
+        hero.playerDataModel.playerSystem.Buff(4, ReverseModifier);
         GameManager.Resource.Destroy(effect);
     }
 }

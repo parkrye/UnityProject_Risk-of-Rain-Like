@@ -24,3 +24,4 @@ MonoBehaviour:
       m_Calls: []
   dashPower: 10
   skillRange: 5
+  crack: {fileID: 198106895250101352, guid: e7473d9620ab29341b98bf21b400e598, type: 3}

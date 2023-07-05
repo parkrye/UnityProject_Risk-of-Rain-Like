@@ -10,10 +10,15 @@ public class Mage : Boss
     enum MagicMode { Bolt, Drain }
     MagicMode magicMode;
 
+    EnemyDrain enemyDrain;
+    EnemyBolt enemyBolt;
+
     protected override void Awake()
     {
         enemyData = GameManager.Resource.Load<EnemyData>("Boss/Mage");
         magicMode = MagicMode.Bolt;
+        enemyDrain = GameManager.Resource.Load<EnemyDrain>("EnemyAttack/EnemyDrain");
+        enemyBolt = GameManager.Resource.Load<EnemyBolt>("EnemyAttack/EnemyBolt");
         base.Awake();
     }
 
@@ -38,8 +43,8 @@ public class Mage : Boss
                 {
                     case MagicMode.Drain:
                         animator.SetBool("Drain", true);
-                        GameObject enemyDrain = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyDrain"), attackTransform.position, Quaternion.identity, true);
-                        enemyDrain.GetComponent<EnemyDrain>().StartDrain(this);
+                        EnemyDrain drainAttack = GameManager.Resource.Instantiate(enemyDrain, attackTransform.position, Quaternion.identity, true);
+                        drainAttack.StartDrain(this);
                         yield return new WaitForSeconds(enemyData.floatdatas[0]);
                         animator.SetBool("Drain", false);
                         GameManager.Resource.Destroy(enemyDrain);
@@ -48,8 +53,8 @@ public class Mage : Boss
                         animator.SetTrigger("Bolt");
                         for(int i = 0; i < 5; i++)
                         {
-                            GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), attackTransform.position, Quaternion.identity, true);
-                            enemyBolt.GetComponent<EnemyBolt>().Shot(GameManager.Data.Player.transform.position, damage);
+                            EnemyBolt boltAttack = GameManager.Resource.Instantiate(enemyBolt, attackTransform.position, Quaternion.identity, true);
+                            boltAttack.Shot(GameManager.Data.Player.transform.position, damage);
                             yield return new WaitForSeconds(enemyData.AttackSpeed * 0.2f);
                         }
                         break;

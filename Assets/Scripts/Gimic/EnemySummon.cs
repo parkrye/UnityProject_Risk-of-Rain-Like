@@ -26,6 +26,7 @@ public class EnemySummon : MonoBehaviour
             spawnPosition.z = remainDistance;
 
             GameObject enemy = GameManager.Resource.Instantiate(enemyDatas[Random.Range(0, enemyDatas.Length)].enemy, location.position + spawnPosition, Quaternion.identity, true);
+            GameManager.Resource.Instantiate<MinimapMarker>("Marker/MinimapMarker_Enemy", true).StartFollowing(enemy.transform);
             return enemy;
         }
         return null;
@@ -102,6 +103,7 @@ public class EnemySummon : MonoBehaviour
         if (GameManager.Scene.ReadyToPlay)
         {
             GameObject enemy = GameManager.Resource.Instantiate(enemyData.enemy, location.position, Quaternion.identity, true);
+            GameManager.Resource.Instantiate<MinimapMarker>("Marker/MinimapMarker_Boss", true).StartFollowing(enemy.transform);
             return enemy;
         }
         return null;

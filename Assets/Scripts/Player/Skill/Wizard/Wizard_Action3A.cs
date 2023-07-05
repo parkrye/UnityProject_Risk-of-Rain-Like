@@ -9,6 +9,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
 {
     public float teleportDistance, teleportCharge;
     public bool nowCharge;
+    [SerializeField] ParticleSystem magicEffect;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -31,7 +32,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
         nowCharge = true;
         while (teleportCharge < 1f && nowCharge)
         {
-            yield return new WaitForSeconds(0.01f / hero.playerDataModel.TimeScale);
+            yield return new WaitForSeconds(0.01f * hero.playerDataModel.ReverseTimeScale);
             teleportCharge += 0.01f;
         }
         Teleport();
@@ -50,6 +51,6 @@ public class Wizard_Action3A : Skill, IEnumeratable
         }
         CoolCheck = false;
         hero.playerDataModel.animator.SetTrigger("Teleport");
-        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+        GameManager.Resource.Instantiate(magicEffect, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
     }
 }

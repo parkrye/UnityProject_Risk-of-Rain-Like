@@ -83,7 +83,7 @@ public abstract class Hero : MonoBehaviour
         while (jumpCharge < 120 && nowCharge)
         {
             jumpCharge++;
-            yield return new WaitForSeconds(0.001f / playerDataModel.TimeScale);
+            yield return new WaitForSeconds(0.001f * playerDataModel.ReverseTimeScale);
         }
         ChargeJump();
     }

@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Archer_Action2B", menuName = "Data/Skill/Archer/Action2B")]
 public class Archer_Action2B : Skill, ICriticable
 {
+    [SerializeField] BombArrow bombArrow;
+
     public override bool Active(bool isPressed, params float[] param)
     {
         if (isPressed)
@@ -13,9 +15,9 @@ public class Archer_Action2B : Skill, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            GameObject bomb = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/Bomb"), true);
+            BombArrow bomb = GameManager.Resource.Instantiate(bombArrow, true);
             bomb.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            bomb.GetComponent<BombArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
+            bomb.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier);
 
             CoolCheck = false;
 

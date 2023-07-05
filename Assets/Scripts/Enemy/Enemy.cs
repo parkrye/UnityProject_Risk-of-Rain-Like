@@ -5,10 +5,11 @@ using UnityEngine.Events;
 public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 {
     public EnemyData enemyData;
-    [SerializeField] ParticleSystem bleedParticle;
     protected Animator animator;
     public Transform attackTransform;
+    [SerializeField] ParticleSystem bleedParticle;
     [SerializeField] AudioSource hitAudio;
+    SphereCollider sphere;
 
     public float hp, damage, moveSpeed, attackSpeed;
     public float HP 
@@ -26,7 +27,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     [SerializeField] protected bool onGizmo;
     public bool isStunned, isSlowed, alive;
 
-    public Vector3 enemyPos
+    public Vector3 EnemyPos
     {
         get { return transform.position + Vector3.up * enemyData.yModifier; }
     }
@@ -36,14 +37,12 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 
     protected virtual void Awake()
     {
-        bleedParticle = GameManager.Resource.Load<ParticleSystem>("Particle/Bleed");
         animator = gameObject.GetComponent<Animator>();
+        sphere = GetComponent<SphereCollider>();
     }
 
     void OnEnable()
     {
-        hitAudio = GameManager.Resource.Instantiate<AudioSource>("Audio/SFX/Hit");
-
         HP = enemyData.MaxHP * (1 + (GameManager.Data.NowRecords["Difficulty"] - 1) * 0.5f + GameManager.Data.NowRecords["Time"] * 0.0016f);
         damage = enemyData.Damage * (1 + (GameManager.Data.NowRecords["Difficulty"] - 1) * 0.5f + GameManager.Data.NowRecords["Time"] * 0.0016f);
         moveSpeed = enemyData.MoveSpeed;
@@ -51,8 +50,9 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         bleed = false;
         attack = false;
         alive = true;
-        GetComponent<SphereCollider>().radius = enemyData.Size;
-        GetComponent<SphereCollider>().center = Vector3.up * enemyData.yModifier;
+        sphere.radius = enemyData.Size;
+        sphere.center = Vector3.up * enemyData.yModifier;
+        bleedParticle.transform.position = Vector3.up * enemyData.yModifier;
         StopAllCoroutines();
         StartCoroutine(BleedingRoutine());
         StartCoroutine(AttackRoutine());
@@ -79,8 +79,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
             if (bleed)
             {
                 hitAudio.Play();
-                ParticleSystem effect = GameManager.Resource.Instantiate(bleedParticle, transform.position, Quaternion.identity, true);
-                GameManager.Resource.Destroy(effect.gameObject, 2f);
+                bleedParticle.Play();
                 bleed = false;
             }
             if (HP <= 0f)
@@ -120,8 +119,8 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     {
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(1f);
-        GameManager.Data.Player.Coin += (int)((enemyData.Coin + GameManager.Data.NowRecords["Time"] * 0.0016f) / (GameManager.Data.NowRecords["Difficulty"]));
-        GameManager.Data.Player.EXP += (int)((enemyData.Exp + GameManager.Data.NowRecords["Time"] * 0.0016f) / (GameManager.Data.NowRecords["Difficulty"]));
+        GameManager.Data.Player.Coin += (int)((enemyData.Coin + GameManager.Data.NowRecords["Time"] * 0.0016f) * ( 4 - (GameManager.Data.NowRecords["Difficulty"])));
+        GameManager.Data.Player.EXP += (int)((enemyData.Exp + GameManager.Data.NowRecords["Time"] * 0.0016f) * ( 4 - (GameManager.Data.NowRecords["Difficulty"])));
         if (Random.Range(0, 10) <= 3 - GameManager.Data.NowRecords["Difficulty"])
             GameManager.Resource.Instantiate<ItemBox>("Item/ItemBox", transform.position, Quaternion.identity);
         GameManager.Resource.Destroy(gameObject);
@@ -153,7 +152,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 
     public bool TranslateGradually(Vector3 dir, float distance)
     {
-        if (!Physics.SphereCast(enemyPos, enemyData.Size, dir, out _, distance, LayerMask.GetMask("Ground")))
+        if (!Physics.SphereCast(EnemyPos, enemyData.Size, dir, out _, distance, LayerMask.GetMask("Ground")))
         {
             transform.position += dir * distance;
             return true;
@@ -170,7 +169,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         }
         else
         {
-            if (!Physics.SphereCast(enemyPos, enemyData.Size, Vector3.up, out _, 0f, LayerMask.GetMask("Ground")))
+            if (!Physics.SphereCast(EnemyPos, enemyData.Size, Vector3.up, out _, 0f, LayerMask.GetMask("Ground")))
             {
                 transform.position = pos;
                 return true;

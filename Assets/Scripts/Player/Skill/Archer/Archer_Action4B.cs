@@ -8,8 +8,10 @@ using UnityEngine;
 public class Archer_Action4B : Skill, ICriticable
 {
     [SerializeField] float skillRange;
+    [SerializeField] FlagArrow flag;
+    [SerializeField] ArrowShower shower;
     float damage;
-    GameObject arrowShower;
+    ArrowShower arrowShower;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -20,10 +22,10 @@ public class Archer_Action4B : Skill, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            GameObject arrow = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/FlagArrow"), true);
+            FlagArrow arrow = GameManager.Resource.Instantiate(flag, true);
             arrow.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            arrow.GetComponent<FlagArrow>().OnTriggerEnterEvent.AddListener(ShotArrowShower);
-            arrow.GetComponent<FlagArrow>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, damage);
+            arrow.OnTriggerEnterEvent.AddListener(ShotArrowShower);
+            arrow.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, damage);
             CoolCheck = false;
             return true;
         }
@@ -32,7 +34,7 @@ public class Archer_Action4B : Skill, ICriticable
 
     void ShotArrowShower(Transform target)
     {
-        arrowShower = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/ArrowShower"), true);
-        arrowShower.GetComponent<ArrowShower>().Shot(target, damage);
+        arrowShower = GameManager.Resource.Instantiate(shower, true);
+        arrowShower.Shot(target, damage);
     }
 }

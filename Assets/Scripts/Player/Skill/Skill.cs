@@ -41,7 +41,7 @@ public abstract class Skill : ScriptableObject
         {
             yield return null;
         }
-        yield return new WaitForSeconds(coolTime * modifier / hero.playerDataModel.TimeScale);
+        yield return new WaitForSeconds(coolTime * modifier * hero.playerDataModel.ReverseTimeScale);
         CoolCheck = true;
     }
 }

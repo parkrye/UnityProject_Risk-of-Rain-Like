@@ -25,9 +25,9 @@ public class Warrior_Action3A : Skill, IEnumeratable
 
     public IEnumerator enumerator()
     {
-        yield return new WaitForSeconds(0.2f / hero.playerDataModel.TimeScale);
+        yield return new WaitForSeconds(0.2f * hero.playerDataModel.ReverseTimeScale);
         hero.playerDataModel.dodgeDamage = true;
-        yield return new WaitForSeconds(0.3f / hero.playerDataModel.TimeScale);
+        yield return new WaitForSeconds(0.3f * hero.playerDataModel.ReverseTimeScale);
         hero.playerDataModel.dodgeDamage = false;
     }
 }

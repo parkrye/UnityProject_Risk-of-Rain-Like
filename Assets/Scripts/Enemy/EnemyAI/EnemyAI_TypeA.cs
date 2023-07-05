@@ -25,9 +25,9 @@ public class EnemyAI_TypeA : EnemyAI
 
     protected override IEnumerator StateRoutine()
     {
-        while (isActiveAndEnabled)
+        while (this)
         {
-            if (enemy.isActiveAndEnabled && enemy.alive)
+            if (enemy && enemy.alive)
             {
                 state = StateCheck();
             }
@@ -37,7 +37,7 @@ public class EnemyAI_TypeA : EnemyAI
 
     protected override IEnumerator BehaviorRoutine()
     {
-        while (isActiveAndEnabled)
+        while (this)
         {
             if (!enemy.isStunned && enemy.alive)
             {
@@ -64,13 +64,13 @@ public class EnemyAI_TypeA : EnemyAI
     AI_State StateCheck()
     {
         playerPos = playerTransform.position + Vector3.up;
-        float distance = Vector3.Distance(playerPos, enemy.enemyPos);
+        float sqrDistance = Vector3.SqrMagnitude(playerPos - enemy.EnemyPos);
 
-        if (distance <= enemy.enemyData.Range)
+        if (sqrDistance <= enemy.enemyData.Range * enemy.enemyData.Range)
         {
             if(state != AI_State.Attack)
             {
-                if (!Physics.Raycast(enemy.enemyPos, (playerPos - enemy.enemyPos).normalized, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+                if (Physics.Raycast(enemy.EnemyPos, (playerPos - enemy.EnemyPos).normalized, sqrDistance, LayerMask.GetMask("Player")))
                 {
                     enemy.StartAttack();
                     StopCoroutine(FindBypass());
@@ -81,7 +81,7 @@ public class EnemyAI_TypeA : EnemyAI
 
         if(state != AI_State.Bypass)
         {
-            if (Physics.SphereCast(enemy.enemyPos, enemy.enemyData.Size, (playerPos - enemy.enemyPos).normalized, out _, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+            if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, (playerPos - enemy.EnemyPos).normalized, out _, Mathf.Sqrt(sqrDistance) - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
             {
                 enemy.StopAttack();
                 StartCoroutine(FindBypass());
@@ -89,20 +89,20 @@ public class EnemyAI_TypeA : EnemyAI
             }
         }
 
-        if(distance > enemy.enemyData.Range)
+        if(sqrDistance > enemy.enemyData.Range * enemy.enemyData.Range)
         {
             enemy.StopAttack();
             StopCoroutine(FindBypass());
             return AI_State.Approach;
         }
 
-        return state;
+        return AI_State.Dumb;
     }
 
     void ApproachMove()
     {
         transform.LookAt(playerPos);
-        transform.Translate((playerPos - enemy.enemyPos).normalized * enemy.enemyData.MoveSpeed * Time.deltaTime, Space.World);
+        transform.Translate((playerPos - enemy.EnemyPos).normalized * enemy.enemyData.MoveSpeed * Time.deltaTime, Space.World);
     }
 
     void AttackMove()
@@ -125,8 +125,8 @@ public class EnemyAI_TypeA : EnemyAI
         if (bypass.Count > 0)
         {
             transform.LookAt(Vector3.Lerp(transform.forward, bypass.Peek(), Time.deltaTime));
-            transform.Translate(enemy.enemyData.MoveSpeed * Time.deltaTime * (bypass.Peek() - enemy.enemyPos).normalized, Space.World);
-            if(Vector3.SqrMagnitude((enemy.enemyPos) - bypass.Peek()) <= 1f)
+            transform.Translate(enemy.enemyData.MoveSpeed * Time.deltaTime * (bypass.Peek() - enemy.EnemyPos).normalized, Space.World);
+            if(Vector3.SqrMagnitude((enemy.EnemyPos) - bypass.Peek()) <= 1f)
                 bypass.Pop();
         }
     }
@@ -146,7 +146,7 @@ public class EnemyAI_TypeA : EnemyAI
             if (Vector3.SqrMagnitude(playerPos - prevPlayerPosition) > 9f || bypass.Count == 0)
             {
                 transform.LookAt(playerPos);
-                bypass = PathFinder.PathFinding(transform, enemy.enemyPos, playerPos, enemy.enemyData.Size);
+                bypass = PathFinder.PathFinding(transform, enemy.EnemyPos, playerPos, enemy.enemyData.Size);
                 prevPlayerPosition = playerPos;
             }
 
@@ -165,7 +165,7 @@ public class EnemyAI_TypeA : EnemyAI
             Gizmos.color = Color.green;
             if (state == AI_State.Bypass && bypass.Count > 0)
             {
-                foreach (var bypass in bypass)
+                foreach (Vector3 bypass in bypass)
                 {
                     Gizmos.DrawWireSphere(bypass, enemy.enemyData.Size);
                 }

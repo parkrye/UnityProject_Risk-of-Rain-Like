@@ -153,7 +153,7 @@ public class PriorityQueue<TElement, TPriority>
 
     private int GetParentIndex(int childIndex)
     {
-        return (childIndex - 1) / 2;
+        return (int)((childIndex - 1) * 0.5f);
     }
 
     private int GetLeftChildIndex(int parentIndex)

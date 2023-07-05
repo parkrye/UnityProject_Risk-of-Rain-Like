@@ -31,7 +31,7 @@ public class EnemyHPBar : MonoBehaviour
 
     IEnumerator LookRoutine()
     {
-        while (isActiveAndEnabled)
+        while (this)
         {
             transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
             yield return new WaitForEndOfFrame();

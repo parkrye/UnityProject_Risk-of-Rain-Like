@@ -19,7 +19,7 @@ public class MerchantBox : ItemBox
 
     protected virtual IEnumerator LookRoutine()
     {
-        while (isActiveAndEnabled)
+        while (this)
         {
             costObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
             yield return new WaitForEndOfFrame();

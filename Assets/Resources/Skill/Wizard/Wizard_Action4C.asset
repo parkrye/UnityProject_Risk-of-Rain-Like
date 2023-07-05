@@ -24,3 +24,5 @@ MonoBehaviour:
       m_Calls: []
   skillRange: 30
   skillTime: 30
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  poisonSwampPrefab: {fileID: 3894232979964067829, guid: fce3b23d357325d47904e1200cdc7bde, type: 3}

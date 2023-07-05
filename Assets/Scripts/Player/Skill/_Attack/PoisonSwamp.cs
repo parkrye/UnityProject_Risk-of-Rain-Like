@@ -16,7 +16,7 @@ public class PoisonSwamp : MonoBehaviour
         {
             for (int j = -2; j <= 2; j++)
             {
-                ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/_poison"), transform, true);
+                ParticleSystem effect = GameManager.Resource.Instantiate<ParticleSystem>("Particle/_poison", transform, true);
                 effect.transform.position = transform.position + Vector3.forward * i * 0.2f * range + Vector3.right * j * 0.2f * range + Vector3.up;
             }
         }

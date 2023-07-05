@@ -40,7 +40,6 @@ public class EnemySpawner : MonoBehaviour
                     ParticleSystem effect = GameManager.Resource.Instantiate(summonParticle, true);
                     effect.transform.position = enemy.transform.position;
                     effect.transform.LookAt(GameManager.Data.Player.playerTransform.position);
-                    GameManager.Resource.Destroy(effect.gameObject, 2f);
 
                     enemyCount++;
                 }

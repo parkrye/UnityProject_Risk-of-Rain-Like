@@ -23,3 +23,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   poisonTime: 10
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  poisonBoltPrefab: {fileID: 3934632041313335654, guid: 5e1b99b5a1aae574199d13b40b42a1c1, type: 3}

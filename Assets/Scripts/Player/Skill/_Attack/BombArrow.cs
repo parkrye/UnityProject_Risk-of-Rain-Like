@@ -32,8 +32,7 @@ public class BombArrow : ArrowType
         if (other.CompareTag("Enemy") || (1 << other.gameObject.layer == LayerMask.GetMask("Ground")))
         {
             GameManager.Resource.Instantiate<GameObject>("Audio/SFX/Explosion");
-            ParticleSystem effect = GameManager.Resource.Instantiate(bombParticle, transform.position, Quaternion.identity, true);
-            GameManager.Resource.Destroy(effect.gameObject, 2f);
+            GameManager.Resource.Instantiate(bombParticle, transform.position, Quaternion.identity, true);
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, range);
             for(int i = 0; i < colliders.Length; i++)

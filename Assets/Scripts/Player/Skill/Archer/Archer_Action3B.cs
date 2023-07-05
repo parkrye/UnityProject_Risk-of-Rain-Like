@@ -8,6 +8,8 @@ using UnityEngine;
 public class Archer_Action3B : Skill, IEnumeratable
 {
     public float skillTime;
+    public float reverseModifier;
+    [SerializeField] ParticleSystem swift;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -16,8 +18,7 @@ public class Archer_Action3B : Skill, IEnumeratable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.powerupSource.Play();
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/Swift"), hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
-            GameManager.Resource.Destroy(effect.gameObject, 0.8f);
+            GameManager.Resource.Instantiate(swift, hero.playerDataModel.playerTransform.position, Quaternion.identity, true);
 
             CoolCheck = false;
 
@@ -30,8 +31,8 @@ public class Archer_Action3B : Skill, IEnumeratable
     {
         hero.playerDataModel.playerSystem.Buff(3, modifier);
         hero.playerDataModel.playerSystem.Buff(4, modifier);
-        yield return new WaitForSeconds(skillTime);
-        hero.playerDataModel.playerSystem.Buff(3, 1 / modifier);
-        hero.playerDataModel.playerSystem.Buff(4, 1 / modifier);
+        yield return new WaitForSeconds(skillTime * hero.playerDataModel.ReverseTimeScale);
+        hero.playerDataModel.playerSystem.Buff(3, reverseModifier);
+        hero.playerDataModel.playerSystem.Buff(4, reverseModifier);
     }
 }

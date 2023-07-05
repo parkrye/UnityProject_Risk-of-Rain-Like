@@ -8,7 +8,8 @@ public class Wizard_Action3B : Skill, IDamageSubscriber
 {
     public float shieldPoint;
     bool summonMagicFlat;
-    GameObject magicFlat;
+    [SerializeField] ParticleSystem magicFlatPRefab;
+    ParticleSystem magicFlat;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -18,7 +19,7 @@ public class Wizard_Action3B : Skill, IDamageSubscriber
             hero.powerupSource.Play();
 
             if (!summonMagicFlat)
-                magicFlat = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Particle/MagicFlat"), hero.transform.position, Quaternion.identity, hero.transform, true);
+                magicFlat = GameManager.Resource.Instantiate(magicFlatPRefab, hero.transform.position, Quaternion.identity, hero.transform, true);
             summonMagicFlat = true;
             shieldPoint = param[0];
             hero.playerDataModel.playerSystem.AddDamageSubscriber(this);

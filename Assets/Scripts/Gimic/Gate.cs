@@ -23,7 +23,6 @@ public class Gate : MonoBehaviour
             }
         }
         GameManager.Data.NowRecords["Stage"] += 1f;
-        Debug.Log(nextSceneName);
         GameManager.Scene.LoadScene(nextSceneName);
     }
 }

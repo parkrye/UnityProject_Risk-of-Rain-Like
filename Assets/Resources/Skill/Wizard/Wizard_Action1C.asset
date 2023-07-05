@@ -24,3 +24,5 @@ MonoBehaviour:
       m_Calls: []
   slowTime: 5
   slowModifier: 0.5
+  magicEffect: {fileID: 198853323768970596, guid: 1103bc5779fcc26419c248d4fd2f8586, type: 3}
+  bolt: {fileID: 8261499412450296434, guid: 2980d1d1941e8b747a6fe22b90a6db9c, type: 3}

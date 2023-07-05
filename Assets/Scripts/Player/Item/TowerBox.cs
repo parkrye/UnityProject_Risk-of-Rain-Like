@@ -9,11 +9,18 @@ public class TowerBox : MerchantBox
     [SerializeField] GameObject hpObject;
     [SerializeField] GameObject boxObject, towerObject;
     [SerializeField] Transform attackTransform;
+    enum SupportType { Attack, Heal }
+    [SerializeField] SupportType supportType;
+    FollowBolt followBolt;
 
     protected override void OnEnable()
     {
         base.OnEnable();
         slider = GetComponentInChildren<Slider>();
+        followBolt = GameManager.Resource.Load<FollowBolt>("Attack/FollowEnergyBolt");
+        supportType = SupportType.Attack;
+        if (Random.Range(0, 2) == 1)
+            supportType = SupportType.Heal;
 
         boxObject.SetActive(true);
         towerObject.SetActive(false);
@@ -25,7 +32,7 @@ public class TowerBox : MerchantBox
 
     protected override IEnumerator LookRoutine()
     {
-        while (isActiveAndEnabled)
+        while (this)
         {
             if (box)
                 costObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
@@ -52,9 +59,18 @@ public class TowerBox : MerchantBox
     {
         while(slider.value > 0)
         {
-            GameObject followBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/FollowEnergyBolt"), attackTransform.position, Quaternion.identity, true);
-            followBolt.GetComponent<FollowBolt>().Shot(transform.forward, cost * 0.1f, 0f);
-            slider.value -= cost * 0.1f;
+            switch (supportType)
+            {
+                case SupportType.Attack:
+                    FollowBolt boltAttack = GameManager.Resource.Instantiate(followBolt, attackTransform.position, Quaternion.identity, true);
+                    boltAttack.Shot(transform.forward, cost * 0.1f, 0f);
+                    slider.value -= cost * 0.1f;
+                    break;
+                case SupportType.Heal:
+                    GameManager.Data.Player.NOWHP += cost * 0.1f;
+                    slider.value -= cost * 0.1f;
+                    break;
+            }
             yield return new WaitForSeconds(1f);
         }
         GameManager.Resource.Destroy(gameObject);

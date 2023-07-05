@@ -34,10 +34,10 @@ public class EnemyAI_TypeB : EnemyAI
 
     protected override IEnumerator StateRoutine()
     {
-        while (isActiveAndEnabled)
+        while (this)
         {
             playerPos = playerTransform.position + Vector3.up;
-            if (Vector3.SqrMagnitude(playerPos - enemy.enemyPos) <= (enemy.enemyData.Range * enemy.enemyData.Range))
+            if (Vector3.SqrMagnitude(playerPos - enemy.EnemyPos) <= (enemy.enemyData.Range * enemy.enemyData.Range))
             {
                 if (state != AI_State.CloseRange)
                 {

@@ -4,10 +4,12 @@ using UnityEngine;
 public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
 {
     PlayerDataModel playerDataModel;
+    ParticleSystem levelupParticle;
 
     void Awake()
     {
         playerDataModel = GetComponent<PlayerDataModel>();
+        levelupParticle = GameManager.Resource.Load<ParticleSystem>("Particle/LevelUp");
     }
 
     /// <summary>
@@ -77,8 +79,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         playerDataModel.NOWHP = playerDataModel.MAXHP;
         playerDataModel.AttackDamage *= 1.1f;
 
-        ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/LevelUp"), playerDataModel.playerTransform.position, Quaternion.identity, true);
-        GameManager.Resource.Destroy(effect.gameObject, 0.2f);
+        GameManager.Resource.Instantiate(levelupParticle, playerDataModel.playerTransform.position, Quaternion.identity, true);
     }
 
     public void Die()

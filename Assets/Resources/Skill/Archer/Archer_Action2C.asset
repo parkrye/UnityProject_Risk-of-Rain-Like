@@ -22,3 +22,4 @@ MonoBehaviour:
   CoolEvent:
     m_PersistentCalls:
       m_Calls: []
+  boomerang: {fileID: 8199404979248529604, guid: 9cc1f7bb0afaeb143a25c08d2d173f79, type: 3}

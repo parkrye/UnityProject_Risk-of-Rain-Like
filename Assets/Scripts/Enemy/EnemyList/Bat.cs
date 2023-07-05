@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class Bat : Enemy, IMezable
 {
+    EnemyBolt enemyBolt;
+
     protected override void Awake()
     {
         enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Bat");
+        enemyBolt = GameManager.Resource.Load<EnemyBolt>("EnemyAttack/EnemyBolt");
         base.Awake();
     }
 
@@ -16,8 +19,8 @@ public class Bat : Enemy, IMezable
             if (attack && !isStunned)
             {
                 animator.SetTrigger("Attack");
-                GameObject enemyBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("EnemyAttack/EnemyBolt"), attackTransform.position, Quaternion.identity, true);
-                enemyBolt.GetComponent<EnemyBolt>().Shot(GameManager.Data.Player.transform.position, damage);
+                EnemyBolt boltAttack = GameManager.Resource.Instantiate(enemyBolt, attackTransform.position, Quaternion.identity, true);
+                boltAttack.Shot(GameManager.Data.Player.transform.position, damage);
                 yield return new WaitForSeconds(enemyData.AttackSpeed);
             }
             else

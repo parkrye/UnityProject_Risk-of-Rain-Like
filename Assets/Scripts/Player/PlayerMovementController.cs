@@ -57,7 +57,7 @@ public class PlayerMovementController : MonoBehaviour
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
         if(Physics.Raycast(ray, out slopeHit, 0.3f, LayerMask.GetMask("Ground")))
         {
-            var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             isSlope = angle != 0f && angle < slopeDegree;
             return;
         }

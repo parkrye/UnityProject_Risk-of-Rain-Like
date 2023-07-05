@@ -7,6 +7,8 @@ using UnityEngine;
 public class Wizard_Action4B : Skill, ICriticable
 {
     [SerializeField] float drawPower, drawRange;
+    [SerializeField] ParticleSystem magicEffect;
+    [SerializeField] GyroBolt gyroBoltPrefab;
 
     public override bool Active(bool isPressed, params float[] param)
     {
@@ -15,11 +17,11 @@ public class Wizard_Action4B : Skill, ICriticable
             hero.playerDataModel.animator.SetTrigger(actionKeys[actionNum]);
             hero.attackSource.Play();
 
-            ParticleSystem effect = GameManager.Resource.Instantiate(GameManager.Resource.Load<ParticleSystem>("Particle/MagicEffect"), hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
+            GameManager.Resource.Instantiate(magicEffect, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
 
-            GameObject gyroBolt = GameManager.Resource.Instantiate(GameManager.Resource.Load<GameObject>("Attack/GyroBolt"), true);
+            GyroBolt gyroBolt = GameManager.Resource.Instantiate(gyroBoltPrefab, true);
             gyroBolt.transform.position = hero.playerDataModel.playerAction.AttackTransform.position;
-            gyroBolt.GetComponent<GyroBolt>().Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier, 0.5f, drawPower, drawRange);
+            gyroBolt.Shot(hero.playerDataModel.playerAction.lookAtTransform.position, param[0] * modifier, 0.5f, drawPower, drawRange);
 
             CoolCheck = false;
             return true;
