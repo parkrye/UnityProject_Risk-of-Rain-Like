@@ -21,7 +21,7 @@ public class Wizard : Hero
 
         if (isPressed)
         {
-            playerDataModel.jumpCount++;
+            playerDataModel.jumpCount--;
             floating = true;
             playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.JumpPower * 1f;
             StartCoroutine(FloaterJump());

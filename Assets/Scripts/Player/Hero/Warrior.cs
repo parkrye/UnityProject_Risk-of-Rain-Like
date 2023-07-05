@@ -16,7 +16,7 @@ public class Warrior : Hero
 
         if (isPressed)
         {
-            playerDataModel.jumpCount++;
+            playerDataModel.jumpCount--;
             StartCoroutine(JumpCharger());
         }
 

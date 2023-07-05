@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : MonoBehaviour
 {
     PlayerDataModel playerDataModel;
+    [SerializeField] PlayerGroundChecker groundChecker;
 
     public Vector3 moveDir, dirModifier;
     [SerializeField] Vector3 curVelocity;
@@ -11,7 +12,6 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] bool isSlope;
     [SerializeField] AudioSource jumpAudio;
     RaycastHit slopeHit;
-    bool descending;
 
     void Awake()
     {
@@ -29,20 +29,9 @@ public class PlayerMovementController : MonoBehaviour
 
     void CheckGround()
     {
-        if (playerDataModel.rb.velocity.y > 0f)
+        if (groundChecker.IsGround)
         {
-            descending = true;
-        }
-
-        Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        if (Physics.Raycast(ray, 0.5f, LayerMask.GetMask("Ground")))
-        {
-            if (descending && playerDataModel.rb.velocity.y < 0f)
-            {
-                playerDataModel.jumpCount = 0;
-                descending = false;
-            }
-
+            playerDataModel.jumpCount = playerDataModel.jumpLimit;
             playerDataModel.animator.SetBool("IsGround", true);
             return;
         }
@@ -55,10 +44,10 @@ public class PlayerMovementController : MonoBehaviour
     void CheckSlope()
     {
         Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-        if(Physics.Raycast(ray, out slopeHit, 0.3f, LayerMask.GetMask("Ground")))
+        if(Physics.Raycast(ray, out slopeHit, 0.2f, LayerMask.GetMask("Ground")))
         {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            isSlope = angle != 0f && angle < slopeDegree;
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);   // 상향 벡터와 바닥면의 법선 벡터 사이의 각에 대하여
+            isSlope = angle != 0f && angle <= slopeDegree;              // 각이 0이 아니고(평평), 정해둔 경사 각도 이하라면 경사면
             return;
         }
         isSlope = false;
@@ -89,19 +78,18 @@ public class PlayerMovementController : MonoBehaviour
 
         // 경사로 보정
         float gravity = (playerDataModel.rb.velocity.y < 0 ? -playerDataModel.rb.velocity.y : playerDataModel.rb.velocity.y) - Physics.gravity.y * Time.deltaTime * playerDataModel.TimeScale;
-        if(playerDataModel.animator.GetBool("IsGround") && isSlope)
+        if(groundChecker.IsGround && isSlope)
         {
             curVelocity = AdjustDirectionToSlope(moveDir);
             gravity = 0f;
         }
         else
             curVelocity = moveDir;
-        if (!playerDataModel.rb.useGravity)
-            gravity = 0f;
         curVelocity = transform.right * curVelocity.x + transform.forward * curVelocity.z;
 
         // 이동
-        playerDataModel.rb.velocity = (new Vector3(curVelocity.x, 0f, curVelocity.z) * playerDataModel.MoveSpeed * playerDataModel.TimeScale + Vector3.down * gravity + dirModifier);
+        Debug.Log(gravity);
+        playerDataModel.rb.velocity = playerDataModel.MoveSpeed * playerDataModel.TimeScale * curVelocity + Vector3.down * gravity + dirModifier;
         if (Vector3.SqrMagnitude(dirModifier - Vector3.zero) > 0.1f)
             dirModifier = Vector3.Lerp(dirModifier, Vector3.zero, Time.deltaTime * 5f);
 
@@ -124,10 +112,14 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (playerDataModel.controllable)
         {
-            if (playerDataModel.jumpCount < playerDataModel.jumpLimit)
+            if (playerDataModel.jumpCount > 0)
             {
                 if (playerDataModel.hero.Jump(inputValue.isPressed))
+                {
                     jumpAudio.Play();
+                    if(groundChecker.IsGround)
+                        groundChecker.JumpReady();
+                }
             }
             else
             {
