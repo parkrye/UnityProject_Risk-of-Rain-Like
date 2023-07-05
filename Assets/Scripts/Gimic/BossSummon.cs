@@ -115,10 +115,13 @@ public class BossSummon : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (charge < chargeTime)
+            if (startSummon)
             {
-                inArea = true;
-            ObjectStateEvent?.Invoke(LevelScene.LevelState.Keep);
+                if (charge < chargeTime)
+                {
+                    inArea = true;
+                    ObjectStateEvent?.Invoke(LevelScene.LevelState.Keep);
+                }
             }
         }
     }
@@ -127,10 +130,13 @@ public class BossSummon : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            if(charge < chargeTime)
+            if (startSummon)
             {
-                inArea = false;
-                ObjectStateEvent?.Invoke(LevelScene.LevelState.ComeBack);
+                if (charge < chargeTime)
+                {
+                    inArea = false;
+                    ObjectStateEvent?.Invoke(LevelScene.LevelState.ComeBack);
+                }
             }
         }
     }

@@ -88,7 +88,6 @@ public class PlayerMovementController : MonoBehaviour
         curVelocity = transform.right * curVelocity.x + transform.forward * curVelocity.z;
 
         // ÀÌµ¿
-        Debug.Log(gravity);
         playerDataModel.rb.velocity = playerDataModel.MoveSpeed * playerDataModel.TimeScale * curVelocity + Vector3.down * gravity + dirModifier;
         if (Vector3.SqrMagnitude(dirModifier - Vector3.zero) > 0.1f)
             dirModifier = Vector3.Lerp(dirModifier, Vector3.zero, Time.deltaTime * 5f);

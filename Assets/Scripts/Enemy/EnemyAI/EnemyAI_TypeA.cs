@@ -68,7 +68,7 @@ public class EnemyAI_TypeA : EnemyAI
 
         if (distance <= enemy.enemyData.Range)
         {
-            if (!Physics.Raycast(enemy.EnemyPos, (playerPos - enemy.EnemyPos).normalized, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+            if (!Physics.Raycast(enemy.EnemyPos, (playerPos - enemy.EnemyPos).normalized, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
             {
                 if (state != AI_State.Attack)
                 {
@@ -78,7 +78,7 @@ public class EnemyAI_TypeA : EnemyAI
             }
         }
 
-        if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, (playerPos - enemy.EnemyPos).normalized, out _, distance - enemy.enemyData.Size * 0.5f, LayerMask.GetMask("Ground")))
+        if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, (playerPos - enemy.EnemyPos).normalized, out _, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
         {
             if (state != AI_State.Bypass)
             {
@@ -133,6 +133,7 @@ public class EnemyAI_TypeA : EnemyAI
     void DumbMove()
     {
         transform.Rotate(Vector3.up);
+        transform.Translate(transform.up * Time.deltaTime);
         deleteTimer += Time.deltaTime;
         if(deleteTimer > 60f)
             GameManager.Resource.Destroy(gameObject);

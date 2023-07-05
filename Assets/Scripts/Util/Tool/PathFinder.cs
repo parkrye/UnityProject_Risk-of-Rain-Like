@@ -17,18 +17,19 @@ public class PathFinder : MonoBehaviour
 
         Dictionary<Vector3, bool> visited = new Dictionary<Vector3, bool>();    // 좌표, 노드 방문 여부 딕셔너리
         Dictionary<Vector3, Node> nodes = new Dictionary<Vector3, Node>();      // 좌표, 노드 딕셔너리
-        PriorityQueue<Node, float> pq = new PriorityQueue<Node, float>();           // 총 예상 거리로 노드를 정렬한 우선순위 큐
+        PriorityQueue<Node, float> pq = new PriorityQueue<Node, float>();       // 총 예상 거리로 노드를 정렬한 우선순위 큐
+
         float moveModifier = 1f;
         int counter = 0;
 
         // 초기 노드를 저장
-        Node startNode = new Node();
+        Node startNode = new();
         startNode.position = start;
         nodes.Add(startNode.position, startNode);
         pq.Enqueue(startNode, 0);
 
         // 우선순위 큐에 노드가 있다면 반복
-        while (pq.Count > 0 && ++counter < 100)
+        while (pq.Count > 0 && ++counter < 200)
         {
             Node node = pq.Dequeue();                // 현재 노드
             if (visited.ContainsKey(node.position))
