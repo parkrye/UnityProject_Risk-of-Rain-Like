@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] AudioSource summonAudio;
     Transform player;
     ParticleSystem summonParticle;
+    IEnumerator Spawn;
 
     public void Initialize(float _spawnDelay, float _spawnDistance, int _enemyLimit)
     {
@@ -16,8 +17,9 @@ public class EnemySpawner : MonoBehaviour
         enemyLimit = _enemyLimit;
         player = GameManager.Data.Player.transform;
         summonParticle = GameManager.Resource.Load<ParticleSystem>("Particle/_Spawn");
+        Spawn = SpawnRoutine();
 
-        StartCoroutine(Spawner());
+        StartCoroutine(Spawn);
     }
 
     public void EnemyDie()
@@ -25,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
         enemyCount--;
     }
 
-    IEnumerator Spawner()
+    IEnumerator SpawnRoutine()
     {
         while(true)
         {
@@ -54,6 +56,6 @@ public class EnemySpawner : MonoBehaviour
     public void StopSpawn(LevelScene.LevelState levelState)
     {
         if(levelState == LevelScene.LevelState.Keep)
-            StopCoroutine(Spawner());
+            StopCoroutine(Spawn);
     }
 }

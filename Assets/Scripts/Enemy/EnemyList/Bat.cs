@@ -55,12 +55,12 @@ public class Bat : Enemy, IMezable
         isStunned = true;
         animator.SetBool("Stun", isStunned);
         StopAttack();
-        StopCoroutine(AttackRoutine());
+        StopCoroutine(Attack);
         yield return new WaitForSeconds(time);
         isStunned = false;
         animator.SetBool("Stun", isStunned);
         StartAttack();
-        StartCoroutine(AttackRoutine());
+        StartCoroutine(Attack);
     }
 
     public IEnumerator SlowRoutine(float time, float modifier)

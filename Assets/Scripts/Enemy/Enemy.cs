@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     [SerializeField] ParticleSystem bleedParticle;
     [SerializeField] AudioSource hitAudio;
     SphereCollider sphere;
+    protected IEnumerator Attack;
 
     public float hp, damage, moveSpeed, attackSpeed;
     public float HP 
@@ -39,6 +40,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     {
         animator = gameObject.GetComponent<Animator>();
         sphere = GetComponent<SphereCollider>();
+        Attack = AttackRoutine();
     }
 
     void OnEnable()
@@ -55,7 +57,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         bleedParticle.transform.position = Vector3.up * enemyData.yModifier;
         StopAllCoroutines();
         StartCoroutine(BleedingRoutine());
-        StartCoroutine(AttackRoutine());
+        StartCoroutine(Attack);
     }
 
     void OnDisable()

@@ -6,22 +6,24 @@ public class EnemyDrain : MonoBehaviour
     LineRenderer lineRenderer;
     Enemy enemy;
     float damage;
+    IEnumerator Drain;
 
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        Drain = DrainRoutine();
     }
 
     public void StartDrain(Enemy _enemy)
     {
         enemy = _enemy;
         damage = _enemy.damage;
-        StartCoroutine(DrainRoutine());
+        StartCoroutine(Drain);
     }
 
     void OnDisable()
     {
-        StopCoroutine(DrainRoutine());
+        StopCoroutine(Drain);
     }
 
     IEnumerator DrainRoutine()

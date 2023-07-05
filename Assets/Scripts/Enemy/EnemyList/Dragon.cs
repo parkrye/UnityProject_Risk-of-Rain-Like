@@ -6,12 +6,14 @@ public class Dragon : Enemy, IMezable
     [SerializeField] Transform mouse;
     bool attacking;
     EnemyFlame enemyFlame, flameAttack;
+    IEnumerator Breath;
 
     protected override void Awake()
     {
         attacking = false;
         enemyData = GameManager.Resource.Load<EnemyData>("Enemy/Dragon");
         enemyFlame = GameManager.Resource.Load<EnemyFlame>("EnemyAttack/EnemyFlame");
+        Breath = BreathRoutine();
         base.Awake();
     }
 
@@ -22,7 +24,7 @@ public class Dragon : Enemy, IMezable
             if (attack && !attacking && !isStunned)
             {
                 animator.SetTrigger("Attack");
-                StartCoroutine(Breath());
+                StartCoroutine(Breath);
             }
             else
             {
@@ -31,7 +33,7 @@ public class Dragon : Enemy, IMezable
         }
     }
 
-    IEnumerator Breath()
+    IEnumerator BreathRoutine()
     {
         attacking = true;
         flameAttack = GameManager.Resource.Instantiate(enemyFlame, attackTransform.position, Quaternion.identity, transform);
@@ -49,7 +51,7 @@ public class Dragon : Enemy, IMezable
         if (isStunned)
         {
             attacking = false;
-            StopCoroutine(Breath());
+            StopCoroutine(Breath);
             GameManager.Resource.Destroy(flameAttack);
         }
     }
@@ -79,12 +81,12 @@ public class Dragon : Enemy, IMezable
         isStunned = true;
         animator.SetBool("Stun", isStunned);
         StopAttack();
-        StopCoroutine(AttackRoutine());
+        StopCoroutine(Attack);
         yield return new WaitForSeconds(time);
         isStunned = false;
         animator.SetBool("Stun", isStunned);
         StartAttack();
-        StartCoroutine(AttackRoutine());
+        StartCoroutine(Attack);
     }
 
     public IEnumerator SlowRoutine(float time, float modifier)

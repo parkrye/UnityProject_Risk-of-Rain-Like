@@ -5,15 +5,17 @@ public class ItemDropper : MonoBehaviour
 {
     SphereCollider sphere;
     [SerializeField] float dropDelay;
+    IEnumerator ItemDrop;
 
     void Awake()
     {
         sphere = GetComponent<SphereCollider>();
+        ItemDrop = ItemDropRoutine();
     }
 
     void Start()
     {
-        StartCoroutine(ItemDropRoutine());
+        StartCoroutine(ItemDrop);
     }
 
     IEnumerator ItemDropRoutine()
@@ -40,6 +42,6 @@ public class ItemDropper : MonoBehaviour
     public void StopDrop(LevelScene.LevelState levelState)
     {
         if (levelState == LevelScene.LevelState.Keep)
-            StopCoroutine(ItemDropRoutine());
+            StopCoroutine(ItemDrop);
     }
 }
