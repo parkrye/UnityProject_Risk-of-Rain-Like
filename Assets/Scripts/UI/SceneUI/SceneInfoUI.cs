@@ -72,6 +72,11 @@ public class SceneInfoUI : SceneUI
         }
     }
 
+    public void UpdateCharge(int percentage)
+    {
+        texts["ObjectiveText"].text = $"格钎\n己家甫 瘤难扼\n({percentage}%)";
+    }
+
     public void UpdateCoinText(int coin)
     {
         texts["CoinText"].text = coin.ToString();

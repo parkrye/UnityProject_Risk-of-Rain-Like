@@ -14,6 +14,7 @@ public class BossSummon : MonoBehaviour
     [SerializeField] AudioSource bellAudio, enemySummonAudio, lazerAudio;
 
     public UnityEvent<LevelScene.LevelState> ObjectStateEvent;
+    public UnityEvent<int> ChargeEvent;
 
     void Awake()
     {
@@ -44,6 +45,7 @@ public class BossSummon : MonoBehaviour
     IEnumerator SummonCharge()
     {
         counter = 1;
+        float reverseChargeTime = 1 / chargeTime;
         GetComponent<SphereCollider>().radius = chargeDistance;
         GetComponent<CircleDrawer>().Setting(transform.position + Vector3.up, 60, chargeDistance * 0.5f);
         ObjectStateEvent?.Invoke(LevelScene.LevelState.Keep);
@@ -62,6 +64,7 @@ public class BossSummon : MonoBehaviour
                 SummonGuardians();
             }
             charge += 0.1f;
+            ChargeEvent?.Invoke((int)(charge * reverseChargeTime));
             yield return new WaitForSeconds(0.1f);
         }
         SummonBoss();

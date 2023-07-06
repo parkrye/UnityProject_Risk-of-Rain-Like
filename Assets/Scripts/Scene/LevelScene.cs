@@ -54,6 +54,7 @@ public class LevelScene : BaseScene
         bossSummonZone.ObjectStateEvent.AddListener(infoUI.UpdateObjective);
         bossSummonZone.ObjectStateEvent.AddListener(enemySpawner.StopSpawn);
         bossSummonZone.ObjectStateEvent.AddListener(itemDropper.StopDrop);
+        bossSummonZone.ChargeEvent.AddListener(infoUI.UpdateCharge);
         towerBoxSetter.SetTowerBoxes();
         Progress = 0.8f;
 
