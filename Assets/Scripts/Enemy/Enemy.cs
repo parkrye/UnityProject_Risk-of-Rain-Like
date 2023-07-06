@@ -44,7 +44,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         Attack = AttackRoutine();
     }
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         HP = enemyData.MaxHP * (1 + (GameManager.Data.NowRecords["Difficulty"] - 1) * 0.5f + GameManager.Data.NowRecords["Time"] * 0.0016f);
         damage = enemyData.Damage * (1 + (GameManager.Data.NowRecords["Difficulty"] - 1) * 0.5f + GameManager.Data.NowRecords["Time"] * 0.0016f);

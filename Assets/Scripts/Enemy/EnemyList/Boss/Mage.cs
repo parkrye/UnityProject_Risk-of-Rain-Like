@@ -1,36 +1,26 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
-/// 패턴 1: 흡수
-/// 패턴 2: 마법탄 발사
+/// 패턴 1-1: 흡수
+/// 패턴 1-2: 마법탄 발사
+/// 패턴 2-1: 순간이동
+/// 패턴 1-2: 에너미 소환
 /// </summary>
 public class Mage : Boss
 {
-    enum MagicMode { Bolt, Drain }
-    MagicMode magicMode;
-
     EnemyDrain enemyDrain;
     EnemyBolt enemyBolt;
+    ParticleSystem teleportParticle;
 
     protected override void Awake()
     {
         enemyData = GameManager.Resource.Load<EnemyData>("Boss/Mage");
-        magicMode = MagicMode.Bolt;
         enemyDrain = GameManager.Resource.Load<EnemyDrain>("EnemyAttack/EnemyDrain");
         enemyBolt = GameManager.Resource.Load<EnemyBolt>("EnemyAttack/EnemyBolt");
+        teleportParticle = GameManager.Resource.Load<ParticleSystem>("Particle/FireworkBlueLarge");
         base.Awake();
-    }
-
-    public override void ChangeToClose()
-    {
-        magicMode = MagicMode.Drain;
-    }
-
-    public override void ChangeToFar()
-    {
-        animator.SetBool("Drain", false);
-        magicMode = MagicMode.Bolt;
     }
 
     protected override IEnumerator AttackRoutine()
@@ -39,23 +29,32 @@ public class Mage : Boss
         {
             if (attack)
             {
-                switch (magicMode)
+                switch (lifeMode)
                 {
-                    case MagicMode.Drain:
-                        animator.SetBool("Drain", true);
-                        EnemyDrain drainAttack = GameManager.Resource.Instantiate(enemyDrain, attackTransform.position, Quaternion.identity, true);
-                        drainAttack.StartDrain(this);
-                        yield return new WaitForSeconds(enemyData.floatdatas[0]);
-                        animator.SetBool("Drain", false);
-                        GameManager.Resource.Destroy(enemyDrain);
-                        break;
-                    case MagicMode.Bolt:
-                        animator.SetTrigger("Bolt");
-                        for(int i = 0; i < 5; i++)
+                    case LifeMode.Full:
+                        switch (rangeMode)
                         {
-                            EnemyBolt boltAttack = GameManager.Resource.Instantiate(enemyBolt, attackTransform.position, Quaternion.identity, true);
-                            boltAttack.Shot(GameManager.Data.Player.transform.position, damage);
-                            yield return new WaitForSeconds(enemyData.AttackSpeed * 0.2f);
+                            case RangeMode.NearRange:
+                                if (!patternCoroutineIsRunning)
+                                    StartCoroutine(DrainRoutine());
+                                break;
+                            case RangeMode.FarRange:
+                                if (!patternCoroutineIsRunning)
+                                    StartCoroutine(BoltRoutine());
+                                break;
+                        }
+                        break;
+                    case LifeMode.Half:
+                        switch (rangeMode)
+                        {
+                            case RangeMode.NearRange:
+                                if (!patternCoroutineIsRunning)
+                                    StartCoroutine(TeleportRoutine());
+                                break;
+                            case RangeMode.FarRange:
+                                if (!patternCoroutineIsRunning)
+                                    StartCoroutine(SummonRoutine());
+                                break;
                         }
                         break;
                 }
@@ -63,5 +62,69 @@ public class Mage : Boss
             }
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    IEnumerator DrainRoutine()
+    {
+        patternCoroutineIsRunning = true;
+        transform.LookAt(playerTransform);
+        animator.SetBool("Drain", true);
+        GameManager.Resource.Instantiate(enemyDrain, attackTransform.position, Quaternion.identity, true).StartDrain(this, enemyData.floatdatas[0]);
+        yield return new WaitForSeconds(enemyData.floatdatas[0]);
+        animator.SetBool("Drain", false);
+        transform.LookAt(playerTransform);
+        patternCoroutineIsRunning = false;
+    }
+
+    IEnumerator BoltRoutine()
+    {
+        patternCoroutineIsRunning = true;
+        transform.LookAt(playerTransform);
+        animator.SetTrigger("Bolt");
+        for (int i = 0; i < 5; i++)
+        {
+            EnemyBolt boltAttack = GameManager.Resource.Instantiate(enemyBolt, attackTransform.position, Quaternion.identity, true);
+            boltAttack.Shot(GameManager.Data.Player.transform.position, damage);
+            yield return new WaitForSeconds(enemyData.AttackSpeed * 0.2f);
+        }
+        transform.LookAt(playerTransform);
+        patternCoroutineIsRunning = false;
+    }
+
+    IEnumerator TeleportRoutine()
+    {
+        patternCoroutineIsRunning = true;
+        transform.LookAt(playerTransform);
+        animator.SetTrigger("Teleport");
+        RaycastHit hit;
+        for (int x = -1; x <= 1; x++)
+        {
+            for(int z = -1; z <= 1; z++)
+            {
+                if (x == z)
+                    continue;
+                if(Physics.Raycast(transform.position + 0.75f * enemyData.Range * Vector3.up, Vector3.down + Vector3.forward * z + Vector3.right * x , out hit, enemyData.Range, LayerMask.GetMask("Ground")))
+                {
+                    GameManager.Resource.Instantiate(teleportParticle, transform.position, Quaternion.identity);
+                    transform.position = hit.point;
+                    x = 2; z = 2;
+                }
+            }
+        }
+        yield return null;
+        transform.LookAt(playerTransform);
+        patternCoroutineIsRunning = false;
+    }
+
+    IEnumerator SummonRoutine()
+    {
+        patternCoroutineIsRunning = true;
+        transform.LookAt(playerTransform);
+        animator.SetTrigger("Summon");
+        for(int i = 0; i < 3; i++)
+            EnemySummon.RandomLocationSummon(transform, enemyData.Range);
+        yield return null;
+        transform.LookAt(playerTransform);
+        patternCoroutineIsRunning = false;
     }
 }

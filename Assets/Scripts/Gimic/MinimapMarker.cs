@@ -16,7 +16,7 @@ public class MinimapMarker : MonoBehaviour
     {
         while (this)
         {
-            if (!target)
+            if (!target.gameObject.activeInHierarchy || !target.gameObject.activeSelf)
                 break;
             transform.position = new Vector3(target.position.x, height, target.position.z);
             yield return new WaitForEndOfFrame();

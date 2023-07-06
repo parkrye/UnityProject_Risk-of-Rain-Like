@@ -8,9 +8,7 @@ using UnityEngine;
 /// </summary>
 public class EnemyAI_TypeB : EnemyAI
 {
-    enum AI_State { CloseRange, FarRange }
-    AI_State state;
-    [SerializeField] bool onGizmo;
+    [SerializeField] bool onGizmo, onCheckHP;
     Boss boss;
     Vector3 playerPos;
 
@@ -18,18 +16,13 @@ public class EnemyAI_TypeB : EnemyAI
     {
         base.Awake();
         boss = GetComponent<Boss>();
-        state = AI_State.FarRange;
     }
 
      protected override void OnEnable()
     {
         base.OnEnable();
         boss.StartAttack();
-    }
-
-    void FixedUpdate()
-    {
-        transform.LookAt(playerPos);
+        onCheckHP = true;
     }
 
     protected override IEnumerator StateRoutine()
@@ -39,19 +32,17 @@ public class EnemyAI_TypeB : EnemyAI
             playerPos = playerTransform.position + Vector3.up;
             if (Vector3.SqrMagnitude(playerPos - enemy.EnemyPos) <= (enemy.enemyData.Range * enemy.enemyData.Range))
             {
-                if (state != AI_State.CloseRange)
-                {
-                    boss.ChangeToClose();
-                    state = AI_State.CloseRange;
-                }
+                boss.ChangeToNear();
             }
             else
             {
-                if (state != AI_State.FarRange)
-                {
-                    boss.ChangeToFar();
-                    state = AI_State.FarRange;
-                }
+                boss.ChangeToFar();
+            }
+
+            if (onCheckHP && boss.HP <= boss.enemyData.MaxHP * 0.5f)
+            {
+                boss.ChangeToCritical();
+                onCheckHP = false;
             }
             yield return new WaitForSeconds(1f);
         }

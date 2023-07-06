@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.ParticleSystem;
 
 public class BossSummon : MonoBehaviour
 {
@@ -28,12 +27,14 @@ public class BossSummon : MonoBehaviour
     {
         lazerAudio.Play();
         bossZoneParticle.Play();
+        startSummon = false;
     }
 
     public void StartCharge()
     {
         if (!startSummon)
         {
+            startSummon = true;
             lazerAudio.Stop();
             bossZoneParticle.Stop();
             StartCoroutine(SummonCharge());
@@ -42,7 +43,6 @@ public class BossSummon : MonoBehaviour
 
     IEnumerator SummonCharge()
     {
-        startSummon = true;
         counter = 1;
         GetComponent<SphereCollider>().radius = chargeDistance;
         GetComponent<CircleDrawer>().Setting(transform.position + Vector3.up, 60, chargeDistance * 0.5f);
@@ -61,6 +61,7 @@ public class BossSummon : MonoBehaviour
                 enemySummonAudio.Play();
                 SummonGuardians();
             }
+            charge += 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
         SummonBoss();

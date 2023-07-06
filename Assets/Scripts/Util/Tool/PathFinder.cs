@@ -19,9 +19,9 @@ public class PathFinder : MonoBehaviour
         Dictionary<Vector3, Node> nodes = new Dictionary<Vector3, Node>();      // 좌표, 노드 딕셔너리
         PriorityQueue<Node, float> pq = new PriorityQueue<Node, float>();       // 총 예상 거리로 노드를 정렬한 우선순위 큐
 
-        float moveModifier = 1f;
+        int moveModifier = 1;
         int counter = 0;
-        int maxCount = 100;
+        int maxCount = 300;
 
         // 초기 노드를 저장
         Node startNode = new();

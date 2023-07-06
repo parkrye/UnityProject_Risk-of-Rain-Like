@@ -15,7 +15,7 @@ MonoBehaviour:
   enemy: {fileID: 1706760125350986, guid: 45f36e2270151a542be4982f9f1dd581, type: 3}
   MaxHP: 100
   Damage: 20
-  Range: 10
+  Range: 8
   AttackSpeed: 2
   MoveSpeed: 0
   Exp: 30
