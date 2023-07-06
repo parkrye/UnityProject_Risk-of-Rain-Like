@@ -21,6 +21,7 @@ public class PathFinder : MonoBehaviour
 
         float moveModifier = 1f;
         int counter = 0;
+        int maxCount = 100;
 
         // 초기 노드를 저장
         Node startNode = new();
@@ -29,7 +30,7 @@ public class PathFinder : MonoBehaviour
         pq.Enqueue(startNode, 0);
 
         // 우선순위 큐에 노드가 있다면 반복
-        while (pq.Count > 0 && ++counter < 200)
+        while (pq.Count > 0 && ++counter < maxCount)
         {
             Node node = pq.Dequeue();                // 현재 노드
             if (visited.ContainsKey(node.position))

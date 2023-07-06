@@ -38,9 +38,7 @@ public abstract class Skill : ScriptableObject
     public IEnumerator CoolTime(float modifier)
     {
         while (CoolCheck)
-        {
             yield return null;
-        }
         yield return new WaitForSeconds(coolTime * modifier * hero.playerDataModel.ReverseTimeScale);
         CoolCheck = true;
     }

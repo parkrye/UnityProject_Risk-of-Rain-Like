@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: EasyModeIcon
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: dc616340029fe46f488deb0845bf7a59, type: 3}
+  desc: "\uC77C\uBC18\uC801\uC73C\uB85C \uD50C\uB808\uC774\uD558\uB3C4\uB85D \uACC4\uD68D\uB41C
+    \uB09C\uC774\uB3C4\uC785\uB2C8\uB2E4"

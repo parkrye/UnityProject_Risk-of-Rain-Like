@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: NormalModeIcon
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 2a992c71d9f0f4636977c9f7a496d2f3, type: 3}
+  desc: "\uC5B4\uB824\uC6C0\uACFC \uBCF4\uD1B5 \uC0AC\uC774\uC758 \uC560\uB9E4\uD55C
+    \uB09C\uC774\uB3C4\uC785\uB2C8\uB2E4"

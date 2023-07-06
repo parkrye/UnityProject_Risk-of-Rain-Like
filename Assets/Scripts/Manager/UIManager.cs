@@ -41,11 +41,6 @@ public class UIManager : MonoBehaviour
 
     public T ShowPopupUI<T>(T popup) where T : PopUpUI
     {
-        if (popUpStack.Count > 0)
-        {
-            popUpStack.Peek().gameObject.SetActive(false);
-        }
-
         T ui = GameManager.Pool.GetUI<T>(popup);
         ui.transform.SetParent(popUpCanvas.transform, false);
 
@@ -63,11 +58,6 @@ public class UIManager : MonoBehaviour
     public void ClosePopupUI()
     {
         GameManager.Pool.ReleaseUI(popUpStack.Pop());
-
-        if (popUpStack.Count > 0)
-        {
-            popUpStack.Peek().gameObject.SetActive(true);
-        }
     }
 
     // юлго SceneUI

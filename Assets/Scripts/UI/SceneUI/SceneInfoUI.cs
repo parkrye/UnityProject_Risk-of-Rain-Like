@@ -1,3 +1,5 @@
+using System.Text;
+
 public class SceneInfoUI : SceneUI
 {
     public override void Initialize()
@@ -34,9 +36,15 @@ public class SceneInfoUI : SceneUI
     /// </summary>
     public void UpdateTime()
     {
-        string minText = GameManager.Data.Time[1] < 10 ? "0" + GameManager.Data.Time[1].ToString() : GameManager.Data.Time[1].ToString();
-        string secText = GameManager.Data.Time[0] < 10 ? "0" + GameManager.Data.Time[0].ToString() : GameManager.Data.Time[0].ToString();
-        texts["TimeText"].text = $"{minText}:{secText}";
+        StringBuilder time = new(), sec = new();
+        if (GameManager.Data.Time[0] < 10)
+            time.Append("0");
+        time.Append(GameManager.Data.Time[0].ToString());
+        time.Append(":");
+        if (GameManager.Data.Time[1] < 10)
+            time.Append("0");
+        time.Append(GameManager.Data.Time[1].ToString());
+        texts["TimeText"].text = time.ToString();
     }
 
     /// <summary>

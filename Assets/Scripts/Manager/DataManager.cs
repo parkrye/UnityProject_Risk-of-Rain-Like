@@ -54,14 +54,17 @@ public class DataManager : MonoBehaviour
     {
         while (this)
         {
-            if (++time[1] >= 60)
+            if (recordTime)
             {
-                time[0]++;
-                time[1] = 0;
+                if (++time[1] >= 60)
+                {
+                    time[0]++;
+                    time[1] = 0;
+                }
+                NowRecords["Time"] += 1f;
+                TimeClock?.Invoke();
             }
-            NowRecords["Time"] += 1f;
-            TimeClock?.Invoke();
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -103,11 +106,11 @@ public class DataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 업적의 특정 값을 수정하는 메소드
+    /// 특정 업적의 현재 값을 더하는 메소드
     /// </summary>
     /// <param name="index">Achivement의 키</param>
     /// <param name="value">Achivement에 저장할 값</param>
-    public void SetAchives(string index, int value)
+    public void AddAchives(string index, int value)
     {
         if (!Achivements.ContainsKey(index))
             throw new IndexOutOfRangeException();
@@ -120,5 +123,22 @@ public class DataManager : MonoBehaviour
     public void SaveAchivements()
     {
         CSVRW.WriteCSV_Achivements(Achivements);
+    }
+
+    /// <summary>
+    /// 기록을 초기화하는 메소드
+    /// </summary>
+    public void ResetAchivements()
+    {
+        Achivements["StageCount"][0] = 0;
+        Achivements["TimeCount"][0] = 0;
+        Achivements["KillCount"][0] = 0;
+        Achivements["DamageCount"][0] = 0;
+        Achivements["HitCount"][0] = 0;
+        Achivements["HealCount"][0] = 0;
+        Achivements["MoneyCount"][0] = 0;
+        Achivements["CostCount"][0] = 0;
+        Achivements["LevelCount"][0] = 0;
+        SaveAchivements();
     }
 }

@@ -119,7 +119,7 @@ public class PlayerDataModel : MonoBehaviour
         set 
         {
             exp = value;
-            while (exp >= LEVEL * 100f)
+            while (exp != 0 && exp >= LEVEL * 100f)
             {
                 exp -= LEVEL * 100f;
                 LEVEL++;

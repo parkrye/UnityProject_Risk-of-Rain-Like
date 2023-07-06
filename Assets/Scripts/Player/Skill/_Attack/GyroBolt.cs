@@ -19,7 +19,6 @@ public class GyroBolt : BoltType
         {
             other.GetComponent<IHitable>()?.Hit(damage, 0f);
             other.GetComponent<ITranslatable>()?.TranslateGradually((transform.position - other.transform.position).normalized, drawPower * Time.deltaTime);
-            //other.transform.Translate(drawPower * Time.deltaTime * (transform.position - other.transform.position).normalized);
         }
     }
 

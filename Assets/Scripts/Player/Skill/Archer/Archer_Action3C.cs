@@ -38,9 +38,7 @@ public class Archer_Action3C : Skill, IEnumeratable, ICriticable
     public IEnumerator enumerator()
     {
         while (!anchorOn)
-        {
             yield return null;
-        }
 
         hero.playerDataModel.playerMovement.dirModifier += (anchorTransform.position - hero.playerDataModel.playerTransform.position).normalized * anchorPower;
 

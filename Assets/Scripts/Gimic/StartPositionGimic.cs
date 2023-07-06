@@ -15,7 +15,7 @@ public class StartPositionGimic : MonoBehaviour
         float range = sphere.radius;
         RaycastHit hit;
 
-        while (!check)
+        for (int i = 0; i < 100 || !check; i++)
         {
             float xPos = Random.Range(-range, range);
             float zPos = Random.Range(-range, range);

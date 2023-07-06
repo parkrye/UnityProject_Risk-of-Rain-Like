@@ -4,13 +4,14 @@ using UnityEngine;
 public class ItemBox : MonoBehaviour
 {
     protected ItemData item;
-    protected bool fall;
+    protected bool fall, ground;
 
     protected virtual void OnEnable()
     {
         ItemData[] items = GameManager.Resource.LoadAll<ItemData>("Item");
         item = items[Random.Range(0, items.Length)];
         fall = true;
+        ground = false;
 
         StartCoroutine(FallRoutine());
         StartCoroutine(TurnRoutine());
@@ -20,8 +21,7 @@ public class ItemBox : MonoBehaviour
     {
         while (fall)
         {
-            Ray ray = new Ray(transform.position, Vector3.down);
-            if (Physics.Raycast(ray, 2f, LayerMask.GetMask("Ground")))
+            if (ground)
                 fall = false;
             yield return null;
         }
@@ -41,5 +41,13 @@ public class ItemBox : MonoBehaviour
     {
         GameManager.Data.Player.Inventory.AddItem(item);
         GameManager.Resource.Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if ((1 << other.gameObject.layer) == LayerMask.GetMask("Ground"))
+        {
+            ground = true;
+        }
     }
 }

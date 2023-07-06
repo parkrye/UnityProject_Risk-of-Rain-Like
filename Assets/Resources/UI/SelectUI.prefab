@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 2373400577171323856}
   - component: {fileID: 2373400577171323857}
   - component: {fileID: 1658060888124807449}
-  - component: {fileID: 9050832571301362059}
+  - component: {fileID: 4011992047892659368}
   m_Layer: 5
   m_Name: Action3B
   m_TagString: Untagged
@@ -287,7 +287,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &9050832571301362059
+--- !u!114 &4011992047892659368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,9 +296,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400577171323863}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400577206419761
 GameObject:
@@ -833,7 +834,7 @@ GameObject:
   - component: {fileID: 2373400578206686094}
   - component: {fileID: 2373400578206686095}
   - component: {fileID: 2181758923033808077}
-  - component: {fileID: 1782122778548824735}
+  - component: {fileID: 4148053770609536411}
   m_Layer: 5
   m_Name: Action3C
   m_TagString: Untagged
@@ -947,7 +948,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &1782122778548824735
+--- !u!114 &4148053770609536411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -956,9 +957,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578206686093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578213369180
 GameObject:
@@ -972,7 +974,7 @@ GameObject:
   - component: {fileID: 2373400578213369177}
   - component: {fileID: 2373400578213369182}
   - component: {fileID: 6319140376641616543}
-  - component: {fileID: 3200245892294752966}
+  - component: {fileID: 7062478813015543356}
   m_Layer: 5
   m_Name: Action1B
   m_TagString: Untagged
@@ -1086,7 +1088,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &3200245892294752966
+--- !u!114 &7062478813015543356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1095,9 +1097,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578213369180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578321497888
 GameObject:
@@ -1232,7 +1235,7 @@ GameObject:
   - component: {fileID: 2373400578326432995}
   - component: {fileID: 2373400578326432992}
   - component: {fileID: 5378162693962097911}
-  - component: {fileID: 8001575827824684213}
+  - component: {fileID: 3529199041564948395}
   m_Layer: 5
   m_Name: Action3A
   m_TagString: Untagged
@@ -1346,7 +1349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &8001575827824684213
+--- !u!114 &3529199041564948395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1355,9 +1358,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578326432998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578353842137
 GameObject:
@@ -1414,6 +1418,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd3bae8914473f4f81a4118e9cafed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
+  selected: {r: 0, g: 0, b: 0, a: 0}
+  nonSelected: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2373400578441479748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,7 +1433,7 @@ GameObject:
   - component: {fileID: 2373400578441479745}
   - component: {fileID: 2373400578441479750}
   - component: {fileID: 7106376576618090975}
-  - component: {fileID: 5516466471761774913}
+  - component: {fileID: 1847314720560333417}
   m_Layer: 5
   m_Name: Action1A
   m_TagString: Untagged
@@ -1540,7 +1547,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &5516466471761774913
+--- !u!114 &1847314720560333417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1549,9 +1556,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578441479748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578530323350
 GameObject:
@@ -1565,7 +1573,7 @@ GameObject:
   - component: {fileID: 2373400578530323347}
   - component: {fileID: 2373400578530323344}
   - component: {fileID: 2174077868704602401}
-  - component: {fileID: 5483467974983280156}
+  - component: {fileID: 4796516676767961405}
   m_Layer: 5
   m_Name: Action4B
   m_TagString: Untagged
@@ -1679,7 +1687,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &5483467974983280156
+--- !u!114 &4796516676767961405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1688,9 +1696,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578530323350}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578798041569
 GameObject:
@@ -1704,7 +1713,7 @@ GameObject:
   - component: {fileID: 2373400578798041570}
   - component: {fileID: 2373400578798041571}
   - component: {fileID: 6599405542628305690}
-  - component: {fileID: 4329204744009147759}
+  - component: {fileID: 1061656752354254451}
   m_Layer: 5
   m_Name: Action4A
   m_TagString: Untagged
@@ -1818,7 +1827,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &4329204744009147759
+--- !u!114 &1061656752354254451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1827,9 +1836,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578798041569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578830456991
 GameObject:
@@ -1843,7 +1853,7 @@ GameObject:
   - component: {fileID: 2373400578830456984}
   - component: {fileID: 2373400578830456985}
   - component: {fileID: 6498547076050516538}
-  - component: {fileID: 5700593969857228972}
+  - component: {fileID: 2169438431256963923}
   m_Layer: 5
   m_Name: Action2A
   m_TagString: Untagged
@@ -1957,7 +1967,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &5700593969857228972
+--- !u!114 &2169438431256963923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1966,9 +1976,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578830456991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578848893659
 GameObject:
@@ -1982,7 +1993,7 @@ GameObject:
   - component: {fileID: 2373400578848893652}
   - component: {fileID: 2373400578848893653}
   - component: {fileID: 6927870059082667447}
-  - component: {fileID: 4420601794137706726}
+  - component: {fileID: 3209749645357448814}
   m_Layer: 5
   m_Name: Action2B
   m_TagString: Untagged
@@ -2096,7 +2107,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &4420601794137706726
+--- !u!114 &3209749645357448814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2105,9 +2116,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578848893659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578924721774
 GameObject:
@@ -2121,7 +2133,7 @@ GameObject:
   - component: {fileID: 2373400578924721771}
   - component: {fileID: 2373400578924721768}
   - component: {fileID: 3375683341253582512}
-  - component: {fileID: 5474150705358992303}
+  - component: {fileID: 976748817734192184}
   m_Layer: 5
   m_Name: Action1C
   m_TagString: Untagged
@@ -2235,7 +2247,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &5474150705358992303
+--- !u!114 &976748817734192184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2244,9 +2256,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578924721774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400578955186796
 GameObject:
@@ -2260,7 +2273,7 @@ GameObject:
   - component: {fileID: 2373400578955186793}
   - component: {fileID: 2373400578955186798}
   - component: {fileID: 8335656345160127580}
-  - component: {fileID: 970176954596977808}
+  - component: {fileID: 8435018838033790949}
   m_Layer: 5
   m_Name: Action4C
   m_TagString: Untagged
@@ -2374,7 +2387,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &970176954596977808
+--- !u!114 &8435018838033790949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2383,9 +2396,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400578955186796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2373400579143751324
 GameObject:
@@ -2399,7 +2413,7 @@ GameObject:
   - component: {fileID: 2373400579143751321}
   - component: {fileID: 2373400579143751326}
   - component: {fileID: 2373469339726285508}
-  - component: {fileID: 4224203039485551143}
+  - component: {fileID: 2310112922993766487}
   m_Layer: 5
   m_Name: Action2C
   m_TagString: Untagged
@@ -2513,7 +2527,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &4224203039485551143
+--- !u!114 &2310112922993766487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2522,9 +2536,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373400579143751324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e461ad7560c8bf4d9904ab133d2239f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537ab9ec7ddef04c963785c2f23ef6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
   skill: {fileID: 0}
 --- !u!1 &2644822032447166574
 GameObject:
@@ -2658,6 +2673,7 @@ GameObject:
   - component: {fileID: 1288636949264477573}
   - component: {fileID: 1616755075520348003}
   - component: {fileID: 6742589337518495093}
+  - component: {fileID: 7020953408263603098}
   m_Layer: 5
   m_Name: DifficultyImage
   m_TagString: Untagged
@@ -2723,6 +2739,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7020953408263603098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3516861668543222886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf88d5c990819f4992b9bc1978b8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
+  difficulty: {fileID: 0}
 --- !u!1 &4853249607886024384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2734,6 +2764,7 @@ GameObject:
   - component: {fileID: 3469656535764445347}
   - component: {fileID: 7544830588286534410}
   - component: {fileID: 2621343808022141265}
+  - component: {fileID: 686826824053754982}
   m_Layer: 5
   m_Name: DifficultyImage
   m_TagString: Untagged
@@ -2799,6 +2830,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &686826824053754982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853249607886024384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf88d5c990819f4992b9bc1978b8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
+  difficulty: {fileID: 0}
 --- !u!1 &5547915077647363701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,6 +2855,7 @@ GameObject:
   - component: {fileID: 1028326435634904836}
   - component: {fileID: 6399738387800255105}
   - component: {fileID: 2948086071291166703}
+  - component: {fileID: 8929913717666412923}
   m_Layer: 5
   m_Name: DifficultyImage
   m_TagString: Untagged
@@ -2875,6 +2921,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8929913717666412923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547915077647363701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf88d5c990819f4992b9bc1978b8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickAudio: {fileID: 0}
+  difficulty: {fileID: 0}
 --- !u!1 &5787390838322476519
 GameObject:
   m_ObjectHideFlags: 0

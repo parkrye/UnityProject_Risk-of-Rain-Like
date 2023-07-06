@@ -88,11 +88,13 @@ public class AchivementUI : SceneUI
                 StringBuilder content = new();
                 content.Append(pair.Value[i].ToString());
                 content.Append(achiveContent);
-                achiveTitle.Append($"({i})");
+                StringBuilder title = new();
+                title.Append(achiveTitle);
+                title.Append($"({i})");
                 if (pair.Value[0] >= pair.Value[i])
-                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(clearIcon, achiveTitle.ToString(), content.ToString());
+                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(clearIcon, title.ToString(), content.ToString());
                 else
-                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(noneIcon, achiveTitle.ToString(), content.ToString());
+                    GameManager.UI.ShowSceneUI(achiveUI, achiveTransform).SetContent(noneIcon, title.ToString(), content.ToString());
 
                 achiveCount++;
             }

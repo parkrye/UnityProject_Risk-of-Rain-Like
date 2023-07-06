@@ -5457,7 +5457,7 @@ MonoBehaviour:
   attackCooldown: 0
   controllable: 1
   dodgeDamage: 0
-  onGizmo: 1
+  onGizmo: 0
   onESC: 0
   alive: 0
   onSession: 0
@@ -5494,7 +5494,6 @@ MonoBehaviour:
   dirModifier: {x: 0, y: 0, z: 0}
   curVelocity: {x: 0, y: 0, z: 0}
   slopeDegree: 60
-  prevPositionY: 0
   isSlope: 0
   jumpAudio: {fileID: 4155263033519050691}
 --- !u!114 &3988545672618533068

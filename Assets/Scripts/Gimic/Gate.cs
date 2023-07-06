@@ -7,7 +7,7 @@ public class Gate : MonoBehaviour
         GameManager.Data.RecordTime = false;
 
         string nextSceneName = GameManager.Scene.CurScene.name;
-        while (nextSceneName == GameManager.Scene.CurScene.name)
+        for (int i = 0; i < 100 || nextSceneName == GameManager.Scene.CurScene.name; i++)
         {
             switch (Random.Range(0, 3))
             {

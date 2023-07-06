@@ -93,6 +93,18 @@ public class PlayerActionController : MonoBehaviour
         }
     }
 
+    void OnTab(InputValue inputValue)
+    {
+        if (inputValue.isPressed)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
     void OnDrawGizmos()
     {
         if (playerDataModel.onGizmo)

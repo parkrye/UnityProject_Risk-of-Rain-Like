@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
         for (int i = 0; i < upDistance * 100f; i++)
         {
             transform.Translate(Vector3.up * 0.01f);
-            yield return new WaitForSeconds(0.016f);
+            yield return new WaitForFixedUpdate();
         }
     }
 }

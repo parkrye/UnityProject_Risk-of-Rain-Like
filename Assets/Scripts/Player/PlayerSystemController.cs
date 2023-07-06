@@ -63,14 +63,14 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
     public IEnumerator HitRoutine(float damage, float time)
     {
         float nowTime = 0f;
-        do
+        while (nowTime <= time)
         {
             float _damage = DamageOccurrence(damage);
             playerDataModel.NOWHP -= _damage;
             GameManager.Data.NowRecords["Hit"] += _damage;
             nowTime += 0.1f;
             yield return new WaitForSeconds(0.1f);
-        } while (nowTime < time);
+        }
     }
 
     public void LevelUp()
@@ -125,17 +125,17 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         bool achive = false;
 
         yield return null;
-        GameManager.Data.SetAchives("StageCount", (int)GameManager.Data.NowRecords["Stage"]);
+        GameManager.Data.AddAchives("StageCount", (int)GameManager.Data.NowRecords["Stage"]);
         if (GameManager.Data.NowRecords["Stage"] > GameManager.Data.Records["StageCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
-            notifyUI.SetText($"스테이지 기록 갱신!\n{GameManager.Data.Records["StageCount"]} => {(int)GameManager.Data.NowRecords["Stage"]}");
+            notifyUI.SetText($"탐사 기록 갱신!\n{GameManager.Data.Records["StageCount"]} => {(int)GameManager.Data.NowRecords["Stage"]}");
             GameManager.Data.SetRecords("StageCount", (int)GameManager.Data.NowRecords["Stage"]);
             achive = true;
         }
 
         yield return null;
-        GameManager.Data.SetAchives("TimeCount", (int)GameManager.Data.NowRecords["Time"]);
+        GameManager.Data.AddAchives("TimeCount", (int)GameManager.Data.NowRecords["Time"]);
         if (GameManager.Data.NowRecords["Time"] > GameManager.Data.Records["TimeCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
@@ -145,7 +145,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         }
 
         yield return null;
-        GameManager.Data.SetAchives("KillCount", (int)GameManager.Data.NowRecords["Kill"]);
+        GameManager.Data.AddAchives("KillCount", (int)GameManager.Data.NowRecords["Kill"]);
         if (GameManager.Data.NowRecords["Kill"] > GameManager.Data.Records["KillCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
@@ -155,7 +155,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         }
 
         yield return null;
-        GameManager.Data.SetAchives("DamageCount", (int)GameManager.Data.NowRecords["Damage"]);
+        GameManager.Data.AddAchives("DamageCount", (int)GameManager.Data.NowRecords["Damage"]);
         if (GameManager.Data.NowRecords["Damage"] > GameManager.Data.Records["DamageCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
@@ -165,7 +165,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         }
 
         yield return null;
-        GameManager.Data.SetAchives("HitCount", (int)GameManager.Data.NowRecords["Hit"]);
+        GameManager.Data.AddAchives("HitCount", (int)GameManager.Data.NowRecords["Hit"]);
         if (GameManager.Data.NowRecords["Hit"] > GameManager.Data.Records["HitCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
@@ -175,7 +175,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         }
 
         yield return null;
-        GameManager.Data.SetAchives("HealCount", (int)GameManager.Data.NowRecords["Heal"]);
+        GameManager.Data.AddAchives("HealCount", (int)GameManager.Data.NowRecords["Heal"]);
         if (GameManager.Data.NowRecords["Heal"] > GameManager.Data.Records["HealCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
@@ -185,7 +185,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         }
 
         yield return null;
-        GameManager.Data.SetAchives("MoneyCount", (int)GameManager.Data.NowRecords["Money"]);
+        GameManager.Data.AddAchives("MoneyCount", (int)GameManager.Data.NowRecords["Money"]);
         if (GameManager.Data.NowRecords["Money"] > GameManager.Data.Records["MoneyCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
@@ -195,7 +195,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         }
 
         yield return null;
-        GameManager.Data.SetAchives("CostCount", (int)GameManager.Data.NowRecords["Cost"]);
+        GameManager.Data.AddAchives("CostCount", (int)GameManager.Data.NowRecords["Cost"]);
         if (GameManager.Data.NowRecords["Cost"] > GameManager.Data.Records["CostCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");
@@ -205,7 +205,7 @@ public class PlayerSystemController : MonoBehaviour, IHitable, IDamagePublisher
         }
 
         yield return null;
-        GameManager.Data.SetAchives("LevelCount", (int)GameManager.Data.Player.LEVEL);
+        GameManager.Data.AddAchives("LevelCount", (int)GameManager.Data.Player.LEVEL);
         if (GameManager.Data.Player.LEVEL > GameManager.Data.Records["LevelCount"])
         {
             NotifyUI notifyUI = GameManager.UI.ShowPopupUI<NotifyUI>("UI/NotifyUI");

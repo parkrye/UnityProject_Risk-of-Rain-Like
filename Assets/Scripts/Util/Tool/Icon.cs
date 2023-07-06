@@ -4,4 +4,5 @@ using UnityEngine;
 public class Icon : ScriptableObject
 {
     public Sprite sprite;
+    public string desc;
 }

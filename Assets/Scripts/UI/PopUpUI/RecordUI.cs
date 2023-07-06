@@ -66,7 +66,7 @@ public class RecordUI : PopUpUI
 
     void RetryButton()
     {
-        GameManager.Scene.LoadScene("ReadyScene");
+        GameManager.Scene.LoadScene("SelectScene");
         GameManager.ResetSession();
     }
 
