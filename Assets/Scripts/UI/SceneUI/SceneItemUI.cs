@@ -17,6 +17,7 @@ public class SceneItemUI : SceneUI
             Image newItemImage = GameManager.Resource.Instantiate<Image>("UI/ItemImage", transform);
             newItemImage.sprite = pair.Key.ItemIcon;
             newItemImage.name = pair.Key.ItemName;
+            newItemImage.GetComponent<DescTargetItemUI>().item = pair.Key;
             if (pair.Value > 1)
             {
                 newItemImage.GetComponentInChildren<TextMeshProUGUI>().text = pair.Value.ToString();
@@ -35,6 +36,7 @@ public class SceneItemUI : SceneUI
             Image newItemImage =  GameManager.Resource.Instantiate<Image>("UI/ItemImage", transform);
             newItemImage.sprite = itemData.ItemIcon;
             newItemImage.name = itemData.ItemName;
+            newItemImage.GetComponent<DescTargetItemUI>().item = itemData;
         }
         else
         {

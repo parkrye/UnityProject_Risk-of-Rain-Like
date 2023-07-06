@@ -18,6 +18,10 @@ public class SceneKeyUI : SceneUI
     /// </summary>
     void SettingKeyIcons()
     {
+        images["Action1Icon"].GetComponent<DescTargetSkillUI>().skill = GameManager.Data.Player.hero.skills[0];
+        images["Action2Icon"].GetComponent<DescTargetSkillUI>().skill = GameManager.Data.Player.hero.skills[1];
+        images["Action3Icon"].GetComponent<DescTargetSkillUI>().skill = GameManager.Data.Player.hero.skills[2];
+        images["Action4Icon"].GetComponent<DescTargetSkillUI>().skill = GameManager.Data.Player.hero.skills[3];
         images["Action1Icon"].sprite = GameManager.Data.Player.hero.skills[0].SkillIcon;
         images["Action2Icon"].sprite = GameManager.Data.Player.hero.skills[1].SkillIcon;
         images["Action3Icon"].sprite = GameManager.Data.Player.hero.skills[2].SkillIcon;
