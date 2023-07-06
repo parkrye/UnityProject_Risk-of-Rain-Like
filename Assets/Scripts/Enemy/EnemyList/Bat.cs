@@ -25,7 +25,7 @@ public class Bat : Enemy, IMezable
             }
             else
             {
-                yield return null;
+                yield return new WaitForSeconds(1f);
             }
         }
     }
@@ -82,7 +82,6 @@ public class Bat : Enemy, IMezable
         while (now < distance)
         {
             TranslateGradually(backFrom.forward, distance * Time.deltaTime);
-            //transform.Translate(distance * Time.deltaTime * backFrom.forward, Space.World);
             now += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }

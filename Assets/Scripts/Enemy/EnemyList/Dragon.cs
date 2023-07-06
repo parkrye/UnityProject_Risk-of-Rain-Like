@@ -25,17 +25,14 @@ public class Dragon : Enemy, IMezable
             {
                 animator.SetTrigger("Attack");
                 StartCoroutine(Breath);
+                attacking = true;
             }
-            else
-            {
-                yield return null;
-            }
+            yield return null;
         }
     }
 
     IEnumerator BreathRoutine()
     {
-        attacking = true;
         flameAttack = GameManager.Resource.Instantiate(enemyFlame, attackTransform.position, Quaternion.identity, transform);
         flameAttack.transform.LookAt(attackTransform.position + transform.forward);
         flameAttack.Shot(damage);
@@ -108,7 +105,6 @@ public class Dragon : Enemy, IMezable
         while (now < distance)
         {
             TranslateGradually(backFrom.forward, distance * Time.deltaTime);
-            //transform.Translate(distance * Time.deltaTime * knockBackVector, Space.World);
             now += Time.deltaTime * distance;
             yield return new WaitForFixedUpdate();
         }

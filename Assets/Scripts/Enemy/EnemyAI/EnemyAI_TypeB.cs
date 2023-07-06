@@ -53,7 +53,7 @@ public class EnemyAI_TypeB : EnemyAI
                     state = AI_State.FarRange;
                 }
             }
-            yield return null;
+            yield return new WaitForSeconds(1f);
         }
     }
 

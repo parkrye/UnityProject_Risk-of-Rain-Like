@@ -27,6 +27,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     public bool bleed, attack;
     [SerializeField] public bool onGizmo;
     public bool isStunned, isSlowed, alive;
+    int groundCount;
 
     public Vector3 EnemyPos
     {
@@ -52,6 +53,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         bleed = false;
         attack = false;
         alive = true;
+        groundCount = 0;
         sphere.radius = enemyData.Size;
         sphere.center = Vector3.up * enemyData.yModifier;
         bleedParticle.transform.position = Vector3.up * enemyData.yModifier;
@@ -73,7 +75,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
     public IEnumerator HitRoutine(float damage, float time)
     {
         float nowTime = 0f;
-        do
+        while (nowTime <= time)
         {
             HP -= damage;
             GameManager.Data.NowRecords["Damage"] += damage;
@@ -98,7 +100,7 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
             }
             nowTime += 0.1f;
             yield return new WaitForSeconds(0.1f);
-        } while (nowTime < time);
+        }
     }
 
     public void Die()
@@ -154,12 +156,13 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
 
     public bool TranslateGradually(Vector3 dir, float distance)
     {
-        if (!Physics.SphereCast(EnemyPos, enemyData.Size, dir, out _, distance, LayerMask.GetMask("Ground")))
+        transform.position += dir * distance;
+        if (groundCount > 0)
         {
-            transform.position += dir * distance;
-            return true;
+            transform.position -= dir * distance;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public bool TranslateSuddenly(Vector3 pos, bool ignoreGround = true)
@@ -171,12 +174,30 @@ public abstract class Enemy : MonoBehaviour, IHitable, ITranslatable
         }
         else
         {
-            if (!Physics.SphereCast(EnemyPos, enemyData.Size, Vector3.up, out _, 0f, LayerMask.GetMask("Ground")))
+            Vector3 prevPos = transform.position;
+            transform.position = pos;
+            if (groundCount > 0)
             {
-                transform.position = pos;
-                return true;
+                transform.position = prevPos;
+                return false;
             }
-            return false;
+            return true;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if ((1 << other.gameObject.layer) == LayerMask.GetMask("Ground"))
+        {
+            groundCount++;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if ((1 << other.gameObject.layer) == LayerMask.GetMask("Ground"))
+        {
+            groundCount--;
         }
     }
 }

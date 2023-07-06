@@ -11,16 +11,17 @@ public class EnemyAI_TypeA : EnemyAI
     enum AI_State { Approach, Bypass, Attack, Dumb }
     [SerializeField] AI_State state;
     Stack<Vector3> bypass;
-    Vector3 prevPlayerPosition;
+    Vector3 prevPlayerPosition, playerPos;
     [SerializeField] bool moveSide;
-    Vector3 playerPos;
     [SerializeField] float deleteTimer;
+    IEnumerator ByPassRoutine;
 
     protected override void Awake()
     {
         base.Awake();
         state = AI_State.Approach;
         bypass = new Stack<Vector3>();
+        ByPassRoutine = FindBypass();
     }
 
     protected override IEnumerator StateRoutine()
@@ -65,33 +66,36 @@ public class EnemyAI_TypeA : EnemyAI
     {
         playerPos = playerTransform.position + Vector3.up;
         float distance = Vector3.Distance(playerPos, enemy.EnemyPos);
+        Vector3 dir = (playerPos - enemy.EnemyPos).normalized;
 
         if (distance <= enemy.enemyData.Range)
         {
-            if (!Physics.Raycast(enemy.EnemyPos, (playerPos - enemy.EnemyPos).normalized, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
+            if (!Physics.Raycast(enemy.EnemyPos, dir, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
             {
                 if (state != AI_State.Attack)
-                {
                     enemy.StartAttack();
-                }
+                if (state == AI_State.Bypass)
+                    StopCoroutine(ByPassRoutine);
                 return AI_State.Attack;
             }
         }
 
-        if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, (playerPos - enemy.EnemyPos).normalized, out _, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
+        if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, dir, out _, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
         {
-            if (state != AI_State.Bypass)
-            {
+            if (state == AI_State.Attack)
                 enemy.StopAttack();
-                StartCoroutine(FindBypass());
-            }
+            if (state != AI_State.Bypass)
+                StartCoroutine(ByPassRoutine);
             return AI_State.Bypass;
         }
 
 
         if (distance > enemy.enemyData.Range)
         {
-            enemy.StopAttack();
+            if(state == AI_State.Attack)
+                enemy.StopAttack();
+            if (state == AI_State.Bypass)
+                StopCoroutine(ByPassRoutine);
             return AI_State.Approach;
         }
 
@@ -101,7 +105,7 @@ public class EnemyAI_TypeA : EnemyAI
     void ApproachMove()
     {
         transform.LookAt(playerPos);
-        transform.Translate((playerPos - enemy.EnemyPos).normalized * enemy.enemyData.MoveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(enemy.enemyData.MoveSpeed * Time.deltaTime * (playerPos - enemy.EnemyPos).normalized, Space.World);
     }
 
     void AttackMove()
