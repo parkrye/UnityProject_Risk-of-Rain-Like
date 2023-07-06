@@ -1175,6 +1175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1960266467}
   - component: {fileID: 1960266466}
+  - component: {fileID: 1960266468}
   m_Layer: 0
   m_Name: ReadyScene
   m_TagString: Untagged
@@ -1194,6 +1195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4927736b0cacee41adb64c7fc5e1e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationController: {fileID: 1960266468}
 --- !u!4 &1960266467
 Transform:
   m_ObjectHideFlags: 0
@@ -1209,6 +1211,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960266468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960266465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4d5f8d4a8a1cd4f90164762d335ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator:
+  - {fileID: 8598677682398246431}
+  - {fileID: 4525694790661917475}
+  - {fileID: 3939120938682319883}
 --- !u!1 &2028705505
 GameObject:
   m_ObjectHideFlags: 3
