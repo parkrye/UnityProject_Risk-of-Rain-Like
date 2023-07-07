@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: JumpPotion
   m_EditorClassIdentifier: 
   ItemName: "\uC810\uD504 \uD3EC\uC158"
-  ItemDesc: "\uB2E4\uC2DC \uB6F8 \uC218 \uC788\uC2B5\uB2C8\uB2E4"
+  ItemDesc: "\uC810\uD504 \uD69F\uC218\uB97C \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4"
   ItemIcon: {fileID: 21300000, guid: 5b224af7c8f4f4a618b4d2fa39a0dbde, type: 3}

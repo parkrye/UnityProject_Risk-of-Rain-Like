@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52787f3d00e2674d80ba53dffbdc854, type: 3}
-  m_Name: PowerPotion
+  m_Script: {fileID: 11500000, guid: 8b59ac29d0678a44eb049557b37ea948, type: 3}
+  m_Name: SharpDagger
   m_EditorClassIdentifier: 
-  ItemName: "\uD798\uC758 \uD3EC\uC158"
-  ItemDesc: "\uACF5\uACA9\uB825\uC744 \uC62C\uB824\uC90D\uB2C8\uB2E4"
-  ItemIcon: {fileID: 21300000, guid: 338766860e7104c7da0c9077a4cfad71, type: 3}
+  ItemName: "\uB2E8\uAC80"
+  ItemDesc: "\uCE58\uBA85\uD0C0 \uD53C\uD574\uB7C9\uC744 \uB298\uB824\uC90D\uB2C8\uB2E4"
+  ItemIcon: {fileID: 21300000, guid: 15795860a9d324250823686a664034a3, type: 3}
