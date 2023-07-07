@@ -75,4 +75,16 @@ public class TowerBox : MerchantBox
         }
         GameManager.Resource.Destroy(gameObject);
     }
+
+    protected override IEnumerator LookRoutine()
+    {
+        while (this)
+        {
+            if (box)
+                costObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+            else
+                hpObject.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

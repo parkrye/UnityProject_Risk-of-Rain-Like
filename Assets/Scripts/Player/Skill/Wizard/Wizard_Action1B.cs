@@ -27,7 +27,7 @@ public class Wizard_Action1B : Skill, ICriticable, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         for (int i = 0; i < 3; i++)
         {

@@ -25,7 +25,7 @@ public class Bat : Enemy, IMezable
             }
             else
             {
-                yield return new WaitForSeconds(1f);
+                yield return null;
             }
         }
     }

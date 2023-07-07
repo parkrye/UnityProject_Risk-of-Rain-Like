@@ -13,7 +13,7 @@ public class AchivementScene : BaseScene
         GameManager.UI.ShowSceneUI<SceneUI>("UI/AchivementUI").Initialize();
         Progress = 0.6f;
 
-        yield return new WaitForEndOfFrame();
+        yield return null;
         Progress = 1f;
     }
 }

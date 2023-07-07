@@ -33,7 +33,7 @@ public class Wizard_Action4A : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         summon = true;
         tower = GameManager.Resource.Instantiate(towerPrefab, true);

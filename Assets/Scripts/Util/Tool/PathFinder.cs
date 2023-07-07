@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// AStar 알고리즘을 이용한 공중 길찾기 스크립트
+/// </summary>
 public class PathFinder : MonoBehaviour
 {
     /// <summary>
@@ -21,7 +24,7 @@ public class PathFinder : MonoBehaviour
 
         int moveModifier = 1;
         int counter = 0;
-        int maxCount = 300;
+        int maxCount = 1000;
 
         // 초기 노드를 저장
         Node startNode = new();

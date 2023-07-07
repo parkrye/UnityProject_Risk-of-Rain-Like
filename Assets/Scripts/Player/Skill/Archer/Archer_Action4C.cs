@@ -36,7 +36,7 @@ public class Archer_Action4C : Skill, ICriticable, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         yield return new WaitForSeconds(chargeTime * hero.playerDataModel.ReverseTimeScale);
         if(stack.Count == count && count > 0)

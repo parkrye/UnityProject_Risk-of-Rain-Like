@@ -63,9 +63,9 @@ public class BossSummon : MonoBehaviour
                 enemySummonAudio.Play();
                 SummonGuardians();
             }
-            charge += 0.1f;
+            charge += Time.deltaTime;
             ChargeEvent?.Invoke((int)(charge * reverseChargeTime));
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
         SummonBoss();
     }

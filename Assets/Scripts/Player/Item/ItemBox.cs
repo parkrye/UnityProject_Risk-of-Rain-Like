@@ -31,7 +31,7 @@ public class ItemBox : MonoBehaviour
     {
         while (fall)
         {
-            transform.Translate(Vector3.down * Time.deltaTime * 10f);
+            transform.Translate(10f * Time.deltaTime * Vector3.down);
             transform.Rotate(Vector3.up);
             yield return new WaitForFixedUpdate();
         }

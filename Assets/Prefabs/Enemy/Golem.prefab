@@ -2195,6 +2195,18 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 3857460642731586243}
+    - target: {fileID: 7763726094247414230, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763726094247414230, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -960
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763726094247414230, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -537
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
 --- !u!224 &502588678363442311 stripped

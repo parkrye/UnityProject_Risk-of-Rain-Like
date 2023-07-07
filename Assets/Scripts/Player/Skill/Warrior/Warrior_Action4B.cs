@@ -25,7 +25,7 @@ public class Warrior_Action4B : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         ParticleSystem effect = GameManager.Resource.Instantiate(electricity, hero.playerDataModel.playerTransform.position + Vector3.up, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         Time.timeScale = modifier;

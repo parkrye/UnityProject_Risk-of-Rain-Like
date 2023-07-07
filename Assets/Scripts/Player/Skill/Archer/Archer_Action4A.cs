@@ -28,7 +28,7 @@ public class Archer_Action4A : Skill, IEnumeratable, ICriticable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         hero.playerDataModel.controllable = false;
         yield return new WaitForSeconds(skillTime * hero.playerDataModel.ReverseTimeScale);

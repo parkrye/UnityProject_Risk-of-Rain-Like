@@ -25,7 +25,7 @@ public class Warrior_Action4C : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         ParticleSystem effect = GameManager.Resource.Instantiate(blood, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         hero.playerDataModel.playerSystem.Buff(0, modifier);

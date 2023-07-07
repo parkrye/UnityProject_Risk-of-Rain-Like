@@ -35,7 +35,7 @@ public class Wizard_Action3C : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         hero.playerDataModel.dodgeDamage = true;
         yield return new WaitForSeconds(dodgeTime * hero.playerDataModel.ReverseTimeScale);

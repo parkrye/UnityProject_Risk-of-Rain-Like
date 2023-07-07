@@ -1033,12 +1033,6 @@ AnimatorController:
   m_Name: ArcherAnimationController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Hero
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: -1
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: Foward
     m_Type: 1
     m_DefaultFloat: 0

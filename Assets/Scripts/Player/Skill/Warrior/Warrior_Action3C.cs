@@ -23,7 +23,7 @@ public class Warrior_Action3C : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         ParticleSystem effect = GameManager.Resource.Instantiate(sparkle, hero.playerDataModel.playerTransform.position, Quaternion.identity, hero.playerDataModel.playerTransform, true);
         hero.playerDataModel.playerSystem.Buff(0, modifier);

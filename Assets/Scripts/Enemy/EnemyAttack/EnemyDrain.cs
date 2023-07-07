@@ -31,8 +31,8 @@ public class EnemyDrain : MonoBehaviour
                 lineRenderer.SetPosition(i, enemy.attackTransform.position + dir * i * 0.1f + Vector3.up * Trigonometrics.Sin(i * 18f));
             }
             enemy.HP += damage * 0.25f;
-            now += 0.1f;
-            yield return new WaitForSeconds(0.1f);
+            now += Time.deltaTime;
+            yield return null;
         }
         GameManager.Resource.Destroy(gameObject);
     }

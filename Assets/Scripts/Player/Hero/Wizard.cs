@@ -23,7 +23,7 @@ public class Wizard : Hero
         {
             playerDataModel.jumpCount--;
             floating = true;
-            playerDataModel.playerMovement.dirModifier += Vector3.up * playerDataModel.JumpPower * 1f;
+            playerDataModel.playerMovement.dirModifier += 1f * playerDataModel.JumpPower * Vector3.up;
             StartCoroutine(FloaterJump());
             animator.SetTrigger("JumpH");
             animator.SetTrigger("JumpL");
@@ -41,7 +41,7 @@ public class Wizard : Hero
         playerDataModel.rb.useGravity = false;
         while (floating)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
             if ((playerDataModel.rb.velocity.y < 0 ? -playerDataModel.rb.velocity.y : playerDataModel.rb.velocity.y) > 1f)
                 floating = false;
         }

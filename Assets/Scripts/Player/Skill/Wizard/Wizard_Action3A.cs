@@ -26,7 +26,7 @@ public class Wizard_Action3A : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         teleportCharge = 0f;
         nowCharge = true;

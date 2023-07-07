@@ -16,7 +16,7 @@ public class YLimiter : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return null;
             Vector3 player = GameManager.Data.Player.transform.position;
             if(player.y > transforms[1].position.y || player.y < transforms[2].position.y)
             {

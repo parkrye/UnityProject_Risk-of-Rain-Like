@@ -84,7 +84,7 @@ public class LevelScene : BaseScene
         GameManager.Data.RecordTime = true;
         GameManager.Resource.Instantiate<MinimapMarker>("Marker/MinimapMarker_Player", true).StartFollowing(GameManager.Data.Player.playerTransform);
 
-        yield return new WaitForEndOfFrame();
+        yield return null;
         Progress = 1f;
     }
 }

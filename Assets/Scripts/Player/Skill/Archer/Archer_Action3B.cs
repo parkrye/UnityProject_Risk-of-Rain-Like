@@ -27,7 +27,7 @@ public class Archer_Action3B : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         hero.playerDataModel.playerSystem.Buff(3, modifier);
         hero.playerDataModel.playerSystem.Buff(4, modifier);

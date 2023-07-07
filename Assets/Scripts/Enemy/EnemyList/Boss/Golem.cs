@@ -53,7 +53,7 @@ public class Golem : Boss
                 }
                 yield return new WaitForSeconds(enemyData.AttackSpeed);
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
     }
 
@@ -84,7 +84,7 @@ public class Golem : Boss
         while (lifeMode == LifeMode.Full && rangeMode == RangeMode.FarRange)
         {
             HP += enemyData.floatdatas[0] * Time.deltaTime;
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
         animator.SetBool("Heal", false);
         patternCoroutineIsRunning = false;

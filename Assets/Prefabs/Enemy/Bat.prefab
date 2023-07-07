@@ -1401,6 +1401,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4158631881214898}
     m_Modifications:
+    - target: {fileID: 355019989568681749, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 355019989568681751, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
       propertyPath: m_Name
       value: EnemyHPCanvas
@@ -1501,6 +1505,14 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 3143585279466658270}
+    - target: {fileID: 7763726094247414230, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763726094247414230, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7763726094247414230, guid: f8e40ea4e22c9924ebefe0822699c83e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2

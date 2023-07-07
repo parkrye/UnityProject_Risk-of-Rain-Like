@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// 특수한 이동에 대한 인터페이스
-/// 경우에 따라 매 업데이트마다 SphereCast를 사용할 수 있으므로 부하가 생길 수 있음을 유의
+/// GroundChecker를 이용하여 이동 후 GroundChecker로 지면에 접촉할 경우 이동을 취소하도록 구현
 /// </summary>
 public interface ITranslatable
 {

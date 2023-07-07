@@ -23,7 +23,7 @@ public class Warrior_Action3A : Skill, IEnumeratable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         yield return new WaitForSeconds(0.2f * hero.playerDataModel.ReverseTimeScale);
         hero.playerDataModel.dodgeDamage = true;

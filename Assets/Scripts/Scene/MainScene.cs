@@ -13,7 +13,7 @@ public class MainScene : BaseScene
         Progress = 0.6f;
         GameManager.UI.ShowSceneUI<SceneUI>("UI/MainSceneUI");
 
-        yield return new WaitForEndOfFrame();
+        yield return null;
         Progress = 1f;
     }
 }

@@ -17,7 +17,7 @@ public class SelectScene : BaseScene
         selectUI.AddListener(GetComponent<SelectSceneAnimationController>().PlayAnimation);
         Progress = 0.75f;
 
-        yield return new WaitForEndOfFrame();
+        yield return null;
         Progress = 1f;
     }
 }

@@ -27,7 +27,7 @@ public class Warrior_Action4A : Skill, IEnumeratable, ICriticable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         hero.playerDataModel.controllable = false;
         hero.playerDataModel.playerMovement.dirModifier += (hero.playerDataModel.playerTransform.forward + Vector3.up * 0.5f) * dashPower;

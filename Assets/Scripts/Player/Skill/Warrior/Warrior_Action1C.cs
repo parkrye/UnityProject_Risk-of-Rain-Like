@@ -27,7 +27,7 @@ public class Warrior_Action1C : Skill, IEnumeratable, ICriticable
         return false;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         yield return new WaitForSeconds(0.08f * hero.playerDataModel.ReverseTimeScale);
 

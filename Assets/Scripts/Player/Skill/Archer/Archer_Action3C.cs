@@ -35,7 +35,7 @@ public class Archer_Action3C : Skill, IEnumeratable, ICriticable
         anchorOn = true;
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         while (!anchorOn)
             yield return null;

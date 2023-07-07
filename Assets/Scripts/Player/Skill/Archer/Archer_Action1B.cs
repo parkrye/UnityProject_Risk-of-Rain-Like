@@ -7,12 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Archer_Action1B", menuName = "Data/Skill/Archer/Action1B")]
 public class Archer_Action1B : Skill, ICriticable, IEnumeratable
 {
-    [SerializeField] float chargeSpeed, charge;
-    [SerializeField] Arrow arrow;
+    [SerializeField] float chargeSpeed, charge; // 장전 속도, 장전량
+    [SerializeField] Arrow arrow;               // 화살
 
     public override bool Active(bool isPressed, params float[] param)
     {
-        if (isPressed)
+        if (isPressed)  // 
         {
             charge = 0f;
 
@@ -32,7 +32,7 @@ public class Archer_Action1B : Skill, ICriticable, IEnumeratable
         }
     }
 
-    public IEnumerator enumerator()
+    public IEnumerator Enumerator()
     {
         while (CoolCheck)
         {
