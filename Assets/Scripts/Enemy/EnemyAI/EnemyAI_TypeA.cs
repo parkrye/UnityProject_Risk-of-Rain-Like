@@ -32,7 +32,7 @@ public class EnemyAI_TypeA : EnemyAI
             {
                 state = StateCheck();
             }
-            yield return new WaitForSeconds(1f);
+            yield return null;
         }
     }
 
@@ -70,7 +70,7 @@ public class EnemyAI_TypeA : EnemyAI
 
         if (distance <= enemy.enemyData.Range)
         {
-            if (!Physics.Raycast(enemy.EnemyPos, dir, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
+            if (!Physics.Raycast(enemy.EnemyPos, dir, distance - enemy.enemyData.Size - enemy.enemyData.yModifier, LayerMask.GetMask("Ground")))
             {
                 if (state != AI_State.Attack)
                     enemy.StartAttack();
@@ -80,7 +80,7 @@ public class EnemyAI_TypeA : EnemyAI
             }
         }
 
-        if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, dir, out _, distance - enemy.enemyData.Size, LayerMask.GetMask("Ground")))
+        if (Physics.SphereCast(enemy.EnemyPos, enemy.enemyData.Size, dir, out _, distance - enemy.enemyData.Size - enemy.enemyData.yModifier, LayerMask.GetMask("Ground")))
         {
             if (state == AI_State.Attack)
                 enemy.StopAttack();

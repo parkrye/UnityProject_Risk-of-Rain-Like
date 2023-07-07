@@ -44,7 +44,7 @@ public class EnemyAI_TypeB : EnemyAI
                 boss.ChangeToCritical();
                 onCheckHP = false;
             }
-            yield return new WaitForSeconds(1f);
+            yield return null;
         }
     }
 
