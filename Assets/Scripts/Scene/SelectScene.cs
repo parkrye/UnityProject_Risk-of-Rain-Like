@@ -14,7 +14,7 @@ public class SelectScene : BaseScene
         Progress = 0.5f;
 
         selectUI.Initialize();
-        selectUI.AddListener(GetComponent<SelectSceneAnimationController>().PlayAnimation);
+        selectUI.AddListener(GetComponent<SelectSceneAnimationPlayer>().PlayAnimation);
         Progress = 0.75f;
 
         yield return null;

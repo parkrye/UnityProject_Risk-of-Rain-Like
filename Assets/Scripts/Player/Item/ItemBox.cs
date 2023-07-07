@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class ItemBox : MonoBehaviour
 {
+    protected ItemData[] items;
     protected ItemData item;
     protected bool fall, ground;
 
     protected virtual void OnEnable()
     {
-        ItemData[] items = GameManager.Resource.LoadAll<ItemData>("Item");
+        items = GameManager.Resource.LoadAll<ItemData>("Item");
         item = items[Random.Range(0, items.Length)];
         fall = true;
         ground = false;

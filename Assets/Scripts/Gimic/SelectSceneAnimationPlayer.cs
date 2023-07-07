@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SelectSceneAnimationController : MonoBehaviour
+public class SelectSceneAnimationPlayer : MonoBehaviour
 {
     [SerializeField] Animator[] animator = new Animator[3];
 

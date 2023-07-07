@@ -7,7 +7,7 @@ public class LevelScene : BaseScene
     [SerializeField] BossSummon bossSummonZone;
     [SerializeField] EnemySpawner enemySpawner;
     [SerializeField] ItemDropper itemDropper;
-    [SerializeField] TowerBoxSetter towerBoxSetter;
+    [SerializeField] InitialBoxSetter towerBoxSetter;
     [SerializeField] GameObject bossZone;
     [SerializeField] GameObject directionalLight;
     [SerializeField] float spawnDelay, spawnDistance;
