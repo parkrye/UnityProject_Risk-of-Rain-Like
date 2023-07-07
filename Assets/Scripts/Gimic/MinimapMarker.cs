@@ -16,11 +16,15 @@ public class MinimapMarker : MonoBehaviour
     {
         while (this)
         {
-            if (!target.gameObject.activeInHierarchy || !target.gameObject.activeSelf)
-                break;
-            transform.position = new Vector3(target.position.x, height, target.position.z);
+            try
+            {
+                transform.position = new Vector3(target.position.x, height, target.position.z);
+            }
+            catch
+            {
+                GameManager.Resource.Destroy(gameObject);
+            }
             yield return new WaitForEndOfFrame();
         }
-        GameManager.Resource.Destroy(gameObject);
     }
 }
