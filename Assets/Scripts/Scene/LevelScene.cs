@@ -8,6 +8,8 @@ public class LevelScene : BaseScene
     [SerializeField] EnemySpawner enemySpawner;
     [SerializeField] ItemDropper itemDropper;
     [SerializeField] InitialBoxSetter towerBoxSetter;
+    [SerializeField] StructureRemover structureRemover;
+
     [SerializeField] GameObject bossZone;
     [SerializeField] GameObject directionalLight;
     [SerializeField] float spawnDelay, spawnDistance;
@@ -19,6 +21,10 @@ public class LevelScene : BaseScene
     {
         // 플레이어 조작 제한
         GameManager.Data.Player.controllable = false;
+
+        // 지형 수정
+        structureRemover.StartRemove();
+        Progress = 0.1f;
 
         // 플레이어, 보스존 시작 위치 설정
         startPositionGimic = GetComponent<StartPositionGimic>();
@@ -76,6 +82,7 @@ public class LevelScene : BaseScene
                 GameManager.Resource.Instantiate<PositionFixer>("Particle/Rain").SetTarget(GameManager.Data.Player.playerTransform);
                 break;
         }
+        Progress = 0.9f;
 
         // 플레이어 세팅
         GetComponent<YLimiter>().Initialize();

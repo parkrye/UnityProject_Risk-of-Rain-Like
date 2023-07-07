@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 165342526003183289}
   - component: {fileID: 5190737555192339937}
   - component: {fileID: 1027528879342844493}
+  - component: {fileID: 1618803963677010883}
   m_Layer: 0
   m_Name: LevelScene
   m_TagString: Untagged
@@ -122,6 +123,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 165342526003183289}
   itemDropper: {fileID: 165342526003183288}
   towerBoxSetter: {fileID: 1027528879342844493}
+  structureRemover: {fileID: 1618803963677010883}
   bossZone: {fileID: 166591396417808417}
   directionalLight: {fileID: 6991231662604691268}
   spawnDelay: 5
@@ -208,6 +210,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140c4e203d5e2bf4e804764c5cd720ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1618803963677010883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165342526003183282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34b60843d1b9544b869ed83926c84bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structures: []
 --- !u!1 &166591396417808417
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +293,9 @@ MonoBehaviour:
   enemySummonAudio: {fileID: 5165592303274891685}
   lazerAudio: {fileID: 7768821103350994659}
   ObjectStateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ChargeEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &4184128602308370638
