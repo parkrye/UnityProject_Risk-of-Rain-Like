@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34b60843d1b9544b869ed83926c84bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  structureRoots: []
   structures: []
 --- !u!1 &166591396417808417
 GameObject:
@@ -690,7 +691,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 159
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
