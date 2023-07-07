@@ -24,7 +24,7 @@ public class PathFinder : MonoBehaviour
 
         int moveModifier = 1;
         int counter = 0;
-        int maxCount = 1000;
+        int maxCount = 2000;
 
         // 초기 노드를 저장
         Node startNode = new();
