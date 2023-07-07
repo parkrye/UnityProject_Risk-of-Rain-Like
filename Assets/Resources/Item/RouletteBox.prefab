@@ -548,7 +548,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6006216059270025108}
         m_TargetAssemblyTypeName: MerchantBox, Assembly-CSharp
         m_MethodName: Interact
         m_Mode: 1
