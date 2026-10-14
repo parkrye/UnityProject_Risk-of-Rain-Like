@@ -4,6 +4,10 @@
 
 ![타이틀](screenshots/title.png)
 
+## 영상
+
+[![플레이 영상](https://img.youtube.com/vi/nnA54nroQkg/hqdefault.jpg)](https://youtu.be/nnA54nroQkg)
+
 ## 플레이
 
 [Releases](../../releases)에서 `Risk-of-Rain-Like-<버전>-windows.zip`을 받아 압축을 풀고 `Risk-of-Rain-Like.exe` 실행.
